@@ -1,0 +1,8 @@
+{
+    "name": "sparkplug",
+    "private": true,
+    "workspaces": [
+        "sparkplug",
+        "coilpack"
+    ]
+}

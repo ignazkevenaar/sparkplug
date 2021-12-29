@@ -1,0 +1,25 @@
+/* .vitepress/theme/custom.css */
+/* https://github.com/vuejs/vitepress/blob/main/src/client/theme-default/styles/vars.css */
+:root {
+    /* --c-bg: black;
+    --c-text: red;
+    --c-text-light: red; */
+    --c-brand: #646cff;
+    --c-brand-light: #747bff;
+}
+
+#main-title {
+    font-size: clamp(1rem, 10vw, 10rem);
+    overflow: hidden;
+    line-height: normal;
+    font-weight: bold;
+    background: linear-gradient(to right, #E1AB35, #D97B20, #A73E13);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.nav-bar {
+    backdrop-filter: blur(5px) brightness(1.25);
+    background-color: rgba(255, 255, 255, .65) !important;
+}

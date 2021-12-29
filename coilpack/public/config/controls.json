@@ -1,0 +1,102 @@
+[
+    {
+        "name": "testCategory",
+        "icon": "bug",
+        "controls": [
+            {
+                "type": "Button",
+                "icon": "flash",
+                "grid": {
+                    "column": "span 12",
+                    "row": "span 10"
+                },
+                "positions": [
+                    {
+                        "type": "set",
+                        "modes": {
+                            "DRL": false,
+                            "Parking": false,
+                            "LowBeams": false
+                        }
+                    },
+                    {
+                        "type": "hold",
+                        "modes": {
+                            "BlinkL": true
+                        },
+                        "icon": "bolt",
+                        "color": "red"
+                    },
+                    {
+                        "type": "set",
+                        "modes": {
+                            "DRL": true
+                        },
+                        "color": "green"
+                    },
+                    {
+                        "type": "hold",
+                        "modes": {
+                            "ESS": true
+                        },
+                        "color": "blue"
+                    },
+                    {
+                        "type": "set",
+                        "modes": {
+                            "Parking": true
+                        }
+                    },
+                    {
+                        "type": "set",
+                        "modes": {
+                            "LowBeams": true
+                        }
+                    }
+                ]
+            },
+            {
+                "type": "Placeholder",
+                "grid": {
+                    "column": "span 6",
+                    "row": "span 6"
+                }
+            },
+            {
+                "type": "Placeholder",
+                "grid": {
+                    "column": "span 6",
+                    "row": "span 6"
+                }
+            }
+        ]
+    },
+    {
+        "name": "testCategory2",
+        "controls": []
+    },
+    {
+        "name": "testCategory3",
+        "controls": []
+    },
+    {
+        "name": "testCategory4",
+        "controls": []
+    },
+    {
+        "name": "testCategory5",
+        "controls": []
+    },
+    {
+        "name": "testCategory6",
+        "controls": []
+    },
+    {
+        "name": "testCategory7",
+        "controls": []
+    },
+    {
+        "name": "testCategory8",
+        "controls": []
+    }
+]

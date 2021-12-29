@@ -1,0 +1,10 @@
+[
+    {
+        "type": "TLC",
+        "address": "0x00",
+        "addressRange": {
+            "from": 0,
+            "to": 0
+        }
+    }
+]

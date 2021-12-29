@@ -1,0 +1,6 @@
+# https://releases.llvm.org/12.0.1/tools/clang/docs/ClangFormatStyleOptions.html
+BasedOnStyle: LLVM
+# IndentWidth: 4
+BreakBeforeBraces: Allman
+AllowShortIfStatementsOnASingleLine: Always
+ColumnLimit: 0
