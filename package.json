@@ -1,5 +1,6 @@
 {
     "name": "sparkplug",
+    "license": "ISC",
     "private": true,
     "workspaces": [
         "sparkplug",

@@ -12,6 +12,6 @@ features:
     details: Hook into events, write custom code, make it do the thing you want without fighting the library. Configuration and code on a per-model basis.
   - title: Comes with a remote
     details: Sparkplug runs on an ESP8266, and serves it's own remote control known as Coilpack.
-footer: Copyright © 2016-present Ignaz Kevenaar
+footer: Copyright © 2021-present Ignaz Kevenaar
 # https://github.com/vitejs/vite/blob/main/docs/index.md?plain=1
 ---
