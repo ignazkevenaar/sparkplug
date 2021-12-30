@@ -9,17 +9,19 @@
 }
 
 #main-title {
-    font-size: clamp(1rem, 10vw, 10rem);
+    /* font-size: clamp(1rem, 10vw, 10rem); */
     overflow: hidden;
-    line-height: normal;
+    line-height: 1.5;
     font-weight: bold;
-    background: linear-gradient(to right, #E1AB35, #D97B20, #A73E13);
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
+    font-family: 'Krona One', sans-serif;
 }
 
 .nav-bar {
     backdrop-filter: blur(5px) brightness(1.25);
     background-color: rgba(255, 255, 255, .65) !important;
+}
+
+.nav-bar .logo {
+    height: 30px;
+    margin-right: 2px;
 }

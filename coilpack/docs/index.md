@@ -1,5 +1,6 @@
 ---
 home: true
+heroImage: /logo.svg
 heroAlt: Logo image
 heroText: Coilpack
 tagline: Web-based remote control for controlling Sparkplug lighting.

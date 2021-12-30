@@ -1,5 +1,6 @@
 ---
 home: true
+heroImage: /logo.svg
 heroAlt: Logo image
 heroText: Sparkplug
 tagline: An extendible boilerplate to add lighting to model vehicles.

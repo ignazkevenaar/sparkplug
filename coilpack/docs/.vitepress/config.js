@@ -1,7 +1,11 @@
 module.exports = {
     title: 'Coilpack',
+    head: [
+        ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }],
+        ['link', { rel: 'stylesheet', crossorigin: 'anonymous', href: 'https://fonts.googleapis.com/css2?family=Krona+One&display=swap' }]
+    ],
     themeConfig: {
-        logo: '/logo.png',
+        logo: '/logo.svg',
         nav: [
             { text: 'Home', link: '/' },
             { text: 'Guide', link: '/guide/' },
