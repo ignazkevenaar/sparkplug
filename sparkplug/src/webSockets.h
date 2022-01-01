@@ -10,4 +10,4 @@ void setupWebSockets();
 void updateWebSockets();
 void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t length);
 void socketConnectionChanged(uint8_t connectedClients_);
-bool onSocketConnectionChanged(uint8_t connectedClients_);
+void onSocketConnectionChanged(uint8_t connectedClients_);

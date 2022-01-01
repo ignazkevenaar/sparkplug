@@ -9,6 +9,7 @@ module.exports = {
         nav: [
             { text: 'Home', link: '/' },
             { text: 'Guide', link: '/guide/' },
+            { text: 'Reference', link: '/reference/' },
             { text: 'GitHub', link: 'https://github.com/ignazkevenaar/sparkplug' }
         ]
     },

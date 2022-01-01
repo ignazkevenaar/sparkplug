@@ -44,10 +44,9 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t length)
 
 void socketConnectionChanged(uint8_t connectedClients)
 {
-  if (!onSocketConnectionChanged(connectedClients)) return;
+  onSocketConnectionChanged(connectedClients)
 }
 
-__attribute__((weak)) bool onSocketConnectionChanged(uint8_t connectedClients)
+__attribute__((weak)) void onSocketConnectionChanged(uint8_t connectedClients)
 {
-  return true;
 }

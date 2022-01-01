@@ -14,7 +14,14 @@ extern LightingMode modes[];
 extern Channel channels[];
 extern const size_t channelsCount;
 
+/**
+A brief description on a single line, ended by a period or blank line.
+@param myParam1 Description of 1st parameter.
+@param myParam2 Description of 2nd parameter.
+@returns Description of returned value.
+*/
 bool setLightMode(int modeID, int newState);
+
 void applyLightModeChanges();
 void updateChannelValues();
 uint16_t getChannelValue(Channel &channel);

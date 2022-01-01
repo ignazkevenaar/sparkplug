@@ -377,11 +377,3 @@ In the example;
   The intensity of the `Parking` preset is overlaid over the `0` intensity of the first `BlinkL` preset.
 
 _(How to combine this example with the [sequential blinkers](#sequential-blinkers) is left as an exercise for the reader.)_
-
-## Reference
-
-[Reference](/reference/)
-
-## Coilpack
-
-[Coilpack](/coilpack/)
