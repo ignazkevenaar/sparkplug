@@ -226,8 +226,8 @@ Devices using the I²C protocol are "hot-swappable"; A setup routine runs when t
 
 It comes built-in with support for these LED diver ICs:
 
-* [NXP PCA9685](https://www.nxp.com/docs/en/data-sheet/PCA9685.pdf)
-* [TI LP55231](https://www.ti.com/lit/ds/symlink/lp55231.pdf)
+* [NXP PCA9685](/reference/#pca9685)
+* [TI LP55231](/reference/#lp55231)
 
 Example definition of devices in a config:
 ```cpp
