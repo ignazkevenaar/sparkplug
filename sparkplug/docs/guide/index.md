@@ -192,15 +192,14 @@ Presets also support basic blinking.
 
 ### Channels
 
-A channel represets a physical light in your model.
-previously defined presets are assigned to channels so the output intensity of a channel can be calculated correctly for each combination of active [modes](#modes).
+A channel represets a single physical light source in your hardware setup.Previously defined presets are assigned to channels so the output intensity of a channel can be calculated correctly for each combination of active [modes](#modes).
 
-The number of channels your config requires depends on the number of physical LEDs and the output devices that are driving those LEDs. If you have two LED drivers, one with 16 and the other 9 with outputs, you will need 15 channels.
+The number of channels your config requires depends on the number of physical light sources and the output devices that are driving those. If you have two LED drivers, one with 16 and the other with 9 outputs, you must define 15 channels in your config.
 
 The following example defines a single channel with two basic presets:
 
 ```cpp{9}
-const PROGMEM Preset presetsMainBeams[] =
+const PROGMEM Preset presetsHeadlightLeft[] =
 {
   { .modeID = LowBeams, .intensity = 0x1111 },
   { .modeID = HighBeams, .intensity = 0x7777 },
@@ -208,7 +207,7 @@ const PROGMEM Preset presetsMainBeams[] =
 
 Channel channels[] =
 {
-  { COUNT_OF(presetsMainBeams), presetsMainBeams }
+  { COUNT_OF(presetsHeadlightLeft), presetsHeadlightLeft }
 };
 const size_t channelsCount = COUNT_OF(channels);
 ```

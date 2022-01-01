@@ -19,7 +19,7 @@ bool onInitialize()
 }
 ```
 
-**Arguments**: None.
+**Arguments:** None.
 
 **Return type**: `bool` — To stop execution after an initialization error, return `false`.
 
@@ -36,7 +36,7 @@ void onUpdate()
 }
 ```
 
-**Arguments**: None.
+**Arguments:** None.
 
 **Return type**: `void`
 
@@ -58,7 +58,7 @@ bool onLightingModeChanged(int modeID)
 }
 ```
 
-**Arguments**:
+**Arguments:**
 
 * `int` `modeID` — ID of the mode that changed.
 
@@ -78,7 +78,7 @@ bool onBlinkPhaseChanged(Channel &channel)
 }
 ```
 
-**Arguments**:
+**Arguments:**
 
 * `Channel` `&channel` — Channel reference which blink phase changed.
 
@@ -97,7 +97,7 @@ void onSocketConnectionChanged(uint8_t connectedClients)
 }
 ```
 
-**Arguments**:
+**Arguments:**
 
 * `uint8_t` `connectedClients` — Number of connected clients after the connection event.
 
@@ -117,7 +117,7 @@ void onSocketConnectionChanged(uint8_t connectedClients)
 }
 ```
 
-**Arguments**:
+**Arguments:**
 
 * `WireDevice` `&device` — Reference to the `WireDevice` that co.
 
