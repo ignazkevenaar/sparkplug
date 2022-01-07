@@ -10,6 +10,6 @@
   "author": "Ignaz Kevenaar",
   "license": "ISC",
   "devDependencies": {
-    "vitepress": "^0.20.10"
+    "vitepress": "^0.21.3"
   }
 }
