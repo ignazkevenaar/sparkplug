@@ -92,13 +92,11 @@ void setExecute(char **arguments, uint8_t length)
     int modeIndex = strtol(arguments[i], NULL, 10);
     if (!setLightMode(modeIndex, 1))
     {
-      Serial.println("Mode index out of range.");
+      Serial.println("Mode index out of range or already set.");
       continue;
     }
     outputMode(modeIndex, true);
   }
-
-  // Broadcast changes.
 }
 
 const Command setCommand =
@@ -117,7 +115,7 @@ void unsetExecute(char **arguments, uint8_t length)
     int modeIndex = strtol(arguments[i], NULL, 10);
     if (!setLightMode(modeIndex, 0))
     {
-      Serial.println("Mode index out of range.");
+      Serial.println("Mode index out of range or already set.");
       continue;
     }
     outputMode(modeIndex, true);

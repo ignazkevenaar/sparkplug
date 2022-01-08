@@ -13,6 +13,7 @@ constexpr auto uconstrain(auto value, auto b1, auto b2)
 bool setLightMode(int modeID, int newState)
 {
   if (modeID >= modesCount) return false;
+  if (modes[modeID].currentState == newState) return false;
   modes[modeID].nextState = newState;
   return true;
 }
@@ -93,6 +94,12 @@ uint16_t getChannelValue(Channel &channel)
       }
       break;
     }
+  }
+
+  if (channel.blinkPresetIndex == -1 && highestEnabledBlinkIndex)
+  {
+    channel.timerBlink = currentMillis;
+    Serial.println("Starting blink.");
   }
 
   channel.previousPresetIndex = channel.activePresetIndex;
