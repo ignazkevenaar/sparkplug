@@ -1,27 +1,96 @@
 /* .vitepress/theme/custom.css */
 /* https://github.com/vuejs/vitepress/blob/main/src/client/theme-default/styles/vars.css */
 :root {
-  /* --c-bg: black;
-    --c-text: red;
-    --c-text-light: red; */
-  --c-brand: #646cff;
-  --c-brand-light: #747bff;
+  --c-brand: rgb(229, 129, 56);
+  --c-brand-light: rgb(233, 160, 75);
+  --c-header-bg: rgba(255, 255, 255, 0.65);
+
+  /* Custom variables. */
+  --c-custom-block-tip: 186, 208, 65;
+  --c-custom-block-info: 79, 114, 208;
+  --c-custom-block-warning: 255, 144, 59;
+  --c-custom-block-danger: 255, 52, 98;
+
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --c-bg: rgb(19, 20, 27);
+    --c-text: rgba(239, 240, 242);
+    --c-text-light: rgb(210, 211, 218);
+    --c-text-lighter: rgba(113, 114, 133);
+    --c-header-bg: rgba(32, 33, 42, 0.65);
+    --c-divider: var(--c-divider-dark);
+    --code-bg-color: black;
+
+    --c-custom-block-tip: 186, 208, 65;
+    --c-custom-block-info: 79, 114, 208;
+    --c-custom-block-warning: 255, 144, 59;
+    --c-custom-block-danger: 255, 52, 98;
+  }
+}
+
+.nav-bar {
+  backdrop-filter: blur(5px) brightness(1.25);
+  background-color: var(--c-header-bg) !important;
+}
+
+.nav-bar .logo {
+  height: 30px;
+  margin-right: 2px;
 }
 
 #main-title {
-  /* font-size: clamp(1rem, 10vw, 10rem); */
   overflow: hidden;
   line-height: 1.5;
   font-weight: bold;
   font-family: "Krona One", sans-serif;
 }
 
-.nav-bar {
-  backdrop-filter: blur(5px) brightness(1.25);
-  background-color: rgba(255, 255, 255, 0.65) !important;
+/* Custom block styling */
+
+.custom-block.tip {
+  background-color: rgba(var(c-custom-block-tip), 0.15);
+  border-color: rgba(var(c-custom-block-tip));
 }
 
-.nav-bar .logo {
-  height: 30px;
-  margin-right: 2px;
+.custom-block.tip .custom-block-title {
+  color: rgb(var(c-custom-block-tip));
+}
+
+.custom-block.info {
+  border-color: rgb(var(--c-custom-block-info));
+  color: var(--c-text);
+  background-color: rgb(var(--c-custom-block-info), 0.15);
+}
+
+.custom-block.info .custom-block-title {
+  color: rgb(var(--c-custom-block-info));
+}
+
+.custom-block.warning {
+  border-color: rgb(var(--c-custom-block-warning));
+  color: var(--c-text);
+  background-color: rgba(var(--c-custom-block-warning), 0.15);
+}
+
+.custom-block.warning .custom-block-title {
+  color: rgb(var(--c-custom-block-warning));
+}
+
+.custom-block.danger {
+  border-color: rgb(var(--c-custom-block-danger));
+  color: var(--c-text);
+  background-color: rgba(var(--c-custom-block-danger), 0.25);
+}
+
+.custom-block.danger .custom-block-title {
+  color: rgb(var(--c-custom-block-danger));
+}
+
+@media (prefers-color-scheme: dark) {
+  .nav-bar {
+    backdrop-filter: blur(5px) brightness(0.75);
+  }
 }
