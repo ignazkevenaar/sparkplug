@@ -6,7 +6,6 @@ Version version(0, 0, 0, "indev");
 
 uint32_t currentMillis = 0;
 
-const uint16_t deltaTime = 16; // +- 60 FPS.
 Timer timerLights(deltaTime);
 Timer timerWire(1000);
 
@@ -46,11 +45,7 @@ void sparkUpdate()
 
   if (timerLights.elapsed(currentMillis))
   {
-    // uint32_t currentMicros = micros();
-    updateFadeChannels(deltaTime);
-    // uint32_t laterMicros = micros();
-    // Serial.print(laterMicros - currentMicros);
-    // Serial.println("micros");
+    updateFadeChannels();
 
     outputToDevices();
     clearAllChannelsChanged();

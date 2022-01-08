@@ -13,6 +13,7 @@ extern const size_t modesCount;
 extern LightingMode modes[];
 extern Channel channels[];
 extern const size_t channelsCount;
+extern const uint16_t deltaTime;
 
 /**
 A brief description on a single line, ended by a period or blank line.
@@ -28,8 +29,8 @@ uint16_t getChannelValue(Channel &channel);
 void clearAllChannelsChanged();
 
 bool startFade(Channel &channel, uint16_t value);
-void updateFadeChannels(uint16_t deltaTime);
-void updateFade(Channel &channel, uint16_t deltaTime);
+void updateFadeChannels();
+void updateFade(Channel &channel);
 void updateBlink(Channel &channel);
 
 bool onLightingModeChanged(int modeID);

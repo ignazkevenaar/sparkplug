@@ -3,6 +3,8 @@
 
 #include "lighting.h"
 
+const uint16_t deltaTime = 16; // +- 60 FPS.
+
 constexpr auto uconstrain(auto value, auto b1, auto b2)
 {
   return constrain(value, min(b1, b2), max(b1, b2));
@@ -111,41 +113,45 @@ bool startFade(Channel &channel, uint16_t value)
 {
   channel.transitionFrom = channel.value;
   channel.transitionTo = value;
-  return channel.transitionFrom != channel.transitionTo;
+
+  if (channel.transitionFrom != channel.transitionTo)
+  {
+    // Precalculate fade speeds.
+    uint16_t presetIndex = channel.previousPresetIndex < channel.activePresetIndex ? channel.activePresetIndex : channel.previousPresetIndex;
+
+    const Preset preset = PROGMEM_getAnything(&channel.presets[presetIndex]);
+
+    int32_t fadeSpeed = channel.previousPresetIndex < channel.activePresetIndex ? preset.fadeSpeedRising : preset.fadeSpeedFalling;
+
+    int32_t fadeAmount = 65536 / fadeSpeed * deltaTime;
+    if (channel.transitionTo < channel.transitionFrom) fadeAmount *= -1;
+    channel.fadeAmount = fadeAmount;
+
+    return true;
+  }
+
+  return false;
 }
 
-void updateFadeChannels(uint16_t deltaTime)
+void updateFadeChannels()
 {
   for (int i = 0; i < channelsCount; i++)
   {
     Channel &channel = channels[i];
-    updateFade(channel, deltaTime);
+    updateFade(channel);
     updateBlink(channel);
   }
 }
 
-void updateFade(Channel &channel, uint16_t deltaTime)
+void updateFade(Channel &channel)
 {
   if (channel.value == channel.transitionTo || channel.activePresetIndex == -1) return;
 
-  int32_t fadeSpeed;
+  // This onwards can be precalculated on fade start.
 
-  if (channel.previousPresetIndex < channel.activePresetIndex)
-  {
-    const Preset preset = PROGMEM_getAnything(&channel.presets[channel.activePresetIndex]);
-    fadeSpeed = preset.fadeSpeedRising;
-  }
-  else
-  {
-    const Preset preset = PROGMEM_getAnything(&channel.presets[channel.previousPresetIndex]);
-    fadeSpeed = preset.fadeSpeedFalling;
-  }
+  // Until here.
 
-  int32_t fadeAmount = 65536 / fadeSpeed * deltaTime; //0xFFFF / (fadeSpeed / deltaTime);
-  if (channel.transitionTo < channel.transitionFrom) fadeAmount *= -1;
-  // Serial.println(fadeAmount);
-
-  channel.value = uconstrain((int32_t)channel.value + fadeAmount, channel.transitionFrom, channel.transitionTo);
+  channel.value = uconstrain((int32_t)channel.value + channel.fadeAmount, channel.transitionFrom, channel.transitionTo);
   channel.wasUpdated = true;
 }
 
@@ -160,7 +166,7 @@ void updateBlink(Channel &channel)
   {
     channel.timerBlink = currentMillis - (currentMillis - channel.timerBlink - interval);
 
-    // Check blink callback.
+    // Call onBlinkPhaseChanged event.
     if (!onBlinkPhaseChanged(channel)) return;
 
     channel.blinkPhase = !channel.blinkPhase;
