@@ -1,7 +1,7 @@
 #pragma once
 
 builtinLED builtin(0);
-PCA9685 dashboard(0x40, 0, 4);
+PCA9685 dashboard(0x40, 0, 16);
 
 WireDevice *wireDevices[] = {
     &dashboard};
@@ -9,6 +9,6 @@ size_t wireDevicesCount = COUNT_OF(wireDevices);
 
 OutputDevice *outputDevices[] = {
     &dashboard,
-    &builtin,
+    // &builtin,
 };
 size_t outputDevicesCount = COUNT_OF(outputDevices);

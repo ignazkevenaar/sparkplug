@@ -9,7 +9,7 @@ bool onInitialize()
 {
   Serial.println("Hello from car");
 
-  setLightMode(BlinkR, true);
+  //setLightMode(BlinkR, true);
 
   return true;
 }
