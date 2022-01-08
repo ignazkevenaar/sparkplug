@@ -21,6 +21,7 @@ const char *wireErrorMessagesByReturnCode[] = {
 void updateDeviceConnection()
 {
   Wire.begin(wirePins[0], wirePins[1]);
+  Wire.setClock(400000);
 
   bool shouldUpdateChannels = false;
 
