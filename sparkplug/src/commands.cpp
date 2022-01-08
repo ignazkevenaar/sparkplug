@@ -97,6 +97,7 @@ void setExecute(char **arguments, uint8_t length)
     }
     outputMode(modeIndex, true);
   }
+  outputBuffer.println();
 }
 
 const Command setCommand =
@@ -120,6 +121,7 @@ void unsetExecute(char **arguments, uint8_t length)
     }
     outputMode(modeIndex, true);
   }
+  outputBuffer.println();
 }
 
 const Command unsetCommand =
@@ -132,7 +134,6 @@ const Command unsetCommand =
 void getExecute(char **arguments, uint8_t length)
 {
   outputBuffer.print("M ");
-
   if (!length)
   {
     for (int i = 0; i < modesCount; i++)
@@ -151,6 +152,7 @@ void getExecute(char **arguments, uint8_t length)
       outputMode(modeIndex);
     }
   }
+  outputBuffer.println();
 }
 
 const Command getCommand =

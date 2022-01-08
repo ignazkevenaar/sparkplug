@@ -13,7 +13,8 @@ struct Channel
   uint16_t value = 0;
   int16_t activePresetIndex = -1;
   int16_t previousPresetIndex = -1;
-  int32_t fadeAmount = 0;
+  uint16_t targetDelay = 0;
+  uint32_t startTime = 0;
 
   // Blink.
   uint32_t timerBlink = 0;

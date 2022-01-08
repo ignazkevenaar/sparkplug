@@ -6,6 +6,7 @@ Version version(0, 0, 0, "indev");
 
 uint32_t currentMillis = 0;
 
+const uint16_t deltaTime = 16; // +- 60 FPS.
 Timer timerLights(deltaTime);
 Timer timerWire(1000);
 
