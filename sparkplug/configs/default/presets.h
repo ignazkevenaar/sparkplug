@@ -33,13 +33,6 @@ const PROGMEM Preset presetsHighBeams[] =
         {.modeID = Hazards, .mode = PresetModes::Blink},
 };
 
-const PROGMEM Preset presetsBlinkersRear[] =
-    {
-        {.modeID = BlinkL, .mode = PresetModes::Blink},
-        {.modeID = BlinkR, .mode = PresetModes::Blink},
-        {.modeID = Hazards, .mode = PresetModes::Blink},
-};
-
 const PROGMEM Preset presetsBlinkersFrontLeft[] =
     {
         {.modeID = Parking, .intensity = 16},
