@@ -7,8 +7,6 @@
 
 // Max number of input characters.
 const int inputBufferSize = 64;
-// Max length of command identifier string.
-const int commandMaxLength = 16;
 // Max number of argument pointers.
 const int argumentsMaxLength = 16;
 // String token separators.
@@ -50,13 +48,13 @@ void readSerialInput()
 void splitMessage(char *message, uint8_t messageLength)
 {
   int tokenIndex = 0;
-  char commandString[commandMaxLength];
+  char *commandString;
 
   char *token = strtok(message, commandArgumentSeparator);
 
   while (token != NULL)
   {
-    if (tokenIndex == 0) strcpy(commandString, token);
+    if (tokenIndex == 0) commandString = token;
     else
       arguments[tokenIndex - 1] = token;
 
