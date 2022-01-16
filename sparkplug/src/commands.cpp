@@ -34,7 +34,8 @@ const Command versionCommand =
         "V",
         "version",
         "Get Sparkplug semantic version number.",
-        &versionExecute};
+        &versionExecute,
+};
 
 void helpExecute(const Command &command, char **arguments, uint8_t length)
 {
@@ -68,7 +69,8 @@ const Command helpCommand =
         "?",
         "help",
         "Get information on available commands and their usage. (This command.)",
-        &helpExecute};
+        &helpExecute,
+};
 
 void testExecute(const Command &command, char **arguments, uint8_t length)
 {
@@ -86,13 +88,14 @@ const Command testCommand =
         "T",
         "test",
         "Test command used for echoing presented command arguments.",
-        &testExecute};
+        &testExecute,
+};
 
-void outputMode(int modeIndex, bool nextState = false)
+void outputMode(int modeIndex)
 {
   outputBuffer.print(modeIndex);
   outputBuffer.print(outputKeyValueSeparator);
-  outputBuffer.print(nextState ? modes[modeIndex].nextState : modes[modeIndex].currentState);
+  outputBuffer.print(modes[modeIndex].nextState > -1 ? modes[modeIndex].nextState : modes[modeIndex].currentState);
   outputBuffer.print(outputGroupSeparator);
 }
 
@@ -152,7 +155,6 @@ bool argumentIsRange(char *string, uint16_t *rangeFrom, uint16_t *rangeTo, bool 
 void setUnsetGetExecute(const Command &command, char **arguments, uint8_t length)
 {
   const bool setUnset = command.ID == idSetCommand || command.ID == idUnsetCommand;
-  const int newModeState = command.ID == idSetCommand;
 
   outputBuffer.print("M ");
 
@@ -171,12 +173,12 @@ void setUnsetGetExecute(const Command &command, char **arguments, uint8_t length
 
     for (int modeIndex = rangeFrom; modeIndex <= rangeTo; modeIndex++)
     {
-      if (setUnset && !setLightMode(modeIndex, newModeState))
+      if (setUnset && !setLightMode(modeIndex, command.ID == idSetCommand))
       {
         Serial.println("Mode index out of range or already set.");
         continue;
       }
-      outputMode(modeIndex, setUnset);
+      outputMode(modeIndex);
     }
   }
   outputBuffer.println();
@@ -187,24 +189,27 @@ const Command setCommand =
         idSetCommand,
         "S",
         "set",
-        "Set light mode. [mode, ...]",
-        &setUnsetGetExecute};
+        "Set light mode. [mode, range, ...]",
+        &setUnsetGetExecute,
+};
 
 const Command unsetCommand =
     {
         idUnsetCommand,
         "U",
         "unset",
-        "Unset light mode. [mode, ...]",
-        &setUnsetGetExecute};
+        "Unset light mode. [mode, range, ...]",
+        &setUnsetGetExecute,
+};
 
 const Command getCommand =
     {
         idGetCommand,
         "G",
         "get",
-        "Get light mode state. [(all)], [mode, ...]",
-        &setUnsetGetExecute};
+        "Get light mode state. [mode, range, ...]",
+        &setUnsetGetExecute,
+};
 
 const Command *commands[] =
     {
