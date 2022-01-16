@@ -19,8 +19,8 @@ char inputBuffer[inputBufferSize] = {};
 char *arguments[argumentsMaxLength] = {};
 
 // Output
-const int outputBufferSize = 256;
-PrintCharArray outputBuffer(outputBufferSize);
+#define PRINTCHARARRAY_MAX_BUFFER_SIZE 250
+PrintCharArray outputBuffer(PRINTCHARARRAY_MAX_BUFFER_SIZE);
 
 void readSerialInput()
 {
