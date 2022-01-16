@@ -55,6 +55,11 @@ void splitMessage(char *message, uint8_t messageLength)
   while (token != NULL)
   {
     if (tokenIndex == 0) commandString = token;
+    else if (tokenIndex > argumentsMaxLength)
+    {
+      Serial.println("Too many arguments.");
+      break;
+    }
     else
       arguments[tokenIndex - 1] = token;
 
