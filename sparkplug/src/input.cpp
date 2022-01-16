@@ -84,7 +84,7 @@ void parseCommand(char *commandString, char **arguments, uint8_t length)
 
     if (resultLong == 0 || resultShort == 0)
     {
-      command.execute(arguments, length);
+      command.execute(command, arguments, length);
       return;
     }
   }

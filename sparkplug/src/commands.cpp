@@ -4,6 +4,16 @@
 #include "input.h"
 #include "lighting.h"
 
+enum commandIDs
+{
+  idSetCommand,
+  idUnsetCommand,
+  idGetCommand,
+  idTestCommand,
+  idHelpCommand,
+  idVersionCommand,
+};
+
 void welcomeMessage()
 {
   Serial.println();
@@ -13,19 +23,20 @@ void welcomeMessage()
   Serial.println();
 }
 
-void versionExecute(char **arguments, uint8_t length)
+void versionExecute(const Command &command, char **arguments, uint8_t length)
 {
   outputBuffer.print(version.getString());
 }
 
 const Command versionCommand =
     {
+        idVersionCommand,
         "V",
         "version",
         "Get Sparkplug semantic version number.",
         &versionExecute};
 
-void helpExecute(char **arguments, uint8_t length)
+void helpExecute(const Command &command, char **arguments, uint8_t length)
 {
   Serial.println();
   Serial.print("Sparkplug - version ");
@@ -53,12 +64,13 @@ void helpExecute(char **arguments, uint8_t length)
 
 const Command helpCommand =
     {
+        idHelpCommand,
         "?",
         "help",
         "Get information on available commands and their usage. (This command.)",
         &helpExecute};
 
-void testExecute(char **arguments, uint8_t length)
+void testExecute(const Command &command, char **arguments, uint8_t length)
 {
   Serial.println("Sleeping...");
   delay(1500);
@@ -70,6 +82,7 @@ void testExecute(char **arguments, uint8_t length)
 
 const Command testCommand =
     {
+        idTestCommand,
         "T",
         "test",
         "Test command used for echoing presented command arguments.",
@@ -83,84 +96,115 @@ void outputMode(int modeIndex, bool nextState = false)
   outputBuffer.print(outputGroupSeparator);
 }
 
-void setExecute(char **arguments, uint8_t length)
+void argumentToRangeTokens(char *string, char **firstToken, char **lastToken)
 {
+  const char delimiter[] = "-";
+  char *token;
+
+  token = strtok(string, delimiter);
+  *firstToken = token;
+
+  while (token != NULL)
+  {
+    *lastToken = token; // Only accept last token as 'end' of range.
+    token = strtok(NULL, delimiter);
+  }
+}
+
+uint32_t strToLong(char *string, bool &error)
+{
+  char *endptr;
+  uint32_t number = strtoul(string, &endptr, 0);
+  if (endptr == string) error |= true;
+  return number;
+}
+
+bool argumentIsRange(char *string, uint16_t *rangeFrom, uint16_t *rangeTo, bool &error)
+{
+  char *firstToken;
+  char *lastToken;
+  argumentToRangeTokens(string, &firstToken, &lastToken);
+
+  char *endptr;
+  bool errorFirst = false;
+  bool errorLast = false;
+  unsigned int firstNumber = strToLong(firstToken, errorFirst);
+  unsigned int lastNumber = strToLong(lastToken, errorLast);
+
+  if (errorFirst || errorLast)
+  {
+    Serial.print("Error in ");
+    Serial.print(errorFirst ? "first" : "last");
+    Serial.println(" range index.");
+
+    error |= true;
+    return false;
+  }
+
+  bool isRange = firstToken != lastToken;
+
+  *rangeFrom = min(firstNumber, lastNumber);
+  *rangeTo = max(firstNumber, lastNumber);
+
+  return isRange;
+}
+
+void setUnsetGetExecute(const Command &command, char **arguments, uint8_t length)
+{
+  const bool setUnset = command.ID == idSetCommand || command.ID == idUnsetCommand;
+  const int newModeState = command.ID == idSetCommand;
+
   outputBuffer.print("M ");
+
+  if (!length)
+  {
+    Serial.println("TODO: implement setUnsetGet without arguments");
+  }
+
   for (int i = 0; i < length; i++)
   {
-    // Convert each argument to int.
-    int modeIndex = strtol(arguments[i], NULL, 10);
-    if (!setLightMode(modeIndex, 1))
+    bool error = false;
+    uint16_t rangeFrom = 0;
+    uint16_t rangeTo = 0;
+    bool isRange = argumentIsRange(arguments[i], &rangeFrom, &rangeTo, error);
+    if (error) continue; // Continue parsing following arguments.
+
+    for (int modeIndex = rangeFrom; modeIndex <= rangeTo; modeIndex++)
     {
-      Serial.println("Mode index out of range or already set.");
-      continue;
+      if (setUnset && !setLightMode(modeIndex, newModeState))
+      {
+        Serial.println("Mode index out of range or already set.");
+        continue;
+      }
+      outputMode(modeIndex, setUnset);
     }
-    outputMode(modeIndex, true);
   }
   outputBuffer.println();
 }
 
 const Command setCommand =
     {
+        idSetCommand,
         "S",
         "set",
         "Set light mode. [mode, ...]",
-        &setExecute};
-
-void unsetExecute(char **arguments, uint8_t length)
-{
-  outputBuffer.print("M ");
-  for (int i = 0; i < length; i++)
-  {
-    // Convert each argument to int.
-    int modeIndex = strtol(arguments[i], NULL, 10);
-    if (!setLightMode(modeIndex, 0))
-    {
-      Serial.println("Mode index out of range or already set.");
-      continue;
-    }
-    outputMode(modeIndex, true);
-  }
-  outputBuffer.println();
-}
+        &setUnsetGetExecute};
 
 const Command unsetCommand =
     {
+        idUnsetCommand,
         "U",
         "unset",
         "Unset light mode. [mode, ...]",
-        &unsetExecute};
-
-void getExecute(char **arguments, uint8_t length)
-{
-  outputBuffer.print("M ");
-  if (!length)
-  {
-    for (int i = 0; i < modesCount; i++)
-    {
-      if (modes[i].currentState == 0) continue;
-      outputMode(i);
-    }
-  }
-  else
-  {
-    for (int i = 0; i < length; i++)
-    {
-      // Convert each argument to int.
-      int modeIndex = strtol(arguments[i], NULL, 10);
-      if (modeIndex < 0 || modeIndex > modesCount) continue;
-      outputMode(modeIndex);
-    }
-  }
-  outputBuffer.println();
-}
+        &setUnsetGetExecute};
 
 const Command getCommand =
     {
+        idGetCommand,
         "G",
         "get",
         "Get light mode state. [(all)], [mode, ...]",
-        &getExecute};
+        &setUnsetGetExecute};
 
 const Command *commands[] =
     {
