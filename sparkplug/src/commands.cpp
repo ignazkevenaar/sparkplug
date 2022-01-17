@@ -161,7 +161,12 @@ void setUnsetGetExecute(const Command &command, char **arguments, uint8_t length
 
   if (!length)
   {
-    Serial.println("TODO: implement setUnsetGet without arguments");
+    for (int modeIndex = 0; modeIndex < modesCount; modeIndex++)
+    {
+      if (command.ID == idUnsetCommand) setLightMode(modeIndex, command.ID == idSetCommand);
+      if (modes[modeIndex].currentState > 0) outputMode(modeIndex);
+    }
+    return;
   }
 
   for (int i = 0; i < length; i++)
