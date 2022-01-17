@@ -69,6 +69,7 @@ void splitMessage(char *message, uint8_t messageLength)
 
   outputBuffer.clear();
   parseCommand(commandString, arguments, tokenIndex - 1);
+  outputBuffer.println();
 
   // Clean argument pointers.
   memset(arguments, 0, COUNT_OF(arguments));

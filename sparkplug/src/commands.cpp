@@ -93,10 +93,13 @@ const Command testCommand =
 
 void outputMode(int modeIndex)
 {
+  if (outputBuffer.size() == 0)
+    outputBuffer.print("M ");
+  else
+    outputBuffer.print(outputGroupSeparator);
   outputBuffer.print(modeIndex);
   outputBuffer.print(outputKeyValueSeparator);
   outputBuffer.print(modes[modeIndex].nextState > -1 ? modes[modeIndex].nextState : modes[modeIndex].currentState);
-  outputBuffer.print(outputGroupSeparator);
 }
 
 void argumentToRangeTokens(char *string, char **firstToken, char **lastToken)
@@ -156,8 +159,6 @@ void setUnsetGetExecute(const Command &command, char **arguments, uint8_t length
 {
   const bool setUnset = command.ID == idSetCommand || command.ID == idUnsetCommand;
 
-  outputBuffer.print("M ");
-
   if (!length)
   {
     Serial.println("TODO: implement setUnsetGet without arguments");
@@ -181,7 +182,6 @@ void setUnsetGetExecute(const Command &command, char **arguments, uint8_t length
       outputMode(modeIndex);
     }
   }
-  outputBuffer.println();
 }
 
 const Command setCommand =
