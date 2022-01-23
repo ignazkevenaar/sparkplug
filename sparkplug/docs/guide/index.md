@@ -34,8 +34,7 @@ To upload any data to the [LittleFS](https://github.com/littlefs-project/littlef
 Using Arduino CLI:
 
 ```shell
-arduino-cli core update-index --additional-urls https://arduino.esp8266.com/stable/package_esp8266com_index.json
-arduino-cli core install esp8266:esp8266@3.0.2
+arduino-cli core install esp8266:esp8266@3.0.2 --additional-urls https://arduino.esp8266.com/stable/package_esp8266com_index.json
 ```
 
 Using the Arduino IDE board manager you can follow these instructions:
