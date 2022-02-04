@@ -17,6 +17,7 @@ module.exports = {
       { text: "Home", link: "/" },
       { text: "Guide", link: "/guide/" },
       { text: "Reference", link: "/reference/" },
+      { text: "Coilpack", link: "/coilpack" },
       { text: "GitHub", link: "https://github.com/ignazkevenaar/sparkplug" },
     ],
   },

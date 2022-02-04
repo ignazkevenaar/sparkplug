@@ -5,5 +5,13 @@
   "workspaces": [
     "sparkplug",
     "coilpack"
-  ]
+  ],
+  "scripts": {
+    "docs:build": "vitepress build docs",
+    "docs:dev": "vitepress dev docs",
+    "docs:serve": "vitepress serve docs"
+  },
+  "devDependencies": {
+    "vitepress": "^0.21.3"
+  }
 }

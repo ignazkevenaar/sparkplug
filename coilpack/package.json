@@ -13,9 +13,6 @@
     "type-check": "vue-tsc --build --force",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --write src/",
-    "docs:dev": "vitepress dev docs",
-    "docs:build": "vitepress build docs",
-    "docs:serve": "vitepress serve docs",
     "makefs": "mklittlefs --create ./dist ./littlefs/coilpack.bin --size 1024000 -b 8192 -p 256",
     "websocket": "cd ../utils/websocket-echo/ && npm run serve"
   },
@@ -48,7 +45,6 @@
     "sass": "^1.72.0",
     "tailwindcss": "^3.4.1",
     "vite": "^5.1.5",
-    "vitepress": "^0.21.3",
     "vue-tsc": "^2.0.6"
   }
 }
