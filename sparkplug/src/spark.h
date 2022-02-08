@@ -13,6 +13,7 @@
 #include "webServer.h"
 #include "webSockets.h"
 #include "wiFi.h"
+#include "sound.h"
 
 void sparkInitialize();
 bool onInitialize();

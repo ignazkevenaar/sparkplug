@@ -3,6 +3,7 @@
 #include "helpers/macros.h"
 #include "input.h"
 #include "lighting.h"
+#include "sound.h"
 
 void welcomeMessage()
 {
@@ -60,6 +61,9 @@ const Command helpCommand =
 
 void testExecute(char **arguments, uint8_t length)
 {
+  playSound();
+  return;
+
   Serial.println("Sleeping...");
   delay(1500);
 

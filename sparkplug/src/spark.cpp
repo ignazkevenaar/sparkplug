@@ -55,6 +55,8 @@ void sparkUpdate()
   updateWebServer();
   updateWebSockets();
 
+  updateSound();
+
   onUpdate();
 }
 
