@@ -9,6 +9,12 @@
         -webkit-touch-callout: none;
     }
 
+    @media (prefers-color-scheme: dark) {
+        :root {
+            color-scheme: dark;
+        }
+    }
+
     :root {
         --color-foreground-50:  248,250,252; /* #f8fafc */
         --color-foreground-100: 241,245,249; /* #f1f5f9 */
