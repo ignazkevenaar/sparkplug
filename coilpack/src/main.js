@@ -1,5 +1,5 @@
 import './index.css';
-import * as mdijs from '@mdi/js'
+import * as mdijs from './config/icons';
 import App from './App.vue';
 import { createApp } from 'vue'
 import mdiVue from 'mdi-vue/v3'
