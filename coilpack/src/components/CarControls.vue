@@ -2,6 +2,7 @@
 import { onBeforeUpdate, ref } from 'vue';
 import Button from './Button.vue'
 import ControlContainer from './ControlContainer.vue'
+import ControlFooter from './ControlFooter.vue'
 import ControlGrid from './ControlGrid.vue'
 import MinimapItem from './MinimapItem.vue'
 import Placeholder from './Placeholder.vue'
@@ -112,13 +113,7 @@ const scrollToContainer = categoryIndex => {
           {{ control.text }}
         </component>
       </ControlContainer>
+      <ControlFooter />
     </div>
   </div>
 </template>
-
-<style lang="scss" scoped>
-  footer {
-    writing-mode: vertical-rl;
-    text-orientation: mixed;
-  }
-</style>
