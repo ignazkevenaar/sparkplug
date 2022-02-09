@@ -1,7 +1,7 @@
 [
     {
-        "name": "testCategory",
-        "icon": "bug",
+        "name": "Headlights",
+        "icon": "car-light-dimmed",
         "controls": [
             {
                 "type": "Button",
@@ -72,31 +72,28 @@
         ]
     },
     {
-        "name": "testCategory2",
+        "name": "Drivetrain",
+        "icon": "car-shift-pattern",
         "controls": []
     },
     {
-        "name": "testCategory3",
+        "name": "Exterior accessoires",
+        "icon": "car",
         "controls": []
     },
     {
-        "name": "testCategory4",
+        "name": "Interior",
+        "icon": "car-seat",
         "controls": []
     },
     {
-        "name": "testCategory5",
+        "name": "Interior accessoires",
+        "icon": "car-seat-heater",
         "controls": []
     },
     {
-        "name": "testCategory6",
-        "controls": []
-    },
-    {
-        "name": "testCategory7",
-        "controls": []
-    },
-    {
-        "name": "testCategory8",
+        "name": "Trailer",
+        "icon": "truck-trailer",
         "controls": []
     }
 ]
