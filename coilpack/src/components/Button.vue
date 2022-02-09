@@ -112,15 +112,6 @@ const swapSetUnset = original => {
 
 const colorClass = computed(() => colors.default[cascadedProps.value.color || 'default'].background);
 
-const absorbEvent_ = event => {
-  var e = event || window.event;
-  e.preventDefault && e.preventDefault();
-  e.stopPropagation && e.stopPropagation();
-  e.cancelBubble = true;
-  e.returnValue = false;
-  return false;
-}
-
 let holding = ref(false);
 let holdingPosition = ref(false);
 
@@ -165,10 +156,10 @@ const onHold = event => {
   <button
     class="relative z-0 flex cursor-pointer select-none flex-col items-center justify-center bg-gradient-to-br p-2 text-center text-sm font-semibold"
     :class="[roundClass, colorClass]"
-    @mousedown.stop.prevent="mouseDown"
-    @mouseup.stop.prevent="mouseUp"
-    @touchstart="mouseDown"
-    @touchend="mouseUp"
+    @mousedown.prevent="mouseDown"
+    @mouseup.prevent="mouseUp"
+    @touchstart.prevent="mouseDown"
+    @touchend.prevent="mouseUp"
   >
     <mdicon
       v-if="cascadedProps.icon"
