@@ -1,11 +1,10 @@
 <script setup>
 import * as sparkplug from './api.js'
-import { onMounted, ref } from 'vue'
 import CarControls from './components/CarControls.vue'
 import CarImage from './components/CarImage.vue'
 import Container from './components/Container.vue'
 import Header from './components/Header.vue'
-import ModeToggler from './components/debug/ModeToggler.vue'
+import { ref } from 'vue'
 
 let loading = ref(true);
 let controlModels = ref({});
@@ -39,14 +38,12 @@ const debugSetMode = event => {
     ref="body"
     class="h-screen overflow-y-auto overflow-x-hidden bg-black text-foreground-200 md:flex"
     :class="[ lightsOut ? 'lightsOut' : '' ]"
-    style="scroll-snap-type: y mandatory;"
   >
     <!-- Car image -->
     <Container
       id="carImage"
       ref="carImage"
       class="relative h-screen shrink-0 md:w-1/2 lg:w-[500px]"
-      style="scroll-snap-align: start;"
       :padding="paddingSides"
     >
       <template #header>
@@ -73,7 +70,6 @@ const debugSetMode = event => {
     <!-- Controls -->
     <Container
       class="bg-background-900"
-      style="scroll-snap-align: start;"
       :padding="paddingSides"
     >
       <template #header>
@@ -87,10 +83,6 @@ const debugSetMode = event => {
           </button>
         </Header>
       </template>
-      <!-- <ModeToggler
-        :value="controlModels"
-        @input="debugSetMode"
-      /> -->
       <CarControls
         :value="controlModels"
         :control-config="sparkplug.controlsData"
