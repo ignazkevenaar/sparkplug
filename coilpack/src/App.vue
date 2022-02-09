@@ -52,7 +52,7 @@ const debugSetMode = event => {
       <template #header>
         <Header text="Sparkplug">
           <template #beforeText>
-            <mdicon name="flash" />
+            <mdicon name="sparkplug" />
           </template>
         </Header>
       </template>
