@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue';
+import { computed, ref } from 'vue';
 import InlineSVG from './InlineSVG.vue'
 
 const props = defineProps({
@@ -26,86 +26,86 @@ const lightTest = ref(false);
 
 <template>
   <div
-    class="relative vfd"
+    class="vfd relative"
     :class="{ 'light-test': lightTest }"
   >
     <!-- Side toolbars -->
     <div
-      class="flex absolute bottom-0 justify-between w-full fade-out"
+      class="fade-out absolute bottom-0 flex w-full justify-between"
       :style="{ height: `calc(${ finalHeight }px - 3rem)` }"
       :class="{ hide: !hasScrolled }"
     >
-      <div class="grid grow grid-rows-4 gap-px items-center ">
-        <div class="max-w-[3rem] h-full max-h-[3rem] bg-background-700 rounded-lg aspect-square" />
-        <div class="max-w-[3rem] h-full max-h-[3rem] bg-background-700 rounded-lg aspect-square" />
-        <div class="max-w-[3rem] h-full max-h-[3rem] bg-background-700 rounded-lg aspect-square" />
-        <div class="max-w-[3rem] h-full max-h-[3rem] bg-background-700 rounded-lg aspect-square" />
+      <div class="grid grow grid-rows-4 items-center gap-px">
+        <div class="aspect-square h-full max-h-[3rem] max-w-[3rem] rounded-lg bg-background-700" />
+        <div class="aspect-square h-full max-h-[3rem] max-w-[3rem] rounded-lg bg-background-700" />
+        <div class="aspect-square h-full max-h-[3rem] max-w-[3rem] rounded-lg bg-background-700" />
+        <div class="aspect-square h-full max-h-[3rem] max-w-[3rem] rounded-lg bg-background-700" />
       </div>
-      <div class="grid grow grid-rows-4 gap-px justify-items-end items-center">
-        <div class="max-w-[3rem] h-full max-h-[3rem] bg-background-700 rounded-lg aspect-square" />
-        <div class="max-w-[3rem] h-full max-h-[3rem] bg-background-700 rounded-lg aspect-square" />
-        <div class="max-w-[3rem] h-full max-h-[3rem] bg-background-700 rounded-lg aspect-square" />
-        <div class="max-w-[3rem] h-full max-h-[3rem] bg-background-700 rounded-lg aspect-square" />
+      <div class="grid grow grid-rows-4 items-center justify-items-end gap-px">
+        <div class="aspect-square h-full max-h-[3rem] max-w-[3rem] rounded-lg bg-background-700" />
+        <div class="aspect-square h-full max-h-[3rem] max-w-[3rem] rounded-lg bg-background-700" />
+        <div class="aspect-square h-full max-h-[3rem] max-w-[3rem] rounded-lg bg-background-700" />
+        <div class="aspect-square h-full max-h-[3rem] max-w-[3rem] rounded-lg bg-background-700" />
       </div>
     </div>
 
     <!-- Car image -->
     <InlineSVG
       src="/car.svg"
-      class="grid overflow-hidden absolute bottom-0 place-items-center w-full fill-[none] stroke-2 lg:stroke-[1.5px] carImage"
+      class="carImage absolute bottom-0 grid w-full place-items-center overflow-hidden fill-[none] stroke-2 lg:stroke-[1.5px]"
     />
 
     <!-- Top toolbar -->
     <div class="sticky top-0">
       <!-- Header -->
-      <div class="flex md:hidden justify-between items-center mb-6">
+      <div class="mb-6 flex items-center justify-between md:hidden">
         <button
-          class="w-12 h-12 bg-background-700 rounded-full fade-out"
+          class="fade-out h-12 w-12 rounded-full bg-background-700"
           :class="{ hide: hasScrolled }"
         />
         <p class="mx-auto font-header text-lg font-bold tracking-tight">
           Sparkplug
         </p>
         <button
-          class="w-12 h-12 bg-background-700 rounded-full fade-out"
+          class="fade-out h-12 w-12 rounded-full bg-background-700"
           :class="{ hide: hasScrolled }"
         />
       </div>
       <!-- Indicator lights -->
       <div
-        class="grid grid-cols-5 gap-6 fade-out"
+        class="fade-out grid grid-cols-5 gap-6"
         :class="{ hide: hasScrolled }"
       >
         <div class="relative aspect-square">
           <mdicon
             name="flash"
-            class="absolute top-0 left-0 w-full h-full green on-BlinkL blink fill"
+            class="green on-BlinkL blink fill absolute top-0 left-0 h-full w-full"
           />
         </div>
-        <div class="bg-background-700 rounded-lg aspect-square" />
-        <div class="bg-background-700 rounded-lg aspect-square" />
-        <div class="bg-background-700 rounded-lg aspect-square" />
-        <div class="bg-background-700 rounded-lg aspect-square" />
-        <div class="bg-background-700 rounded-lg aspect-square" />
-        <div class="col-start-5 bg-background-700 rounded-lg aspect-square" />
+        <div class="aspect-square rounded-lg bg-background-700" />
+        <div class="aspect-square rounded-lg bg-background-700" />
+        <div class="aspect-square rounded-lg bg-background-700" />
+        <div class="aspect-square rounded-lg bg-background-700" />
+        <div class="aspect-square rounded-lg bg-background-700" />
+        <div class="col-start-5 aspect-square rounded-lg bg-background-700" />
       </div>
     </div>
 
     <!-- Bottom toolbar -->
     <div
-      class="absolute bottom-0 w-full text-center select-none fade-out"
+      class="fade-out absolute bottom-0 w-full select-none text-center"
       :class="{ hide: hasScrolled }"
     >
       <div class="flex justify-between">
         <button
-          class="grid place-items-center w-12 h-12 bg-background-700 rounded-full"
+          class="grid h-12 w-12 place-items-center rounded-full bg-background-700"
           @mousedown="lightTest = true;"
           @mouseup="lightTest = false;"
         >
           LT
         </button>
         <div>
-          <p class="pb-0 mx-auto font-bold">
+          <p class="mx-auto pb-0 font-bold">
             Volkswagen
           </p>
           <p class="mx-auto font-header text-lg font-bold tracking-tight">
@@ -113,7 +113,7 @@ const lightTest = ref(false);
           </p>
         </div>
         <button
-          class="grid place-items-center w-12 h-12 bg-background-700 rounded-full"
+          class="grid h-12 w-12 place-items-center rounded-full bg-background-700"
           @click="$emit('toggle-lights-out')"
         >
           LO

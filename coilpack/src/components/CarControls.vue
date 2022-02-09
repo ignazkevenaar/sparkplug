@@ -1,11 +1,10 @@
 <script setup>
-import { ref, onBeforeUpdate } from 'vue';
+import { onBeforeUpdate, ref } from 'vue';
+import Button from './Button.vue'
 import ControlContainer from './ControlContainer.vue'
 import ControlGrid from './ControlGrid.vue'
 import MinimapItem from './MinimapItem.vue'
-
 import Placeholder from './Placeholder.vue'
-import Button from './Button.vue'
 
 const props = defineProps({
   value: {
@@ -75,7 +74,7 @@ const scrollToContainer = categoryIndex => {
 <template>
   <!-- Minimap -->
   <div
-    class="flex md:hidden overflow-x-auto gap-1 py-2 max-w-full"
+    class="flex max-w-full gap-1 overflow-x-auto py-2 md:hidden"
     :class="paddingSides"
   >
     <MinimapItem
@@ -89,7 +88,7 @@ const scrollToContainer = categoryIndex => {
   </div>
   <div>
     <div
-      class="flex overflow-x-scroll md:overflow-x-hidden md:flex-wrap gap-6 justify-items-start pt-2 md:w-auto scroll-px-6 snap-x snap-mandatory"
+      class="flex snap-x snap-mandatory scroll-px-6 justify-items-start gap-6 overflow-x-scroll pt-2 md:w-auto md:flex-wrap md:overflow-x-hidden"
       :class="[paddingSides, paddingBottom]"
     >
       <ControlContainer

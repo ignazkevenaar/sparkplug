@@ -1,15 +1,15 @@
 <template>
-  <div class="relative p-[8%] rounded-full surround">
-    <div class="absolute top-0 left-0 w-full h-full rounded-full shadow" />
-    <div class="relative p-[12.5%] w-full h-full rounded-full gap">
-      <div class="absolute top-0 left-0 w-full h-full rounded-full shadow">
+  <div class="surround relative rounded-full p-[8%]">
+    <div class="absolute top-0 left-0 h-full w-full rounded-full shadow" />
+    <div class="gap relative h-full w-full rounded-full p-[12.5%]">
+      <div class="absolute top-0 left-0 h-full w-full rounded-full shadow">
         <svg
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"
-          class="overflow-hidden absolute top-[.5%] left-0 w-full h-full rounded-full opacity-20"
+          class="absolute top-[.5%] left-0 h-full w-full overflow-hidden rounded-full opacity-20"
         >
           <circle
-            class="text-white stroke-current ridges"
+            class="ridges stroke-current text-white"
             cx="50%"
             cy="50%"
             r="50%"
@@ -18,19 +18,19 @@
         <svg
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"
-          class="overflow-hidden absolute top-0 left-0 w-full h-full rounded-full opacity-20"
+          class="absolute top-0 left-0 h-full w-full overflow-hidden rounded-full opacity-20"
         >
           <circle
-            class="text-black stroke-current ridges"
+            class="ridges stroke-current text-black"
             cx="50%"
             cy="50%"
             r="50%"
           />
         </svg>
       </div>
-      <div class="relative w-full h-full rounded-full front">
-        <div class="absolute w-full h-full rounded-full shadow">
-          <div class="relative top-2 mx-auto w-1 h-[20%] bg-background-600/10 rounded-md indent" />
+      <div class="front relative h-full w-full rounded-full">
+        <div class="absolute h-full w-full rounded-full shadow">
+          <div class="indent relative top-2 mx-auto h-[20%] w-1 rounded-md bg-background-600/10" />
         </div>
       </div>
     </div>

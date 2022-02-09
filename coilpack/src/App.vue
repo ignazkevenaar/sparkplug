@@ -1,13 +1,11 @@
 <script setup>
 import * as sparkplug from './api.js'
-import { ref, onMounted } from 'vue'
-
-import ModeToggler from './components/debug/ModeToggler.vue'
-
+import { onMounted, ref } from 'vue'
+import CarControls from './components/CarControls.vue'
+import CarImage from './components/CarImage.vue'
 import Container from './components/Container.vue'
 import Header from './components/Header.vue'
-import CarImage from './components/CarImage.vue'
-import CarControls from './components/CarControls.vue'
+import ModeToggler from './components/debug/ModeToggler.vue'
 
 let loading = ref(true);
 let controlModels = ref({});
@@ -40,7 +38,7 @@ const debugSetMode = event => {
   <div
     v-else
     ref="body"
-    class="md:flex overflow-x-hidden overflow-y-auto h-screen text-foreground-200 bg-black"
+    class="h-screen overflow-y-auto overflow-x-hidden bg-black text-foreground-200 md:flex"
     :class="[ lightsOut ? 'lightsOut' : '' ]"
     style="scroll-snap-type: y mandatory;"
   >
@@ -48,7 +46,7 @@ const debugSetMode = event => {
     <Container
       id="carImage"
       ref="carImage"
-      class="relative shrink-0 md:w-1/2 lg:w-[500px] h-screen"
+      class="relative h-screen shrink-0 md:w-1/2 lg:w-[500px]"
       style="scroll-snap-align: start;"
       :padding="paddingSides"
     >
@@ -60,7 +58,7 @@ const debugSetMode = event => {
         </Header>
       </template>
       <div
-        class="relative pt-6 md:pt-0 h-full"
+        class="relative h-full pt-6 md:pt-0"
         :class="[paddingSides, paddingBottom]"
       >
         <CarImage
@@ -83,7 +81,7 @@ const debugSetMode = event => {
       <template #header>
         <Header text="Controls">
           <button
-            class="hidden md:block p-2 px-4 mx-2 font-bold bg-background-700 rounded-md"
+            class="mx-2 hidden rounded-md bg-background-700 p-2 px-4 font-bold md:block"
             :class="lightsOut ? 'bg-foreground-50 text-background-700' : ''"
             @click="lightsOut = !lightsOut"
           >

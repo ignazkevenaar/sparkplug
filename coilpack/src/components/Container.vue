@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 
 defineProps({
   width: {
@@ -23,7 +23,7 @@ onMounted(() => {
 
 <template>
   <div
-    class="block md:grid min-w-0 min-h-0"
+    class="block min-h-0 min-w-0 md:grid"
     style="grid-template-rows: min-content minmax(0, 1fr);"
   >
     <div
@@ -33,7 +33,7 @@ onMounted(() => {
       <slot name="header" />
     </div>
     <div
-      class="overflow-y-auto h-full"
+      class="h-full overflow-y-auto"
       :class="[width]"
     >
       <div

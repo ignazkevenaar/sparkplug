@@ -14,7 +14,7 @@ const selectedIconClasses = "text-black";
 
 <template>
   <button
-    class="grid shrink-0 place-items-center w-12 h-8 rounded-full border-[1.5px] border-background-600 transition-all"
+    class="grid h-8 w-12 shrink-0 place-items-center rounded-full border-[1.5px] border-background-600 transition-all"
     :class="[selected ? selectedClasses : null]"
   >
     <mdicon

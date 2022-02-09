@@ -1,6 +1,6 @@
 <template>
   <div
-    class="grid relative grid-cols-12 gap-2 md:gap-4 w-full grid-rows-[16]"
+    class="relative grid w-full grid-cols-12 grid-rows-[16] gap-2 md:gap-4"
     style="grid-auto-rows: var(--control-grid-row-height);"
   >
     <slot />

@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
+import { onMounted, onUnmounted, ref } from 'vue';
 
 let grid = ref(null);
 let rowHeight = ref("");
@@ -22,16 +22,16 @@ onUnmounted(() => {
 
 <template>
   <div
-    class="grow-0 shrink-0 w-[calc(100vw-theme(spacing.24))] md:w-[300px]"
+    class="w-[calc(100vw-theme(spacing.24))] shrink-0 grow-0 md:w-[300px]"
     style="scroll-snap-align: start;"
   >
-    <div class="md:flex items-center mb-2 font-header font-bold">
+    <div class="mb-2 items-center font-header font-bold md:flex">
       <slot name="header" />
     </div>
     <div
       v-bind="$attrs"
       ref="grid"
-      class="grid relative grid-cols-12 gap-2 w-full rounded-xl"
+      class="relative grid w-full grid-cols-12 gap-2 rounded-xl"
       :style="`grid-template-rows: repeat(16, ${ rowHeight });`"
     >
       <slot />

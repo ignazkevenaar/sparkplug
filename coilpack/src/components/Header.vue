@@ -8,9 +8,9 @@ defineProps({
 </script>
 
 <template>
-  <div class="flex items-center h-20 2xl:h-40 select-none">
+  <div class="flex h-20 select-none items-center 2xl:h-40">
     <slot name="beforeText" />
-    <h1 class="grow font-header text-lg 2xl:text-xl font-semibold">
+    <h1 class="grow font-header text-lg font-semibold 2xl:text-xl">
       {{ text }}
     </h1>
     <slot />

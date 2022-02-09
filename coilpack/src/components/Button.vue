@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue';
+import { computed, ref } from 'vue';
 
 const props = defineProps({
   value: {
@@ -163,7 +163,7 @@ const onHold = event => {
 
 <template>
   <button
-    class="flex relative z-0 flex-col justify-center items-center p-2 text-sm font-semibold text-center bg-gradient-to-br cursor-pointer select-none"
+    class="relative z-0 flex cursor-pointer select-none flex-col items-center justify-center bg-gradient-to-br p-2 text-center text-sm font-semibold"
     :class="[roundClass, colorClass]"
     @mousedown.stop.prevent="mouseDown"
     @mouseup.stop.prevent="mouseUp"
@@ -178,7 +178,7 @@ const onHold = event => {
     <slot />
     <div
       v-if="holdPosition || holdingPosition"
-      class="absolute bottom-1 md:bottom-2 justify-self-end w-full text-3xl"
+      class="absolute bottom-1 w-full justify-self-end text-3xl md:bottom-2"
     >
       ...
     </div>

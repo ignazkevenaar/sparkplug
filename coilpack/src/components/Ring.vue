@@ -20,7 +20,7 @@ const circumference = 50 * 2 * Math.PI;
 <template>
   <div>
     <svg
-      class="overflow-visible w-full h-full"
+      class="h-full w-full overflow-visible"
       :style="{ transform: `rotate(${ -90 + startAngle }deg)` }"
       :stroke-width="strokeWidth"
       fill="transparent"
@@ -50,7 +50,7 @@ const circumference = 50 * 2 * Math.PI;
         cy="50%"
       /> -->
       <circle
-        class="text-foreground-700 stroke-current"
+        class="stroke-current text-foreground-700"
         :stroke-dasharray="`${ circumference }%`"
         :stroke-dashoffset="`${ circumference - percent / 100 * circumference }%`"
         stroke-linecap="round"
