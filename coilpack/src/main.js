@@ -7,5 +7,3 @@ import mdiVue from 'mdi-vue/v3'
 const app = createApp(App).use(mdiVue, {
     icons: mdijs
 }).mount('#app');
-
-// app.config.devtools = true;

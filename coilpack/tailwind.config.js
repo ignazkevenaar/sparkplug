@@ -54,10 +54,6 @@ module.exports = {
       },
       gridTemplateRows: {
        '16': 'repeat(16, minmax(0, 1fr))',
-      },
-      rotate: {
-        '135': '135deg',
-        '-135': '-135deg',
       }
     }
   }

@@ -13,7 +13,6 @@ let lightsOut = ref(false);
 
 let body = ref(null);
 let carImage = ref(null);
-let bijdehandje = ref(null);
 
 let finalHeight = ref(0);
 let scrollTopPX = ref(0);
@@ -62,7 +61,6 @@ const debugSetMode = event => {
         :class="[paddingSides, paddingBottom]"
       >
         <CarImage
-          ref="bijdehandje"
           :final-height="finalHeight"
           :scroll-top="scrollTopPX"
           :control-models="controlModels"
