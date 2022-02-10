@@ -65,20 +65,4 @@
         --color-foreground-800: 4,34,37;     /* #042225 */
         --color-foreground-900: 2,18,19;     /* #021213 */
     }
-
-    @media (pointer: fine) {
-        ::-webkit-scrollbar {
-            width: 5px;
-            height: 8px;
-            background-color: transparent;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            @apply bg-background-800;
-        }
-
-        *:hover::-webkit-scrollbar-thumb {
-            @apply bg-background-700;
-        }
-    }
 }

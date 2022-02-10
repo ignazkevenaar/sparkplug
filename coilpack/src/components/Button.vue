@@ -14,46 +14,50 @@ const props = defineProps({
 
 const emit = defineEmits(['input']);
 
-const roundClass = computed(() => props.round ? 'rounded-full' : 'rounded-2xl');
+const roundClass = computed(() => props.control.round ? 'rounded-full' : 'rounded-lg md:rounded-2xl');
 
 const colors = {
   default: {
     default: {
       background: [
-        "from-background-700",
-        "to-background-800",
-        "active:from-background-800",
-        "active:to-background-900",
+        "bg-background-600",
+        "active:bg-black",
         "active:text-foreground-500"
+      ]
+    },
+    invert: {
+      background: [
+        "bg-foreground-50",,
+        "text-background-700",
+        "active:bg-foreground-200",
       ]
     },
     red: {
       background: [
-        "from-red-700",
-        "to-red-800",
-        "active:from-red-800",
-        "active:to-red-900",
-        "active:text-white",
+        "bg-red-700",
+        "active:bg-red-800",
+        "text-white"
+      ]
+    },
+    yellow: {
+      background: [
+        "bg-yellow-700",
+        "active:bg-yellow-800",
         "text-white"
       ]
     },
     green: {
       background: [
-        "from-green-700",
-        "to-green-800",
-        "active:from-green-800",
-        "active:to-green-900",
-        "active:text-white",
+        "bg-green-700",
+        "active:bg-green-800",
         "text-white"
       ]
     },
     blue: {
       background: [
-        "from-blue-700",
-        "to-blue-800",
-        "active:from-blue-800",
-        "active:to-blue-900",
-        "active:text-foreground-500"
+        "bg-blue-700",
+        "active:bg-blue-800",
+        "text-white"
       ]
     }
   }
@@ -71,11 +75,11 @@ const currentPositions = computed(() =>
 
 // Finds 'hold' position that comes later than the highest current position, if any.
 const holdPosition = computed(() =>
-  props.control.positions.slice(currentPositions.value[currentPositions.value.length - 1].index + 1)
+  props.control.positions.slice(currentPositions.value[currentPositions.value.length - 1]?.index + 1)
     .find(position => position.type === 'hold')
 );
 
-const nextPosition = computed(() => currentPositions.value[currentPositions.value.length - 1].index + 1);
+const nextPosition = computed(() => currentPositions.value[currentPositions.value.length - 1]?.index + 1);
 const nonHoldPosition = computed(() =>
   [
     ...props.control.positions.slice(nextPosition.value),

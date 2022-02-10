@@ -1,99 +1,242 @@
 [
     {
         "name": "Headlights",
-        "icon": "car-light-dimmed",
         "controls": [
             {
                 "type": "Button",
-                "icon": "flash",
+                "icon": "numeric-0",
                 "grid": {
-                    "column": "span 12",
-                    "row": "span 10"
+                    "column": "span 2",
+                    "row": "span 2"
                 },
                 "positions": [
                     {
-                        "type": "set",
                         "modes": {
-                            "DRL": false,
                             "Parking": false,
                             "LowBeams": false
-                        }
-                    },
-                    {
-                        "type": "hold",
-                        "modes": {
-                            "BlinkL": true
                         },
-                        "icon": "bolt",
-                        "color": "red"
-                    },
-                    {
-                        "type": "set",
-                        "modes": {
-                            "DRL": true
-                        },
-                        "color": "green"
-                    },
-                    {
-                        "type": "hold",
-                        "modes": {
-                            "ESS": true
-                        },
-                        "color": "blue"
-                    },
-                    {
-                        "type": "set",
-                        "modes": {
-                            "Parking": true
-                        }
-                    },
-                    {
-                        "type": "set",
-                        "modes": {
-                            "LowBeams": true
-                        }
+                        "color": "invert"
                     }
                 ]
             },
             {
-                "type": "Placeholder",
+                "type": "Button",
+                "icon": "car-parking-lights",
                 "grid": {
-                    "column": "span 6",
-                    "row": "span 6"
-                }
+                    "column": "span 2",
+                    "row": "span 2"
+                },
+                "positions": [
+                    {
+                        "modes": {
+                            "Parking": true,
+                            "LowBeams": false
+                        },
+                        "color": "green"
+                    }
+                ]
             },
             {
-                "type": "Placeholder",
+                "type": "Button",
+                "icon": "car-light-dimmed",
                 "grid": {
-                    "column": "span 6",
-                    "row": "span 6"
-                }
+                    "column": "span 4",
+                    "row": "span 2"
+                },
+                "positions": [
+                    {
+                        "modes": {
+                            "Parking": true,
+                            "LowBeams": true
+                        },
+                        "color": "green"
+                    }
+                ]
             }
         ]
     },
     {
-        "name": "Drivetrain",
-        "icon": "car-shift-pattern",
-        "controls": []
+        "name": "High beams",
+        "height": 6,
+        "controls": [
+            {
+                "type": "Button",
+                "icon": "car-light-high",
+                "grid": {
+                    "column": "span 4",
+                    "row": "span 3"
+                },
+                "positions": [
+                    {
+                        "modes": { "HighBeams": false }
+                    },
+                    {
+                        "modes": { "HighBeams": true },
+                        "color": "blue"
+                    }
+                ]
+            },
+            {
+                "type": "Button",
+                "icon": "car-light-high",
+                "grid": {
+                    "column": "span 4",
+                    "row": "span 3"
+                },
+                "positions": [
+                    {
+                        "modes": { "FlashToPass": false }
+                    },
+                    {
+                        "type": "hold",
+                        "modes": { "FlashToPass": true },
+                        "color": "blue"
+                    }
+                ]
+            }
+        ]
     },
     {
-        "name": "Exterior accessoires",
-        "icon": "car",
-        "controls": []
+        "name": "Fog lights",
+        "height": 2,
+        "controls": [
+            {
+                "type": "Button",
+                "icon": "car-light-fog",
+                "round": true,
+                "grid": {
+                    "column": "span 2",
+                    "row": "span 2"
+                },
+                "positions": [
+                    {
+                        "modes": { "FogFront": false }
+                    },
+                    {
+                        "modes": { "FogFront": true },
+                        "color": "green"
+                    }
+                ]
+            },
+            {
+                "type": "Button",
+                "icon": "car-light-fog",
+                "round": true,
+                "grid": {
+                    "column": "span 2",
+                    "row": "span 2"
+                },
+                "positions": [
+                    {
+                        "modes": { "FogRear": false }
+                    },
+                    {
+                        "modes": { "FogRear": true },
+                        "color": "yellow"
+                    }
+                ]
+            }
+        ]
     },
     {
-        "name": "Interior",
-        "icon": "car-seat",
-        "controls": []
+        "name": "Blinkers",
+        "height": 4,
+        "controls": [
+            {
+                "type": "Button",
+                "icon": "arrow-left-bold-outline",
+                "round": true,
+                "grid": {
+                    "column": "span 2",
+                    "row": "span 2"
+                },
+                "positions": [
+                    {
+                        "modes": { "BlinkL": false }
+                    },
+                    {
+                        "modes": { "BlinkL": true },
+                        "color": "green"
+                    }
+                ]
+            },
+            {
+                "type": "Button",
+                "icon": "arrow-right-bold-outline",
+                "round": true,
+                "grid": {
+                    "column": "span 2",
+                    "row": "span 2"
+                },
+                "positions": [
+                    {
+                        "modes": { "BlinkR": false }
+                    },
+                    {
+                        "modes": { "BlinkR": true },
+                        "color": "green"
+                    }
+                ]
+            },
+            {
+                "type": "Button",
+                "icon": "hazard-lights",
+                "grid": {
+                    "column": "span 4",
+                    "row": "span 2"
+                },
+                "positions": [
+                    {
+                        "modes": { "Hazards": false }
+                    },
+                    {
+                        "modes": { "Hazards": true },
+                        "color": "red"
+                    }
+                ]
+            }
+        ]
     },
     {
-        "name": "Interior accessoires",
-        "icon": "car-seat-heater",
-        "controls": []
-    },
-    {
-        "name": "Trailer",
-        "icon": "truck-trailer",
-        "controls": []
+        "name": "Brakes",
+        "height": 5,
+        "controls": [
+            {
+                "type": "Button",
+                "icon": "car-brake-alert",
+                "grid": {
+                    "column": "span 4",
+                    "row": "span 2"
+                },
+                "positions": [
+                    {
+                        "modes": { "Brake": false }
+                    },
+                    {
+                        "type": "hold",
+                        "modes": { "Brake": true },
+                        "color": "red"
+                    }
+                ]
+            },
+            {
+                "type": "Button",
+                "icon": "car-brake-abs",
+                "grid": {
+                    "column": "span 4",
+                    "row": "span 3"
+                },
+                "positions": [
+                    {
+                        "modes": { "ESS": false }
+                    },
+                    {
+                        "type": "hold",
+                        "modes": { "ESS": true },
+                        "color": "red"
+                    }
+                ]
+            }
+        ]
     }
 ]

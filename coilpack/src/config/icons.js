@@ -14,6 +14,7 @@ export {
     mdiArrowLeftRightBoldOutline,
     mdiArrowRightBold,
     mdiArrowRightBoldOutline,
+    mdiArrowUpDown,
     mdiBugle,
     mdiCar,
     mdiCar2Plus,
@@ -89,6 +90,7 @@ export {
     mdiGolfCart,
     mdiHazardLights,
     mdiLightbulbVariantOutline,
+    mdiNumeric0,
     mdiParking,
     mdiShieldCar,
     mdiTrainCar,
@@ -113,4 +115,6 @@ export {
     mdiTruckRemoveOutline,
     mdiTruckSnowflake,
     mdiTruckTrailer,
+    mdiWeatherNight,
+    mdiGestureTapHold
 } from '@mdi/js';

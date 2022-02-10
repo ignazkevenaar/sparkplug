@@ -2,7 +2,6 @@
 import * as sparkplug from './api.js'
 import CarControls from './components/CarControls.vue'
 import CarImage from './components/CarImage.vue'
-import Container from './components/Container.vue'
 import Header from './components/Header.vue'
 import { ref } from 'vue'
 
@@ -10,15 +9,9 @@ let loading = ref(true);
 let controlModels = ref({});
 let lightsOut = ref(false);
 
-let body = ref(null);
-let carImage = ref(null);
-
-let finalHeight = ref(0);
-let scrollTopPX = ref(0);
-
 // Small viewport padding is determined by individual elements, to allow scrolling to screen edge.
 const paddingSides = "px-6 md:px-8 lg:px-12 xl:px-20";
-const paddingBottom = "pb-6 md:pb-8 xl:pb-20";
+const paddingBottom = "pb-6 md:pb-8 lg:pb-12 xl:pb-20";
 
 const debugSetMode = event => {
   console.log("Control input", event);
@@ -27,6 +20,7 @@ const debugSetMode = event => {
     controlModels.value[modeID] = Number(event[modeID]);
   });
 };
+
 </script>
 
 <template>
@@ -35,68 +29,80 @@ const debugSetMode = event => {
   </div>
   <div
     v-else
-    ref="body"
-    class="h-screen overflow-y-auto overflow-x-hidden bg-black text-foreground-200 md:flex"
+    class="min-h-screen bg-black text-foreground-200 md:bg-horizontal-split"
     :class="[ lightsOut ? 'lightsOut' : '' ]"
   >
-    <!-- Car image -->
-    <Container
-      id="carImage"
-      ref="carImage"
-      class="relative h-screen shrink-0 md:w-1/2 lg:w-[500px]"
-      :padding="paddingSides"
-    >
-      <template #header>
-        <Header text="Sparkplug">
-          <template #beforeText>
-            <mdicon name="sparkplug" />
-          </template>
-        </Header>
-      </template>
+    <div class="mx-auto flex min-h-screen flex-col md:flex-row lg:container">
+      <!-- Car image -->
       <div
-        class="relative h-full pt-6 md:pt-0"
-        :class="[paddingSides, paddingBottom]"
+        :class="paddingSides"
+        class="flex-col md:sticky md:top-0 md:flex md:h-screen md:flex-1 md:self-start"
       >
+        <div class="py-4">
+          <Header :text="lightsOut ? '' : 'Sparkplug'">
+            <template #beforeText>
+              <mdicon
+                name="sparkplug"
+                class="text-foreground-400"
+              />
+            </template>
+            <button
+              class="mx-2 rounded-md bg-background-800 p-2 font-bold"
+            >
+              <mdicon name="??" />
+            </button>
+          </Header>
+        </div>
         <CarImage
-          :final-height="finalHeight"
-          :scroll-top="scrollTopPX"
           :control-models="controlModels"
-          class="h-full"
-          @toggle-lights-out="lightsOut = !lightsOut"
         />
-      </div>
-    </Container>
-
-    <!-- Controls -->
-    <Container
-      class="bg-background-900"
-      :padding="paddingSides"
-    >
-      <template #header>
-        <Header text="Controls">
+        <div
+          class="flex items-center justify-between pt-6"
+          :class="[paddingBottom]"
+        >
           <button
-            class="mx-2 hidden rounded-md bg-background-700 p-2 px-4 font-bold md:block"
-            :class="lightsOut ? 'bg-foreground-50 text-background-700' : ''"
+            :class="lightsOut ? 'bg-foreground-50 text-background-700' : 'bg-background-700'"
+            class="mx-2 shrink-0 rounded-full p-2 font-bold md:p-3"
             @click="lightsOut = !lightsOut"
           >
-            Lights out
+            <mdicon name="weather-night" />
           </button>
-        </Header>
-      </template>
-      <CarControls
-        :value="controlModels"
-        :control-config="sparkplug.controlsData"
-        :padding-sides="paddingSides"
-        :padding-bottom="paddingBottom"
-        @input="debugSetMode"
-      />
-    </Container>
+          <div class="text-center font-header text-foreground-300">
+            <p class="text-xs leading-tight tracking-tighter">
+              Volkswagen
+            </p>
+            <p>Golf <span class="text-foreground-300 text-opacity-50">Mk3</span></p>
+          </div>
+          <button
+            class="mx-2 shrink-0 rounded-full bg-background-700 p-2 font-bold md:p-3"
+          >
+            <mdicon name="gesture-tap-hold" />
+          </button>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div
+        :class="paddingSides"
+        class="flex flex-1 flex-col flex-col rounded-3xl rounded-b-none bg-background-800 md:flex md:flex-1"
+      >
+        <div class="py-4">
+          <Header text="Controls" />
+        </div>
+        <CarControls
+          class="flex flex-1 flex-col justify-between md:items-center md:justify-center"
+          :class="[paddingBottom]"
+          :value="controlModels"
+          :control-config="sparkplug.controlsData"
+          :padding-bottom="paddingBottom"
+          @input="debugSetMode"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import { nextTick } from 'vue';
-
 export default {
   async mounted() {
     try {
@@ -126,36 +132,6 @@ export default {
     sparkplug.getModes();
 
     this.loading = false;
-    await nextTick();
-
-    let ticking = false;
-
-    this.body.addEventListener('scroll', () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          const clientHeight = this.body.clientHeight;
-          const scrollHeight = this.body.scrollHeight;
-          this.scrollTopPX = this.body.scrollTop;
-
-          document.documentElement.style.setProperty('--scroll',
-            this.scrollTopPX / (scrollHeight - clientHeight)
-          );
-
-          ticking = false;
-        });
-
-        ticking = true;
-      }
-    });
-
-    // Update final height.
-    const getFinalHeight = ()=> {
-      this.finalHeight = this.body.clientHeight -
-        (this.body.scrollHeight - this.body.clientHeight);
-    };
-
-    const roControlGrid = new ResizeObserver(getFinalHeight);
-    roControlGrid.observe(this.body);
   }
 }
 </script>

@@ -3,6 +3,7 @@
     "Parking",
     "LowBeams",
     "HighBeams",
+    "FlashToPass",
     "FogRear",
     "FogFront",
     "Brake",
@@ -11,5 +12,7 @@
     "Reverse",
     "BlinkL",
     "BlinkR",
-    "Hazards"
+    "Hazards",
+    "Exhaust",
+    "ExhaustGlow"
 ]
