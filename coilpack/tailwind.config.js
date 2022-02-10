@@ -53,7 +53,10 @@ module.exports = {
         'span-12': 'span 12 / span 12'
       },
       gridTemplateRows: {
-       '16': 'repeat(16, minmax(0, 1fr))',
+       '8': 'repeat(8, minmax(0, 1fr))',
+      },
+      backgroundImage: {
+        'horizontal-split': "linear-gradient(to right, black 50% , theme(colors.background.800) 50%);"
       }
     }
   }

@@ -1,40 +1,46 @@
 <script setup>
-import { onMounted, onUnmounted, ref } from 'vue';
-
-let grid = ref(null);
-let rowHeight = ref("");
-let roGridRowHeight;
-
-const updateGridRowHeight = () => {
-  rowHeight.value = window.getComputedStyle(grid.value).gridTemplateColumns.split(' ')[0];
-};
-
-onMounted(() => {
-  updateGridRowHeight();
-  roGridRowHeight = new ResizeObserver(updateGridRowHeight);
-  roGridRowHeight.observe(grid.value);
-});
-
-onUnmounted(() => {
-  if (roGridRowHeight && grid.value) roGridRowHeight.unobserve(grid.value);
+const props = defineProps({
+  height: {
+    type: Number,
+    default: 4
+  }
 });
 </script>
 
 <template>
-  <div
-    class="w-[calc(100vw-theme(spacing.24))] shrink-0 grow-0 md:w-[300px]"
-    style="scroll-snap-align: start;"
-  >
-    <div class="mb-2 items-center font-header font-bold md:flex">
+  <div class="">
+    <div class="items-center overflow-hidden text-ellipsis whitespace-nowrap font-header text-xl font-bold md:flex">
       <slot name="header" />
     </div>
     <div
       v-bind="$attrs"
-      ref="grid"
-      class="relative grid w-full grid-cols-12 gap-2 rounded-xl"
-      :style="`grid-template-rows: repeat(16, ${ rowHeight });`"
+      class="controlGrid relative w-full "
+      style="grid-template-rows: repeat(8, 1fr);"
     >
-      <slot />
+      <div class="innerControlGrid absolute inset-0 grid rounded-2xl bg-black md:rounded-3xl">
+        <slot />
+      </div>
     </div>
   </div>
 </template>
+
+<style lang="scss" scoped>
+.controlGrid {
+  $cols: 4;
+  $rows: v-bind('props.height');
+  $gap: theme('spacing.2');
+
+
+  padding-top: calc(
+    ((100% - (($cols + 1) * $gap)) / $cols) * $rows +
+    (($rows + 1) * $gap)
+  );
+
+  .innerControlGrid {
+    gap: $gap;
+    padding: $gap;
+    grid-template-columns: repeat($cols, minmax(0, 1fr));
+    grid-template-rows: repeat($rows, minmax(0, 1fr));
+  }
+}
+</style>

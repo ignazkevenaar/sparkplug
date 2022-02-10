@@ -15,10 +15,6 @@ export default {
     this.svgElement = svg;
   },
   render: function() {
-    // if (this.svgElement) return h('div', {
-    //   innerHTML: this.svgElement
-    // });
-
     if (this.svgElement) return h('div', {
       innerHTML: this.svgElement
     });
