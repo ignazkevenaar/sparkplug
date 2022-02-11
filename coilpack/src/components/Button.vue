@@ -94,10 +94,10 @@ const cascadableProperties = [
 const cascadedProps = computed(() =>
   Object.fromEntries(
     cascadableProperties.flatMap(key =>
-      currentPositions.value.filter(position =>
+      currentPositions.value.length ? currentPositions.value.filter(position =>
         !holdingPosition.value ? position.type !== 'hold' : true).map(position =>
           [key, (position[key] || props.control[key])]
-        )
+        ) : [[key, props.control[key] || ""]]
     ).filter(([key, value]) => !!value)
   )
 );
