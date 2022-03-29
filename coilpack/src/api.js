@@ -26,14 +26,21 @@ const bind = (event_name, callback) => {
   return this;
 };
 
+const trySend = data =>
+{
+  const OPEN = 1;
+  if (connection?.readyState !== OPEN) return;
+  connection.send(data);
+}
+
 export const getModes = () =>
 {
-  connection?.send("G");
+  trySend("G");
 }
 
 export const setMode = (inputArguments) =>
 {
-  connection?.send(`S:${ inputArguments.join(',') }`);
+  trySend(`S:${ inputArguments.join(',') }`);
 }
 
 export const onGetMode = callback => {
@@ -43,12 +50,19 @@ export const onGetMode = callback => {
 export const setup = async () => {
   await fetchConfigurationFiles();
 
-  if (process.env.NODE_ENV === "development") return true;
-
   return new Promise((resolve, reject) => {
-    connection = new WebSocket('ws://' + window.location.hostname + ':81/');
+    if (import.meta.env.DEV) {
+      const debugServer = import.meta.env.VITE_DEBUG_WEBSOCKET;
+      if (!debugServer) return false;
+      connection = new WebSocket(debugServer);
+    }
+    else
+    {
+      connection = new WebSocket('ws://' + window.location.hostname + ':81/');
+    }
 
     connection.onopen = () => {
+      console.log(connection);
       resolve(connection);
     };
 
@@ -58,6 +72,8 @@ export const setup = async () => {
 
     connection.onmessage = event =>
     {
+      console.log("websocket says:", event.data);
+
       const splitData = event.data.split(" ");
       if (splitData.length != 2) return;
 
