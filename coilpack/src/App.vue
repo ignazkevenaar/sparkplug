@@ -99,7 +99,13 @@ import { nextTick } from 'vue';
 
 export default {
   async mounted() {
+    try {
       await sparkplug.setup();
+    }
+    catch(e) {
+      // Display error message in UI.
+      return;
+    }
 
     this.controlModels = {};
     sparkplug.lightingModes.forEach(mode => {
