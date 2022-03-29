@@ -99,25 +99,25 @@ import { nextTick } from 'vue';
 
 export default {
   async mounted() {
-    await this.sparkplug.setup();
+      await sparkplug.setup();
 
     this.controlModels = {};
-    this.sparkplug.lightingModes.forEach(mode => {
+    sparkplug.lightingModes.forEach(mode => {
       this.controlModels[mode] = 0;
     });
 
-    this.sparkplug.onGetMode(inputArguments =>
+    sparkplug.onGetMode(inputArguments =>
     {
       inputArguments.forEach(argument =>
       {
         const [modeIndex, modeState] = argument.split(":");
-        const modeID = this.sparkplug.lightingModes[parseInt(modeIndex)];
+        const modeID = sparkplug.lightingModes[parseInt(modeIndex)];
         this.$set(this.controlModels, modeID, parseInt(modeState));
       });
     });
 
     // Get initial mode state.
-    this.sparkplug.getModes();
+    sparkplug.getModes();
 
     this.loading = false;
     await nextTick();
