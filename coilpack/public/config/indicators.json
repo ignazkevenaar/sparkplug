@@ -19,7 +19,7 @@
             "icon": "hazard-lights",
             "color": "red",
             "set": {
-                "Hazards": "blink fast"
+                "Hazards": "blink"
             }
         },
         {
