@@ -1,8 +1,8 @@
 <script setup>
 import * as sparkplug from './api.js'
-import CarControls from './components/CarControls.vue'
-import CarImage from './components/CarImage.vue'
+import ControlPanel from './components/ControlPanel.vue'
 import Header from './components/Header.vue'
+import StatusDisplay from './components/StatusDisplay.vue'
 import { ref } from 'vue'
 
 let loading = ref(true);
@@ -34,7 +34,7 @@ const debugSetMode = event => {
     :class="[ lightsOut ? 'lightsOut' : '' ]"
   >
     <div class="mx-auto flex min-h-screen flex-col md:flex-row lg:container">
-      <!-- Car image -->
+      <!-- Status -->
       <div
         :class="paddingSides"
         class="flex-col md:sticky md:top-0 md:flex md:h-screen md:flex-1 md:self-start"
@@ -54,7 +54,7 @@ const debugSetMode = event => {
             </button>
           </Header>
         </div>
-        <CarImage
+        <StatusDisplay
           :control-models="controlModels"
           :indicator-configuration="indicatorConfiguration"
         />
@@ -91,7 +91,7 @@ const debugSetMode = event => {
         <div class="py-4">
           <Header text="Controls" />
         </div>
-        <CarControls
+        <ControlPanel
           class="flex flex-1 flex-col justify-between md:items-center md:justify-center"
           :class="[paddingBottom]"
           :value="controlModels"
