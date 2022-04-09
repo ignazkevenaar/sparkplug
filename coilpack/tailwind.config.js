@@ -19,8 +19,30 @@ module.exports = {
         'screen-75': '75vh'
       },
       colors: {
-        foreground: colors.zinc,
-        background: colors.zinc
+        foreground: {
+          50:  withOpacity('--color-foreground-50'),
+          100: withOpacity('--color-foreground-100'),
+          200: withOpacity('--color-foreground-200'),
+          300: withOpacity('--color-foreground-300'),
+          400: withOpacity('--color-foreground-400'),
+          500: withOpacity('--color-foreground-500'),
+          600: withOpacity('--color-foreground-600'),
+          700: withOpacity('--color-foreground-700'),
+          800: withOpacity('--color-foreground-800'),
+          900: withOpacity('--color-foreground-900'),
+        },
+        background: {
+          50:  withOpacity('--color-background-50'),
+          100: withOpacity('--color-background-100'),
+          200: withOpacity('--color-background-200'),
+          300: withOpacity('--color-background-300'),
+          400: withOpacity('--color-background-400'),
+          500: withOpacity('--color-background-500'),
+          600: withOpacity('--color-background-600'),
+          700: withOpacity('--color-background-700'),
+          800: withOpacity('--color-background-800'),
+          900: withOpacity('--color-background-900'),
+        }
       },
       gridRow: {
         'span-7':  'span 7 / span 7',
