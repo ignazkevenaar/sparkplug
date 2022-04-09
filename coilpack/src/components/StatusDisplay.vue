@@ -36,8 +36,8 @@ const indicatorColumnCount = props.indicatorConfiguration.settings?.columns || 4
       />
     </div>
     <InlineSVG
-      id="car"
-      src="/car.svg"
+      id="display"
+      src="/display.svg"
       class="pointer-events-none relative grid min-h-[150px] flex-1 rotate-90 scale-[2] place-items-center fill-transparent stroke-[3px] md:aspect-auto md:rotate-0 md:scale-100 md:stroke-2"
     />
 
@@ -59,7 +59,7 @@ const indicatorColumnCount = props.indicatorConfiguration.settings?.columns || 4
   grid-template-columns: repeat(v-bind(indicatorColumnCount), minmax(0, 1fr));
 }
 
-#car {
+#display {
   svg {
     position: absolute;
     height: 100%;
