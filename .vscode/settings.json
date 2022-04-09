@@ -8,5 +8,13 @@
     },
     "eslint.workingDirectories": [
         "coilpack"
+    ],
+    "json.schemas": [
+        {
+            "fileMatch": [
+                "/coilpack/public/config/indicators.json"
+            ],
+            "url": "/coilpack/src/schemas/indicators.schema.json"
+        }
     ]
 }

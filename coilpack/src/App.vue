@@ -8,6 +8,7 @@ import { ref } from 'vue'
 let loading = ref(true);
 let controlModels = ref({});
 let lightsOut = ref(false);
+let indicatorConfiguration = ref([]);
 
 // Small viewport padding is determined by individual elements, to allow scrolling to screen edge.
 const paddingSides = "px-6 md:px-8 lg:px-12 xl:px-20";
@@ -55,6 +56,7 @@ const debugSetMode = event => {
         </div>
         <CarImage
           :control-models="controlModels"
+          :indicator-configuration="indicatorConfiguration"
         />
         <div
           class="flex items-center justify-between pt-6"
@@ -117,6 +119,8 @@ export default {
     sparkplug.lightingModes.forEach(mode => {
       this.controlModels[mode] = 0;
     });
+
+    this.indicatorConfiguration = sparkplug.indicatorConfiguration;
 
     sparkplug.onGetMode(inputArguments =>
     {

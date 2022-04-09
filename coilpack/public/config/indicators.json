@@ -1,0 +1,62 @@
+{
+    "indicators": [
+        {
+            "icon": "arrow-left-bold-outline",
+            "color": "green",
+            "set": {
+                "BlinkL": "blink",
+                "Hazards": "blink"
+            }
+        },
+        {
+            "icon": "car-light-high",
+            "color": "blue",
+            "set": {
+                "HighBeams": "static"
+            }
+        },
+        {
+            "icon": "hazard-lights",
+            "color": "red",
+            "set": {
+                "Hazards": "blink"
+            }
+        },
+        {
+            "icon": "arrow-right-bold-outline",
+            "color": "green",
+            "set": {
+                "BlinkR": "blink",
+                "Hazards": "blink"
+            }
+        },
+        {
+            "icon": "car-parking-lights",
+            "color": "green",
+            "set": {
+                "Parking": "static"
+            }
+        },
+        {
+            "icon": "car-light-dimmed",
+            "color": "green",
+            "set": {
+                "LowBeams": "static"
+            }
+        },
+        {
+            "icon": "car-light-fog",
+            "color": "green",
+            "set": {
+                "FogFront": "static"
+            }
+        },
+        {
+            "icon": "car-light-fog",
+            "color": "yellow",
+            "set": {
+                "FogRear": "static"
+            }
+        }
+    ]
+}

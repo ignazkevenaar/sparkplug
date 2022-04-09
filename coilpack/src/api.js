@@ -1,5 +1,6 @@
 export let lightingModes;
 export let controlsData;
+export let indicatorConfiguration;
 export let connection;
 
 let callbacks = {};
@@ -10,6 +11,7 @@ export const fetchConfigurationFiles = async () =>
 {
   lightingModes = await fetchJSON('/config/modes.json');
   controlsData = await fetchJSON('/config/controls.json');
+  indicatorConfiguration = await fetchJSON('/config/indicators.json');
 }
 
 const dispatch = (event_name, data) => {
