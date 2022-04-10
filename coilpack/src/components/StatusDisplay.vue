@@ -54,6 +54,13 @@ const indicatorColumnCount = props.indicatorConfiguration.settings?.columns || 4
   </div>
 </template>
 
+<style lang="scss" scoped>
+::v-deep .mdi svg {
+  width: 100%;
+  height: 100%;
+}
+</style>
+
 <style lang="scss">
 #indicators {
   grid-template-columns: repeat(v-bind(indicatorColumnCount), minmax(0, 1fr));
@@ -125,10 +132,5 @@ const indicatorColumnCount = props.indicatorConfiguration.settings?.columns || 4
       --vfd-color: var(--vfd-off) !important;
     }
   }
-}
-
-.mdi svg {
-  width: 100%;
-  height: 100%;
 }
 </style>
