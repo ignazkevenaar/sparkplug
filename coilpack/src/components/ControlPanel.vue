@@ -13,11 +13,7 @@ defineProps({
   controlConfig: {
     type: Array,
     required: true
-  },
-  paddingBottom: {
-    type: String,
-    default: ""
-  },
+  }
 });
 
 defineEmits(['input'])

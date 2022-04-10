@@ -1,4 +1,5 @@
-import './index.css';
+import './styles/index.css';
+import './styles/transitions.css';
 import * as mdijs from './config/icons';
 import App from './App.vue';
 import MasonryWall from '@yeger/vue-masonry-wall'
