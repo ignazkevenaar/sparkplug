@@ -49,6 +49,7 @@ export default {
     }
     catch(e) {
       // Display error message in UI.
+      console.log(e);
       return;
     }
 
