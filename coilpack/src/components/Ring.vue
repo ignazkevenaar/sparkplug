@@ -25,39 +25,20 @@ const circumference = 50 * 2 * Math.PI;
       :stroke-width="strokeWidth"
       fill="transparent"
     >
-      <defs>
-        <linearGradient
-          id="linear"
-          x1="0%"
-          y1="0%"
-          x2="100%"
-          y2="0%"
-        >
-          <stop
-            offset="0%"
-            stop-color="#05a"
-          />
-          <stop
-            offset="100%"
-            stop-color="#0a5"
-          />
-        </linearGradient>
-      </defs>
-      <!-- <circle
-        class="text-gray-300 stroke-current"
+      <circle
+        class="stroke-current opacity-10"
         r="50%"
         cx="50%"
         cy="50%"
-      /> -->
+      />
       <circle
-        class="stroke-current text-foreground-700"
+        class="stroke-current"
         :stroke-dasharray="`${ circumference }%`"
         :stroke-dashoffset="`${ circumference - percent / 100 * circumference }%`"
         stroke-linecap="round"
         r="50%"
         cx="50%"
         cy="50%"
-        stroke="url(#linear)"
       />
     </svg>
   </div>

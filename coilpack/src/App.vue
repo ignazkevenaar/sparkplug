@@ -3,6 +3,7 @@ import * as sparkplug from './api.js'
 import { provide, ref } from 'vue'
 import AppHeader from './components/AppHeader.vue'
 import AppRouter from './components/AppRouter.vue'
+import LoadingIndicator from './components/LoadingIndicator.vue'
 
 let loading = ref(true);
 let lightsOut = ref(false);
@@ -26,8 +27,11 @@ const scollToTop = () => { window.scrollTo(0, 0); }
     @on-logo="scollToTop"
   />
   <Transition mode="out-in">
-    <div v-if="loading">
-      loading...
+    <div
+      v-if="loading"
+      class="absolute grid h-screen w-screen place-items-center"
+    >
+      <LoadingIndicator />
     </div>
     <div v-else>
       <AppRouter
