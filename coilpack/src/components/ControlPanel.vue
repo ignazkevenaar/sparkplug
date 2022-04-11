@@ -30,6 +30,7 @@ const controlToComponent = {
       :items="controlConfig"
       :column-width="150"
       :gap="10"
+      :ssr-columns="2"
       class="w-full"
     >
       <template #default="{ item }">

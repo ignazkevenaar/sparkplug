@@ -3,9 +3,11 @@ import * as sparkplug from './api.js'
 import { provide, ref } from 'vue'
 import AppHeader from './components/AppHeader.vue'
 import AppRouter from './components/AppRouter.vue'
+import ErrorMessage from './components/ErrorMessage.vue'
 import LoadingIndicator from './components/LoadingIndicator.vue'
 
 let loading = ref(true);
+let error = ref(null);
 let lightsOut = ref(false);
 let currentRoute = ref('/');
 let controlModels = ref({});
@@ -33,6 +35,12 @@ const scollToTop = () => { window.scrollTo(0, 0); }
     >
       <LoadingIndicator />
     </div>
+    <div
+      v-else-if="error"
+      class="absolute grid h-screen w-screen place-items-center"
+    >
+      <ErrorMessage :error="error" />
+    </div>
     <div v-else>
       <AppRouter
         @route-changed="currentRoute = $event"
@@ -52,6 +60,10 @@ export default {
       console.log(e);
       return;
     }
+
+    // this.error = {
+    //   message: "This is a test error!"
+    // };
 
     this.controlModels = {};
     sparkplug.lightingModes.forEach(mode => {
