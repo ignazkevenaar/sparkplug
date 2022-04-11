@@ -55,7 +55,7 @@ const indicatorColumnCount = props.indicatorConfiguration.settings?.columns || 4
 </template>
 
 <style lang="scss" scoped>
-::v-deep .mdi svg {
+:deep(.mdi svg) {
   width: 100%;
   height: 100%;
 }
