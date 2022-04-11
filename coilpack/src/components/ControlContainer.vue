@@ -8,18 +8,17 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="">
-    <div class="items-center overflow-hidden text-ellipsis whitespace-nowrap font-header text-xl font-bold md:flex">
-      <slot name="header" />
-    </div>
+  <div>
     <div
       v-bind="$attrs"
-      class="controlGrid relative w-full "
-      style="grid-template-rows: repeat(8, 1fr);"
+      class="controlGrid relative w-full"
     >
       <div class="innerControlGrid absolute inset-0 grid rounded-2xl bg-black md:rounded-3xl">
         <slot />
       </div>
+    </div>
+    <div class="flex items-center overflow-hidden text-ellipsis whitespace-nowrap text-xl font-bold">
+      <slot name="header" />
     </div>
   </div>
 </template>
