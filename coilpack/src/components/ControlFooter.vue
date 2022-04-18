@@ -4,7 +4,7 @@ const version = packageJSON.version;
 </script>
 
 <template>
-  <footer class="flex select-none items-center gap-2 font-header text-xs md:hidden">
+  <footer class="lo:opacity-0 flex select-none items-center gap-2 font-header text-xs md:hidden">
     <mdicon
       name="sparkplug"
       class="-mr-2"

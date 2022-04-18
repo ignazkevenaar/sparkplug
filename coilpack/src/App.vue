@@ -23,30 +23,32 @@ const scollToTop = () => { window.scrollTo(0, 0); }
 </script>
 
 <template>
-  <AppHeader
-    :show-back-button="currentRoute != '' && currentRoute != '/'"
-    @on-back="navigateHome"
-    @on-logo="scollToTop"
-  />
-  <Transition mode="out-in">
-    <div
-      v-if="loading"
-      class="absolute grid h-screen w-screen place-items-center"
-    >
-      <LoadingIndicator />
-    </div>
-    <div
-      v-else-if="error"
-      class="absolute grid h-screen w-screen place-items-center"
-    >
-      <ErrorMessage :error="error" />
-    </div>
-    <div v-else>
-      <AppRouter
-        @route-changed="currentRoute = $event"
-      />
-    </div>
-  </Transition>
+  <div :class="[ lightsOut ? 'lightsOut' : '' ]">
+    <AppHeader
+      :show-back-button="currentRoute != '' && currentRoute != '/'"
+      @on-back="navigateHome"
+      @on-logo="scollToTop"
+    />
+    <Transition mode="out-in">
+      <div
+        v-if="loading"
+        class="absolute grid h-screen w-screen place-items-center"
+      >
+        <LoadingIndicator />
+      </div>
+      <div
+        v-else-if="error"
+        class="absolute grid h-screen w-screen place-items-center"
+      >
+        <ErrorMessage :error="error" />
+      </div>
+      <div v-else>
+        <AppRouter
+          @route-changed="currentRoute = $event"
+        />
+      </div>
+    </Transition>
+  </div>
 </template>
 
 <script>

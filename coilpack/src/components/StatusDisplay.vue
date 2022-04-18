@@ -38,7 +38,7 @@ const indicatorColumnCount = props.indicatorConfiguration.settings?.columns || 4
     <InlineSVG
       id="display"
       src="/display.svg"
-      class="pointer-events-none relative grid min-h-[150px] flex-1 rotate-90 scale-[2] place-items-center fill-transparent stroke-[3px] md:aspect-auto md:rotate-0 md:scale-100 md:stroke-2"
+      class="pointer-events-none relative grid min-h-[150px] flex-1 rotate-90 scale-[2] place-items-center fill-transparent stroke-2 md:aspect-auto md:rotate-0 md:scale-100"
     />
 
     <component :is="`style`">
@@ -90,7 +90,7 @@ const indicatorColumnCount = props.indicatorConfiguration.settings?.columns || 4
   }
 
   .red {
-    @apply text-red-400;
+    @apply text-red-500;
   }
   .yellow {
     @apply text-yellow-400;

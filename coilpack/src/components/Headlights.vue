@@ -3,7 +3,7 @@ import Ring from './Ring.vue'
 </script>
 
 <template>
-  <div class="flex justify-center overflow-hidden rounded-lg bg-background-800 bg-gradient-to-br from-background-800 to-background-700 px-4">
+  <div class="flex justify-center overflow-hidden rounded-lg bg-background-800 bg-gradient-to-br from-background-800 to-background-700 px-6">
     <div class="relative top-[10%] aspect-square w-3/5 self-center rounded-full border-8 border-black bg-background-600">
       <Ring
         class="absolute inset-[-1.25rem]"

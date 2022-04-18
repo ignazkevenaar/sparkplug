@@ -25,30 +25,25 @@
                         "icon": {
                             "type": "string"
                         },
-                        "grid": {
-                            "type": "object",
-                            "properties": {
-                                "column": {
-                                    "type": "string",
-                                    "enum": [
-                                        "span 1",
-                                        "span 2",
-                                        "span 3",
-                                        "span 4"
-                                    ]
-                                },
-                                "row": {
-                                    "type": "string",
-                                    "enum": [
-                                        "span 1",
-                                        "span 2",
-                                        "span 3",
-                                        "span 4",
-                                        "span 5",
-                                        "span 6"
-                                    ]
-                                }
-                            }
+                        "width": {
+                            "type": "number",
+                            "minimum": 1,
+                            "maximum": 12
+                        },
+                        "height": {
+                            "type": "number",
+                            "minimum": 1,
+                            "maximum": 12
+                        },
+                        "top": {
+                            "type": "number",
+                            "minimum": 1,
+                            "maximum": 12
+                        },
+                        "left": {
+                            "type": "number",
+                            "minimum": 1,
+                            "maximum": 12
                         },
                         "round": {
                             "type": "boolean"

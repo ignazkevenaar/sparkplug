@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@mdi/js": "^6.5.95",
-    "@yeger/vue-masonry-wall": "^3.0.25",
+    "css-houdini-squircle": "^0.2.1",
     "eslint-plugin-sort-exports": "^0.6.0",
     "mdi-vue": "^3.0.12",
     "vue": "^3.2.24"

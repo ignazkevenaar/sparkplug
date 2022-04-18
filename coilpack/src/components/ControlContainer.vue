@@ -1,23 +1,14 @@
 <script setup>
-const props = defineProps({
-  height: {
-    type: Number,
-    default: 4
-  }
-});
 </script>
 
 <template>
   <div>
-    <div
-      v-bind="$attrs"
-      class="controlGrid relative w-full"
-    >
-      <div class="innerControlGrid absolute inset-0 grid rounded-2xl bg-black md:rounded-3xl">
+    <div class="controlGrid relative w-full">
+      <div class="innerControlGrid absolute inset-0 grid rounded-2xl bg-background-900 md:rounded-3xl">
         <slot />
       </div>
     </div>
-    <div class="flex items-center overflow-hidden text-ellipsis whitespace-nowrap text-xl font-bold">
+    <div class="my-2 select-none overflow-hidden text-ellipsis whitespace-nowrap text-center text-sm font-semibold tracking-wide lo:text-lightsOut-500">
       <slot name="header" />
     </div>
   </div>
@@ -25,10 +16,10 @@ const props = defineProps({
 
 <style lang="scss" scoped>
 .controlGrid {
-  $cols: 4;
-  $rows: v-bind('props.height');
+  $cols: 12;
+  $rows: 12;
   $gap: theme('spacing.2');
-
+  $padding: theme('spacing.3');
 
   padding-top: calc(
     ((100% - (($cols + 1) * $gap)) / $cols) * $rows +
@@ -37,7 +28,7 @@ const props = defineProps({
 
   .innerControlGrid {
     gap: $gap;
-    padding: $gap;
+    padding: $padding;
     grid-template-columns: repeat($cols, minmax(0, 1fr));
     grid-template-rows: repeat($rows, minmax(0, 1fr));
   }

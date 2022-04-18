@@ -26,30 +26,30 @@ const controlToComponent = {
 
 <template>
   <div>
-    <masonry-wall
-      :items="controlConfig"
-      :column-width="150"
-      :gap="10"
-      class="w-full"
+    <div
+      class="grid w-full grid-cols-2 gap-3"
     >
-      <template #default="{ item }">
-        <ControlContainer
-          :height="item.height"
+      <ControlContainer
+        v-for="(item, itemIndex) in controlConfig"
+        :key="itemIndex"
+        class="max-w-[200px]"
+      >
+        <component
+          :is="controlToComponent[control.type.toLowerCase()]"
+          v-for="(control, controlIndex) in item.controls"
+          :key="controlIndex"
+          :value="value"
+          :style="{ 'grid-area': `${ control.left ?? 'auto' } / ${ control.top ?? 'auto' } / span ${ control.height ?? 1 } / span ${ control.width ?? 1 }` }"
+          :control="control"
+          @input="$emit('input', $event)"
         >
-          <component
-            :is="controlToComponent[control.type.toLowerCase()]"
-            v-for="(control, controlIndex) in item.controls"
-            :key="controlIndex"
-            :value="value"
-            :style="{ 'grid-column': control.grid.column, 'grid-row': control.grid.row }"
-            :control="control"
-            @input="$emit('input', $event)"
-          >
-            {{ control.text }}
-          </component>
-        </ControlContainer>
-      </template>
-    </masonry-wall>
+          {{ control.text }}
+        </component>
+        <template #header>
+          {{ item.name }}
+        </template>
+      </ControlContainer>
+    </div>
     <ControlFooter class="pt-4" />
   </div>
 </template>

@@ -19,8 +19,7 @@ const debugSetMode = event => {
 
 <template>
   <div
-    class="min-h-screen bg-black text-foreground-200 md:bg-horizontal-split"
-    :class="[ lightsOut ? 'lightsOut' : '' ]"
+    class="min-h-screen bg-black text-foreground-100"
   >
     <div class="mx-auto flex min-h-screen flex-col md:flex-row lg:container">
       <!-- Status -->
@@ -38,8 +37,7 @@ const debugSetMode = event => {
           class="flex items-center justify-between py-6 md:pb-8 lg:pb-12 xl:pb-20"
         >
           <button
-            :class="lightsOut ? 'bg-foreground-50 text-background-700' : 'bg-background-700'"
-            class="mx-2 shrink-0 rounded-full p-2 font-bold md:p-3"
+            class="mx-2 shrink-0 rounded-full bg-background-700 p-2 font-bold lo:bg-lightsOut-500 lo:text-black md:p-3"
             @click="lightsOut = !lightsOut"
           >
             <mdicon name="weather-night" />
@@ -60,9 +58,9 @@ const debugSetMode = event => {
 
       <!-- Controls -->
       <div
-        class="flex flex-1 flex-col rounded-3xl rounded-b-none bg-background-800 px-6 md:flex md:flex-1 md:px-8 lg:px-12 xl:px-20"
+        class="flex flex-1 flex-col px-6 pt-6 md:flex md:flex-1 md:px-8 md:pt-0 lg:px-12 xl:px-20"
       >
-        <div class="flex h-20 items-center font-header text-lg font-semibold lg:h-32 2xl:text-xl">
+        <div class="hidden h-20 items-center font-header text-lg font-semibold md:flex lg:h-32 2xl:text-xl">
           Controls
         </div>
         <ControlPanel

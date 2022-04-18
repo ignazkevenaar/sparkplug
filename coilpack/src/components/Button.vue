@@ -14,50 +14,96 @@ const props = defineProps({
 
 const emit = defineEmits(['input']);
 
-const roundClass = computed(() => props.control.round ? 'rounded-full' : 'rounded-lg md:rounded-2xl');
+const roundClass = computed(() => props.control.round ?
+  'rounded-full' : 'rounded-lg md:rounded-2xl @squircle:squircle-xl @squircle:!rounded-none');
 
 const colors = {
   default: {
     default: {
       background: [
-        "bg-background-600",
-        "active:bg-black",
-        "active:text-foreground-500"
-      ]
-    },
-    invert: {
-      background: [
-        "bg-foreground-50",,
-        "text-background-700",
-        "active:bg-foreground-200",
+        "bg-background-700",
+        "active:bg-background-800",
+        "lo:text-lightsOut-300",
+        "ring-background-600/50"
       ]
     },
     red: {
       background: [
-        "bg-red-700",
-        "active:bg-red-800",
-        "text-white"
+        "bg-red-900/25",
+        "text-red-500",
+        "ring-red-800/50",
       ]
     },
     yellow: {
       background: [
-        "bg-yellow-700",
-        "active:bg-yellow-800",
-        "text-white"
+        "bg-yellow-700/25",
+        "text-yellow-300",
+        "ring-yellow-600/50",
+        "lo:text-lightsOut-300",
+        "lo:ring-background-600/50"
       ]
     },
     green: {
       background: [
-        "bg-green-700",
-        "active:bg-green-800",
-        "text-white"
+        "bg-lime-700/25",
+        "text-lime-300",
+        "ring-green-600/50",
+        "lo:text-lightsOut-300",
+        "lo:ring-background-600/50"
       ]
     },
     blue: {
       background: [
-        "bg-blue-700",
-        "active:bg-blue-800",
-        "text-white"
+        "bg-blue-700/25",
+        "text-blue-400",
+        "ring-blue-600/50",
+        "lo:text-lightsOut-300",
+        "lo:ring-background-600/50"
+      ]
+    }
+  },
+  toggled: {
+    default: {
+      background: [
+        "bg-foreground-50",
+        "text-background-700",
+        "active:bg-foreground-100",
+        "ring-foreground-50",
+        "lo:text-lightsOut-100",
+        "lo:bg-lightsOut-900",
+        "lo:ring-lightsOut-500",
+      ]
+    },
+    red: {
+      background: [
+        "bg-red-600",
+        "active:bg-red-700",
+        "text-black",
+        "ring-red-600"
+      ]
+    },
+    yellow: {
+      background: [
+        "bg-yellow-400",
+        "active:bg-yellow-500",
+        "text-black",
+        "ring-yellow-400"
+      ]
+    },
+    green: {
+      background: [
+        "bg-lime-400",
+        "active:bg-lime-500",
+        "text-black",
+        "ring-lime-400"
+      ]
+    },
+    blue: {
+      background: [
+        "bg-blue-400",
+        "active:bg-blue-500",
+        "text-black",
+        "ring-blue-400"
       ]
     }
   }
@@ -89,7 +135,8 @@ const nonHoldPosition = computed(() =>
 
 const cascadableProperties = [
   'color',
-  'icon'
+  'icon',
+  'style'
 ];
 
 // Cascade properties from props, active positions.
@@ -114,7 +161,7 @@ const swapSetUnset = original => {
   return modified;
 };
 
-const colorClass = computed(() => colors.default[cascadedProps.value.color || 'default'].background);
+const colorClass = computed(() => colors[cascadedProps.value.style || 'default'][cascadedProps.value.color || 'default'].background);
 
 let holding = ref(false);
 let holdingPosition = ref(false);
@@ -158,7 +205,7 @@ const onHold = event => {
 
 <template>
   <button
-    class="relative z-0 flex cursor-pointer select-none flex-col items-center justify-center bg-gradient-to-br p-2 text-center text-sm font-semibold"
+    class="relative z-0 flex cursor-pointer select-none flex-col items-center justify-center bg-gradient-to-br p-2 text-center text-sm font-semibold ring-2 ring-inset"
     :class="[roundClass, colorClass]"
     @mousedown.prevent="mouseDown"
     @mouseup.prevent="mouseUp"
@@ -168,14 +215,12 @@ const onHold = event => {
     <mdicon
       v-if="cascadedProps.icon"
       :name="cascadedProps.icon"
-      size="48"
+      size="36"
     />
     <slot />
     <div
       v-if="holdPosition || holdingPosition"
-      class="absolute bottom-1 w-full justify-self-end text-3xl md:bottom-2"
-    >
-      ...
-    </div>
+      class="absolute bottom-1 h-1 w-5 rounded-full bg-current opacity-75"
+    />
   </button>
 </template>

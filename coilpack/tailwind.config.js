@@ -12,7 +12,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        header: ['Krona One', ...defaultTheme.fontFamily.sans]
+        sans: ['Radio Canada', ...defaultTheme.fontFamily.sans],
+        header: ['Krona One', ...defaultTheme.fontFamily.sans],
         //https://fonts.google.com/specimen/Share+Tech+Mono
       },
       maxHeight: {
@@ -42,6 +43,18 @@ module.exports = {
           700: withOpacity('--color-background-700'),
           800: withOpacity('--color-background-800'),
           900: withOpacity('--color-background-900'),
+        },
+        lightsOut: {
+          50:  withOpacity('--color-lightsOut-50'),
+          100: withOpacity('--color-lightsOut-100'),
+          200: withOpacity('--color-lightsOut-200'),
+          300: withOpacity('--color-lightsOut-300'),
+          400: withOpacity('--color-lightsOut-400'),
+          500: withOpacity('--color-lightsOut-500'),
+          600: withOpacity('--color-lightsOut-600'),
+          700: withOpacity('--color-lightsOut-700'),
+          800: withOpacity('--color-lightsOut-800'),
+          900: withOpacity('--color-lightsOut-900'),
         }
       },
       gridRow: {
@@ -54,10 +67,13 @@ module.exports = {
       },
       gridTemplateRows: {
        '8': 'repeat(8, minmax(0, 1fr))',
-      },
-      backgroundImage: {
-        'horizontal-split': "linear-gradient(to right, black 50% , theme(colors.background.800) 50%);"
       }
     }
-  }
+  },
+  plugins: [
+    require('./src/plugins/lightsOutPlugin'),
+    require('./src/plugins/squirclePlugin').squirclePlugin,
+    require('./src/plugins/squirclePlugin').squircleRingPlugin,
+    require('./src/plugins/squirclePlugin').squircleRingColorPlugin,
+  ]
 }

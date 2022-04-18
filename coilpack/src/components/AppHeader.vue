@@ -24,7 +24,7 @@ defineEmits(['on-back', 'on-logo']);
           />
         </button>
         <span
-          class="flex items-center"
+          class="lo:opacity-0 flex items-center transition-opacity"
           @click="$emit('on-logo')"
         >
           <mdicon
