@@ -11,9 +11,11 @@
                     {
                         "modes": {
                             "Parking": false,
-                            "LowBeams": false
+                            "LowBeams": false,
+                            "HighBeams": false
                         },
-                        "style": "toggled"
+                        "backgroundStyle": "fill",
+                        "foregroundColor": "black"
                     }
                 ]
             },
@@ -28,8 +30,9 @@
                             "Parking": true,
                             "LowBeams": false
                         },
-                        "style": "toggled",
-                        "color": "green"
+                        "backgroundStyle": "fill",
+                        "backgroundColor": "green",
+                        "foregroundColor": "black"
                     }
                 ]
             },
@@ -44,8 +47,9 @@
                             "Parking": true,
                             "LowBeams": true
                         },
-                        "style": "toggled",
-                        "color": "green"
+                        "backgroundStyle": "fill",
+                        "backgroundColor": "green",
+                        "foregroundColor": "black"
                     }
                 ]
             }
@@ -69,8 +73,9 @@
                         "modes": {
                             "HighBeams": true
                         },
-                        "style": "toggled",
-                        "color": "blue"
+                        "backgroundStyle": "fill",
+                        "backgroundColor": "blue",
+                        "foregroundColor": "black"
                     }
                 ]
             },
@@ -90,8 +95,9 @@
                         "modes": {
                             "FlashToPass": true
                         },
-                        "style": "toggled",
-                        "color": "blue"
+                        "backgroundStyle": "fill",
+                        "backgroundColor": "blue",
+                        "foregroundColor": "black"
                     }
                 ]
             }
@@ -116,8 +122,9 @@
                         "modes": {
                             "FogFront": true
                         },
-                        "style": "toggled",
-                        "color": "green"
+                        "backgroundStyle": "fill",
+                        "backgroundColor": "green",
+                        "foregroundColor": "black"
                     }
                 ]
             },
@@ -137,8 +144,9 @@
                         "modes": {
                             "FogRear": true
                         },
-                        "style": "toggled",
-                        "color": "yellow"
+                        "backgroundStyle": "fill",
+                        "backgroundColor": "yellow",
+                        "foregroundColor": "black"
                     }
                 ]
             }
@@ -161,10 +169,12 @@
                     },
                     {
                         "modes": {
-                            "BlinkL": true
+                            "BlinkL": true,
+                            "BlinkR": false
                         },
-                        "style": "toggled",
-                        "color": "green"
+                        "backgroundStyle": "fill",
+                        "backgroundColor": "green",
+                        "foregroundColor": "black"
                     }
                 ]
             },
@@ -182,17 +192,21 @@
                     },
                     {
                         "modes": {
-                            "BlinkR": true
+                            "BlinkR": true,
+                            "BlinkL": false
                         },
-                        "style": "toggled",
-                        "color": "green"
+                        "backgroundStyle": "fill",
+                        "backgroundColor": "green",
+                        "foregroundColor": "black"
                     }
                 ]
             },
             {
                 "type": "Button",
                 "icon": "hazard-lights",
-                "color": "red",
+                "backgroundColor": "red",
+                "backgroundStyle": "outline",
+                "foregroundColor": "red",
                 "width": 12,
                 "height": 6,
                 "positions": [
@@ -205,7 +219,8 @@
                         "modes": {
                             "Hazards": true
                         },
-                        "style": "toggled"
+                        "backgroundStyle": "fill",
+                        "foregroundColor": "black"
                     }
                 ]
             }
@@ -230,8 +245,9 @@
                         "modes": {
                             "Brake": true
                         },
-                        "style": "toggled",
-                        "color": "red"
+                        "backgroundStyle": "fill",
+                        "backgroundColor": "red",
+                        "foregroundColor": "black"
                     }
                 ]
             },
@@ -251,8 +267,9 @@
                         "modes": {
                             "ESS": true
                         },
-                        "style": "toggled",
-                        "color": "red"
+                        "backgroundStyle": "fill",
+                        "backgroundColor": "red",
+                        "foregroundColor": "black"
                     }
                 ]
             },
@@ -271,7 +288,7 @@
                         "modes": {
                             "Reverse": true
                         },
-                        "style": "toggled"
+                        "backgroundStyle": "fill"
                     }
                 ]
             }

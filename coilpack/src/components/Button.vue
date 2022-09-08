@@ -1,5 +1,6 @@
 <script setup>
 import { computed, ref } from 'vue';
+import colors from '../styles/buttonColors';
 
 const props = defineProps({
   value: {
@@ -16,98 +17,6 @@ const emit = defineEmits(['input']);
 
 const roundClass = computed(() => props.control.round ?
   'rounded-full' : 'rounded-lg md:rounded-2xl @squircle:squircle-xl @squircle:!rounded-none');
-
-const colors = {
-  default: {
-    default: {
-      background: [
-        "bg-background-700",
-        "active:bg-background-800",
-        "lo:text-lightsOut-300",
-        "ring-background-600/50"
-      ]
-    },
-    red: {
-      background: [
-        "bg-red-900/25",
-        "text-red-500",
-        "ring-red-800/50",
-      ]
-    },
-    yellow: {
-      background: [
-        "bg-yellow-700/25",
-        "text-yellow-300",
-        "ring-yellow-600/50",
-        "lo:text-lightsOut-300",
-        "lo:ring-background-600/50"
-      ]
-    },
-    green: {
-      background: [
-        "bg-lime-700/25",
-        "text-lime-300",
-        "ring-green-600/50",
-        "lo:text-lightsOut-300",
-        "lo:ring-background-600/50"
-      ]
-    },
-    blue: {
-      background: [
-        "bg-blue-700/25",
-        "text-blue-400",
-        "ring-blue-600/50",
-        "lo:text-lightsOut-300",
-        "lo:ring-background-600/50"
-      ]
-    }
-  },
-  toggled: {
-    default: {
-      background: [
-        "bg-foreground-50",
-        "text-background-700",
-        "active:bg-foreground-100",
-        "ring-foreground-50",
-        "lo:text-lightsOut-100",
-        "lo:bg-lightsOut-900",
-        "lo:ring-lightsOut-500",
-      ]
-    },
-    red: {
-      background: [
-        "bg-red-600",
-        "active:bg-red-700",
-        "text-black",
-        "ring-red-600"
-      ]
-    },
-    yellow: {
-      background: [
-        "bg-yellow-400",
-        "active:bg-yellow-500",
-        "text-black",
-        "ring-yellow-400"
-      ]
-    },
-    green: {
-      background: [
-        "bg-lime-400",
-        "active:bg-lime-500",
-        "text-black",
-        "ring-lime-400"
-      ]
-    },
-    blue: {
-      background: [
-        "bg-blue-400",
-        "active:bg-blue-500",
-        "text-black",
-        "ring-blue-400"
-      ]
-    }
-  }
-};
 
 const currentPositions = computed(() =>
   props.control.positions.flatMap((position, positionIndex) => {
@@ -134,9 +43,11 @@ const nonHoldPosition = computed(() =>
 );
 
 const cascadableProperties = [
-  'color',
+  'backgroundColor',
+  'backgroundStyle',
+  'foregroundColor',
+  'foregroundStyle',
   'icon',
-  'style'
 ];
 
 // Cascade properties from props, active positions.
@@ -161,7 +72,19 @@ const swapSetUnset = original => {
   return modified;
 };
 
-const colorClass = computed(() => colors[cascadedProps.value.style || 'default'][cascadedProps.value.color || 'default'].background);
+const colorClasses = computed(() => {
+  const backgroundColor = cascadedProps.value.backgroundColor || 'default';
+  const foregroundColor = cascadedProps.value.foregroundColor || 'default';
+  const backgroundStyle = cascadedProps.value.backgroundStyle || 'default';
+  const foregroundStyle = cascadedProps.value.foregroundStyle || 'default';
+
+  return [
+    ...colors.common.background[backgroundStyle],
+    ...colors.common.foreground[foregroundStyle],
+    ...colors[backgroundColor].background[backgroundStyle] || [],
+    ...colors[foregroundColor].foreground[foregroundStyle] || []
+  ];
+});
 
 let holding = ref(false);
 let holdingPosition = ref(false);
@@ -205,8 +128,8 @@ const onHold = event => {
 
 <template>
   <button
-    class="relative z-0 flex cursor-pointer select-none flex-col items-center justify-center bg-gradient-to-br p-2 text-center text-sm font-semibold ring-2 ring-inset"
-    :class="[roundClass, colorClass]"
+    class="relative z-0 flex cursor-pointer select-none flex-col items-center justify-center bg-gradient-to-br p-2 text-center text-sm font-semibold ring-inset"
+    :class="[roundClass, colorClasses]"
     @mousedown.prevent="mouseDown"
     @mouseup.prevent="mouseUp"
     @touchstart.prevent="mouseDown"
