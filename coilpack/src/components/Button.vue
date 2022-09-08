@@ -90,10 +90,15 @@ let holding = ref(false);
 let holdingPosition = ref(false);
 
 const mouseDown = () => {
+  if (props.control.readOnly) return;
   holdTimeout = setTimeout(onHold, 150);
 };
 
 const mouseUp = event => {
+  if (props.control.readOnly) return;
+  if (buttonDown.value) buttonDown.value = false;
+  else return;
+
   clearTimeout(holdTimeout);
 
   if (holding.value)
@@ -128,8 +133,9 @@ const onHold = event => {
 
 <template>
   <button
-    class="relative z-0 flex cursor-pointer select-none flex-col items-center justify-center bg-gradient-to-br p-2 text-center text-sm font-semibold ring-inset"
+    class="relative z-0 flex select-none flex-col items-center justify-center bg-gradient-to-br p-2 text-center text-sm font-semibold ring-inset enabled:cursor-pointer"
     :class="[roundClass, colorClasses]"
+    :disabled="control.readOnly"
     @mousedown.prevent="mouseDown"
     @mouseup.prevent="mouseUp"
     @touchstart.prevent="mouseDown"
