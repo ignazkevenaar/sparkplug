@@ -9,13 +9,21 @@ __attribute__((weak)) extern size_t wireDevicesCount;
 __attribute__((weak)) OutputDevice *outputDevices[] = {};
 __attribute__((weak)) extern size_t outputDevicesCount;
 
+const char *wireErrorMessagesByReturnCode[] = {
+  "success",
+  "data too long to fit in transmit buffer",
+  "received NACK on transmit of address",
+  "received NACK on transmit of data",
+  "other error",
+  "timeout"
+};
+
 void updateDeviceConnection()
 {
   Wire.begin(wirePins[0], wirePins[1]);
 
   bool shouldUpdateChannels = false;
 
-  // Put on timer.
   for (int i = 0; i < wireDevicesCount; i++)
   {
     WireDevice &device = *wireDevices[i];
@@ -38,7 +46,18 @@ void outputToDevices()
 bool deviceResponding(WireDevice &device)
 {
   Wire.beginTransmission(device.address);
-  return Wire.endTransmission() == 0;
+  uint8_t error = Wire.endTransmission();
+
+  if (error && error < 5)
+  {
+    Serial.print("I²C error at 0x");
+    Serial.print(device.address, HEX);
+    Serial.print(": ");
+    Serial.print(wireErrorMessagesByReturnCode[error]);
+    Serial.println(".");
+  }
+
+  return !error;
 }
 
 bool deviceConnectionChanged(WireDevice &device)
