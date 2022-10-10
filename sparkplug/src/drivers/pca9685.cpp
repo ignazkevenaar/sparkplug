@@ -1,5 +1,5 @@
 #include "pca9685.h"
-#include "../../helpers/wirehelper.h"
+#include "../helpers/wirehelper.h"
 
 PCA9685::PCA9685(uint8_t address_, uint16_t channelFrom_, uint16_t channelCount_, bool totemPoleOutput_) : Adafruit_PWMServoDriver(address_)
 {
@@ -8,10 +8,10 @@ PCA9685::PCA9685(uint8_t address_, uint16_t channelFrom_, uint16_t channelCount_
   channelCount = channelCount_;
   totemPoleOutput = totemPoleOutput_;
 
-  if (channelCount > getMaxChannelCount())
+  if (channelCount > outputCount)
   {
     Serial.println("Too many channels!");
-    channelCount = getMaxChannelCount();
+    channelCount = outputCount;
     return;
   }
 };
@@ -22,7 +22,7 @@ void PCA9685::setup()
   setPWMFreq(1600);
   setOutputMode(totemPoleOutput);
 
-  for (int i = 0; i < getMaxChannelCount(); i++)
+  for (int i = 0; i < outputCount; i++)
     setPin(i, 0, true);
 };
 
@@ -35,7 +35,7 @@ void PCA9685::output()
     return;
   }
 
-  uint16_t values[getMaxChannelCount()] = {}; // Buffer for values of changed channels.
+  uint16_t values[outputCount] = {}; // Buffer for values of changed channels.
 
   // Split updated channels into ranges.
   int length = 1;

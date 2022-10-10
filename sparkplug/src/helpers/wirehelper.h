@@ -1,5 +1,7 @@
 #pragma once
 
+#include <Wire.h>
+
 class WireHelper
 {
 public:

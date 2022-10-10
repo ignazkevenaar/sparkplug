@@ -2,11 +2,11 @@
 
 #include <Adafruit_PWMServoDriver.h>
 
-#include "../../timingfunctions.h"
-#include "../OutputDevice.h"
-#include "../WireDevice.h"
-#include "../channel.h"
-#include "../preset.h"
+#include "../timingfunctions.h"
+#include "../types/OutputDevice.h"
+#include "../types/WireDevice.h"
+#include "../types/channel.h"
+#include "../types/preset.h"
 
 extern Channel channels[];
 
