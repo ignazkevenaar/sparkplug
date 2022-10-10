@@ -7,6 +7,7 @@
 #include "OTA.h"
 #include "commands.h"
 #include "deviceManager.h"
+#include "error.h"
 #include "input.h"
 #include "lighting.h"
 #include "timer.h"
@@ -21,3 +22,5 @@ void onUpdate();
 
 extern Version version;
 extern uint32_t currentMillis;
+extern ANSI ansi;
+extern boolean terminalSupportsANSI;

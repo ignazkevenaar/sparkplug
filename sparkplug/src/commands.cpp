@@ -10,15 +10,39 @@ enum commandIDs
   idUnsetCommand,
   idGetCommand,
   idTestCommand,
+  idColorCommand,
   idHelpCommand,
   idVersionCommand,
 };
 
+void printSparkplugBranding()
+{
+  if (terminalSupportsANSI)
+  {
+    ansi.bold();
+    ansi.color(ansi.black, ansi.rgb2color(242, 209, 110));
+  }
+
+  Serial.print("Sparkplug");
+
+  if (terminalSupportsANSI)
+  {
+    ansi.normal();
+    ansi.color(ansi.red, ansi.rgb2color(229, 129, 56));
+  }
+
+  Serial.print(" - version ");
+  Serial.println(version.getString());
+
+  if (terminalSupportsANSI) ansi.normal();
+
+  Serial.println();
+}
+
 void welcomeMessage()
 {
   Serial.println();
-  Serial.print("Sparkplug - version ");
-  Serial.println(version.getString());
+  printSparkplugBranding();
   Serial.println("Type `?` to see a list of all available commands.");
   Serial.println();
 }
@@ -40,8 +64,7 @@ const Command versionCommand =
 void helpExecute(const Command &command, char **arguments, uint8_t length)
 {
   Serial.println();
-  Serial.print("Sparkplug - version ");
-  Serial.println(version.getString());
+  printSparkplugBranding();
 
   Serial.println("Usage:");
   Serial.println(" command argument, argument...");
@@ -74,12 +97,14 @@ const Command helpCommand =
 
 void testExecute(const Command &command, char **arguments, uint8_t length)
 {
-  Serial.println("Sleeping...");
-  delay(1500);
+  // Serial.println("Sleeping...");
+  // delay(1500);
 
-  // Your arguments in c-string format.
-  for (int i = 0; i < length; i++)
-    Serial.println(arguments[i]);
+  // // Your arguments in c-string format.
+  // for (int i = 0; i < length; i++)
+  //   Serial.println(arguments[i]);
+
+  printError("Error", "This is an enormous error. Big mistake! Huge!");
 }
 
 const Command testCommand =
@@ -216,12 +241,28 @@ const Command getCommand =
         &setUnsetGetExecute,
 };
 
+void colorExecute(const Command &command, char **arguments, uint8_t length)
+{
+  Serial.println("Toggled serial mode.");
+  terminalSupportsANSI = !terminalSupportsANSI;
+}
+
+const Command colorCommand =
+    {
+        idColorCommand,
+        "C",
+        "color",
+        "ANSI magic?",
+        &colorExecute,
+};
+
 const Command *commands[] =
     {
         &setCommand,
         &unsetCommand,
         &getCommand,
         &testCommand,
+        &colorCommand,
         &helpCommand,
         &versionCommand,
 };
