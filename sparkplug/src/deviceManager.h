@@ -10,6 +10,7 @@
 // Device drivers.
 #include "drivers/builtinLED.h"
 #include "drivers/pca9685.h"
+#include "drivers/lp55231.h"
 
 extern int wirePins[];
 extern size_t wireDevicesCount;
