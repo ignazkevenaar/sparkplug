@@ -15,7 +15,7 @@ void sparkInitialize()
   welcomeMessage();
 
   setupWiFi();
-  setupOTA();
+  setupUpdateServer();
   setupWebServer();
   setupWebSockets();
 
