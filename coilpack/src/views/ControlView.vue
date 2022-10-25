@@ -1,19 +1,36 @@
 <script setup>
+import { defineEmits, inject } from 'vue'
 import ControlPanel from '../components/ControlPanel.vue'
 import StatusDisplay from '../components/StatusDisplay.vue'
-import { inject } from 'vue'
 
 let sparkplug = inject('sparkplug');
 let lightsOut = inject('lightsOut');
+let lightingModes = inject('lightingModes');
 let controlModels = inject('controlModels');
 let indicatorConfiguration = inject('indicatorConfiguration');
+
+const emit = defineEmits(['input'])
 
 const debugSetMode = event => {
   console.log("Control input", event);
 
+  const setModeStrings = [];
+  const unsetModeStrings = [];
+
   Object.keys(event).forEach(modeID => {
-    controlModels.value[modeID] = Number(event[modeID]);
+    const newValue = Number(event[modeID]);
+    controlModels.value[modeID] = newValue
+
+    const modeIndex = lightingModes.value.indexOf(modeID);
+    if (modeIndex > -1)
+    {
+      if (newValue === 1) setModeStrings.push(modeIndex);
+      else if (newValue === 0) unsetModeStrings.push(modeIndex);
+    }
   });
+
+  if (setModeStrings.length) sparkplug.setMode(setModeStrings);
+  if (unsetModeStrings.length) sparkplug.unsetMode(unsetModeStrings);
 };
 </script>
 

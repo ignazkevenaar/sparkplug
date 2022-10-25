@@ -1,25 +1,61 @@
 <script setup>
 import * as sparkplug from './api.js'
-import { provide, ref } from 'vue'
+import { provide, ref, onMounted } from 'vue'
 import AppHeader from './components/AppHeader.vue'
 import AppRouter from './components/AppRouter.vue'
 import ErrorMessage from './components/ErrorMessage.vue'
 import LoadingIndicator from './components/LoadingIndicator.vue'
 
-let loading = ref(true);
-let error = ref(null);
-let lightsOut = ref(false);
-let currentRoute = ref('/');
-let controlModels = ref({});
-let indicatorConfiguration = ref([]);
+const loading = ref(true);
+const error = ref(null);
+const lightsOut = ref(false);
+const currentRoute = ref('/');
+const lightingModes = ref([]);
+const controlModels = ref({});
+const indicatorConfiguration = ref([]);
 
 provide('sparkplug', sparkplug);
 provide('lightsOut', lightsOut);
+provide('lightingModes', lightingModes);
 provide('controlModels', controlModels);
 provide('indicatorConfiguration', indicatorConfiguration);
 
 const navigateHome = () => { window.location.href = '#/' };
 const scollToTop = () => { window.scrollTo(0, 0); }
+
+onMounted(async () => {
+  try {
+      await sparkplug.setup();
+    }
+    catch(e) {
+      // Display error message in UI.
+      console.log(e);
+      return;
+    }
+
+    lightingModes.value = sparkplug.lightingModes;
+    controlModels.value = {};
+    sparkplug.lightingModes.forEach((mode, modeIndex) => {
+      controlModels.value[mode] = 0;
+    });
+
+    indicatorConfiguration.value = sparkplug.indicatorConfiguration;
+
+    sparkplug.onGetMode(inputArguments =>
+    {
+      inputArguments.forEach(argument =>
+      {
+        const [modeIndex, modeState] = argument.split(":");
+        const modeID = sparkplug.lightingModes[parseInt(modeIndex)];
+        controlModels.value[modeID] = parseInt(modeState);
+      });
+    });
+
+    // Get initial mode state.
+    sparkplug.getModes();
+
+    loading.value = false;
+})
 </script>
 
 <template>
@@ -50,44 +86,3 @@ const scollToTop = () => { window.scrollTo(0, 0); }
     </Transition>
   </div>
 </template>
-
-<script>
-export default {
-  async mounted() {
-    try {
-      await sparkplug.setup();
-    }
-    catch(e) {
-      // Display error message in UI.
-      console.log(e);
-      return;
-    }
-
-    // this.error = {
-    //   message: "This is a test error!"
-    // };
-
-    this.controlModels = {};
-    sparkplug.lightingModes.forEach(mode => {
-      this.controlModels[mode] = 0;
-    });
-
-    this.indicatorConfiguration = sparkplug.indicatorConfiguration;
-
-    sparkplug.onGetMode(inputArguments =>
-    {
-      inputArguments.forEach(argument =>
-      {
-        const [modeIndex, modeState] = argument.split(":");
-        const modeID = sparkplug.lightingModes[parseInt(modeIndex)];
-        this.$set(this.controlModels, modeID, parseInt(modeState));
-      });
-    });
-
-    // Get initial mode state.
-    sparkplug.getModes();
-
-    this.loading = false;
-  }
-}
-</script>

@@ -42,7 +42,12 @@ export const getModes = () =>
 
 export const setMode = (inputArguments) =>
 {
-  trySend(`S:${ inputArguments.join(',') }`);
+  trySend(`S ${ inputArguments.join(',') }`);
+}
+
+export const unsetMode = (inputArguments) =>
+{
+  trySend(`U ${ inputArguments.join(',') }`);
 }
 
 export const onGetMode = callback => {
