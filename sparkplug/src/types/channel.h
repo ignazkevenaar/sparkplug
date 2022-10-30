@@ -17,12 +17,10 @@ struct Channel
   uint32_t startTime = 0;
 
   // Blink.
-  uint32_t timerBlink = 0;
+  uint32_t blinkStartTime = 0;
   int8_t blinkPhase = 0;
   int8_t blinkCount = -1;
   int8_t blinkPresetIndex = -1;
 
   bool wasUpdated = false;
-
-  int timingFunction = 0;
 };

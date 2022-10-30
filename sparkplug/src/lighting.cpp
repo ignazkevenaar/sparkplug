@@ -99,14 +99,7 @@ uint16_t getChannelValue(Channel &channel)
   if (highestEnabledBlinkIndex > -1 && channel.blinkPresetIndex != highestEnabledBlinkIndex)
   {
     // Starting blink.
-    channel.timerBlink = currentMillis;
-    channel.blinkPhase = 0;
-  }
-
-  if (channel.blinkPresetIndex > -1 && (highestEnabledBlinkIndex == -1 || highestEnabledBlinkIndex < chosenIndex))
-  {
-    // Stopping blink.
-    channel.blinkPresetIndex = -1;
+    channel.blinkStartTime = currentMillis;
     channel.blinkPhase = 0;
   }
 
@@ -179,22 +172,19 @@ void updateFade(Channel &channel)
 
 void updateBlink(Channel &channel)
 {
-  if (channel.blinkPresetIndex == -1) return;
+  if (channel.blinkPresetIndex < channel.activePresetIndex) return;
 
   const Preset preset = PROGMEM_getAnything(&channel.presets[channel.blinkPresetIndex]);
-  int16_t interval = channel.blinkPhase ? preset.timeOn : preset.timeOff;
+  const uint8_t patternSize = sizeof(preset.blinkPattern) * 8;
+  int16_t interval = preset.blinkInterval / patternSize;
 
-  if (currentMillis - channel.timerBlink > interval)
-  {
-    channel.timerBlink = currentMillis - (currentMillis - channel.timerBlink - interval);
+  uint8_t blinkPatternStep = (currentMillis - channel.blinkStartTime) / interval % patternSize;
+  bool patternIsHigh = preset.blinkPattern & (1 << patternSize - 1 - blinkPatternStep);
 
-    // Call onBlinkPhaseChanged event.
-    if (!onBlinkPhaseChanged(channel)) return;
+  if (channel.blinkPhase == patternIsHigh) return;
+  channel.blinkPhase = patternIsHigh;
 
-    channel.blinkPhase = !channel.blinkPhase;
-    uint16_t newValue = getChannelValue(channel);
-    startFade(channel, newValue);
-  }
+  if (onBlinkPhaseChanged(channel)) startFade(channel, getChannelValue(channel));
 }
 
 __attribute__((weak)) bool onBlinkPhaseChanged(Channel &channel)

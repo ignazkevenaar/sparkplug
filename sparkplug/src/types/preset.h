@@ -11,6 +11,6 @@ struct Preset
   uint8_t intensity = 255;
   uint16_t fadeSpeedRising = 100;
   uint16_t fadeSpeedFalling = 200;
-  int16_t timeOff = 300;
-  int16_t timeOn = 300;
+  int16_t blinkInterval = 600;
+  uint32_t blinkPattern = 0b11111111111111110000000000000000;
 };
