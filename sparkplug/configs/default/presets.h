@@ -13,14 +13,17 @@ enum ModeIDs
   BlinkL,
   BlinkR,
   Hazards,
+  Police
 };
 
-const size_t modesCount = Hazards + 1; // Last element of enum + 1.
+const size_t modesCount = Police + 1; // Last element of enum + 1.
 LightingMode modes[modesCount];
 
 const PROGMEM Preset presetsHeadlights[] =
     {
         {.modeID = LowBeams, .intensity = 128},
+
+        {.modeID = Police, .mode = PresetModes::Blink, .fadeSpeedRising = 50, .fadeSpeedFalling = 100, .blinkInterval = 2400, .blinkPattern = 0b10101000000000001010100000000000},
 };
 
 const PROGMEM Preset presetsHighBeams[] =
@@ -34,6 +37,8 @@ const PROGMEM Preset presetsBlinkersFrontLeft[] =
         {.modeID = Parking, .intensity = 4},
         {.modeID = BlinkL, .mode = PresetModes::Blink},
         {.modeID = Hazards, .mode = PresetModes::Blink},
+
+        {.modeID = Police, .mode = PresetModes::Blink, .fadeSpeedRising = 50, .fadeSpeedFalling = 100, .blinkInterval = 2400, .blinkPattern = 0b10100000101000001111000011110000},
 };
 
 const PROGMEM Preset presetsBlinkersFrontRight[] =
@@ -41,6 +46,8 @@ const PROGMEM Preset presetsBlinkersFrontRight[] =
         {.modeID = Parking, .intensity = 4},
         {.modeID = BlinkR, .mode = PresetModes::Blink},
         {.modeID = Hazards, .mode = PresetModes::Blink},
+
+        {.modeID = Police, .mode = PresetModes::Blink, .fadeSpeedRising = 50, .fadeSpeedFalling = 100, .blinkInterval = 2400, .blinkPattern = 0b00001010000010100000111100001111},
 };
 
 const PROGMEM Preset presetsFogsFront[] =
@@ -62,14 +69,14 @@ const PROGMEM Preset presetsBrake[] =
 
 const PROGMEM Preset presetsBlinkerRearLeft[] =
     {
-        {.modeID = BlinkL, .mode = PresetModes::Blink},
-        {.modeID = Hazards, .mode = PresetModes::Blink},
+        // {.modeID = BlinkL, .mode = PresetModes::Blink},
+        // {.modeID = Hazards, .mode = PresetModes::Blink},
 };
 
 const PROGMEM Preset presetsBlinkerRearRight[] =
     {
-        {.modeID = BlinkR, .mode = PresetModes::Blink},
-        {.modeID = Hazards, .mode = PresetModes::Blink},
+        // {.modeID = BlinkR, .mode = PresetModes::Blink},
+        // {.modeID = Hazards, .mode = PresetModes::Blink},
 };
 
 const PROGMEM Preset presetsFogRear[] =
