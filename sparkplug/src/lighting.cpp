@@ -71,24 +71,26 @@ uint16_t getChannelValue(Channel &channel)
       if (!channel.blinkPhase) continue;
     }
 
+    const uint16_t presetIntensity = preset.intensity << 8 | preset.intensity; // Shift 8-bit to 16-bit intensity.
+
     switch (preset.priorityMode)
     {
     case SwopModes::LTP:
       chosenIndex = i;
-      baseValue = preset.intensity;
+      baseValue = presetIntensity;
       break;
     case SwopModes::HTP:
-      if (preset.intensity > baseValue)
+      if (presetIntensity > baseValue)
       {
         chosenIndex = i;
-        baseValue = preset.intensity;
+        baseValue = presetIntensity;
       }
       break;
     case SwopModes::LoTP:
-      if (preset.intensity < baseValue)
+      if (presetIntensity < baseValue)
       {
         chosenIndex = i;
-        baseValue = preset.intensity;
+        baseValue = presetIntensity;
       }
       break;
     }

@@ -30,7 +30,7 @@ void PCA9685::output()
 {
   if (channelCount == 1)
   {
-    uint16_t value = useTimingFunction(Exponential, channels[channelFrom].value) >> 4;
+    uint16_t value = useTimingFunction(Linear, channels[channelFrom].value) >> 4;
     setPin(channelFrom, value, true);
     return;
   }
@@ -43,7 +43,7 @@ void PCA9685::output()
   for (int i = 1; i <= channelCount; i++)
   {
     if (channels[channelFrom + i - 1].wasUpdated)
-      values[i - 1] = useTimingFunction(Exponential, channels[channelFrom + i - 1].value) >> 4;
+      values[i - 1] = useTimingFunction(Linear, channels[channelFrom + i - 1].value) >> 4;
 
     if (i == channelCount || channels[channelFrom + i].wasUpdated != channels[channelFrom + i - 1].wasUpdated)
     {
