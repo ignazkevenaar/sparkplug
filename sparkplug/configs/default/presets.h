@@ -20,61 +20,49 @@ LightingMode modes[modesCount];
 
 const PROGMEM Preset presetsHeadlights[] =
     {
-        {.modeID = LowBeams, .intensity = 0x7777},
-
-        {.modeID = Hazards, .mode = PresetModes::Blink},
+        {.modeID = LowBeams, .intensity = 128},
 };
 
 const PROGMEM Preset presetsHighBeams[] =
     {
-        {.modeID = Parking, .intensity = 16},
+        {.modeID = Parking, .intensity = 4},
         {.modeID = HighBeams},
-
-        {.modeID = Hazards, .mode = PresetModes::Blink},
 };
 
 const PROGMEM Preset presetsBlinkersFrontLeft[] =
     {
-        {.modeID = Parking, .intensity = 16},
+        {.modeID = Parking, .intensity = 4},
         {.modeID = BlinkL, .mode = PresetModes::Blink},
         {.modeID = Hazards, .mode = PresetModes::Blink},
 };
 
 const PROGMEM Preset presetsBlinkersFrontRight[] =
     {
-        {.modeID = Parking, .intensity = 16},
+        {.modeID = Parking, .intensity = 4},
         {.modeID = BlinkR, .mode = PresetModes::Blink},
         {.modeID = Hazards, .mode = PresetModes::Blink},
 };
 
 const PROGMEM Preset presetsFogsFront[] =
     {
-        {.modeID = FogFront, .intensity = 0x7777},
+        {.modeID = FogFront, .intensity = 128},
         {.modeID = HighBeams, .intensity = 0},
-
-        {.modeID = Hazards, .mode = PresetModes::Blink},
 };
 
 const PROGMEM Preset presetsTaillights[] =
     {
-        {.modeID = Parking, .intensity = 0x1111},
+        {.modeID = Parking, .intensity = 1},
         {.modeID = Brake},
-
-        {.modeID = Hazards, .mode = PresetModes::Blink},
 };
 
 const PROGMEM Preset presetsBrake[] =
     {
         {.modeID = Brake},
-
-        {.modeID = Hazards, .mode = PresetModes::Blink},
 };
 
 const PROGMEM Preset presetsBlinkerRearLeft[] =
     {
         {.modeID = BlinkL, .mode = PresetModes::Blink},
-        {.modeID = Hazards, .mode = PresetModes::Blink},
-
         {.modeID = Hazards, .mode = PresetModes::Blink},
 };
 
@@ -82,22 +70,16 @@ const PROGMEM Preset presetsBlinkerRearRight[] =
     {
         {.modeID = BlinkR, .mode = PresetModes::Blink},
         {.modeID = Hazards, .mode = PresetModes::Blink},
-
-        {.modeID = Hazards, .mode = PresetModes::Blink},
 };
 
 const PROGMEM Preset presetsFogRear[] =
     {
         {.modeID = FogRear},
-
-        {.modeID = Hazards, .mode = PresetModes::Blink},
 };
 
 const PROGMEM Preset presetsReverse[] =
     {
         {.modeID = Reverse},
-
-        {.modeID = Hazards, .mode = PresetModes::Blink},
 };
 
 Channel channels[] =
