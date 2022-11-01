@@ -53,8 +53,8 @@ void updateChannelValues()
 
 uint16_t getChannelValue(Channel &channel)
 {
-  int16_t chosenIndex = -1;
-  uint16_t baseValue = 0;
+  int16_t chosenPresetIndex = -1;
+  uint32_t baseValue = 0;
   int16_t highestEnabledBlinkIndex = -1;
 
   for (int i = 0; i < channel.presetCount; i++)
@@ -72,25 +72,27 @@ uint16_t getChannelValue(Channel &channel)
     }
 
     const uint16_t presetIntensity = preset.intensity << 8 | preset.intensity; // Shift 8-bit to 16-bit intensity.
+    const int modeIntensity = modes[preset.modeID].currentState;
+    const uint16_t intensity = presetIntensity * modeIntensity / 255;
 
     switch (preset.priorityMode)
     {
     case SwopModes::LTP:
-      chosenIndex = i;
-      baseValue = presetIntensity;
+      chosenPresetIndex = i;
+      baseValue = intensity;
       break;
     case SwopModes::HTP:
-      if (presetIntensity > baseValue)
+      if (intensity > baseValue)
       {
-        chosenIndex = i;
-        baseValue = presetIntensity;
+        chosenPresetIndex = i;
+        baseValue = intensity;
       }
       break;
     case SwopModes::LoTP:
-      if (presetIntensity < baseValue)
+      if (intensity < baseValue)
       {
-        chosenIndex = i;
-        baseValue = presetIntensity;
+        chosenPresetIndex = i;
+        baseValue = intensity;
       }
       break;
     }
@@ -104,7 +106,7 @@ uint16_t getChannelValue(Channel &channel)
   }
 
   channel.previousPresetIndex = channel.activePresetIndex;
-  channel.activePresetIndex = chosenIndex;
+  channel.activePresetIndex = chosenPresetIndex;
   channel.blinkPresetIndex = highestEnabledBlinkIndex;
 
   return baseValue;

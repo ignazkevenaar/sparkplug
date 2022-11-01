@@ -171,33 +171,36 @@ void outputMode(int modeIndex)
   outputBuffer.print(modes[modeIndex].nextState > -1 ? modes[modeIndex].nextState : modes[modeIndex].currentState);
 }
 
+uint32_t strToLong(char *string, bool &error)
+{
+  char *endptr = nullptr;
+  uint32_t number = strtoul(string, &endptr, 0);
+  if (endptr == string)
+  {
+    error |= true;
+    return 0;
+  }
+
+  return number;
+}
+
 void argumentToRangeTokens(char *string, char **firstToken, char **lastToken)
 {
   const char delimiter[] = "-";
-  char *token;
-
-  token = strtok(string, delimiter);
+  char *token = strtok(string, delimiter);
   *firstToken = token;
 
   while (token != NULL)
   {
-    *lastToken = token; // Only accept last token as 'end' of range.
+    *lastToken = token;
     token = strtok(NULL, delimiter);
   }
 }
 
-uint32_t strToLong(char *string, bool &error)
+void argumentToRange(char *string, uint16_t *rangeFrom, uint16_t *rangeTo, bool &error)
 {
-  char *endptr;
-  uint32_t number = strtoul(string, &endptr, 0);
-  if (endptr == string) error |= true;
-  return number;
-}
-
-bool argumentIsRange(char *string, uint16_t *rangeFrom, uint16_t *rangeTo, bool &error)
-{
-  char *firstToken;
-  char *lastToken;
+  char *firstToken = nullptr;
+  char *lastToken = nullptr;
   argumentToRangeTokens(string, &firstToken, &lastToken);
 
   char *endptr;
@@ -213,15 +216,27 @@ bool argumentIsRange(char *string, uint16_t *rangeFrom, uint16_t *rangeTo, bool 
     Serial.println(" range index.");
 
     error |= true;
-    return false;
+    return;
   }
-
-  bool isRange = firstToken != lastToken;
 
   *rangeFrom = min(firstNumber, lastNumber);
   *rangeTo = max(firstNumber, lastNumber);
+}
 
-  return isRange;
+void argumentToIDValue(char *string, char **modeID, char **value)
+{
+  int counter = 0;
+  const char delimiter[] = ":";
+  char *token = strtok(string, delimiter);
+
+  while (token != NULL)
+  {
+    if (counter == 0) *modeID = token;
+    else *value = token;
+
+    token = strtok(NULL, delimiter);
+    counter++;
+  }
 }
 
 void setUnsetGetExecute(const Command &command, char **arguments, uint8_t length)
@@ -230,9 +245,11 @@ void setUnsetGetExecute(const Command &command, char **arguments, uint8_t length
 
   if (!length)
   {
+    // If no arguments are provided for the unset command, all modes are turned off.
+    // If no arguments are provided for the get command, the state of all modes is returned.
     for (int modeIndex = 0; modeIndex < modesCount; modeIndex++)
     {
-      if (command.ID == idUnsetCommand) setLightMode(modeIndex, command.ID == idSetCommand);
+      if (command.ID == idUnsetCommand) setLightMode(modeIndex, 0);
       if (modes[modeIndex].currentState > 0) outputMode(modeIndex);
     }
     return;
@@ -240,15 +257,37 @@ void setUnsetGetExecute(const Command &command, char **arguments, uint8_t length
 
   for (int i = 0; i < length; i++)
   {
-    bool error = false;
+    // Split argument into mode ID or range and new mode value.
+    char *modeIDOrRange = nullptr;
+    char *valueArgument = nullptr;
+    argumentToIDValue(arguments[i], &modeIDOrRange, &valueArgument);
+
+    bool errorValue = false;
+    unsigned int newModeValue = 255;
+    if (valueArgument != NULL)
+    {
+      newModeValue = strToLong(valueArgument, errorValue);
+      if (errorValue)
+      {
+        Serial.println("Error: Given value cannot be converted to unsigned long.");
+        continue;
+      }
+    }
+
+    // Try converting first half of command into a valid range.
+    bool errorRange = false;
     uint16_t rangeFrom = 0;
     uint16_t rangeTo = 0;
-    bool isRange = argumentIsRange(arguments[i], &rangeFrom, &rangeTo, error);
-    if (error) continue; // Continue parsing following arguments.
+    argumentToRange(modeIDOrRange, &rangeFrom, &rangeTo, errorRange);
+    if (errorRange)
+    {
+      Serial.println("Error converting argument to valid range.");
+      continue;
+    }
 
     for (int modeIndex = rangeFrom; modeIndex <= rangeTo; modeIndex++)
     {
-      if (setUnset && !setLightMode(modeIndex, command.ID == idSetCommand))
+      if (setUnset && !setLightMode(modeIndex, command.ID == idSetCommand ? newModeValue : 0))
       {
         Serial.println("Mode index out of range or already set.");
         continue;
