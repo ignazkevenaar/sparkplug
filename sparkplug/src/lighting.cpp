@@ -174,18 +174,26 @@ void updateFade(Channel &channel)
 
 void updateBlink(Channel &channel)
 {
-  if (channel.blinkPresetIndex < channel.activePresetIndex) return;
+  if (channel.blinkPresetIndex == -1 || channel.blinkPresetIndex < channel.activePresetIndex) return;
 
   const Preset preset = PROGMEM_getAnything(&channel.presets[channel.blinkPresetIndex]);
   const uint8_t patternSize = sizeof(preset.blinkPattern) * 8;
   int16_t interval = preset.blinkInterval / patternSize;
+  uint32_t maxBlinkTime = interval * patternSize * preset.blinkCount;
+  uint32_t elapsed = currentMillis - channel.blinkStartTime;
 
-  uint8_t blinkPatternStep = (currentMillis - channel.blinkStartTime) / interval % patternSize;
+  if (elapsed > maxBlinkTime)
+  {
+    channel.blinkPhase = 0;
+    if (onBlinkPhaseChanged(channel)) startFade(channel, getChannelValue(channel));
+    return;
+  }
+
+  uint8_t blinkPatternStep = elapsed / interval % patternSize;
   bool patternIsHigh = preset.blinkPattern & (1 << patternSize - 1 - blinkPatternStep);
 
   if (channel.blinkPhase == patternIsHigh) return;
   channel.blinkPhase = patternIsHigh;
-
   if (onBlinkPhaseChanged(channel)) startFade(channel, getChannelValue(channel));
 }
 
