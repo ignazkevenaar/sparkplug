@@ -1,6 +1,6 @@
 <script setup>
 import * as sparkplug from './api.js'
-import { provide, ref, onMounted } from 'vue'
+import { onMounted, provide, ref } from 'vue'
 import AppHeader from './components/AppHeader.vue'
 import AppRouter from './components/AppRouter.vue'
 import ErrorMessage from './components/ErrorMessage.vue'
@@ -59,7 +59,10 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div :class="[ lightsOut ? 'lightsOut' : '' ]">
+  <div
+    :class="[ lightsOut ? 'lightsOut' : '' ]"
+    class="relative h-screen"
+  >
     <AppHeader
       :show-back-button="currentRoute != '' && currentRoute != '/'"
       @on-back="navigateHome"
@@ -68,21 +71,20 @@ onMounted(async () => {
     <Transition mode="out-in">
       <div
         v-if="loading"
-        class="absolute grid h-screen w-screen place-items-center"
+        class="absolute inset-0 grid place-items-center"
       >
         <LoadingIndicator />
       </div>
       <div
         v-else-if="error"
-        class="absolute grid h-screen w-screen place-items-center"
+        class="absolute inset-0 grid place-items-center"
       >
         <ErrorMessage :error="error" />
       </div>
-      <div v-else>
-        <AppRouter
-          @route-changed="currentRoute = $event"
-        />
-      </div>
+      <AppRouter
+        v-else
+        @route-changed="currentRoute = $event"
+      />
     </Transition>
   </div>
 </template>

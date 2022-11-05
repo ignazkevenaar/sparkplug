@@ -7,7 +7,6 @@ let sparkplug = inject('sparkplug');
 let lightsOut = inject('lightsOut');
 let lightingModes = inject('lightingModes');
 let controlModels = inject('controlModels');
-let indicatorConfiguration = inject('indicatorConfiguration');
 
 const emit = defineEmits(['input'])
 
@@ -35,58 +34,10 @@ const debugSetMode = event => {
 </script>
 
 <template>
-  <div
-    class="min-h-screen bg-black text-foreground-100"
-  >
-    <div class="mx-auto flex min-h-screen flex-col md:flex-row lg:container">
-      <!-- Status -->
-      <div
-        class="flex-col px-6 md:sticky md:top-0 md:flex md:h-screen md:flex-1 md:self-start md:px-8 lg:px-12 xl:px-20"
-      >
-        <!-- Header spacer -->
-        <div class="flex h-20 items-center font-header text-lg font-semibold lg:h-32 2xl:text-xl" />
-
-        <StatusDisplay
-          :control-models="controlModels"
-          :indicator-configuration="indicatorConfiguration"
-        />
-        <div
-          class="flex items-center justify-between py-6 md:pb-8 lg:pb-12 xl:pb-20"
-        >
-          <button
-            class="mx-2 shrink-0 rounded-full bg-background-700 p-2 font-bold lo:bg-lightsOut-500 lo:text-black md:p-3"
-            @click="lightsOut = !lightsOut"
-          >
-            <mdicon name="weather-night" />
-          </button>
-          <div class="text-center font-header text-foreground-300">
-            <p class="text-xs leading-tight tracking-tighter">
-              Volkswagen
-            </p>
-            <p>Golf <span class="text-foreground-300 text-opacity-50">Mk3</span></p>
-          </div>
-          <button
-            class="mx-2 shrink-0 rounded-full bg-background-700 p-2 font-bold md:p-3"
-          >
-            <mdicon name="gesture-tap-hold" />
-          </button>
-        </div>
-      </div>
-
-      <!-- Controls -->
-      <div
-        class="flex flex-1 flex-col px-6 pt-6 md:flex md:flex-1 md:px-8 md:pt-0 lg:px-12 xl:px-20"
-      >
-        <div class="hidden h-20 items-center font-header text-lg font-semibold md:flex lg:h-32 2xl:text-xl">
-          Controls
-        </div>
-        <ControlPanel
-          class="flex flex-1 flex-col justify-between pb-6 md:items-center md:justify-center md:pb-8 lg:pb-12 xl:pb-20"
-          :value="controlModels"
-          :control-config="sparkplug.controlsData"
-          @input="debugSetMode"
-        />
-      </div>
-    </div>
-  </div>
+  <ControlPanel
+    class="mx-auto flex flex-1 flex-col justify-between p-6 md:flex md:flex-1 md:flex-row md:items-center md:justify-center md:px-8 md:pb-8 md:pt-0 lg:container lg:px-12 lg:pb-12 xl:px-20 xl:pb-20"
+    :value="controlModels"
+    :control-config="sparkplug.controlsData"
+    @input="debugSetMode"
+  />
 </template>

@@ -10,7 +10,7 @@ defineEmits(['on-back', 'on-logo']);
 </script>
 
 <template>
-  <header class="pointer-events-none absolute z-10 w-full">
+  <header class="pointer-events-none sticky top-0 z-10 w-full">
     <div class="mx-auto flex h-20 items-center px-6 md:px-8 lg:container lg:h-32 lg:px-12 xl:px-20">
       <div class="pointer-events-auto flex items-center">
         <button
@@ -24,7 +24,7 @@ defineEmits(['on-back', 'on-logo']);
           />
         </button>
         <span
-          class="lo:opacity-0 flex items-center transition-opacity"
+          class="flex items-center transition-opacity lo:opacity-0"
           @click="$emit('on-logo')"
         >
           <mdicon

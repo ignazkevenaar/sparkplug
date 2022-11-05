@@ -19,7 +19,8 @@
     "css-houdini-squircle": "^0.2.1",
     "eslint-plugin-sort-exports": "^0.6.0",
     "mdi-vue": "^3.0.12",
-    "vue": "^3.2.24"
+    "vue": "^3.2.24",
+    "vue-inline-svg": "^3.1.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.10.2",

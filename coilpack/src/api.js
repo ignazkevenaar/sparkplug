@@ -1,6 +1,5 @@
 export let lightingModes;
 export let controlsData;
-export let indicatorConfiguration;
 export let connection;
 
 let callbacks = {};
@@ -12,7 +11,6 @@ export const fetchConfigurationFiles = async () =>
   const config = import.meta.env.VITE_CONFIG || "default";
   lightingModes = await fetchJSON(`/configs/${config}/modes.json`);
   controlsData = await fetchJSON(`/configs/${config}/controls.json`);
-  indicatorConfiguration = await fetchJSON(`/configs/${config}/indicators.json`);
 }
 
 const dispatch = (event_name, data) => {

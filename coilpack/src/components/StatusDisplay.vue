@@ -1,58 +1,116 @@
 <script setup>
-import IndicatorLight from './IndicatorLight.vue';
-import InlineSVG from './InlineSVG.vue'
-import { ref } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
+import InlineSvg from 'vue-inline-svg';
+import colors from '../styles/displayColors';
 
 const config = import.meta.env.VITE_CONFIG || 'default';
 
 const props = defineProps({
-  controlModels: {
+  value: {
     type: Object,
     required: true
   },
-  indicatorConfiguration: {
+  control: {
     type: Object,
     required: true
   }
 });
 
-const lightTest = ref(false);
-const indicatorColumnCount = props.indicatorConfiguration.settings?.columns || 4;
+const displayElement = ref(null);
+const originalElementClassLists = ref([]);
+
+const SVGLoaded = event => {
+  displayElement.value = event;
+
+  props.control?.segments.forEach(segment => {
+    const segmentElements = event.querySelectorAll(segment.selector);
+
+    const originalClasses = [];
+    for (let i = 0; i < segmentElements.length; i++) {
+      originalClasses.push(segmentElements[i].getAttribute("class"));
+    }
+
+    originalElementClassLists.value.push(originalClasses);
+  });
+
+  appyIndicatorClasses(cascadedProps.value);
+};
+
+const currentStatesPerSegment = computed(() =>
+  props.control.segments.map(segment => {
+    if (!segment.states) return [];
+    return segment.states.flatMap((position, positionIndex) => {
+      const allModesApply = Object.keys(position.modes).every(mode =>
+        props.value[mode] === Number(position.modes[mode])
+      );
+      return allModesApply ? [{...position, index: positionIndex}] : [];
+    });
+  })
+);
+
+const anyModeApplies = computed(() =>
+  currentStatesPerSegment.value.map(segment => !!segment.length)
+);
+
+// Cascade magic proppers.
+const cascadableProperties = [
+  'color',
+  'style',
+  'onState'
+];
+
+const cascadeProps = (segment, activeSegmentStates) => Object.fromEntries(
+  cascadableProperties.flatMap(key =>
+    activeSegmentStates.length ? activeSegmentStates.map(position =>
+        [key, (position[key] || segment[key])]
+      ) : [[key, segment[key] || ""]]
+  ).filter(([key, value]) => !!value)
+);
+
+const cascadedProps = computed(() =>
+  currentStatesPerSegment.value.map((states, segmentIndex) =>
+    cascadeProps(props.control.segments[segmentIndex], states))
+);
+
+const colorClassPerSegment = (props, anyMode) => {
+  const color = props.color || 'default';
+  const style = props.style || 'stroke';
+  const onState = props.onState || anyMode ? 'on' : 'off'; //Replace 'off' with sensible state.
+
+  return [
+    ...colors.common[style],
+    ...colors[color][onState] || []
+  ];
+};
+
+const appyIndicatorClasses = newSegmentsProps => {
+  newSegmentsProps.forEach((segmentProps, index) => {
+    const segment = props.control.segments[index];
+    const activeSegmentElements = displayElement.value.querySelectorAll(segment.selector);
+
+    for (let i = 0; i < activeSegmentElements.length; i++) {
+      const classes = colorClassPerSegment(segmentProps, anyModeApplies.value[index]);
+      activeSegmentElements[i].setAttribute('class',
+        originalElementClassLists.value[index][i] + ' ' + classes.join(' ')
+      );
+    }
+  });
+}
+
+watch(cascadedProps, newSegmentsProps => {
+  appyIndicatorClasses(newSegmentsProps);
+});
 </script>
 
 <template>
   <div
-    class="vfd flex flex-1 flex-col"
-    :class="{ 'light-test': lightTest }"
+    class="flex flex-1 flex-col"
   >
-    <div
-      id="indicators"
-      class="mb-6 grid place-items-center gap-2"
-    >
-      <IndicatorLight
-        v-for="(indicator, indicatorIndex) in indicatorConfiguration.indicators"
-        :key="indicatorIndex"
-        :value="controlModels"
-        :indicator="indicator"
-        class="min-h-0 w-10 md:w-16"
-      />
-    </div>
-    <InlineSVG
-      id="display"
+    <inline-svg
       :src="`/configs/${ config }/display.svg`"
-      class="pointer-events-none relative grid min-h-[150px] flex-1 rotate-90 scale-[2] place-items-center fill-transparent stroke-2 md:aspect-auto md:rotate-0 md:scale-100"
+      class="pointer-events-none relative grid flex-1 place-items-center fill-transparent stroke-2"
+      @loaded="SVGLoaded($event)"
     />
-
-    <component :is="`style`">
-      <template
-        v-for="(modelValue, modelName) in controlModels"
-        :key="modelName"
-      >
-        <template v-if="modelValue">
-          .on-{{ modelName }} { --vfd-color: currentColor; }
-        </template>
-      </template>
-    </component>
   </div>
 </template>
 
@@ -64,75 +122,12 @@ const indicatorColumnCount = props.indicatorConfiguration.settings?.columns || 4
 </style>
 
 <style lang="scss">
-#indicators {
-  grid-template-columns: repeat(v-bind(indicatorColumnCount), minmax(0, 1fr));
-}
-
 #display {
   svg {
     position: absolute;
     height: 100%;
     width: 100%;
     max-height: 600px;
-  }
-}
-
-.vfd {
-  --vfd-off: theme('colors.background.800'); //#331c1a;
-  --vfd-color: var(--vfd-off);
-
-  * {
-    stroke: var(--vfd-color);
-  }
-
-  .fill,
-  .fill svg {
-    stroke-width: 0;
-    fill: var(--vfd-color);
-  }
-
-  .red {
-    @apply text-red-500;
-  }
-  .yellow {
-    @apply text-yellow-400;
-  }
-  .green {
-    @apply text-lime-400;
-  }
-  .blue {
-    @apply text-blue-400;
-  }
-
-  .blink {
-    animation: .66s blink infinite;
-
-    &.fast {
-      animation-duration: .33s;
-    }
-    &.slow {
-      animation-duration: 2.4s;
-    }
-
-    @keyframes blink {
-      50% {
-        --vfd-color: var(--vfd-off);
-      }
-    }
-  }
-
-  .static {
-    --vfd-color: currentColor !important;
-  }
-
-  &.light-test {
-    * {
-      --vfd-color: var(--vfd-on) !important;
-    }
-
-    .off {
-      --vfd-color: var(--vfd-off) !important;
-    }
   }
 }
 </style>

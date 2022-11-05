@@ -2,8 +2,8 @@
 import { onBeforeUpdate, ref } from 'vue';
 import Button from './Button.vue'
 import ControlContainer from './ControlContainer.vue'
-import ControlFooter from './ControlFooter.vue'
 import Placeholder from './Placeholder.vue'
+import StatusDisplay from './StatusDisplay.vue'
 
 defineProps({
   value: {
@@ -20,7 +20,8 @@ defineEmits(['input'])
 
 const controlToComponent = {
   'placeholder': Placeholder,
-  'button': Button
+  'button': Button,
+  'status-display': StatusDisplay
 };
 
 // Automatic control panel grid sizing.
@@ -31,6 +32,7 @@ const controlToComponent = {
 const autoCols = [
   "grid-cols-[repeat(2,calc((100vw-2*theme(spacing.6)-theme(spacing.4))/2))]",
   "sm:grid-cols-[repeat(2,200px)]",
+  "md:grid-cols-[repeat(4,200px)]",
 ];
 
 // theme(spacing.10) vertical grid gap.
@@ -73,6 +75,5 @@ const autoRows = [
         </template>
       </ControlContainer>
     </div>
-    <ControlFooter class="pt-4" />
   </div>
 </template>

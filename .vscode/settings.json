@@ -15,12 +15,6 @@
                 "/coilpack/public/config/controls.json"
             ],
             "url": "/coilpack/src/schemas/controls.schema.json"
-        },
-        {
-            "fileMatch": [
-                "/coilpack/public/config/indicators.json"
-            ],
-            "url": "/coilpack/src/schemas/indicators.schema.json"
         }
     ]
 }
