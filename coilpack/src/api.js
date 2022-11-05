@@ -9,9 +9,10 @@ const fetchJSON = async (filename) => fetch(filename).then((r) => r.json());
 
 export const fetchConfigurationFiles = async () =>
 {
-  lightingModes = await fetchJSON('/config/modes.json');
-  controlsData = await fetchJSON('/config/controls.json');
-  indicatorConfiguration = await fetchJSON('/config/indicators.json');
+  const config = import.meta.env.VITE_CONFIG || "default";
+  lightingModes = await fetchJSON(`/configs/${config}/modes.json`);
+  controlsData = await fetchJSON(`/configs/${config}/controls.json`);
+  indicatorConfiguration = await fetchJSON(`/configs/${config}/indicators.json`);
 }
 
 const dispatch = (event_name, data) => {

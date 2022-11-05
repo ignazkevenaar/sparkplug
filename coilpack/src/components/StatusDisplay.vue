@@ -3,6 +3,8 @@ import IndicatorLight from './IndicatorLight.vue';
 import InlineSVG from './InlineSVG.vue'
 import { ref } from 'vue';
 
+const config = import.meta.env.VITE_CONFIG || 'default';
+
 const props = defineProps({
   controlModels: {
     type: Object,
@@ -37,7 +39,7 @@ const indicatorColumnCount = props.indicatorConfiguration.settings?.columns || 4
     </div>
     <InlineSVG
       id="display"
-      src="/display.svg"
+      :src="`/configs/${ config }/display.svg`"
       class="pointer-events-none relative grid min-h-[150px] flex-1 rotate-90 scale-[2] place-items-center fill-transparent stroke-2 md:aspect-auto md:rotate-0 md:scale-100"
     />
 
