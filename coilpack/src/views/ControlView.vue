@@ -1,7 +1,7 @@
 <script setup>
-import { defineEmits, inject } from 'vue'
 import ControlPanel from '../components/ControlPanel.vue'
 import StatusDisplay from '../components/StatusDisplay.vue'
+import { inject } from 'vue'
 
 let sparkplug = inject('sparkplug');
 let lightsOut = inject('lightsOut');
