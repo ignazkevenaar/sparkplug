@@ -13,20 +13,22 @@
                 "foregroundStyle": "dim",
                 "backgroundStyle": "transparent",
                 "positions": [
-                    {
-                        "modes": {
-                            "BlinkL": true
-                        },
-                        "foregroundColor": "green",
-                        "foregroundStyle": "default"
+                  {
+                    "modes": {
+                      "BlinkL": true
                     },
-                    {
-                        "modes": {
-                            "Hazards": true
-                        },
-                        "foregroundColor": "green",
-                        "foregroundStyle": "default"
-                    }
+                    "foregroundColor": "green",
+                    "foregroundStyle": "default",
+                    "animation": "blinking"
+                  },
+                  {
+                    "modes": {
+                      "Hazards": true
+                    },
+                    "foregroundColor": "green",
+                    "foregroundStyle": "default",
+                    "animation": "blinking"
+                  }
                 ]
             },
             {
@@ -96,7 +98,8 @@
                             "Hazards": true
                         },
                         "foregroundColor": "red",
-                        "foregroundStyle": "default"
+                        "foregroundStyle": "default",
+                        "animation": "blinking"
                     }
                 ]
             },
@@ -114,14 +117,16 @@
                             "BlinkR": true
                         },
                         "foregroundColor": "green",
-                        "foregroundStyle": "default"
+                        "foregroundStyle": "default",
+                        "animation": "blinking"
                     },
                     {
                         "modes": {
                             "Hazards": true
                         },
                         "foregroundColor": "green",
-                        "foregroundStyle": "default"
+                        "foregroundStyle": "default",
+                        "animation": "blinking"
                     }
                 ]
             },
@@ -420,7 +425,8 @@
                             "Hazards": true
                         },
                         "backgroundStyle": "fill",
-                        "foregroundColor": "black"
+                        "foregroundColor": "black",
+                        "animation": "blinking"
                     }
                 ]
             }

@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from 'vue';
+import { computed, inject, ref } from 'vue';
 import colors from '../styles/buttonColors';
 
 const props = defineProps({
@@ -15,6 +15,10 @@ const props = defineProps({
 
 const emit = defineEmits(['input']);
 
+// Animation timers
+const blinkNormal = inject('blink-normal');
+const blinkFast = inject('blink-fast');
+
 const roundClass = computed(() => props.control.round ?
   'rounded-full' : 'rounded-lg md:rounded-2xl @squircle:squircle-xl @squircle:!rounded-none');
 
@@ -27,18 +31,22 @@ const currentPositions = computed(() =>
       return allModesApply ? [{...position, index: positionIndex}] : [];
     }
 ));
+const nextPositionIndex = computed(() => currentPositions.value[currentPositions.value.length - 1]?.index + 1);
 
 // Finds 'hold' position that comes later than the highest current position, if any.
 const holdPosition = computed(() =>
-  props.control.positions.slice(currentPositions.value[currentPositions.value.length - 1]?.index + 1)
-    .find(position => position.type === 'hold')
+  props.control.positions.slice(nextPositionIndex.value).find(
+    position => position.type === 'hold'
+  )
 );
 
-const nextPosition = computed(() => currentPositions.value[currentPositions.value.length - 1]?.index + 1);
+// The pair of slices wraps around the array.
+// [3,4,0,1,2]
+//      ^
 const nonHoldPosition = computed(() =>
   [
-    ...props.control.positions.slice(nextPosition.value),
-    ...props.control.positions.slice(0, nextPosition.value)
+    ...props.control.positions.slice(nextPositionIndex.value),
+    ...props.control.positions.slice(0, nextPositionIndex.value)
   ].find(position => position.type !== 'hold')
 );
 
@@ -47,6 +55,7 @@ const cascadableProperties = [
   'backgroundStyle',
   'foregroundColor',
   'foregroundStyle',
+  'animation',
   'icon',
 ];
 
@@ -56,11 +65,14 @@ const cascadableProperties = [
 const cascadedProps = computed(() =>
   Object.fromEntries(
     cascadableProperties.flatMap(key =>
-      currentPositions.value.length ? currentPositions.value.filter(position =>
-        !holdingPosition.value ? position.type !== 'hold' : true).map(position =>
-          [key, (position[key] || props.control[key])]
-        ) : [[key, props.control[key] || ""]]
-    ).filter(([key, value]) => !!value)
+    {
+      const v = currentPositions.value
+        .filter(position => !holdingPosition.value ? position.type !== 'hold' : true)
+        .filter(position => !(blinkNormal.value && position.animation === 'blinking'))
+        .map(position => [key, (position[key] || props.control[key])]);
+
+      return v.length ? v : [[key, props.control[key] || ""]]
+    }).filter(([key, value]) => !!value)
   )
 );
 
@@ -86,12 +98,14 @@ const colorClasses = computed(() => {
   ];
 });
 
+let buttonDown = ref(false);
 let holding = ref(false);
 let holdingPosition = ref(false);
 
 const mouseDown = () => {
   if (props.control.readOnly) return;
   holdTimeout = setTimeout(onHold, 150);
+  buttonDown.value = true;
 };
 
 const mouseUp = event => {

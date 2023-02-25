@@ -56,6 +56,15 @@ onMounted(async () => {
 
     loading.value = false;
 })
+
+// Animation timers for controls
+const blinkNormal = ref(false);
+setInterval(() => { blinkNormal.value = !blinkNormal.value; }, 300);
+provide('blink-normal', blinkNormal);
+
+const blinkFast = ref(false);
+setInterval(() => { blinkFast.value = !blinkFast.value; }, 150);
+provide('blink-fast', blinkFast);
 </script>
 
 <template>
