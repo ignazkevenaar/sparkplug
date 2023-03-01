@@ -4,6 +4,7 @@
 
 #include "types/version.h"
 
+#include "fileSystem.h"
 #include "commands.h"
 #include "deviceManager.h"
 #include "input.h"

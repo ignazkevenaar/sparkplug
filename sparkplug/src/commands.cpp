@@ -3,12 +3,14 @@
 #include "helpers/macros.h"
 #include "input.h"
 #include "lighting.h"
+#include "fileSystem.h"
 
 enum commandIDs
 {
   idSetCommand,
   idUnsetCommand,
   idGetCommand,
+  idFileCommand,
   idTestCommand,
   idHelpCommand,
   idVersionCommand,
@@ -70,6 +72,20 @@ const Command helpCommand =
         "help",
         "Get information on available commands and their usage. (This command.)",
         &helpExecute,
+};
+
+void fileExecute(const Command &command, char **arguments, uint8_t length)
+{
+  listHomeDirectory("/");
+}
+
+const Command fileCommand =
+    {
+        idFileCommand,
+        "F",
+        "file",
+        "List files in the littleFS root directory.",
+        &fileExecute,
 };
 
 void testExecute(const Command &command, char **arguments, uint8_t length)
@@ -221,6 +237,7 @@ const Command *commands[] =
         &setCommand,
         &unsetCommand,
         &getCommand,
+        &fileCommand,
         &testCommand,
         &helpCommand,
         &versionCommand,
