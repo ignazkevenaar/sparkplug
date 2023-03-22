@@ -510,5 +510,75 @@
                 "label": "Reverse"
             }
         ]
+    },
+    {
+        "name": "Colors",
+        "controls": [
+            {
+                "type": "Button",
+                "icon": "car-brake-alert",
+                "width": 6,
+                "height": 6,
+                "foregroundColor": "yellow",
+                "positions": [
+                    {
+                        "modes": {
+                            "Brake": false
+                        }
+                    },
+                    {
+                        "modes": {
+                            "Brake": true
+                        },
+                        "backgroundStyle": "fill",
+                        "foregroundColor": "black"
+                    }
+                ]
+            },
+            {
+                "type": "Button",
+                "icon": "car-brake-alert",
+                "width": 6,
+                "height": 6,
+                "backgroundStyle": "outline",
+                "foregroundColor": "yellow",
+                "positions": [
+                    {
+                        "modes": {
+                            "Brake": false
+                        }
+                    },
+                    {
+                        "modes": {
+                            "Brake": true
+                        },
+                        "backgroundStyle": "fill",
+                        "foregroundColor": "black"
+                    }
+                ]
+            },
+            {
+                "type": "Button",
+                "icon": "car-brake-alert",
+                "width": 6,
+                "height": 6,
+                "backgroundStyle": "fill",
+                "foregroundColor": "yellow",
+                "positions": [
+                    {
+                        "modes": {
+                            "Brake": false
+                        }
+                    },
+                    {
+                        "modes": {
+                            "Brake": true
+                        },
+                        "backgroundStyle": "fill",
+                        "foregroundColor": "black"
+                    }
+                ]
+            }
+        ]
     }
 ]

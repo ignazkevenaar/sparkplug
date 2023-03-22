@@ -1,6 +1,6 @@
 export default {
     default: [
-        "bg-background-700"
+        "bg-container-background"
     ],
     red: [
         "bg-red-900/10"

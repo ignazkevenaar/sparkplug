@@ -70,7 +70,7 @@ provide('blink-fast', blinkFast);
 <template>
   <div
     :class="[ lightsOut ? 'lightsOut' : '' ]"
-    class="relative h-screen"
+    class="relative h-screen bg-background"
   >
     <AppHeader
       :show-back-button="currentRoute != '' && currentRoute != '/'"

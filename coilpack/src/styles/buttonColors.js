@@ -19,25 +19,28 @@ export default {
     default: {
         background: {
             default: [
-                "bg-background-600",
-                "active:bg-background-800"
+                "bg-button-background-base",
+                "active:bg-button-background-base/50"
             ],
             outline: [
-                "bg-background-700",
-                "active:bg-background-800"
+                "bg-button-background-base-dim",
+                "active:bg-button-background-base-dim/50",
+                "ring-button-background-base"
             ],
             fill: [
-                "bg-foreground-50",
-                "active:bg-foreground-100",
-                "lo:bg-lightsOut-400",
+                "bg-button-background-base-highlight",
+                "active:bg-button-background-base-highlight/75",
             ]
         },
         foreground: {
             default: [
-                "lo:text-lightsOut-300"
+                "text-button-foreground-base"
+            ],
+            highlight: [
+                "text-button-foreground-base-highlight"
             ],
             dim: [
-                "text-foreground-50/10"
+                "text-button-foreground-base-dim"
             ]
         }
     },
@@ -56,23 +59,28 @@ export default {
     red: {
         background: {
             default: [
-                "bg-red-900/25"
+                "bg-button-background-red",
+                "active:bg-button-background-red/50"
             ],
             outline: [
-                "bg-red-900/25",
-                "ring-red-900",
+                "bg-button-background-red-dim",
+                "active:bg-button-background-red-dim/50",
+                "ring-button-background-red"
             ],
             fill: [
-                "bg-red-600",
-                "active:bg-red-700"
+                "bg-button-background-red-highlight",
+                "active:bg-button-background-red-highlight/75",
             ]
         },
         foreground: {
             default: [
-                "text-red-500"
+                "text-button-foreground-red"
+            ],
+            highlight: [
+                "text-button-foreground-red-highlight"
             ],
             dim: [
-                "text-red-900/25"
+                "text-button-foreground-red-dim"
             ]
         }
     },
@@ -93,10 +101,13 @@ export default {
         },
         foreground: {
             default: [
-                "text-yellow-500"
+                "text-button-foreground-yellow"
+            ],
+            highlight: [
+                "text-button-foreground-yellow-highlight"
             ],
             dim: [
-                "text-yellow-900/25"
+                "text-button-foreground-yellow-dim"
             ]
         }
     },
@@ -117,10 +128,13 @@ export default {
         },
         foreground: {
             default: [
-                "text-lime-500"
+                "text-button-foreground-green"
+            ],
+            highlight: [
+                "text-button-foreground-green-highlight"
             ],
             dim: [
-                "text-green-900/25"
+                "text-button-foreground-green-dim"
             ]
         }
     },
@@ -141,10 +155,40 @@ export default {
         },
         foreground: {
             default: [
-                "text-blue-500"
+                "text-button-foreground-blue"
+            ],
+            highlight: [
+                "text-button-foreground-blue-highlight"
             ],
             dim: [
-                "text-blue-900/25"
+                "text-button-foreground-blue-dim"
+            ]
+        }
+    },
+    pink: {
+        background: {
+            default: [
+                "bg-pink-800/25"
+            ],
+            outline: [
+                "bg-pink-800/25",
+                "ring-pink-900"
+            ],
+            fill: [
+                "bg-pink-500",
+                "active:bg-pink-600",
+                "ring-pink-500"
+            ]
+        },
+        foreground: {
+            default: [
+                "text-button-foreground-pink"
+            ],
+            highlight: [
+                "text-button-foreground-pink-highlight"
+            ],
+            dim: [
+                "text-button-foreground-pink-dim"
             ]
         }
     }

@@ -5,6 +5,8 @@ function withOpacity(variableName) {
   return ({ opacityValue }) => `rgba(var(${variableName}), ${ opacityValue ? opacityValue : 1 })`
 }
 
+const themeCol = (variable) => `rgba(var(--color-${ variable }), <alpha-value>)`
+
 module.exports = {
   mode: 'jit',
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
@@ -20,42 +22,80 @@ module.exports = {
         'screen-75': '75vh'
       },
       colors: {
-        foreground: {
-          50:  withOpacity('--color-foreground-50'),
-          100: withOpacity('--color-foreground-100'),
-          200: withOpacity('--color-foreground-200'),
-          300: withOpacity('--color-foreground-300'),
-          400: withOpacity('--color-foreground-400'),
-          500: withOpacity('--color-foreground-500'),
-          600: withOpacity('--color-foreground-600'),
-          700: withOpacity('--color-foreground-700'),
-          800: withOpacity('--color-foreground-800'),
-          900: withOpacity('--color-foreground-900'),
+        background: themeCol('background'),
+        container: {
+          background: themeCol('container-background')
         },
-        background: {
-          50:  withOpacity('--color-background-50'),
-          100: withOpacity('--color-background-100'),
-          200: withOpacity('--color-background-200'),
-          300: withOpacity('--color-background-300'),
-          400: withOpacity('--color-background-400'),
-          500: withOpacity('--color-background-500'),
-          600: withOpacity('--color-background-600'),
-          700: withOpacity('--color-background-700'),
-          800: withOpacity('--color-background-800'),
-          900: withOpacity('--color-background-900'),
-        },
-        lightsOut: {
-          50:  withOpacity('--color-lightsOut-50'),
-          100: withOpacity('--color-lightsOut-100'),
-          200: withOpacity('--color-lightsOut-200'),
-          300: withOpacity('--color-lightsOut-300'),
-          400: withOpacity('--color-lightsOut-400'),
-          500: withOpacity('--color-lightsOut-500'),
-          600: withOpacity('--color-lightsOut-600'),
-          700: withOpacity('--color-lightsOut-700'),
-          800: withOpacity('--color-lightsOut-800'),
-          900: withOpacity('--color-lightsOut-900'),
+        button: {
+          background: {
+            base: {
+              DEFAULT: themeCol('button-background-base-default'),
+              highlight: themeCol('button-background-base-highlight'),
+              dim: themeCol('button-background-base-dim'),
+            },
+            red: {
+              DEFAULT: themeCol('button-background-red-default'),
+              highlight: themeCol('button-background-red-highlight'),
+              dim: themeCol('button-background-red-dim'),
+            },
+            yellow: {
+              DEFAULT: themeCol('button-background-yellow-default'),
+              highlight: themeCol('button-background-yellow-highlight'),
+              dim: themeCol('button-background-yellow-dim'),
+            },
+            green: {
+              DEFAULT: themeCol('button-background-green-default'),
+              highlight: themeCol('button-background-green-highlight'),
+              dim: themeCol('button-background-green-dim'),
+            },
+            blue: {
+              DEFAULT: themeCol('button-background-blue-default'),
+              highlight: themeCol('button-background-blue-highlight'),
+              dim: themeCol('button-background-blue-dim'),
+            },
+            pink: {
+              DEFAULT: themeCol('button-background-pink-default'),
+              highlight: themeCol('button-background-pink-highlight'),
+              dim: themeCol('button-background-pink-dim'),
+            }
+          },
+          foreground: {
+            base: {
+              DEFAULT: themeCol('button-foreground-base-default'),
+              highlight: themeCol('button-foreground-base-highlight'),
+              dim: themeCol('button-foreground-base-dim'),
+            },
+            red: {
+              DEFAULT: themeCol('button-foreground-red-default'),
+              highlight: themeCol('button-foreground-red-highlight'),
+              dim: themeCol('button-foreground-red-dim'),
+            },
+            yellow: {
+              DEFAULT: themeCol('button-foreground-yellow-default'),
+              highlight: themeCol('button-foreground-yellow-highlight'),
+              dim: themeCol('button-foreground-yellow-dim'),
+            },
+            green: {
+              DEFAULT: themeCol('button-foreground-green-default'),
+              highlight: themeCol('button-foreground-green-highlight'),
+              dim: themeCol('button-foreground-green-dim'),
+            },
+            blue: {
+              DEFAULT: themeCol('button-foreground-blue-default'),
+              highlight: themeCol('button-foreground-blue-highlight'),
+              dim: themeCol('button-foreground-blue-dim'),
+            },
+            pink: {
+              DEFAULT: themeCol('button-foreground-pink-default'),
+              highlight: themeCol('button-foreground-pink-highlight'),
+              dim: themeCol('button-foreground-pink-dim'),
+            },
+          }
         }
+      },
+      gap: {
+        'controls-x': 'var(--gap-controls-x, 1rem)',
+        'controls-y': 'var(--gap-controls-y, 2.25rem)',
       },
       gridRow: {
         'span-7':  'span 7 / span 7',

@@ -1,42 +1,33 @@
 export default {
-    common: {
-        stroke: [
-            "stroke-current"
-        ],
-        fill: [
-            "fill-current"
-        ]
-    },
-    default: {
-        on: [
-            "text-foreground-200"
-        ],
-        off: [
-            "text-foreground-300/10"
-        ]
-    },
-    red: {
-        on: [
-            "text-red-500"
-        ],
-        off: [
-            "text-red-300/10"
-        ]
-    },
-    green: {
-        on: [
-            "text-lime-500"
-        ],
-        off: [
-            "text-lime-300/10"
-        ]
-    },
-    blue: {
-        on: [
-            "text-blue-500"
-        ],
-        off: [
-            "text-blue-300/10"
-        ]
-    },
+  common: {
+    stroke: ["stroke-current"],
+    fill: ["fill-current"],
+  },
+  default: {
+    off: ["text-button-foreground-base-dim"],
+    on: ["text-button-foreground-base-highlight"],
+  },
+  black: {
+    default: ["text-black"],
+  },
+  red: {
+    off: ["text-button-foreground-red-dim"],
+    on: ["text-button-foreground-red-highlight"],
+  },
+  yellow: {
+    off: ["text-button-foreground-yellow-dim"],
+    on: ["text-button-foreground-yellow-highlight"],
+  },
+  green: {
+    off: ["text-button-foreground-green-dim"],
+    on: ["text-button-foreground-green-highlight"],
+  },
+  blue: {
+    off: ["text-button-foreground-blue-dim"],
+    on: ["text-button-foreground-blue-highlight"],
+  },
+  pink: {
+    off: ["text-button-foreground-pink-dim"],
+    on: ["text-button-foreground-pink-highlight"],
+  },
 };

@@ -16,52 +16,71 @@
     }
 
     :root {
-        --color-background-50:  237, 237, 240; /* #EDEDF0 */
-        --color-background-100: 206, 207, 215; /* #CECFD7 */
-        --color-background-200: 141, 144, 160; /* #8D90A0 */
-        --color-background-300: 97, 100, 118;  /* #616476 */
-        --color-background-400: 71, 74, 91;    /* #474A5B */
-        --color-background-500: 50, 52, 67;    /* #323443 */
-        --color-background-600: 32, 33, 45;    /* #20212D */
-        --color-background-700: 19, 20, 27;    /* #13141B */
-        --color-background-800: 11, 12, 16;    /* #0B0C10 */
-        --color-background-900: 7, 8, 10;      /* #07080A */
+        --color-background:  0, 0, 0;
+        --color-container-background:  19, 20, 27;
 
-        --color-foreground-50:  237, 237, 240; /* #EEF0F3 */
-        --color-foreground-100: 206, 207, 215; /* #D1D3DC */
-        --color-foreground-200: 141, 144, 160; /* #989BAC */
-        --color-foreground-300: 97, 100, 118;  /* #6E7287 */
-        --color-foreground-400: 71, 74, 91;    /* #55586D */
-        --color-foreground-500: 50, 52, 67;    /* #3F4255 */
-        --color-foreground-600: 32, 33, 45;    /* #2C2E3C */
-        --color-foreground-700: 19, 20, 27;    /* #1C1E28 */
-        --color-foreground-800: 11, 12, 16;    /* #13141B */
-        --color-foreground-900: 7, 8, 10;      /* #0D0D12 */
+        /* Button background */
+        --color-button-background-base-default:     32, 33, 43;
+        --color-button-background-base-highlight:   206, 207, 215;
+        --color-button-background-base-dim:         11, 12, 16;
 
-        --color-lightsOut-50:  255,176,0;   /* #FF7E00 */
-        --color-lightsOut-100: 255,135,0;   /* #FF7800 */
-        --color-lightsOut-200: 255,115,0;   /* #FF5A00 */
-        --color-lightsOut-300: 255,103,0;   /* #F74F00 */
-        --color-lightsOut-400: 227,71,0;    /* #C13200 */
-        --color-lightsOut-500: 155,44,0;    /* #851000 */
-        --color-lightsOut-600: 105,27,0;    /* #680000 */
-        --color-lightsOut-700: 75,16,0;     /* #450000 */
-        --color-lightsOut-800: 43,6,0;      /* #200000 */
-        --color-lightsOut-900: 28,1,0;      /* #100000 */
+        --color-button-background-red-default:      153, 27, 27;   /* #991b1b */
+        --color-button-background-red-highlight:    220, 38, 38;   /* #dc2626 */
+        --color-button-background-red-dim:          38, 19, 23;    /* #261317 */
 
-    }
+        --color-button-background-yellow-default:   217, 119, 6;   /* #d97706 */
+        --color-button-background-yellow-highlight: 251, 191, 36;  /* #fbbf24 */
+        --color-button-background-yellow-dim:       43, 19, 5;     /* #2b1305 */
 
-    /* Ignored */
-    .lightsOut {
-        --color-background-50:  153, 159 ,197; /* #999FC5 */
-        --color-background-100: 126, 131 ,164; /* #7E83A4 */
-        --color-background-200: 76, 80 ,98;    /* #4C5062 */
-        --color-background-300: 49, 50 ,61;    /* #31323D */
-        --color-background-400: 34, 35 ,42;    /* #22232A */
-        --color-background-500: 24, 24 ,28;    /* #18181C */
-        --color-background-600: 14, 15 ,17;    /* #0E0F11 */
-        --color-background-700: 8, 9 ,10;      /* #08090A */
-        --color-background-800: 5, 5 ,5;       /* #050505 */
-        --color-background-900: 3, 3 ,4;       /* #030304 */
+        --color-button-background-green-default:    132, 204, 22;  /* #84cc16 */
+        --color-button-background-green-highlight:  163, 230, 53;  /* #a3e635 */
+        --color-button-background-green-dim:        20, 32, 7;     /* #142007 */
+
+        --color-button-background-blue-default:     59, 130, 246;  /* #3b82f6 */
+        --color-button-background-blue-highlight:   96, 165, 250;  /* #60a5fa */
+        --color-button-background-blue-dim:         9, 19, 48;     /* #091330 */
+
+        --color-button-background-pink-default:     219, 39, 119;  /* #db2777 */
+        --color-button-background-pink-highlight:   244, 114, 182; /* #f472b6 */
+        --color-button-background-pink-dim:         40, 0, 20;     /* #280014 */
+
+        /* Button foreground */
+        --color-button-foreground-base-default:     200, 200, 200;
+        --color-button-foreground-base-highlight:   255, 255, 255;
+        --color-button-foreground-base-dim:         32, 32, 32;
+
+        --color-button-foreground-red-default:      153, 27, 27;   /* #991b1b */
+        --color-button-foreground-red-highlight:    220, 38, 38;   /* #dc2626 */
+        --color-button-foreground-red-dim:          38, 19, 23;    /* #261317 */
+
+        --color-button-foreground-yellow-default:   217, 119, 6;   /* #d97706 */
+        --color-button-foreground-yellow-highlight: 251, 191, 36;  /* #fbbf24 */
+        --color-button-foreground-yellow-dim:       43, 19, 5;     /* #2b1305 */
+
+        --color-button-foreground-green-default:    132, 204, 22;  /* #84cc16 */
+        --color-button-foreground-green-highlight:  163, 230, 53;  /* #a3e635 */
+        --color-button-foreground-green-dim:        20, 32, 7;     /* #142007 */
+
+        --color-button-foreground-blue-default:     59, 130, 246;  /* #3b82f6 */
+        --color-button-foreground-blue-highlight:   96, 165, 250;  /* #60a5fa */
+        --color-button-foreground-blue-dim:         9, 19, 48;     /* #091330 */
+
+        --color-button-foreground-pink-default:     219, 39, 119;  /* #db2777 */
+        --color-button-foreground-pink-highlight:   244, 114, 182; /* #f472b6 */
+        --color-button-foreground-pink-dim:         40, 0, 20;     /* #280014 */
+
+        --gap-controls-x: 1rem;
+        --gap-controls-y: 3rem;
+
+        /*--color-background-50:  237, 237, 240; /* #EDEDF0 */
+        /*--color-background-100: 206, 207, 215; /* #CECFD7 */
+        /*--color-background-200: 141, 144, 160; /* #8D90A0 */
+        /*--color-background-300: 97, 100, 118;  /* #616476 */
+        /*--color-background-400: 71, 74, 91;    /* #474A5B */
+        /*--color-background-500: 50, 52, 67;    /* #323443 */
+        /*--color-background-600: 32, 33, 45;    /* #20212D */
+        /*--color-background-700: 19, 20, 27;    /* #13141B */
+        /*--color-background-800: 11, 12, 16;    /* #0B0C10 */
+        /*--color-background-900: 7, 8, 10;      /* #07080A */
     }
 }

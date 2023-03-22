@@ -30,7 +30,7 @@ const controlToComponent = {
 // theme(spacing.4) - Horizontal grid gap.
 
 const autoCols = [
-  "grid-cols-[repeat(2,calc((100vw-2*theme(spacing.6)-theme(spacing.4))/2))]",
+  "grid-cols-[repeat(2,calc((100vw-2*var(--gap-controls-x)-theme(spacing.4))/2))]",
   "sm:grid-cols-[repeat(2,200px)]",
   "md:grid-cols-[repeat(4,200px)]",
 ];
@@ -38,15 +38,15 @@ const autoCols = [
 // theme(spacing.10) vertical grid gap.
 
 const autoRows = [
-  "auto-rows-[calc(((100vw-2_*_theme(spacing.6)_-_theme(spacing.4))/2_-_theme(spacing.10))/2)]",
-  "sm:auto-rows-[calc((200px_-_theme(spacing.10))/2)]",
+  "auto-rows-[calc(((100vw-2_*_var(--gap-controls-x)_-_theme(spacing.4))/2_-_var(--gap-controls-y))/2)]",
+  "sm:auto-rows-[calc((200px_-_var(--gap-controls-y))/2)]",
 ];
 </script>
 
 <template>
   <div>
     <div
-      class="controlGrid grid w-full gap-4 gap-y-10 pb-10 xl:gap-10"
+      class="controlGrid grid w-full gap-x-controls-x gap-y-controls-y pb-10 xl:gap-10"
       :class="[autoCols, autoRows]"
     >
       <ControlContainer
