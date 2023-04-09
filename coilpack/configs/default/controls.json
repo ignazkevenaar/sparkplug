@@ -222,7 +222,8 @@
                         "backgroundStyle": "fill",
                         "foregroundColor": "black"
                     }
-                ]
+                ],
+                "label": "Off"
             },
             {
                 "type": "Button",
@@ -239,7 +240,8 @@
                         "backgroundColor": "green",
                         "foregroundColor": "black"
                     }
-                ]
+                ],
+                "label": "Parking"
             },
             {
                 "type": "Button",
@@ -256,7 +258,8 @@
                         "backgroundColor": "green",
                         "foregroundColor": "black"
                     }
-                ]
+                ],
+                "label": "Low"
             }
         ]
     },
@@ -282,7 +285,8 @@
                         "backgroundColor": "blue",
                         "foregroundColor": "black"
                     }
-                ]
+                ],
+                "label": "High"
             },
             {
                 "type": "Button",
@@ -304,7 +308,8 @@
                         "backgroundColor": "blue",
                         "foregroundColor": "black"
                     }
-                ]
+                ],
+                "label": "Flash"
             }
         ]
     },
@@ -331,7 +336,8 @@
                         "backgroundColor": "green",
                         "foregroundColor": "black"
                     }
-                ]
+                ],
+                "label": "Front"
             },
             {
                 "type": "Button",
@@ -353,7 +359,8 @@
                         "backgroundColor": "yellow",
                         "foregroundColor": "black"
                     }
-                ]
+                ],
+                "label": "Rear"
             }
         ]
     },
@@ -428,7 +435,8 @@
                         "foregroundColor": "black",
                         "animation": "blinking"
                     }
-                ]
+                ],
+                "label": "Hazards"
             }
         ]
     },
@@ -455,7 +463,8 @@
                         "backgroundColor": "red",
                         "foregroundColor": "black"
                     }
-                ]
+                ],
+                "label": "Brake"
             },
             {
                 "type": "Button",
@@ -477,7 +486,8 @@
                         "backgroundColor": "red",
                         "foregroundColor": "black"
                     }
-                ]
+                ],
+                "label": "ESS"
             },
             {
                 "type": "Button",
@@ -496,7 +506,8 @@
                         },
                         "backgroundStyle": "fill"
                     }
-                ]
+                ],
+                "label": "Reverse"
             }
         ]
     }

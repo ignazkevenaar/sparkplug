@@ -57,6 +57,7 @@ const cascadableProperties = [
   'foregroundStyle',
   'animation',
   'icon',
+  'label',
 ];
 
 // Cascade properties from props, active positions.
@@ -147,7 +148,7 @@ const onHold = event => {
 
 <template>
   <button
-    class="relative z-0 flex select-none flex-col items-center justify-center bg-gradient-to-br p-2 text-center text-sm font-semibold ring-inset enabled:cursor-pointer"
+    class="relative z-0 flex select-none flex-col items-center justify-center bg-gradient-to-br p-2 text-center text-xs md:text-sm md:font-semibold ring-inset enabled:cursor-pointer"
     :class="[roundClass, colorClasses]"
     :disabled="control.readOnly"
     @mousedown.prevent="mouseDown"
@@ -161,6 +162,7 @@ const onHold = event => {
       size="36"
     />
     <slot />
+    {{ cascadedProps.label }}
     <div
       v-if="holdPosition || holdingPosition"
       class="absolute bottom-1 h-1 w-5 rounded-full bg-current opacity-75"
