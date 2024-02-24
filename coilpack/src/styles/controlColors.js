@@ -2,6 +2,9 @@ export default {
     default: [
         "bg-container-background"
     ],
+    transparent: [
+        "bg-transparent"
+    ],
     red: [
         "bg-red-900/10"
     ],

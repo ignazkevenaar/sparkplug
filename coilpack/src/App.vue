@@ -4,6 +4,7 @@ import { onMounted, provide, ref } from 'vue'
 import AppHeader from './components/AppHeader.vue'
 import AppRouter from './components/AppRouter.vue'
 import ErrorMessage from './components/ErrorMessage.vue'
+import HeaderButton from './components/HeaderButton.vue'
 import LoadingIndicator from './components/LoadingIndicator.vue'
 
 const loading = ref(true);
@@ -70,13 +71,20 @@ provide('blink-fast', blinkFast);
 <template>
   <div
     :class="[ lightsOut ? 'lightsOut' : '' ]"
-    class="relative h-screen bg-background"
+    class="relative min-h-screen bg-background"
   >
     <AppHeader
       :show-back-button="currentRoute != '' && currentRoute != '/'"
       @on-back="navigateHome"
       @on-logo="scollToTop"
-    />
+    >
+      <template #left>
+        <HeaderButton icon="weather-night" />
+      </template>
+      <template #right>
+        <HeaderButton icon="power-standby" />
+      </template>
+    </AppHeader>
     <Transition mode="out-in">
       <div
         v-if="loading"

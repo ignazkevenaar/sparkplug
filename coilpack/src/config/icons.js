@@ -4,6 +4,9 @@
 // https://materialdesignicons.com/
 
 export {
+    mdiPower,
+    mdiPowerCycle,
+    mdiPowerStandby,
     mdiAlarmLight,
     mdiAlarmLightOff,
     mdiAlarmLightOffOutline,

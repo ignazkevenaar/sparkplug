@@ -26,6 +26,9 @@ module.exports = {
         container: {
           background: themeCol('container-background')
         },
+        header: {
+          background: themeCol('header-background')
+        },
         button: {
           background: {
             base: {
