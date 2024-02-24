@@ -16,8 +16,9 @@
     }
 
     :root {
-        --color-background:  0, 0, 0;
-        --color-container-background:  19, 20, 27;
+        --color-background: 10, 10, 10;
+        --color-container-background: 19, 20, 27;
+        --color-header-background: 0, 0, 0;
 
         /* Button background */
         --color-button-background-base-default:     32, 33, 43;
@@ -69,8 +70,8 @@
         --color-button-foreground-pink-highlight:   244, 114, 182; /* #f472b6 */
         --color-button-foreground-pink-dim:         40, 0, 20;     /* #280014 */
 
-        --gap-controls-x: 1rem;
-        --gap-controls-y: 3rem;
+        --gap-controls-x: theme(spacing.4);
+        --gap-controls-y: theme(spacing.12);
 
         /*--color-background-50:  237, 237, 240; /* #EDEDF0 */
         /*--color-background-100: 206, 207, 215; /* #CECFD7 */

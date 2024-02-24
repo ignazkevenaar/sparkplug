@@ -1,584 +1,519 @@
-[
+{
+  "status": [
     {
-        "name": "Status",
-        "color": "pink",
-        "width": 2,
-        "controls": [
+      "name": "Status",
+      "width": 2,
+      "color": "transparent",
+      "controls": [
+        {
+          "type": "Button",
+          "icon": "arrow-left-bold-outline",
+          "readOnly": true,
+          "width": 4,
+          "height": 4,
+          "foregroundStyle": "dim",
+          "backgroundStyle": "transparent",
+          "positions": [
             {
-                "type": "Button",
-                "icon": "arrow-left-bold-outline",
-                "readOnly": true,
-                "width": 4,
-                "height": 4,
-                "foregroundStyle": "dim",
-                "backgroundStyle": "transparent",
-                "positions": [
-                  {
-                    "modes": {
-                      "BlinkL": true
-                    },
-                    "foregroundColor": "green",
-                    "foregroundStyle": "default",
-                    "animation": "blinking"
-                  },
-                  {
-                    "modes": {
-                      "Hazards": true
-                    },
-                    "foregroundColor": "green",
-                    "foregroundStyle": "default",
-                    "animation": "blinking"
+              "modes": {
+                "BlinkL": true
+              },
+              "foregroundColor": "green",
+              "foregroundStyle": "default",
+              "animation": "blinking"
+            },
+            {
+              "modes": {
+                "Hazards": true
+              },
+              "foregroundColor": "green",
+              "foregroundStyle": "default",
+              "animation": "blinking"
+            }
+          ]
+        },
+        {
+          "type": "Button",
+          "icon": "car-light-high",
+          "readOnly": true,
+          "width": 4,
+          "height": 4,
+          "foregroundStyle": "dim",
+          "backgroundStyle": "transparent",
+          "positions": [
+            {
+              "modes": {
+                "HighBeams": true
+              },
+              "foregroundColor": "blue",
+              "foregroundStyle": "default"
+            }
+          ]
+        },
+        {
+          "type": "status-display",
+          "width": 8,
+          "height": 12,
+          "segments": [
+            {
+              "selector": ".window",
+              "style": "fill",
+              "color": "red",
+              "states": [
+                {
+                  "modes": {
+                    "Brake": true
                   }
-                ]
+                }
+              ]
             },
             {
-                "type": "Button",
-                "icon": "car-light-high",
-                "readOnly": true,
-                "width": 4,
-                "height": 4,
-                "foregroundStyle": "dim",
-                "backgroundStyle": "transparent",
-                "positions": [
-                    {
-                        "modes": {
-                            "HighBeams": true
-                        },
-                        "foregroundColor": "blue",
-                        "foregroundStyle": "default"
-                    }
-                ]
-            },
-            {
-                "type": "status-display",
-                "width": 8,
-                "height": 12,
-                "segments": [
-                    {
-                        "selector": ".window",
-                        "style": "fill",
-                        "color": "red",
-                        "states": [
-                            {
-                                "modes": {
-                                    "Brake": true
-                                }
-                            }
-                        ]
-                    },
-                    {
-                        "selector": ".carOutline",
-                        "style": "stroke",
-                        "states": [
-                            {
-                                "modes": {
-                                    "Parking": true
-                                }
-                            },
-                            {
-                                "modes": {
-                                    "LowBeams": true
-                                }
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "type": "Button",
-                "icon": "hazard-lights",
-                "readOnly": true,
-                "width": 4,
-                "height": 4,
-                "foregroundStyle": "dim",
-                "backgroundStyle": "transparent",
-                "positions": [
-                    {
-                        "modes": {
-                            "Hazards": true
-                        },
-                        "foregroundColor": "red",
-                        "foregroundStyle": "default",
-                        "animation": "blinking"
-                    }
-                ]
-            },
-            {
-                "type": "Button",
-                "icon": "arrow-right-bold-outline",
-                "readOnly": true,
-                "width": 4,
-                "height": 4,
-                "foregroundStyle": "dim",
-                "backgroundStyle": "transparent",
-                "positions": [
-                    {
-                        "modes": {
-                            "BlinkR": true
-                        },
-                        "foregroundColor": "green",
-                        "foregroundStyle": "default",
-                        "animation": "blinking"
-                    },
-                    {
-                        "modes": {
-                            "Hazards": true
-                        },
-                        "foregroundColor": "green",
-                        "foregroundStyle": "default",
-                        "animation": "blinking"
-                    }
-                ]
-            },
-            {
-                "type": "Button",
-                "icon": "car-parking-lights",
-                "readOnly": true,
-                "width": 4,
-                "height": 4,
-                "foregroundStyle": "dim",
-                "backgroundStyle": "transparent",
-                "positions": [
-                    {
-                        "modes": {
-                            "Parking": true
-                        },
-                        "foregroundColor": "green",
-                        "foregroundStyle": "default"
-                    }
-                ]
-            },
-            {
-                "type": "Button",
-                "icon": "car-light-dimmed",
-                "readOnly": true,
-                "width": 4,
-                "height": 4,
-                "foregroundStyle": "dim",
-                "backgroundStyle": "transparent",
-                "positions": [
-                    {
-                        "modes": {
-                            "LowBeams": true
-                        },
-                        "foregroundColor": "green",
-                        "foregroundStyle": "default"
-                    }
-                ]
-            },
-            {
-                "type": "Button",
-                "icon": "car-light-fog",
-                "readOnly": true,
-                "width": 4,
-                "height": 4,
-                "foregroundStyle": "dim",
-                "backgroundStyle": "transparent",
-                "positions": [
-                    {
-                        "modes": {
-                            "FogFront": true
-                        },
-                        "foregroundColor": "green",
-                        "foregroundStyle": "default"
-                    }
-                ]
-            },
-            {
-                "type": "Button",
-                "icon": "car-light-fog",
-                "readOnly": true,
-                "width": 4,
-                "height": 4,
-                "foregroundStyle": "dim",
-                "backgroundStyle": "transparent",
-                "positions": [
-                    {
-                        "modes": {
-                            "FogRear": true
-                        },
-                        "foregroundColor": "yellow",
-                        "foregroundStyle": "default"
-                    }
-                ]
+              "selector": ".carOutline",
+              "style": "stroke",
+              "states": [
+                {
+                  "modes": {
+                    "Parking": true
+                  }
+                },
+                {
+                  "modes": {
+                    "LowBeams": true
+                  }
+                }
+              ]
             }
-        ]
-    },
-    {
-        "name": "Headlights",
-        "controls": [
+          ]
+        },
+        {
+          "type": "Button",
+          "icon": "hazard-lights",
+          "readOnly": true,
+          "width": 4,
+          "height": 4,
+          "foregroundStyle": "dim",
+          "backgroundStyle": "transparent",
+          "positions": [
             {
-                "type": "Button",
-                "icon": "numeric-0",
-                "width": 6,
-                "height": 6,
-                "positions": [
-                    {
-                        "modes": {
-                            "Parking": false,
-                            "LowBeams": false,
-                            "HighBeams": false
-                        },
-                        "backgroundStyle": "fill",
-                        "foregroundColor": "black"
-                    }
-                ],
-                "label": "Off"
-            },
-            {
-                "type": "Button",
-                "icon": "car-parking-lights",
-                "width": 6,
-                "height": 6,
-                "positions": [
-                    {
-                        "modes": {
-                            "Parking": true,
-                            "LowBeams": false
-                        },
-                        "backgroundStyle": "fill",
-                        "backgroundColor": "green",
-                        "foregroundColor": "black"
-                    }
-                ],
-                "label": "Parking"
-            },
-            {
-                "type": "Button",
-                "icon": "car-light-dimmed",
-                "width": 12,
-                "height": 6,
-                "positions": [
-                    {
-                        "modes": {
-                            "Parking": true,
-                            "LowBeams": true
-                        },
-                        "backgroundStyle": "fill",
-                        "backgroundColor": "green",
-                        "foregroundColor": "black"
-                    }
-                ],
-                "label": "Low"
+              "modes": {
+                "Hazards": true
+              },
+              "foregroundColor": "red",
+              "foregroundStyle": "default",
+              "animation": "blinking"
             }
-        ]
-    },
-    {
-        "name": "High beams",
-        "controls": [
+          ]
+        },
+        {
+          "type": "Button",
+          "icon": "arrow-right-bold-outline",
+          "readOnly": true,
+          "width": 4,
+          "height": 4,
+          "foregroundStyle": "dim",
+          "backgroundStyle": "transparent",
+          "positions": [
             {
-                "type": "Button",
-                "icon": "car-light-high",
-                "width": 12,
-                "height": 6,
-                "positions": [
-                    {
-                        "modes": {
-                            "HighBeams": false
-                        }
-                    },
-                    {
-                        "modes": {
-                            "HighBeams": true
-                        },
-                        "backgroundStyle": "fill",
-                        "backgroundColor": "blue",
-                        "foregroundColor": "black"
-                    }
-                ],
-                "label": "High"
+              "modes": {
+                "BlinkR": true
+              },
+              "foregroundColor": "green",
+              "foregroundStyle": "default",
+              "animation": "blinking"
             },
             {
-                "type": "Button",
-                "icon": "car-light-high",
-                "width": 12,
-                "height": 6,
-                "positions": [
-                    {
-                        "modes": {
-                            "FlashToPass": false
-                        }
-                    },
-                    {
-                        "type": "hold",
-                        "modes": {
-                            "FlashToPass": true
-                        },
-                        "backgroundStyle": "fill",
-                        "backgroundColor": "blue",
-                        "foregroundColor": "black"
-                    }
-                ],
-                "label": "Flash"
+              "modes": {
+                "Hazards": true
+              },
+              "foregroundColor": "green",
+              "foregroundStyle": "default",
+              "animation": "blinking"
             }
-        ]
-    },
-    {
-        "name": "Fog lights",
-        "controls": [
+          ]
+        },
+        {
+          "type": "Button",
+          "icon": "car-parking-lights",
+          "readOnly": true,
+          "width": 4,
+          "height": 4,
+          "foregroundStyle": "dim",
+          "backgroundStyle": "transparent",
+          "positions": [
             {
-                "type": "Button",
-                "icon": "car-light-fog",
-                "round": true,
-                "width": 6,
-                "height": 6,
-                "positions": [
-                    {
-                        "modes": {
-                            "FogFront": false
-                        }
-                    },
-                    {
-                        "modes": {
-                            "FogFront": true
-                        },
-                        "backgroundStyle": "fill",
-                        "backgroundColor": "green",
-                        "foregroundColor": "black"
-                    }
-                ],
-                "label": "Front"
-            },
-            {
-                "type": "Button",
-                "icon": "car-light-fog",
-                "round": true,
-                "width": 6,
-                "height": 6,
-                "positions": [
-                    {
-                        "modes": {
-                            "FogRear": false
-                        }
-                    },
-                    {
-                        "modes": {
-                            "FogRear": true
-                        },
-                        "backgroundStyle": "fill",
-                        "backgroundColor": "yellow",
-                        "foregroundColor": "black"
-                    }
-                ],
-                "label": "Rear"
+              "modes": {
+                "Parking": true
+              },
+              "foregroundColor": "green",
+              "foregroundStyle": "default"
             }
-        ]
-    },
-    {
-        "name": "Blinkers",
-        "controls": [
+          ]
+        },
+        {
+          "type": "Button",
+          "icon": "car-light-dimmed",
+          "readOnly": true,
+          "width": 4,
+          "height": 4,
+          "foregroundStyle": "dim",
+          "backgroundStyle": "transparent",
+          "positions": [
             {
-                "type": "Button",
-                "icon": "arrow-left-bold-outline",
-                "round": true,
-                "width": 6,
-                "height": 6,
-                "positions": [
-                    {
-                        "modes": {
-                            "BlinkL": false
-                        }
-                    },
-                    {
-                        "modes": {
-                            "BlinkL": true,
-                            "BlinkR": false
-                        },
-                        "backgroundStyle": "fill",
-                        "backgroundColor": "green",
-                        "foregroundColor": "black"
-                    }
-                ]
-            },
-            {
-                "type": "Button",
-                "icon": "arrow-right-bold-outline",
-                "round": true,
-                "width": 6,
-                "height": 6,
-                "positions": [
-                    {
-                        "modes": {
-                            "BlinkR": false
-                        }
-                    },
-                    {
-                        "modes": {
-                            "BlinkR": true,
-                            "BlinkL": false
-                        },
-                        "backgroundStyle": "fill",
-                        "backgroundColor": "green",
-                        "foregroundColor": "black"
-                    }
-                ]
-            },
-            {
-                "type": "Button",
-                "icon": "hazard-lights",
-                "backgroundColor": "red",
-                "backgroundStyle": "outline",
-                "foregroundColor": "red",
-                "width": 12,
-                "height": 6,
-                "positions": [
-                    {
-                        "modes": {
-                            "Hazards": false
-                        }
-                    },
-                    {
-                        "modes": {
-                            "Hazards": true
-                        },
-                        "backgroundStyle": "fill",
-                        "foregroundColor": "black",
-                        "animation": "blinking"
-                    }
-                ],
-                "label": "Hazards"
+              "modes": {
+                "LowBeams": true
+              },
+              "foregroundColor": "green",
+              "foregroundStyle": "default"
             }
-        ]
-    },
-    {
-        "name": "Brakes",
-        "controls": [
+          ]
+        },
+        {
+          "type": "Button",
+          "icon": "car-light-fog",
+          "readOnly": true,
+          "width": 4,
+          "height": 4,
+          "foregroundStyle": "dim",
+          "backgroundStyle": "transparent",
+          "positions": [
             {
-                "type": "Button",
-                "icon": "car-brake-alert",
-                "width": 12,
-                "height": 6,
-                "positions": [
-                    {
-                        "modes": {
-                            "Brake": false
-                        }
-                    },
-                    {
-                        "type": "hold",
-                        "modes": {
-                            "Brake": true
-                        },
-                        "backgroundStyle": "fill",
-                        "backgroundColor": "red",
-                        "foregroundColor": "black"
-                    }
-                ],
-                "label": "Brake"
-            },
-            {
-                "type": "Button",
-                "icon": "car-brake-abs",
-                "width": 6,
-                "height": 6,
-                "positions": [
-                    {
-                        "modes": {
-                            "ESS": false
-                        }
-                    },
-                    {
-                        "type": "hold",
-                        "modes": {
-                            "ESS": true
-                        },
-                        "backgroundStyle": "fill",
-                        "backgroundColor": "red",
-                        "foregroundColor": "black"
-                    }
-                ],
-                "label": "ESS"
-            },
-            {
-                "type": "Button",
-                "icon": "car-shift-pattern",
-                "width": 6,
-                "height": 6,
-                "positions": [
-                    {
-                        "modes": {
-                            "Reverse": false
-                        }
-                    },
-                    {
-                        "modes": {
-                            "Reverse": true
-                        },
-                        "backgroundStyle": "fill"
-                    }
-                ],
-                "label": "Reverse"
+              "modes": {
+                "FogFront": true
+              },
+              "foregroundColor": "green",
+              "foregroundStyle": "default"
             }
-        ]
-    },
-    {
-        "name": "Colors",
-        "controls": [
+          ]
+        },
+        {
+          "type": "Button",
+          "icon": "car-light-fog",
+          "readOnly": true,
+          "width": 4,
+          "height": 4,
+          "foregroundStyle": "dim",
+          "backgroundStyle": "transparent",
+          "positions": [
             {
-                "type": "Button",
-                "icon": "car-brake-alert",
-                "width": 6,
-                "height": 6,
-                "foregroundColor": "yellow",
-                "positions": [
-                    {
-                        "modes": {
-                            "Brake": false
-                        }
-                    },
-                    {
-                        "modes": {
-                            "Brake": true
-                        },
-                        "backgroundStyle": "fill",
-                        "foregroundColor": "black"
-                    }
-                ]
-            },
-            {
-                "type": "Button",
-                "icon": "car-brake-alert",
-                "width": 6,
-                "height": 6,
-                "backgroundStyle": "outline",
-                "foregroundColor": "yellow",
-                "positions": [
-                    {
-                        "modes": {
-                            "Brake": false
-                        }
-                    },
-                    {
-                        "modes": {
-                            "Brake": true
-                        },
-                        "backgroundStyle": "fill",
-                        "foregroundColor": "black"
-                    }
-                ]
-            },
-            {
-                "type": "Button",
-                "icon": "car-brake-alert",
-                "width": 6,
-                "height": 6,
-                "backgroundStyle": "fill",
-                "foregroundColor": "yellow",
-                "positions": [
-                    {
-                        "modes": {
-                            "Brake": false
-                        }
-                    },
-                    {
-                        "modes": {
-                            "Brake": true
-                        },
-                        "backgroundStyle": "fill",
-                        "foregroundColor": "black"
-                    }
-                ]
+              "modes": {
+                "FogRear": true
+              },
+              "foregroundColor": "yellow",
+              "foregroundStyle": "default"
             }
-        ]
+          ]
+        }
+      ]
     }
-]
+  ],
+  "controls": [
+    {
+      "name": "Headlights",
+      "controls": [
+        {
+          "type": "Button",
+          "icon": "numeric-0",
+          "width": 6,
+          "height": 6,
+          "positions": [
+            {
+              "modes": {
+                "Parking": false,
+                "LowBeams": false,
+                "HighBeams": false
+              },
+              "backgroundStyle": "fill",
+              "foregroundColor": "black"
+            }
+          ],
+          "label": "Off"
+        },
+        {
+          "type": "Button",
+          "icon": "car-parking-lights",
+          "width": 6,
+          "height": 6,
+          "positions": [
+            {
+              "modes": {
+                "Parking": true,
+                "LowBeams": false
+              },
+              "backgroundStyle": "fill",
+              "backgroundColor": "green",
+              "foregroundColor": "black"
+            }
+          ],
+          "label": "Parking"
+        },
+        {
+          "type": "Button",
+          "icon": "car-light-dimmed",
+          "width": 12,
+          "height": 6,
+          "positions": [
+            {
+              "modes": {
+                "Parking": true,
+                "LowBeams": true
+              },
+              "backgroundStyle": "fill",
+              "backgroundColor": "green",
+              "foregroundColor": "black"
+            }
+          ],
+          "label": "Low"
+        }
+      ]
+    },
+    {
+      "name": "High beams",
+      "controls": [
+        {
+          "type": "Button",
+          "icon": "car-light-high",
+          "width": 12,
+          "height": 6,
+          "positions": [
+            {
+              "modes": {
+                "HighBeams": false
+              }
+            },
+            {
+              "modes": {
+                "HighBeams": true
+              },
+              "backgroundStyle": "fill",
+              "backgroundColor": "blue",
+              "foregroundColor": "black"
+            }
+          ],
+          "label": "High"
+        },
+        {
+          "type": "Button",
+          "icon": "car-light-high",
+          "width": 12,
+          "height": 6,
+          "positions": [
+            {
+              "modes": {
+                "FlashToPass": false
+              }
+            },
+            {
+              "type": "hold",
+              "modes": {
+                "FlashToPass": true
+              },
+              "backgroundStyle": "fill",
+              "backgroundColor": "blue",
+              "foregroundColor": "black"
+            }
+          ],
+          "label": "Flash"
+        }
+      ]
+    },
+    {
+      "name": "Fog lights",
+      "controls": [
+        {
+          "type": "Button",
+          "icon": "car-light-fog",
+          "round": true,
+          "width": 6,
+          "height": 6,
+          "positions": [
+            {
+              "modes": {
+                "FogFront": false
+              }
+            },
+            {
+              "modes": {
+                "FogFront": true
+              },
+              "backgroundStyle": "fill",
+              "backgroundColor": "green",
+              "foregroundColor": "black"
+            }
+          ],
+          "label": "Front"
+        },
+        {
+          "type": "Button",
+          "icon": "car-light-fog",
+          "round": true,
+          "width": 6,
+          "height": 6,
+          "positions": [
+            {
+              "modes": {
+                "FogRear": false
+              }
+            },
+            {
+              "modes": {
+                "FogRear": true
+              },
+              "backgroundStyle": "fill",
+              "backgroundColor": "yellow",
+              "foregroundColor": "black"
+            }
+          ],
+          "label": "Rear"
+        }
+      ]
+    },
+    {
+      "name": "Blinkers",
+      "controls": [
+        {
+          "type": "Button",
+          "icon": "arrow-left-bold-outline",
+          "round": true,
+          "width": 6,
+          "height": 6,
+          "positions": [
+            {
+              "modes": {
+                "BlinkL": false
+              }
+            },
+            {
+              "modes": {
+                "BlinkL": true,
+                "BlinkR": false
+              },
+              "backgroundStyle": "fill",
+              "backgroundColor": "green",
+              "foregroundColor": "black"
+            }
+          ]
+        },
+        {
+          "type": "Button",
+          "icon": "arrow-right-bold-outline",
+          "round": true,
+          "width": 6,
+          "height": 6,
+          "positions": [
+            {
+              "modes": {
+                "BlinkR": false
+              }
+            },
+            {
+              "modes": {
+                "BlinkR": true,
+                "BlinkL": false
+              },
+              "backgroundStyle": "fill",
+              "backgroundColor": "green",
+              "foregroundColor": "black"
+            }
+          ]
+        },
+        {
+          "type": "Button",
+          "icon": "hazard-lights",
+          "backgroundColor": "red",
+          "backgroundStyle": "outline",
+          "foregroundColor": "red",
+          "width": 12,
+          "height": 6,
+          "positions": [
+            {
+              "modes": {
+                "Hazards": false
+              }
+            },
+            {
+              "modes": {
+                "Hazards": true
+              },
+              "backgroundStyle": "fill",
+              "foregroundColor": "black",
+              "animation": "blinking"
+            }
+          ],
+          "label": "Hazards"
+        }
+      ]
+    },
+    {
+      "name": "Brakes",
+      "controls": [
+        {
+          "type": "Button",
+          "icon": "car-brake-alert",
+          "width": 12,
+          "height": 6,
+          "positions": [
+            {
+              "modes": {
+                "Brake": false
+              }
+            },
+            {
+              "type": "hold",
+              "modes": {
+                "Brake": true
+              },
+              "backgroundStyle": "fill",
+              "backgroundColor": "red",
+              "foregroundColor": "black"
+            }
+          ],
+          "label": "Brake"
+        },
+        {
+          "type": "Button",
+          "icon": "car-brake-abs",
+          "width": 6,
+          "height": 6,
+          "positions": [
+            {
+              "modes": {
+                "ESS": false
+              }
+            },
+            {
+              "type": "hold",
+              "modes": {
+                "ESS": true
+              },
+              "backgroundStyle": "fill",
+              "backgroundColor": "red",
+              "foregroundColor": "black"
+            }
+          ],
+          "label": "ESS"
+        },
+        {
+          "type": "Button",
+          "icon": "car-shift-pattern",
+          "width": 6,
+          "height": 6,
+          "positions": [
+            {
+              "modes": {
+                "Reverse": false
+              }
+            },
+            {
+              "modes": {
+                "Reverse": true
+              },
+              "backgroundStyle": "fill",
+              "foregroundColor": "black"
+            }
+          ],
+          "label": "Reverse"
+        }
+      ]
+    }
+  ]
+}

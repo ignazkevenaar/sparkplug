@@ -11,7 +11,7 @@ defineProps({
     required: true
   },
   controlConfig: {
-    type: Array,
+    type: Object,
     required: true
   }
 });
@@ -30,15 +30,14 @@ const controlToComponent = {
 // theme(spacing.4) - Horizontal grid gap.
 
 const autoCols = [
-  "grid-cols-[repeat(2,calc((100vw-2*var(--gap-controls-x)-theme(spacing.4))/2))]",
+  "grid-cols-[repeat(2,calc((100vw-2*theme(spacing.6)-var(--gap-controls-x))/2))]",
   "sm:grid-cols-[repeat(2,200px)]",
-  "md:grid-cols-[repeat(4,200px)]",
 ];
 
 // theme(spacing.10) vertical grid gap.
 
 const autoRows = [
-  "auto-rows-[calc(((100vw-2_*_var(--gap-controls-x)_-_theme(spacing.4))/2_-_var(--gap-controls-y))/2)]",
+  "auto-rows-[calc(((100vw-2_*_theme(spacing.6)_-_var(--gap-controls-x))/2_-_var(--gap-controls-y))/2)]",
   "sm:auto-rows-[calc((200px_-_var(--gap-controls-y))/2)]",
 ];
 </script>
