@@ -1,6 +1,6 @@
 <script setup>
 import { computed, inject, ref } from 'vue';
-import colors from '../styles/buttonColors';
+import colors from '../styles/controlColors';
 
 const props = defineProps({
   value: {

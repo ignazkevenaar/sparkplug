@@ -1,5 +1,5 @@
 <script setup>
-import colors from '../styles/controlColors';
+import colors from '../styles/controlContainerColors';
 
 const props = defineProps({
   color: {
@@ -48,7 +48,7 @@ const rowClass = props.circleLayout && props.width === 1 && props.height === 2 ?
     >
       <slot />
     </div>
-    <div class="absolute top-full w-full translate-y-2 select-none overflow-hidden text-ellipsis whitespace-nowrap text-center text-xs font-semibold tracking-wide">
+    <div class="absolute text-container-foreground top-full w-full translate-y-2 select-none overflow-hidden text-ellipsis whitespace-nowrap text-center text-xs font-semibold tracking-wide">
       <slot name="header" />
     </div>
   </div>

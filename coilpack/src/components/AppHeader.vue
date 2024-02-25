@@ -29,12 +29,12 @@ defineEmits(['on-back', 'on-logo']);
       />
       <div class="flex-1 flex flex-col items-center">
         <span
-          class="mx-auto flex items-center transition-opacity lo:opacity-0"
+          class="mx-auto flex items-center transition-opacity"
           @click="$emit('on-logo')"
         >
           <mdicon
             name="sparkplug"
-            class="text-foreground-400 w-[24px]"
+            class="text-foreground-200 w-[24px]"
           />
           <h1 class="select-none font-header text-lg font-semibold 2xl:text-xl">
             Sparkplug

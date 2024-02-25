@@ -4,30 +4,30 @@ export default {
     fill: ["fill-current"],
   },
   default: {
-    off: ["text-button-foreground-base-dim"],
-    on: ["text-button-foreground-base-highlight"],
+    off: ["text-control-foreground-base-dim"],
+    on: ["text-control-foreground-base-highlight"],
   },
   black: {
     default: ["text-black"],
   },
   red: {
-    off: ["text-button-foreground-red-dim"],
-    on: ["text-button-foreground-red-highlight"],
+    off: ["text-control-foreground-red-dim"],
+    on: ["text-control-foreground-red-highlight"],
   },
   yellow: {
-    off: ["text-button-foreground-yellow-dim"],
-    on: ["text-button-foreground-yellow-highlight"],
+    off: ["text-control-foreground-yellow-dim"],
+    on: ["text-control-foreground-yellow-highlight"],
   },
   green: {
-    off: ["text-button-foreground-green-dim"],
-    on: ["text-button-foreground-green-highlight"],
+    off: ["text-control-foreground-green-dim"],
+    on: ["text-control-foreground-green-highlight"],
   },
   blue: {
-    off: ["text-button-foreground-blue-dim"],
-    on: ["text-button-foreground-blue-highlight"],
+    off: ["text-control-foreground-blue-dim"],
+    on: ["text-control-foreground-blue-highlight"],
   },
   pink: {
-    off: ["text-button-foreground-pink-dim"],
-    on: ["text-button-foreground-pink-highlight"],
+    off: ["text-control-foreground-pink-dim"],
+    on: ["text-control-foreground-pink-highlight"],
   },
 };

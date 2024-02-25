@@ -222,8 +222,7 @@
                 "LowBeams": false,
                 "HighBeams": false
               },
-              "backgroundStyle": "fill",
-              "foregroundColor": "black"
+              "backgroundStyle": "outline"
             }
           ],
           "label": "Off"

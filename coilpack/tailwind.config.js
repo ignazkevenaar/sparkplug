@@ -1,11 +1,7 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
-const colors = require('tailwindcss/colors')
+const colors = require('tailwindcss/colors');
 
-function withOpacity(variableName) {
-  return ({ opacityValue }) => `rgba(var(${variableName}), ${ opacityValue ? opacityValue : 1 })`
-}
-
-const themeCol = (variable) => `rgba(var(--color-${ variable }), <alpha-value>)`
+const themeCol = (variable) => `rgba(var(--color-${ variable }), <alpha-value>)`;
 
 module.exports = {
   mode: 'jit',
@@ -22,76 +18,101 @@ module.exports = {
         'screen-75': '75vh'
       },
       colors: {
-        background: themeCol('background'),
+        background: {
+          50:  themeCol('background-50'),
+          100: themeCol('background-100'),
+          200: themeCol('background-200'),
+          300: themeCol('background-300'),
+          400: themeCol('background-400'),
+          500: themeCol('background-500'),
+          600: themeCol('background-600'),
+          700: themeCol('background-700'),
+          800: themeCol('background-800'),
+          900: themeCol('background-900'),
+        },
+        foreground: {
+          50:  themeCol('foreground-50'),
+          100: themeCol('foreground-100'),
+          200: themeCol('foreground-200'),
+          300: themeCol('foreground-300'),
+          400: themeCol('foreground-400'),
+          500: themeCol('foreground-500'),
+          600: themeCol('foreground-600'),
+          700: themeCol('foreground-700'),
+          800: themeCol('foreground-800'),
+          900: themeCol('foreground-900'),
+        },
+        app: {background: themeCol('app-background')},
         container: {
-          background: themeCol('container-background')
+          background: themeCol('container-background'),
+          foreground: themeCol('container-foreground')
         },
         header: {
           background: themeCol('header-background')
         },
-        button: {
+        control: {
           background: {
             base: {
-              DEFAULT: themeCol('button-background-base-default'),
-              highlight: themeCol('button-background-base-highlight'),
-              dim: themeCol('button-background-base-dim'),
+              DEFAULT: themeCol('control-background-base-default'),
+              highlight: themeCol('control-background-base-highlight'),
+              dim: themeCol('control-background-base-dim'),
             },
             red: {
-              DEFAULT: themeCol('button-background-red-default'),
-              highlight: themeCol('button-background-red-highlight'),
-              dim: themeCol('button-background-red-dim'),
+              DEFAULT: themeCol('control-background-red-default'),
+              highlight: themeCol('control-background-red-highlight'),
+              dim: themeCol('control-background-red-dim'),
             },
             yellow: {
-              DEFAULT: themeCol('button-background-yellow-default'),
-              highlight: themeCol('button-background-yellow-highlight'),
-              dim: themeCol('button-background-yellow-dim'),
+              DEFAULT: themeCol('control-background-yellow-default'),
+              highlight: themeCol('control-background-yellow-highlight'),
+              dim: themeCol('control-background-yellow-dim'),
             },
             green: {
-              DEFAULT: themeCol('button-background-green-default'),
-              highlight: themeCol('button-background-green-highlight'),
-              dim: themeCol('button-background-green-dim'),
+              DEFAULT: themeCol('control-background-green-default'),
+              highlight: themeCol('control-background-green-highlight'),
+              dim: themeCol('control-background-green-dim'),
             },
             blue: {
-              DEFAULT: themeCol('button-background-blue-default'),
-              highlight: themeCol('button-background-blue-highlight'),
-              dim: themeCol('button-background-blue-dim'),
+              DEFAULT: themeCol('control-background-blue-default'),
+              highlight: themeCol('control-background-blue-highlight'),
+              dim: themeCol('control-background-blue-dim'),
             },
             pink: {
-              DEFAULT: themeCol('button-background-pink-default'),
-              highlight: themeCol('button-background-pink-highlight'),
-              dim: themeCol('button-background-pink-dim'),
+              DEFAULT: themeCol('control-background-pink-default'),
+              highlight: themeCol('control-background-pink-highlight'),
+              dim: themeCol('control-background-pink-dim'),
             }
           },
           foreground: {
             base: {
-              DEFAULT: themeCol('button-foreground-base-default'),
-              highlight: themeCol('button-foreground-base-highlight'),
-              dim: themeCol('button-foreground-base-dim'),
+              DEFAULT: themeCol('control-foreground-base-default'),
+              highlight: themeCol('control-foreground-base-highlight'),
+              dim: themeCol('control-foreground-base-dim'),
             },
             red: {
-              DEFAULT: themeCol('button-foreground-red-default'),
-              highlight: themeCol('button-foreground-red-highlight'),
-              dim: themeCol('button-foreground-red-dim'),
+              DEFAULT: themeCol('control-foreground-red-default'),
+              highlight: themeCol('control-foreground-red-highlight'),
+              dim: themeCol('control-foreground-red-dim'),
             },
             yellow: {
-              DEFAULT: themeCol('button-foreground-yellow-default'),
-              highlight: themeCol('button-foreground-yellow-highlight'),
-              dim: themeCol('button-foreground-yellow-dim'),
+              DEFAULT: themeCol('control-foreground-yellow-default'),
+              highlight: themeCol('control-foreground-yellow-highlight'),
+              dim: themeCol('control-foreground-yellow-dim'),
             },
             green: {
-              DEFAULT: themeCol('button-foreground-green-default'),
-              highlight: themeCol('button-foreground-green-highlight'),
-              dim: themeCol('button-foreground-green-dim'),
+              DEFAULT: themeCol('control-foreground-green-default'),
+              highlight: themeCol('control-foreground-green-highlight'),
+              dim: themeCol('control-foreground-green-dim'),
             },
             blue: {
-              DEFAULT: themeCol('button-foreground-blue-default'),
-              highlight: themeCol('button-foreground-blue-highlight'),
-              dim: themeCol('button-foreground-blue-dim'),
+              DEFAULT: themeCol('control-foreground-blue-default'),
+              highlight: themeCol('control-foreground-blue-highlight'),
+              dim: themeCol('control-foreground-blue-dim'),
             },
             pink: {
-              DEFAULT: themeCol('button-foreground-pink-default'),
-              highlight: themeCol('button-foreground-pink-highlight'),
-              dim: themeCol('button-foreground-pink-dim'),
+              DEFAULT: themeCol('control-foreground-pink-default'),
+              highlight: themeCol('control-foreground-pink-highlight'),
+              dim: themeCol('control-foreground-pink-dim'),
             },
           }
         }

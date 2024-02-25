@@ -78,7 +78,7 @@ provide('blink-fast', blinkFast);
 <template>
   <div
     :class="[ lightsOut ? 'lightsOut' : '' ]"
-    class="relative min-h-screen bg-background"
+    class="relative min-h-screen bg-app-background"
   >
     <AppHeader
       :show-back-button="currentRoute != '' && currentRoute != '/'"
@@ -87,7 +87,10 @@ provide('blink-fast', blinkFast);
       @on-logo="scollToTop"
     >
       <template #left>
-        <HeaderButton icon="weather-night" />
+        <HeaderButton
+          icon="weather-night"
+          @click="lightsOut = !lightsOut"
+        />
       </template>
       <template #right>
         <HeaderButton icon="power-standby" />
