@@ -1,20 +1,36 @@
 {
-    "files.associations": {
-        "ino": "cpp"
-    },
-    "emmet.syntaxProfiles": {
-        "vue-html": "html",
-        "vue": "html"
-    },
-    "eslint.workingDirectories": [
-        "coilpack"
-    ],
-    "json.schemas": [
-        {
-            "fileMatch": [
-                "/coilpack/public/config/controls.json"
-            ],
-            "url": "/coilpack/src/schemas/controls.schema.json"
-        }
-    ]
+  "files.associations": {
+    "ino": "cpp"
+  },
+  "emmet.syntaxProfiles": {
+    "vue-html": "html",
+    "vue": "html"
+  },
+  "eslint.workingDirectories": ["coilpack"],
+  "json.schemas": [
+    {
+      "fileMatch": ["/coilpack/public/config/controls.json"],
+      "url": "/coilpack/src/schemas/controls.schema.json"
+    }
+  ],
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[sass]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  }
 }
