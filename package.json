@@ -1,9 +1,9 @@
 {
-    "name": "sparkplug",
-    "license": "ISC",
-    "private": true,
-    "workspaces": [
-        "sparkplug",
-        "coilpack"
-    ]
+  "name": "sparkplug",
+  "license": "ISC",
+  "private": true,
+  "workspaces": [
+    "sparkplug",
+    "coilpack"
+  ]
 }

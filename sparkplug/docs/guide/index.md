@@ -22,8 +22,8 @@ The combination of cheap and well-known hardware and Wifi connectivity for contr
 
 To build and upload the sketch you need either:
 
-* [Arduino IDE](https://www.arduino.cc/en/software) 1.8.15
-* [Arduino CLI](https://github.com/arduino/arduino-cli) 0.20
+- [Arduino IDE](https://www.arduino.cc/en/software) 1.8.15
+- [Arduino CLI](https://github.com/arduino/arduino-cli) 0.20
 
 ::: info NOTE
 To upload any data to the [LittleFS](https://github.com/littlefs-project/littlefs) file system, the Arduino IDE is required.
@@ -42,11 +42,11 @@ https://github.com/esp8266/Arduino#installing-with-boards-manager
 
 #### Libraries
 
-* [SparkFun LP55231 LED Driver Breakout Arduino Library
-](https://github.com/sparkfun/SparkFun_LP55231_Arduino_Library)
-* [Adafruit PCA9685 PWM Servo Driver Library](https://github.com/adafruit/Adafruit-PWM-Servo-Driver-Library)
-* [WebSocket Server and Client for Arduino](https://github.com/Links2004/arduinoWebSockets)
-* [PrintCharArray](https://github.com/RobTillaart/PrintCharArray)
+- [SparkFun LP55231 LED Driver Breakout Arduino Library
+  ](https://github.com/sparkfun/SparkFun_LP55231_Arduino_Library)
+- [Adafruit PCA9685 PWM Servo Driver Library](https://github.com/adafruit/Adafruit-PWM-Servo-Driver-Library)
+- [WebSocket Server and Client for Arduino](https://github.com/Links2004/arduinoWebSockets)
+- [PrintCharArray](https://github.com/RobTillaart/PrintCharArray)
 
 Installing these libraries using Arduino CLI:
 
@@ -100,10 +100,11 @@ Then include this header in the sketch file after `spark.h`:
 ```
 
 This config contains definitions of:
-* Lighting modes.
-* Lichting channels.
-* Lighting presets.
-* I²C output devices.
+
+- Lighting modes.
+- Lichting channels.
+- Lighting presets.
+- I²C output devices.
 
 The config is also the place to hook into any events to run custom code specific to that config.
 
@@ -113,12 +114,13 @@ The config is also the place to hook into any events to run custom code specific
 
 Sparkplug organises physical lights — output devices with channels containing state — and functionality of those lights — presets applied when a mode is active — into a readable and extendible syntax:
 
-* [Modes](#modes) - Contain state for lighting modes e.g. low beams, left blinker.
-* [Presets](#presets) - Define the state of a channel per mode or combination of modes.
-* [Channels](#channels) - Contain lighting state and assigned presets.
-* [Devices](#devices) - I²C output devices with an assigned range of channels.
+- [Modes](#modes) - Contain state for lighting modes e.g. low beams, left blinker.
+- [Presets](#presets) - Define the state of a channel per mode or combination of modes.
+- [Channels](#channels) - Contain lighting state and assigned presets.
+- [Devices](#devices) - I²C output devices with an assigned range of channels.
 
 **In short:**
+
 1. Group your desired lighting functionality into modes and name them well.
 2. Define presets with the state of any psyical lights for any combination of modes.
 3. Define the psysical output channels and assign the previously defined presets to the right channels.
@@ -166,6 +168,7 @@ const PROGMEM Preset examplePreset =
   .intensity = 0xFFFF
 };
 ```
+
 _If you omit the `intensity` property, it will be treated as full intensity._
 
 By default, presets make channels 'act' like incandescent bulbs; when a preset is applied, the channel fades in to the desired `intensity`, and fades out slower when the preset is no longer applied.
@@ -225,10 +228,11 @@ Devices using the I²C protocol are "hot-swappable"; A setup routine runs when t
 
 It comes built-in with support for these LED diver ICs:
 
-* [NXP PCA9685](https://www.nxp.com/docs/en/data-sheet/PCA9685.pdf)
-* [TI LP55231](https://www.ti.com/lit/ds/symlink/lp55231.pdf)
+- [NXP PCA9685](https://www.nxp.com/docs/en/data-sheet/PCA9685.pdf)
+- [TI LP55231](https://www.ti.com/lit/ds/symlink/lp55231.pdf)
 
 Example definition of devices in a config:
+
 ```cpp
 #pragma once
 
@@ -249,18 +253,18 @@ OutputDevice *outputDevices[] =
 size_t outputDevicesCount = COUNT_OF(outputDevices);
 ```
 
-* Devices in `wireDevices[]` will be checked for (dis-)connection and initialized when needed.
-* Devices in `outputDevices[]` will be updated with changed lighting channels for every frame.
+- Devices in `wireDevices[]` will be checked for (dis-)connection and initialized when needed.
+- Devices in `outputDevices[]` will be updated with changed lighting channels for every frame.
 
 ## Presets in-depth
 
 Presets are cascading; they can take or give precedence over other presets:
 
-* Latest takes priority (`LTP`)<br>
+- Latest takes priority (`LTP`)<br>
   A later preset takes priority over previous presets.
-* Lowest takes priority (`LoTP`)<br>
+- Lowest takes priority (`LoTP`)<br>
   When a preset with a lower value than the current preset is already active, that preset will take priority, even if it comes before the current preset.
-* Highest takes priority (`HTP`)<br>
+- Highest takes priority (`HTP`)<br>
   When a preset with a higher value than the current preset is already active, that preset will take priority, even if it comes before the current preset.
 
 This allows you to define intricate lighting that takes priority over other modes when needed, but not interfere with other modes when that is not desirable.
@@ -276,6 +280,7 @@ Channels calculate what preset is applied for any given combination of active mo
 :::
 
 The following example describes a basic blinking preset:
+
 ```cpp
 const PROGMEM Preset exampleBlinkPreset =
 {
@@ -291,9 +296,10 @@ This preset is applied and removed when the blink cycle swaps phase. The `timeOf
 ### Blinkers with a default state
 
 Most of the time, blinking presets are defined in sets:
-* A normal preset<br>
+
+- A normal preset<br>
   acting as the default preset that is applied when the blinking preset is in the off-phase. You can use this preset to turn off
-* A blinking preset that is applied when the blink phase is in the on-state.
+- A blinking preset that is applied when the blink phase is in the on-state.
 
 The following example describes a set of blinking presets alternating between half intensity and full intensity:
 
@@ -310,6 +316,7 @@ const PROGMEM Preset exampleBlinkPresets[] =
 When you define multiple channels with blink presets that have the same period (the total of `timeOn` and `timeOff` is equal between them), you can easily configure those channels as a squential blinking pattern.
 
 Example:
+
 ```cpp
 const PROGMEM Preset presetBlinkerFirst[] =
 {
@@ -336,6 +343,7 @@ const size_t channelsCount = COUNT_OF(channels);
 ```
 
 ### US tail lights
+
 ...with combined brake lights and blinkers.
 
 The way most old North-American cars use a single bulb for tail lights, brake lights and turn signals is [fascinating](https://www.youtube.com/watch?v=O1lZ9n2bxWA).
@@ -349,6 +357,7 @@ const PROGMEM Preset USTaillightPresets[] =
   { .modeID = BlinkL, .mode = PresetModes::Blink },
 };
 ```
+
 In this example, the blinking light always alternates between fully off, and fully on, regardless of if the `Brake` or `Parking` modes are applied.
 
 #### Thunderbird
@@ -370,8 +379,9 @@ const PROGMEM Preset thunderbirdPresets[] =
 At first glance, the order of the presets might be a little unconventional but here is how it works:
 
 In the example;
-* the `Brake` preset is overwritten by the first `BlinkL` preset.
-* the `Parking` preset has a `HTP` priority, which only applies the preset when the calculated channel intensity up to that point is **lower** than the preset intensity;<br>
+
+- the `Brake` preset is overwritten by the first `BlinkL` preset.
+- the `Parking` preset has a `HTP` priority, which only applies the preset when the calculated channel intensity up to that point is **lower** than the preset intensity;<br>
   The intensity of the `Parking` preset is overlaid over the `0` intensity of the first `BlinkL` preset.
 
 _(How to combine this example with the [sequential blinkers](#sequential-blinkers) is left as an exercise for the reader.)_

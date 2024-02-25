@@ -1,5 +1,5 @@
-const plugin = require('tailwindcss/plugin')
+const plugin = require("tailwindcss/plugin");
 
-module.exports = plugin(function({ addVariant }) {
-    addVariant('lo', '.lightsOut &')
-})
+module.exports = plugin(function ({ addVariant }) {
+  addVariant("lo", ".lightsOut &");
+});

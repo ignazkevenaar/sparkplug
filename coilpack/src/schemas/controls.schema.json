@@ -1,101 +1,87 @@
 {
-    "$schema": "https://json-schema.org/draft-07/schema",
-    "$id": "indicators.schema.json",
-    "type": "array",
-    "items": {
-        "type": "object",
-        "properties": {
-            "name": {
-                "type": "string"
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "$id": "indicators.schema.json",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "name": {
+        "type": "string"
+      },
+      "height": {
+        "type": "number",
+        "minimum": 1,
+        "maximum": 6,
+        "default": 4
+      },
+      "controls": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "const": "Button"
+            },
+            "icon": {
+              "type": "string"
+            },
+            "width": {
+              "type": "number",
+              "minimum": 1,
+              "maximum": 12
             },
             "height": {
-                "type": "number",
-                "minimum": 1,
-                "maximum": 6,
-                "default": 4
+              "type": "number",
+              "minimum": 1,
+              "maximum": 12
             },
-            "controls": {
-                "type": "array",
-                "items": {
+            "top": {
+              "type": "number",
+              "minimum": 1,
+              "maximum": 12
+            },
+            "left": {
+              "type": "number",
+              "minimum": 1,
+              "maximum": 12
+            },
+            "round": {
+              "type": "boolean"
+            },
+            "positions": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "modes": {
                     "type": "object",
-                    "properties": {
-                        "type": {
-                            "const": "Button"
-                        },
-                        "icon": {
-                            "type": "string"
-                        },
-                        "width": {
-                            "type": "number",
-                            "minimum": 1,
-                            "maximum": 12
-                        },
-                        "height": {
-                            "type": "number",
-                            "minimum": 1,
-                            "maximum": 12
-                        },
-                        "top": {
-                            "type": "number",
-                            "minimum": 1,
-                            "maximum": 12
-                        },
-                        "left": {
-                            "type": "number",
-                            "minimum": 1,
-                            "maximum": 12
-                        },
-                        "round": {
-                            "type": "boolean"
-                        },
-                        "positions": {
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "modes": {
-                                        "type": "object",
-                                        "patternProperties": {
-                                            ".*": {
-                                                "type": "boolean"
-                                            }
-                                        }
-                                    },
-                                    "color": {
-                                        "$ref": "#/$defs/buttonColor"
-                                    },
-                                    "type": {
-                                        "type": "string",
-                                        "enum": [
-                                            "hold"
-                                        ]
-                                    }
-                                },
-                                "required": [
-                                    "modes"
-                                ]
-                            }
-                        }
-                    },
-                    "required": [
-                        "type",
-                        "grid",
-                        "positions"
-                    ]
-                }
+                    "patternProperties": {
+                      ".*": {
+                        "type": "boolean"
+                      }
+                    }
+                  },
+                  "color": {
+                    "$ref": "#/$defs/buttonColor"
+                  },
+                  "type": {
+                    "type": "string",
+                    "enum": ["hold"]
+                  }
+                },
+                "required": ["modes"]
+              }
             }
+          },
+          "required": ["type", "grid", "positions"]
         }
-    },
-    "$defs": {
-        "buttonColor": {
-            "type": "string",
-            "enum": [
-                "red",
-                "yellow",
-                "green",
-                "blue",
-                "invert"
-            ]
-        }
+      }
     }
+  },
+  "$defs": {
+    "buttonColor": {
+      "type": "string",
+      "enum": ["red", "yellow", "green", "blue", "invert"]
+    }
+  }
 }

@@ -1,28 +1,27 @@
 <script setup>
-import ControlPanel from '../components/ControlPanel.vue'
-import StatusDisplay from '../components/StatusDisplay.vue'
-import { inject } from 'vue'
+import ControlPanel from "../components/ControlPanel.vue";
+import StatusDisplay from "../components/StatusDisplay.vue";
+import { inject } from "vue";
 
-let sparkplug = inject('sparkplug');
-let lightsOut = inject('lightsOut');
-let lightingModes = inject('lightingModes');
-let controlModels = inject('controlModels');
+let sparkplug = inject("sparkplug");
+let lightsOut = inject("lightsOut");
+let lightingModes = inject("lightingModes");
+let controlModels = inject("controlModels");
 
-const emit = defineEmits(['input'])
+const emit = defineEmits(["input"]);
 
-const debugSetMode = event => {
+const debugSetMode = (event) => {
   console.log("Control input", event);
 
   const setModeStrings = [];
   const unsetModeStrings = [];
 
-  Object.keys(event).forEach(modeID => {
+  Object.keys(event).forEach((modeID) => {
     const newValue = Number(event[modeID]);
-    controlModels.value[modeID] = newValue
+    controlModels.value[modeID] = newValue;
 
     const modeIndex = lightingModes.value.indexOf(modeID);
-    if (modeIndex > -1)
-    {
+    if (modeIndex > -1) {
       if (newValue === 1) setModeStrings.push(modeIndex);
       else if (newValue === 0) unsetModeStrings.push(modeIndex);
     }
@@ -37,14 +36,14 @@ const debugSetMode = event => {
   <div>
     <div class="bg-header-background">
       <ControlPanel
-        class="mx-auto flex flex-1 flex-col justify-between p-6 md:flex md:flex-1 md:flex-row md:items-center md:justify-center md:px-8 md:pb-6 lg:container lg:px-12 lg:pb-12 xl:px-20 xl:pb-10 pb-2"
+        class="mx-auto flex flex-1 flex-col justify-between p-6 pb-2 lg:container md:flex md:flex-1 md:flex-row md:items-center md:justify-center md:px-8 md:pb-6 lg:px-12 lg:pb-12 xl:px-20 xl:pb-10"
         :value="controlModels"
         :control-config="sparkplug.controlsData.status"
         @input="debugSetMode"
       />
     </div>
     <ControlPanel
-      class="mx-auto flex flex-1 flex-col justify-between p-6 md:flex md:flex-1 md:flex-row md:items-center md:justify-center md:px-8 md:pb-8 lg:container lg:px-12 lg:pb-12 xl:px-20 xl:pb-20"
+      class="mx-auto flex flex-1 flex-col justify-between p-6 lg:container md:flex md:flex-1 md:flex-row md:items-center md:justify-center md:px-8 md:pb-8 lg:px-12 lg:pb-12 xl:px-20 xl:pb-20"
       :value="controlModels"
       :control-config="sparkplug.controlsData.controls"
       @input="debugSetMode"

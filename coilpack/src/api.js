@@ -7,21 +7,20 @@ let callbacks = {};
 
 const fetchJSON = async (filename) => fetch(filename).then((r) => r.json());
 
-export const fetchConfigurationFiles = async () =>
-{
+export const fetchConfigurationFiles = async () => {
   const configName = import.meta.env.VITE_CONFIG || "default";
   config = await fetchJSON(`/configs/${configName}/config.json`);
   lightingModes = await fetchJSON(`/configs/${configName}/modes.json`);
   controlsData = await fetchJSON(`/configs/${configName}/controls.json`);
-}
+};
 
 const dispatch = (event_name, data) => {
   let chain = callbacks[event_name];
-  if (typeof chain == 'undefined') return; // no callbacks for this event
+  if (typeof chain == "undefined") return; // no callbacks for this event
   for (let i = 0; i < chain.length; i++) {
-    chain[i](data)
+    chain[i](data);
   }
-}
+};
 
 const bind = (event_name, callback) => {
   callbacks[event_name] = callbacks[event_name] || [];
@@ -29,31 +28,27 @@ const bind = (event_name, callback) => {
   return this;
 };
 
-const trySend = data =>
-{
+const trySend = (data) => {
   const OPEN = 1;
   if (connection?.readyState !== OPEN) return;
   connection.send(data);
-}
+};
 
-export const getModes = () =>
-{
+export const getModes = () => {
   trySend("G");
-}
+};
 
-export const setMode = (inputArguments) =>
-{
-  trySend(`S ${ inputArguments.join(',') }`);
-}
+export const setMode = (inputArguments) => {
+  trySend(`S ${inputArguments.join(",")}`);
+};
 
-export const unsetMode = (inputArguments) =>
-{
-  trySend(`U ${ inputArguments.join(',') }`);
-}
+export const unsetMode = (inputArguments) => {
+  trySend(`U ${inputArguments.join(",")}`);
+};
 
-export const onGetMode = callback => {
-  bind('M', callback);
-}
+export const onGetMode = (callback) => {
+  bind("M", callback);
+};
 
 export const setup = async () => {
   await fetchConfigurationFiles();
@@ -63,10 +58,8 @@ export const setup = async () => {
       const debugServer = import.meta.env.VITE_DEBUG_WEBSOCKET;
       if (!debugServer) return false;
       connection = new WebSocket(debugServer);
-    }
-    else
-    {
-      connection = new WebSocket('ws://' + window.location.hostname + ':81/');
+    } else {
+      connection = new WebSocket("ws://" + window.location.hostname + ":81/");
     }
 
     connection.onopen = () => {
@@ -74,21 +67,20 @@ export const setup = async () => {
       resolve(connection);
     };
 
-    connection.onerror = error => {
+    connection.onerror = (error) => {
       reject(error);
     };
 
-    connection.onmessage = event =>
-    {
+    connection.onmessage = (event) => {
       console.log("websocket says:", event.data);
 
       const splitData = event.data.split(" ");
       if (splitData.length != 2) return;
 
       const command = splitData[0];
-      const inputArguments = splitData[1].split(',').filter(item => item);
+      const inputArguments = splitData[1].split(",").filter((item) => item);
 
       dispatch(command, inputArguments);
     };
   });
-}
+};

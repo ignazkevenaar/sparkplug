@@ -1,27 +1,27 @@
 <script setup>
-import { onBeforeUpdate, ref } from 'vue';
-import Button from './Button.vue'
-import ControlContainer from './ControlContainer.vue'
-import Placeholder from './Placeholder.vue'
-import StatusDisplay from './StatusDisplay.vue'
+import { onBeforeUpdate, ref } from "vue";
+import Button from "./Button.vue";
+import ControlContainer from "./ControlContainer.vue";
+import Placeholder from "./Placeholder.vue";
+import StatusDisplay from "./StatusDisplay.vue";
 
 defineProps({
   value: {
     type: Object,
-    required: true
+    required: true,
   },
   controlConfig: {
     type: Object,
-    required: true
-  }
+    required: true,
+  },
 });
 
-defineEmits(['input'])
+defineEmits(["input"]);
 
 const controlToComponent = {
-  'placeholder': Placeholder,
-  'button': Button,
-  'status-display': StatusDisplay
+  placeholder: Placeholder,
+  button: Button,
+  "status-display": StatusDisplay,
 };
 
 // Automatic control panel grid sizing.
@@ -56,14 +56,18 @@ const autoRows = [
         :width="item.width"
         :height="item.height"
         :circle-layout="item.circleLayout"
-        :style="{ 'grid-area': `span ${ item.height ?? 2 } / span ${ item.width ?? 1 } / span ${ item.height ?? 2 } / span ${ item.width ?? 1 }` }"
+        :style="{
+          'grid-area': `span ${item.height ?? 2} / span ${item.width ?? 1} / span ${item.height ?? 2} / span ${item.width ?? 1}`,
+        }"
       >
         <component
           :is="controlToComponent[control.type.toLowerCase()]"
           v-for="(control, controlIndex) in item.controls"
           :key="controlIndex"
           :value="value"
-          :style="{ 'grid-area': `${ control.top ?? 'auto' } / ${ control.left ?? 'auto' } / span ${ control.height ?? 1 } / span ${ control.width ?? 1 }` }"
+          :style="{
+            'grid-area': `${control.top ?? 'auto'} / ${control.left ?? 'auto'} / span ${control.height ?? 1} / span ${control.width ?? 1}`,
+          }"
           :control="control"
           @input="$emit('input', $event)"
         >

@@ -5,6 +5,7 @@
 Events are [weak functions](https://en.wikipedia.org/wiki/Weak_symbol) that can be used in your configuration to react to changes in the main program loop.
 
 Default return values of non-overridden events with a `bool` return type return `true`.
+
 ### onInitialize
 
 Called at end of default initialization. Run any config-specific initialization in this callback.
@@ -60,7 +61,7 @@ bool onLightingModeChanged(int modeID)
 
 **Arguments:**
 
-* `int` `modeID` — ID of the mode that changed.
+- `int` `modeID` — ID of the mode that changed.
 
 **Return type**: `bool` — To discard the mode change, return `false`.
 
@@ -80,7 +81,7 @@ bool onBlinkPhaseChanged(Channel &channel)
 
 **Arguments:**
 
-* `Channel` `&channel` — Channel reference which blink phase changed.
+- `Channel` `&channel` — Channel reference which blink phase changed.
 
 **Return type**: `bool` — To discard the blink phase change, return `false`.
 
@@ -99,7 +100,7 @@ void onSocketConnectionChanged(uint8_t connectedClients)
 
 **Arguments:**
 
-* `uint8_t` `connectedClients` — Number of connected clients after the connection event.
+- `uint8_t` `connectedClients` — Number of connected clients after the connection event.
 
 **Return type**: `void`
 
@@ -119,6 +120,6 @@ void onSocketConnectionChanged(uint8_t connectedClients)
 
 **Arguments:**
 
-* `WireDevice` `&device` — Reference to the `WireDevice` that co.
+- `WireDevice` `&device` — Reference to the `WireDevice` that co.
 
 **Return type**: `bool` — To prevent recalculation of [channels](/guide/#channels) return `false`.

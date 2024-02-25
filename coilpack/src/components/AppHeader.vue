@@ -1,48 +1,46 @@
 <script setup>
-import HeaderButton from './HeaderButton.vue'
+import HeaderButton from "./HeaderButton.vue";
 
 defineProps({
   showBackButton: {
     type: Boolean,
-    default: false
+    default: false,
   },
   subtitle: {
     type: String,
-    default: null
-  }
+    default: null,
+  },
 });
 
-defineEmits(['on-back', 'on-logo']);
+defineEmits(["on-back", "on-logo"]);
 </script>
 
 <template>
-  <header class="bg-header-background pointer-events-none sticky top-0 z-10 w-full">
-    <div class="w-full mx-auto flex h-28 items-center px-6 md:px-8 lg:container lg:h-32 lg:px-12 xl:px-20 justify-between pointer-events-auto">
+  <header
+    class="pointer-events-none sticky top-0 z-10 w-full bg-header-background"
+  >
+    <div
+      class="pointer-events-auto mx-auto flex h-28 w-full items-center justify-between px-6 lg:container md:px-8 lg:h-32 lg:px-12 xl:px-20"
+    >
       <HeaderButton
         v-if="showBackButton"
         icon="arrow-left"
         @click="$emit('on-back')"
       />
-      <slot
-        v-else
-        name="left"
-      />
-      <div class="flex-1 flex flex-col items-center">
+      <slot v-else name="left" />
+      <div class="flex flex-1 flex-col items-center">
         <span
           class="mx-auto flex items-center transition-opacity"
           @click="$emit('on-logo')"
         >
-          <mdicon
-            name="sparkplug"
-            class="text-foreground-200 w-[24px]"
-          />
+          <mdicon name="sparkplug" class="w-[24px] text-foreground-200" />
           <h1 class="select-none font-header text-lg font-semibold 2xl:text-xl">
             Sparkplug
           </h1>
         </span>
         <span
           v-if="subtitle?.length > 0"
-          class="mx-auto text-xs opacity-25 font-semibold"
+          class="mx-auto text-xs font-semibold opacity-25"
         >
           {{ subtitle }}
         </span>
