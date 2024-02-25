@@ -13,7 +13,7 @@ export default defineConfig({
       targets: [
         {
           src: `./configs/${configName}/*`,
-          dest: './config/'
+          dest: `./configs/${configName}/`
         }
       ]
     })
