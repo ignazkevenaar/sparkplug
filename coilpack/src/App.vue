@@ -11,6 +11,7 @@ const loading = ref(true);
 const error = ref(null);
 const lightsOut = ref(false);
 const currentRoute = ref('/');
+const config = ref({});
 const lightingModes = ref([]);
 const controlModels = ref({});
 const indicatorConfiguration = ref([]);
@@ -26,39 +27,45 @@ const scollToTop = () => { window.scrollTo(0, 0); }
 
 onMounted(async () => {
   try {
-      await sparkplug.setup();
-    }
-    catch(e) {
-      // Display error message in UI.
-      console.log(e);
-      return;
-    }
+    await sparkplug.setup();
+  }
+  catch(e) {
+    // Display error message in UI.
+    console.log(e);
+    return;
+  }
 
-    lightingModes.value = sparkplug.lightingModes;
-    controlModels.value = {};
-    sparkplug.lightingModes.forEach((mode, modeIndex) => {
-      controlModels.value[mode] = 0;
-    });
+  config.value = sparkplug.config;
+  lightingModes.value = sparkplug.lightingModes;
+  controlModels.value = {};
+  sparkplug.lightingModes.forEach(mode => {
+    controlModels.value[mode] = 0;
+  });
 
-    indicatorConfiguration.value = sparkplug.indicatorConfiguration;
+  if (config.value?.name)
+  {
+    document.title = `Sparkplug — ${config.value.name}`;
+  }
 
-    sparkplug.onGetMode(inputArguments =>
+  indicatorConfiguration.value = sparkplug.indicatorConfiguration;
+
+  sparkplug.onGetMode(inputArguments =>
+  {
+    inputArguments.forEach(argument =>
     {
-      inputArguments.forEach(argument =>
-      {
-        const [modeIndex, modeState] = argument.split(":");
-        const modeID = sparkplug.lightingModes[parseInt(modeIndex)];
-        controlModels.value[modeID] = parseInt(modeState);
-      });
+      const [modeIndex, modeState] = argument.split(":");
+      const modeID = sparkplug.lightingModes[parseInt(modeIndex)];
+      controlModels.value[modeID] = parseInt(modeState);
     });
+  });
 
-    // Get initial mode state.
-    sparkplug.getModes();
+  // Get initial mode state.
+  sparkplug.getModes();
 
-    loading.value = false;
+  loading.value = false;
 })
 
-// Animation timers for controls
+// Animation timers for controls.
 const blinkNormal = ref(false);
 setInterval(() => { blinkNormal.value = !blinkNormal.value; }, 300);
 provide('blink-normal', blinkNormal);
@@ -75,6 +82,7 @@ provide('blink-fast', blinkFast);
   >
     <AppHeader
       :show-back-button="currentRoute != '' && currentRoute != '/'"
+      :subtitle="config.name"
       @on-back="navigateHome"
       @on-logo="scollToTop"
     >

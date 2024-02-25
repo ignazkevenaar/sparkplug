@@ -5,6 +5,10 @@ defineProps({
   showBackButton: {
     type: Boolean,
     default: false
+  },
+  subtitle: {
+    type: String,
+    default: null
   }
 });
 
@@ -36,8 +40,11 @@ defineEmits(['on-back', 'on-logo']);
             Sparkplug
           </h1>
         </span>
-        <span class="mx-auto text-xs opacity-25 font-semibold">
-          Bottom text — Online
+        <span
+          v-if="subtitle?.length > 0"
+          class="mx-auto text-xs opacity-25 font-semibold"
+        >
+          {{ subtitle }}
         </span>
       </div>
       <slot name="right" />

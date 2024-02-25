@@ -1,3 +1,4 @@
+export let config;
 export let lightingModes;
 export let controlsData;
 export let connection;
@@ -8,9 +9,10 @@ const fetchJSON = async (filename) => fetch(filename).then((r) => r.json());
 
 export const fetchConfigurationFiles = async () =>
 {
-  const config = import.meta.env.VITE_CONFIG || "default";
-  lightingModes = await fetchJSON(`/configs/${config}/modes.json`);
-  controlsData = await fetchJSON(`/configs/${config}/controls.json`);
+  const configName = import.meta.env.VITE_CONFIG || "default";
+  config = await fetchJSON(`/configs/${configName}/config.json`);
+  lightingModes = await fetchJSON(`/configs/${configName}/modes.json`);
+  controlsData = await fetchJSON(`/configs/${configName}/controls.json`);
 }
 
 const dispatch = (event_name, data) => {
