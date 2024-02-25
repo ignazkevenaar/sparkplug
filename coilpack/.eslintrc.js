@@ -3,5 +3,6 @@ module.exports = {
   plugins: ["sort-exports"],
   rules: {
     "sort-imports": "warn",
+    "vue/max-attributes-per-line": "off",
   },
 };
