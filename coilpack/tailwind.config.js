@@ -1,5 +1,7 @@
-const defaultTheme = require('tailwindcss/defaultTheme');
-const colors = require('tailwindcss/colors');
+import { squirclePlugin, squircleRingColorPlugin, squircleRingPlugin } from './src/plugins/squirclePlugin';
+import lightsOutPlugin from './src/plugins/lightsOutPlugin';
+import colors from 'tailwindcss/colors';
+import defaultTheme from 'tailwindcss/defaultTheme';
 
 const themeCol = (variable) => `rgba(var(--color-${ variable }), <alpha-value>)`;
 
@@ -135,9 +137,10 @@ module.exports = {
     }
   },
   plugins: [
-    require('./src/plugins/lightsOutPlugin'),
-    require('./src/plugins/squirclePlugin').squirclePlugin,
-    require('./src/plugins/squirclePlugin').squircleRingPlugin,
-    require('./src/plugins/squirclePlugin').squircleRingColorPlugin,
+    lightsOutPlugin,
+    squirclePlugin,
+    squircleRingPlugin,
+    squircleRingColorPlugin,
+    'prettier-plugin-tailwindcss'
   ]
 }
