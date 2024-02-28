@@ -3,9 +3,9 @@ import {
   squircleRingColorPlugin,
   squircleRingPlugin,
 } from "./src/plugins/squirclePlugin";
-import lightsOutPlugin from "./src/plugins/lightsOutPlugin";
 import colors from "tailwindcss/colors";
 import defaultTheme from "tailwindcss/defaultTheme";
+import lightsOutPlugin from "./src/plugins/lightsOutPlugin";
 
 const themeCol = (variable) => `rgba(var(--color-${variable}), <alpha-value>)`;
 
@@ -21,37 +21,23 @@ module.exports = {
         //https://fonts.google.com/specimen/Share+Tech+Mono
       },
       colors: {
-        background: {
-          50: themeCol("background-50"),
-          100: themeCol("background-100"),
-          200: themeCol("background-200"),
-          300: themeCol("background-300"),
-          400: themeCol("background-400"),
-          500: themeCol("background-500"),
-          600: themeCol("background-600"),
-          700: themeCol("background-700"),
-          800: themeCol("background-800"),
-          900: themeCol("background-900"),
-        },
-        foreground: {
-          50: themeCol("foreground-50"),
-          100: themeCol("foreground-100"),
-          200: themeCol("foreground-200"),
-          300: themeCol("foreground-300"),
-          400: themeCol("foreground-400"),
-          500: themeCol("foreground-500"),
-          600: themeCol("foreground-600"),
-          700: themeCol("foreground-700"),
-          800: themeCol("foreground-800"),
-          900: themeCol("foreground-900"),
-        },
         app: { background: themeCol("app-background") },
-        container: {
-          background: themeCol("container-background"),
-          foreground: themeCol("container-foreground"),
-        },
         header: {
           background: themeCol("header-background"),
+          foreground: themeCol("header-foreground"),
+          controls: themeCol("header-controls"),
+        },
+        controls: {
+          background: themeCol("controls-background"),
+        },
+        container: {
+          background: themeCol("container-background-base"),
+          red: themeCol("container-background-red"),
+          yellow: themeCol("container-background-yellow"),
+          green: themeCol("container-background-green"),
+          blue: themeCol("container-background-blue"),
+          pink: themeCol("container-background-pink"),
+          foreground: themeCol("container-foreground"),
         },
         control: {
           background: {

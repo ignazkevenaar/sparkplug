@@ -1,7 +1,7 @@
 <script setup>
 import { computed, onMounted, ref, watch } from "vue";
 import InlineSvg from "vue-inline-svg";
-import colors from "../styles/displayColors";
+import colors from "../../styles/displayColors";
 
 const config = import.meta.env.VITE_CONFIG || "default";
 
@@ -112,7 +112,7 @@ watch(cascadedProps, (newSegmentsProps) => {
   <div class="flex flex-1 flex-col">
     <inline-svg
       :src="`/configs/${config}/display.svg`"
-      class="pointer-events-none relative grid flex-1 place-items-center fill-transparent stroke-2"
+      class="display pointer-events-none relative grid flex-1 place-items-center fill-transparent stroke-2"
       @loaded="SVGLoaded($event)"
     />
   </div>

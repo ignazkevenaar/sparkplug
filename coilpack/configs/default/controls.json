@@ -6,7 +6,7 @@
       "color": "transparent",
       "controls": [
         {
-          "type": "Button",
+          "type": "indicator",
           "icon": "arrow-left-bold-outline",
           "readOnly": true,
           "width": 4,
@@ -33,7 +33,7 @@
           ]
         },
         {
-          "type": "Button",
+          "type": "indicator",
           "icon": "car-light-high",
           "readOnly": true,
           "width": 4,
@@ -86,7 +86,7 @@
           ]
         },
         {
-          "type": "Button",
+          "type": "indicator",
           "icon": "hazard-lights",
           "readOnly": true,
           "width": 4,
@@ -105,7 +105,7 @@
           ]
         },
         {
-          "type": "Button",
+          "type": "indicator",
           "icon": "arrow-right-bold-outline",
           "readOnly": true,
           "width": 4,
@@ -132,7 +132,7 @@
           ]
         },
         {
-          "type": "Button",
+          "type": "indicator",
           "icon": "car-parking-lights",
           "readOnly": true,
           "width": 4,
@@ -150,7 +150,7 @@
           ]
         },
         {
-          "type": "Button",
+          "type": "indicator",
           "icon": "car-light-dimmed",
           "readOnly": true,
           "width": 4,
@@ -168,7 +168,7 @@
           ]
         },
         {
-          "type": "Button",
+          "type": "indicator",
           "icon": "car-light-fog",
           "readOnly": true,
           "width": 4,
@@ -186,7 +186,7 @@
           ]
         },
         {
-          "type": "Button",
+          "type": "indicator",
           "icon": "car-light-fog",
           "readOnly": true,
           "width": 4,
@@ -211,7 +211,7 @@
       "name": "Headlights",
       "controls": [
         {
-          "type": "Button",
+          "type": "button",
           "icon": "numeric-0",
           "width": 6,
           "height": 6,
@@ -228,7 +228,7 @@
           "label": "Off"
         },
         {
-          "type": "Button",
+          "type": "button",
           "icon": "car-parking-lights",
           "width": 6,
           "height": 6,
@@ -246,7 +246,7 @@
           "label": "Parking"
         },
         {
-          "type": "Button",
+          "type": "button",
           "icon": "car-light-dimmed",
           "width": 12,
           "height": 6,
@@ -269,7 +269,7 @@
       "name": "High beams",
       "controls": [
         {
-          "type": "Button",
+          "type": "button",
           "icon": "car-light-high",
           "width": 12,
           "height": 6,
@@ -291,7 +291,7 @@
           "label": "High"
         },
         {
-          "type": "Button",
+          "type": "button",
           "icon": "car-light-high",
           "width": 12,
           "height": 6,
@@ -319,7 +319,7 @@
       "name": "Fog lights",
       "controls": [
         {
-          "type": "Button",
+          "type": "button",
           "icon": "car-light-fog",
           "round": true,
           "width": 6,
@@ -342,7 +342,7 @@
           "label": "Front"
         },
         {
-          "type": "Button",
+          "type": "button",
           "icon": "car-light-fog",
           "round": true,
           "width": 6,
@@ -370,7 +370,7 @@
       "name": "Blinkers",
       "controls": [
         {
-          "type": "Button",
+          "type": "button",
           "icon": "arrow-left-bold-outline",
           "round": true,
           "width": 6,
@@ -393,7 +393,7 @@
           ]
         },
         {
-          "type": "Button",
+          "type": "button",
           "icon": "arrow-right-bold-outline",
           "round": true,
           "width": 6,
@@ -416,7 +416,7 @@
           ]
         },
         {
-          "type": "Button",
+          "type": "button",
           "icon": "hazard-lights",
           "backgroundColor": "red",
           "backgroundStyle": "outline",
@@ -446,7 +446,7 @@
       "name": "Brakes",
       "controls": [
         {
-          "type": "Button",
+          "type": "button",
           "icon": "car-brake-alert",
           "width": 12,
           "height": 6,
@@ -465,11 +465,10 @@
               "backgroundColor": "red",
               "foregroundColor": "black"
             }
-          ],
-          "label": "Brake"
+          ]
         },
         {
-          "type": "Button",
+          "type": "button",
           "icon": "car-brake-abs",
           "width": 6,
           "height": 6,
@@ -488,11 +487,10 @@
               "backgroundColor": "red",
               "foregroundColor": "black"
             }
-          ],
-          "label": "ESS"
+          ]
         },
         {
-          "type": "Button",
+          "type": "button",
           "icon": "car-shift-pattern",
           "width": 6,
           "height": 6,
@@ -509,8 +507,7 @@
               "backgroundStyle": "fill",
               "foregroundColor": "black"
             }
-          ],
-          "label": "Reverse"
+          ]
         }
       ]
     }

@@ -1,6 +1,6 @@
 <script setup>
 import { computed, inject, ref } from "vue";
-import colors from "../styles/controlColors";
+import colors from "../../styles/controlColors";
 
 const props = defineProps({
   value: {
@@ -11,11 +11,15 @@ const props = defineProps({
     type: Object,
     required: true,
   },
+  type: {
+    type: String,
+    default: "control",
+  },
 });
 
 const emit = defineEmits(["input"]);
 
-// Animation timers
+// Animation timers.
 const blinkNormal = inject("blink-normal");
 const blinkFast = inject("blink-fast");
 
@@ -157,9 +161,10 @@ const onHold = (event) => {
 </script>
 
 <template>
-  <button
+  <component
+    :is="type === 'button' ? 'button' : 'div'"
     class="relative z-0 flex select-none flex-col items-center justify-center bg-gradient-to-br p-2 text-center text-xs ring-inset enabled:cursor-pointer md:text-sm md:font-semibold"
-    :class="[roundClass, colorClasses]"
+    :class="[roundClass, colorClasses, type]"
     :disabled="control.readOnly"
     @mousedown.prevent="mouseDown"
     @mouseup.prevent="mouseUp"
@@ -171,7 +176,7 @@ const onHold = (event) => {
     {{ cascadedProps.label }}
     <div
       v-if="holdPosition || holdingPosition"
-      class="absolute bottom-1 h-1 w-5 rounded-full bg-current opacity-75"
+      class="absolute bottom-1 h-[3px] w-5 rounded-full bg-current opacity-25"
     />
-  </button>
+  </component>
 </template>

@@ -17,10 +17,13 @@ defineEmits(["on-back", "on-logo"]);
 
 <template>
   <header
-    class="pointer-events-none sticky top-0 z-10 w-full bg-header-background"
+    class="pointer-events-none sticky top-0 z-10 mx-auto w-full p-6 lg:container md:px-8 md:pb-8 lg:h-32 lg:px-12 lg:pb-12 xl:px-20 xl:pb-20"
   >
     <div
-      class="pointer-events-auto mx-auto flex h-28 w-full items-center justify-between px-6 lg:container md:px-8 lg:h-32 lg:px-12 xl:px-20"
+      class="mask-image absolute inset-0 bg-header-background/50 backdrop-blur-lg"
+    />
+    <div
+      class="text-header-foreground pointer-events-auto relative z-10 flex h-20 w-full items-center justify-between rounded-2xl p-3"
     >
       <HeaderButton
         v-if="showBackButton"
@@ -28,13 +31,13 @@ defineEmits(["on-back", "on-logo"]);
         @click="$emit('on-back')"
       />
       <slot v-else name="left" />
-      <div class="flex flex-1 flex-col items-center">
+      <div class="flex flex-1 select-none flex-col items-center">
         <span
-          class="mx-auto flex items-center transition-opacity"
+          class="mx-auto flex cursor-pointer items-center transition-opacity"
           @click="$emit('on-logo')"
         >
-          <mdicon name="sparkplug" class="w-[24px] text-foreground-200" />
-          <h1 class="select-none font-header text-lg font-semibold 2xl:text-xl">
+          <mdicon name="sparkplug" class="w-[24px]" />
+          <h1 class="font-header text-lg font-semibold 2xl:text-xl">
             Sparkplug
           </h1>
         </span>

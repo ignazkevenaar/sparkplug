@@ -1,9 +1,8 @@
 <script setup>
-import { onBeforeUpdate, ref } from "vue";
-import Button from "./Button.vue";
 import ControlContainer from "./ControlContainer.vue";
-import Placeholder from "./Placeholder.vue";
-import StatusDisplay from "./StatusDisplay.vue";
+import IconControl from "./controls/IconControl.vue";
+import Placeholder from "./controls/PlaceholderControl.vue";
+import StatusControl from "./controls/StatusControl.vue";
 
 defineProps({
   value: {
@@ -20,21 +19,16 @@ defineEmits(["input"]);
 
 const controlToComponent = {
   placeholder: Placeholder,
-  button: Button,
-  "status-display": StatusDisplay,
+  button: IconControl,
+  indicator: IconControl,
+  "status-display": StatusControl,
 };
 
 // Automatic control panel grid sizing.
-
-// 2*theme(spacing.6) - Horizontal padding.
-// theme(spacing.4) - Horizontal grid gap.
-
 const autoCols = [
   "grid-cols-[repeat(2,calc((100vw-2*theme(spacing.6)-var(--gap-controls-x))/2))]",
   "sm:grid-cols-[repeat(2,200px)]",
 ];
-
-// theme(spacing.10) vertical grid gap.
 
 const autoRows = [
   "auto-rows-[calc(((100vw-2_*_theme(spacing.6)_-_var(--gap-controls-x))/2_-_var(--gap-controls-y))/2)]",
@@ -61,7 +55,7 @@ const autoRows = [
         }"
       >
         <component
-          :is="controlToComponent[control.type.toLowerCase()]"
+          :is="controlToComponent[control.type]"
           v-for="(control, controlIndex) in item.controls"
           :key="controlIndex"
           :value="value"
@@ -69,6 +63,7 @@ const autoRows = [
             'grid-area': `${control.top ?? 'auto'} / ${control.left ?? 'auto'} / span ${control.height ?? 1} / span ${control.width ?? 1}`,
           }"
           :control="control"
+          :type="control.type"
           @input="$emit('input', $event)"
         >
           {{ control.text }}

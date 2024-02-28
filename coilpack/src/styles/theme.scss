@@ -1,0 +1,142 @@
+:root {
+    // Background
+    --color-background-50: 237, 237, 240;   // #EEF0F3
+    --color-background-100: 206, 207, 215;  // #D1D3DC
+    --color-background-200: 141, 144, 160;  // #989BAC
+    --color-background-300: 97, 100, 118;   // #6E7287
+    --color-background-400: 71, 74, 91;     // #55586D
+    --color-background-500: 50, 52, 67;     // #3F4255
+    --color-background-600: 32, 33, 45;     // #2C2E3C
+    --color-background-700: 19, 20, 27;     // #1C1E28
+    --color-background-800: 11, 12, 16;     // #13141B
+    --color-background-900: 7, 8, 10;       // #0D0D12
+
+    // Foreground
+    --color-foreground-50: 237, 237, 240;   // #EEF0F3
+    --color-foreground-100: 206, 207, 215;  // #D1D3DC
+    --color-foreground-200: 141, 144, 160;  // #989BAC
+    --color-foreground-300: 97, 100, 118;   // #6E7287
+    --color-foreground-400: 71, 74, 91;     // #55586D
+    --color-foreground-500: 50, 52, 67;     // #3F4255
+    --color-foreground-600: 32, 33, 45;     // #2C2E3C
+    --color-foreground-700: 19, 20, 27;     // #1C1E28
+    --color-foreground-800: 11, 12, 16;     // #13141B
+    --color-foreground-900: 7, 8, 10;       // #0D0D12
+
+    // Colors
+    --color-red-highlight: 220, 38, 38;     // #dc2626
+    --color-red-default: 153, 27, 27;       // #991b1b
+    --color-red-dim: 38, 19, 23;            // #261317
+
+    --color-yellow-highlight: 251, 191, 36; // #fbbf24
+    --color-yellow-default: 217, 119, 6;    // #d97706
+    --color-yellow-dim: 43, 19, 5;          // #2b1305
+
+    --color-green-highlight: 163, 230, 53;  // #a3e635
+    --color-green-default: 132, 204, 22;    // #84cc16
+    --color-green-dim: 20, 32, 7;           // #142007
+
+    --color-blue-highlight: 96, 165, 250;   // #60a5fa
+    --color-blue-default: 59, 130, 246;     // #3b82f6
+    --color-blue-dim: 9, 19, 48;            // #091330
+
+    --color-pink-highlight: 244, 114, 182;  // #f472b6
+    --color-pink-default: 219, 39, 119;     // #db2777
+    --color-pink-dim: 40, 0, 20;            // #280014
+
+    // App
+    --color-app-background: 0, 0, 0;
+    --color-controls-background: var(--color-background-800);
+
+    // Header
+    --color-header-background: 0, 0, 0;
+    --color-header-foreground: var(--color-foreground-100);
+    --color-header-controls: var(--color-foreground-300);
+
+    // Control container
+    --color-container-background-base: var(--color-background-700);
+    --color-container-red: var(--color-red-dim);
+    --color-container-yellow: var(--color-yellow-dim);
+    --color-container-green: var(--color-green-dim);
+    --color-container-blue: var(--color-blue-dim);
+    --color-container-pink: var(--color-pink-dim);
+
+    --color-container-foreground: var(--color-foreground-200);
+
+    // Control background
+    --color-control-background-base-highlight: var(--color-background-100);
+    --color-control-background-base-default: var(--color-background-600);
+    --color-control-background-base-dim: var(--color-background-800);
+
+    // Control foreground
+    --color-control-foreground-base-highlight: var(--color-foreground-50);
+    --color-control-foreground-base-default: var(--color-foreground-100);
+    --color-control-foreground-base-dim: var(--color-foreground-600);
+
+    // Automatic generation of theme color variables.
+    $aspects: "background", "foreground";
+    $colors: "red", "yellow", "green", "blue", "pink";
+
+    @each $aspect in $aspects {
+        @each $color in $colors {
+            --color-control-#{$aspect}-#{$color}-highlight: var(--color-#{$color}-highlight);
+            --color-control-#{$aspect}-#{$color}-default: var(--color-#{$color}-default);
+            --color-control-#{$aspect}-#{$color}-dim: var(--color-#{$color}-dim);
+        }
+    }
+}
+
+.button {
+    // Override control specific colors here.
+}
+
+.indicator {
+    // Override indicator specific colors here.
+}
+
+.display {
+    // Override display specific colors here.
+}
+
+.lightsOut {
+    // Lights Out
+    --color-lightsOut-50:  255,176,0; // #FF7E00
+    --color-lightsOut-100: 255,135,0; // #FF7800
+    --color-lightsOut-200: 255,115,0; // #FF5A00
+    --color-lightsOut-300: 255,103,0; // #F74F00
+    --color-lightsOut-400: 227,71,0;  // #C13200
+    --color-lightsOut-500: 155,44,0;  // #851000
+    --color-lightsOut-600: 105,27,0;  // #680000
+    --color-lightsOut-700: 75,16,0;   // #450000
+    --color-lightsOut-800: 43,6,0;    // #200000
+    --color-lightsOut-900: 28,1,0;    // #100000
+
+    // App
+    --color-controls-background: var(--color-background-900);
+
+    // Header
+    --color-header-foreground: var(--color-lightsOut-500);
+    --color-header-controls: var(--color-lightsOut-600);
+
+    // Container
+    --color-container-background-base: var(--color-background-800);
+    --color-container-foreground: var(--color-lightsOut-500);
+
+    .button {
+        // Control background
+        --color-control-background-base-default: var(--color-background-700);
+
+        // Control foreground
+        --color-control-foreground-base-highlight: var(--color-lightsOut-50);
+        --color-control-foreground-base-default: var(--color-lightsOut-200);
+        --color-control-foreground-base-dim: var(--color-lightsOut-800);
+
+        $colors: "yellow", "green", "blue", "pink";
+
+        @each $color in $colors {
+            --color-control-foreground-#{$color}-highlight:var(--color-lightsOut-50);
+            --color-control-foreground-#{$color}-default:var(--color-lightsOut-200);
+            --color-control-foreground-#{$color}-dim:var(--color-lightsOut-800);
+        }
+    }
+}

@@ -7,6 +7,9 @@
   :root {
     -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout: none;
+
+    --gap-controls-x: theme(spacing.4);
+    --gap-controls-y: theme(spacing.12);
   }
 
   @media (prefers-color-scheme: dark) {
@@ -14,137 +17,10 @@
       color-scheme: dark;
     }
   }
+}
 
-  :root {
-    /* Background */
-    --color-background-50: 237, 237, 240; /* #EEF0F3 */
-    --color-background-100: 206, 207, 215; /* #D1D3DC */
-    --color-background-200: 141, 144, 160; /* #989BAC */
-    --color-background-300: 97, 100, 118; /* #6E7287 */
-    --color-background-400: 71, 74, 91; /* #55586D */
-    --color-background-500: 50, 52, 67; /* #3F4255 */
-    --color-background-600: 32, 33, 45; /* #2C2E3C */
-    --color-background-700: 19, 20, 27; /* #1C1E28 */
-    --color-background-800: 11, 12, 16; /* #13141B */
-    --color-background-900: 7, 8, 10; /* #0D0D12 */
-
-    /* Foreground */
-    --color-foreground-50: 237, 237, 240; /* #EEF0F3 */
-    --color-foreground-100: 206, 207, 215; /* #D1D3DC */
-    --color-foreground-200: 141, 144, 160; /* #989BAC */
-    --color-foreground-300: 97, 100, 118; /* #6E7287 */
-    --color-foreground-400: 71, 74, 91; /* #55586D */
-    --color-foreground-500: 50, 52, 67; /* #3F4255 */
-    --color-foreground-600: 32, 33, 45; /* #2C2E3C */
-    --color-foreground-700: 19, 20, 27; /* #1C1E28 */
-    --color-foreground-800: 11, 12, 16; /* #13141B */
-    --color-foreground-900: 7, 8, 10; /* #0D0D12 */
-
-    /* App */
-    --color-app-background: var(--color-background-900);
-    --color-header-background: 0, 0, 0;
-
-    /* Container */
-    --color-container-background: var(--color-background-700);
-    --color-container-foreground: var(--color-foreground-200);
-
-    /* Control background */
-    --color-control-background-base-default: var(--color-background-600);
-    --color-control-background-base-highlight: var(--color-background-100);
-    --color-control-background-base-dim: var(--color-background-800);
-
-    --color-control-background-red-default: 153, 27, 27; /* #991b1b */
-    --color-control-background-red-highlight: 220, 38, 38; /* #dc2626 */
-    --color-control-background-red-dim: 38, 19, 23; /* #261317 */
-
-    --color-control-background-yellow-default: 217, 119, 6; /* #d97706 */
-    --color-control-background-yellow-highlight: 251, 191, 36; /* #fbbf24 */
-    --color-control-background-yellow-dim: 43, 19, 5; /* #2b1305 */
-
-    --color-control-background-green-default: 132, 204, 22; /* #84cc16 */
-    --color-control-background-green-highlight: 163, 230, 53; /* #a3e635 */
-    --color-control-background-green-dim: 20, 32, 7; /* #142007 */
-
-    --color-control-background-blue-default: 59, 130, 246; /* #3b82f6 */
-    --color-control-background-blue-highlight: 96, 165, 250; /* #60a5fa */
-    --color-control-background-blue-dim: 9, 19, 48; /* #091330 */
-
-    --color-control-background-pink-default: 219, 39, 119; /* #db2777 */
-    --color-control-background-pink-highlight: 244, 114, 182; /* #f472b6 */
-    --color-control-background-pink-dim: 40, 0, 20; /* #280014 */
-
-    /* Control foreground */
-    --color-control-foreground-base-default: 200, 200, 200;
-    --color-control-foreground-base-highlight: 255, 255, 255;
-    --color-control-foreground-base-dim: 32, 32, 32;
-
-    --color-control-foreground-red-default: 153, 27, 27; /* #991b1b */
-    --color-control-foreground-red-highlight: 220, 38, 38; /* #dc2626 */
-    --color-control-foreground-red-dim: 38, 19, 23; /* #261317 */
-
-    --color-control-foreground-yellow-default: 217, 119, 6; /* #d97706 */
-    --color-control-foreground-yellow-highlight: 251, 191, 36; /* #fbbf24 */
-    --color-control-foreground-yellow-dim: 43, 19, 5; /* #2b1305 */
-
-    --color-control-foreground-green-default: 132, 204, 22; /* #84cc16 */
-    --color-control-foreground-green-highlight: 163, 230, 53; /* #a3e635 */
-    --color-control-foreground-green-dim: 20, 32, 7; /* #142007 */
-
-    --color-control-foreground-blue-default: 59, 130, 246; /* #3b82f6 */
-    --color-control-foreground-blue-highlight: 96, 165, 250; /* #60a5fa */
-    --color-control-foreground-blue-dim: 9, 19, 48; /* #091330 */
-
-    --color-control-foreground-pink-default: 219, 39, 119; /* #db2777 */
-    --color-control-foreground-pink-highlight: 244, 114, 182; /* #f472b6 */
-    --color-control-foreground-pink-dim: 40, 0, 20; /* #280014 */
-
-    --gap-controls-x: theme(spacing.4);
-    --gap-controls-y: theme(spacing.12);
-
-    /*--color-lightsOut-50:  255,176,0; /* #FF7E00 */
-    /*--color-lightsOut-100: 255,135,0; /* #FF7800 */
-    /*--color-lightsOut-200: 255,115,0; /* #FF5A00 */
-    /*--color-lightsOut-300: 255,103,0; /* #F74F00 */
-    /*--color-lightsOut-400: 227,71,0;  /* #C13200 */
-    /*--color-lightsOut-500: 155,44,0;  /* #851000 */
-    /*--color-lightsOut-600: 105,27,0;  /* #680000 */
-    /*--color-lightsOut-700: 75,16,0;   /* #450000 */
-    /*--color-lightsOut-800: 43,6,0;    /* #200000 */
-    /*--color-lightsOut-900: 28,1,0;    /* #100000 */
-  }
-
-  .lightsOut {
-    --color-background: 10, 10, 10;
-    --color-container-background: 11, 12, 16;
-
-    /* Control background */
-    --color-control-background-base-default: 11, 12, 16;
-    --color-control-background-base-highlight: 255, 103, 0;
-    --color-control-background-base-dim: 7, 8, 10;
-
-    /* Control foreground */
-    --color-control-foreground-base-default: 227, 71, 0;
-    --color-control-foreground-base-highlight: 255, 255, 255;
-    --color-control-foreground-base-dim: 75, 16, 0;
-
-    --color-control-foreground-red-default: 227, 71, 0;
-    --color-control-foreground-red-highlight: 255, 255, 255;
-    --color-control-foreground-red-dim: 75, 16, 0;
-
-    --color-control-foreground-yellow-default: 227, 71, 0;
-    --color-control-foreground-yellow-highlight: 255, 255, 255;
-    --color-control-foreground-yellow-dim: 75, 16, 0;
-
-    --color-control-foreground-green-default: 227, 71, 0;
-    --color-control-foreground-green-highlight: 255, 255, 255;
-    --color-control-foreground-green-dim: 75, 16, 0;
-
-    --color-control-foreground-blue-default: 227, 71, 0;
-    --color-control-foreground-blue-highlight: 255, 255, 255;
-    --color-control-foreground-blue-dim: 75, 16, 0;
-
-    --color-control-foreground-pink-default: 227, 71, 0;
-    --color-control-foreground-pink-highlight: 255, 255, 255;
-    --color-control-foreground-pink-dim: 75, 16, 0;
+@layer utilities {
+  .mask-image {
+    mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
   }
 }
