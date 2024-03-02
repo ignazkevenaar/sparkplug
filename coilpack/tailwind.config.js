@@ -20,9 +20,6 @@ module.exports = {
         header: ["Krona One", ...defaultTheme.fontFamily.sans],
         //https://fonts.google.com/specimen/Share+Tech+Mono
       },
-      maxHeight: {
-        "screen-75": "75vh",
-      },
       colors: {
         background: {
           50: themeCol("background-50"),
@@ -126,17 +123,6 @@ module.exports = {
       gap: {
         "controls-x": "var(--gap-controls-x, 1rem)",
         "controls-y": "var(--gap-controls-y, 2.25rem)",
-      },
-      gridRow: {
-        "span-7": "span 7 / span 7",
-        "span-8": "span 8 / span 8",
-        "span-9": "span 9 / span 9",
-        "span-10": "span 10 / span 10",
-        "span-11": "span 11 / span 11",
-        "span-12": "span 12 / span 12",
-      },
-      gridTemplateRows: {
-        8: "repeat(8, minmax(0, 1fr))",
       },
     },
   },
