@@ -51,7 +51,8 @@
           ]
         },
         {
-          "type": "status-display",
+          "type": "display",
+          "path": "display.svg",
           "width": 8,
           "height": 12,
           "segments": [
@@ -169,7 +170,7 @@
         },
         {
           "type": "indicator",
-          "icon": "car-light-fog",
+          "icon": "car-light-fog-front",
           "readOnly": true,
           "width": 4,
           "height": 4,
@@ -187,7 +188,7 @@
         },
         {
           "type": "indicator",
-          "icon": "car-light-fog",
+          "icon": "car-light-fog-rear",
           "readOnly": true,
           "width": 4,
           "height": 4,
@@ -320,7 +321,7 @@
       "controls": [
         {
           "type": "button",
-          "icon": "car-light-fog",
+          "icon": "car-light-fog-front",
           "round": true,
           "width": 6,
           "height": 6,
@@ -343,7 +344,7 @@
         },
         {
           "type": "button",
-          "icon": "car-light-fog",
+          "icon": "car-light-fog-rear",
           "round": true,
           "width": 6,
           "height": 6,

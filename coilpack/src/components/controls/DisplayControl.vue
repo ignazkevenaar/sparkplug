@@ -16,6 +16,7 @@ const props = defineProps({
   },
 });
 
+const errorLoading = ref(false);
 const displayElement = ref(null);
 const originalElementClassLists = ref([]);
 
@@ -26,8 +27,8 @@ const SVGLoaded = (event) => {
     const segmentElements = event.querySelectorAll(segment.selector);
 
     const originalClasses = [];
-    for (let i = 0; i < segmentElements.length; i++) {
-      originalClasses.push(segmentElements[i].getAttribute("class"));
+    for (let i = 0; i < segmentElements?.length; i++) {
+      originalClasses.push(segmentElements[i]?.getAttribute("class"));
     }
 
     originalElementClassLists.value.push(originalClasses);
@@ -84,6 +85,8 @@ const colorClassPerSegment = (props, anyMode) => {
 };
 
 const appyIndicatorClasses = (newSegmentsProps) => {
+  if (errorLoading.value) return;
+
   newSegmentsProps.forEach((segmentProps, index) => {
     const segment = props.control.segments[index];
     const activeSegmentElements = displayElement.value.querySelectorAll(
@@ -110,20 +113,26 @@ watch(cascadedProps, (newSegmentsProps) => {
 
 <template>
   <div class="flex flex-1 flex-col">
+    <div
+      v-if="errorLoading"
+      class="grid h-full place-items-center rounded-lg bg-control-background-red-dim text-control-foreground-red-highlight"
+    >
+      <div
+        class="mx-auto flex flex-col items-center text-center text-sm font-semibold"
+      >
+        <mdicon name="sparkplug-sad" size="36" />
+        Error loading SVG
+      </div>
+    </div>
     <inline-svg
-      :src="`/configs/${config}/display.svg`"
+      v-else
+      :src="`/configs/${config}/${control.path}`"
       class="display pointer-events-none relative grid flex-1 place-items-center fill-transparent stroke-2"
       @loaded="SVGLoaded($event)"
+      @error="errorLoading = true"
     />
   </div>
 </template>
-
-<style lang="scss" scoped>
-:deep(.mdi svg) {
-  width: 100%;
-  height: 100%;
-}
-</style>
 
 <style lang="scss">
 #display {

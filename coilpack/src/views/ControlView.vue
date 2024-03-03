@@ -1,6 +1,6 @@
 <script setup>
 import ControlPanel from "../components/ControlPanel.vue";
-import StatusDisplay from "../components/controls/StatusControl.vue";
+import StatusDisplay from "../components/controls/DisplayControl.vue";
 import { inject } from "vue";
 
 let sparkplug = inject("sparkplug");

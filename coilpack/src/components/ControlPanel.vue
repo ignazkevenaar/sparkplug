@@ -1,8 +1,8 @@
 <script setup>
 import ControlContainer from "./ControlContainer.vue";
+import DisplayControl from "./controls/DisplayControl.vue";
 import IconControl from "./controls/IconControl.vue";
 import Placeholder from "./controls/PlaceholderControl.vue";
-import StatusControl from "./controls/StatusControl.vue";
 
 defineProps({
   value: {
@@ -21,7 +21,7 @@ const controlToComponent = {
   placeholder: Placeholder,
   button: IconControl,
   indicator: IconControl,
-  "status-display": StatusControl,
+  display: DisplayControl,
 };
 
 // Automatic control panel grid sizing.
