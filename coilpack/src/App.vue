@@ -36,7 +36,8 @@ const groupAndSetModeChanges = (event) => {
   const unsetModeStrings = [];
 
   Object.keys(event).forEach((modeID) => {
-    const newValue = Number(event[modeID]);
+    let newValue = event[modeID];
+    if (typeof newValue === "boolean") newValue = Number(newValue) * 255;
 
     if (import.meta.env.DEV) {
       // Don't wait for websocket confirmation when debugging.
@@ -45,8 +46,9 @@ const groupAndSetModeChanges = (event) => {
 
     const modeIndex = lightingModes.value.indexOf(modeID);
     if (modeIndex > -1) {
-      if (newValue === 1) setModeStrings.push(modeIndex);
+      if (newValue === 255) setModeStrings.push(modeIndex);
       else if (newValue === 0) unsetModeStrings.push(modeIndex);
+      else setModeStrings.push(`${modeIndex}:${newValue}`);
     }
   });
 

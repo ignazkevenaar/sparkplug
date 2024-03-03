@@ -31,9 +31,12 @@ const roundClass = computed(() =>
 
 const currentPositions = computed(() =>
   props.control.positions.flatMap((position, positionIndex) => {
-    const allModesApply = Object.keys(position.modes).every(
-      (mode) => props.value[mode] === Number(position.modes[mode]),
-    );
+    const allModesApply = Object.keys(position.modes).every((mode) => {
+      let positionValue = position.modes[mode];
+      if (typeof positionValue === "boolean")
+        positionValue = Number(position.modes[mode]) * 255;
+      return props.value[mode] === positionValue;
+    });
 
     return allModesApply ? [{ ...position, index: positionIndex }] : [];
   }),
