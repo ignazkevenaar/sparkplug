@@ -1,4 +1,10 @@
-const fetchJSON = async (filename) => fetch(filename).then((r) => r.json());
+const fetchJSON = async (filename) =>
+  fetch(filename).then((response) => {
+    if (!response.ok) {
+      throw new Error(`Failed loading ${filename}`);
+    }
+    return response.json();
+  });
 
 export default async () => {
   const configName = import.meta.env.VITE_CONFIG || "default";

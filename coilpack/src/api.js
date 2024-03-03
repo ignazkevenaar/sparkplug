@@ -42,7 +42,10 @@ export const setup = async () => {
   return new Promise((resolve, reject) => {
     if (import.meta.env.DEV) {
       const debugServer = import.meta.env.VITE_DEBUG_WEBSOCKET;
-      if (!debugServer) return false;
+      if (!debugServer)
+        throw new Error(
+          "Debug websocket server not defined! Use environment variable: VITE_DEBUG_WEBSOCKET",
+        );
       connection = new WebSocket(debugServer);
     } else {
       connection = new WebSocket("ws://" + window.location.hostname + ":81/");

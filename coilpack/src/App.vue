@@ -32,7 +32,10 @@ const scollToTop = () => {
 };
 
 onMounted(async () => {
-  const loadedConfig = await loadConfiguration();
+  const loadedConfig = await loadConfiguration().catch((reason) => {
+    error.value = reason;
+  });
+  if (!loadedConfig) return;
 
   config.value = loadedConfig.config;
   lightingModes.value = loadedConfig.lightingModes;
@@ -47,13 +50,7 @@ onMounted(async () => {
     document.title = `Sparkplug — ${config.value.name}`;
   }
 
-  try {
-    await sparkplug.setup();
-  } catch (e) {
-    // Display error message in UI.
-    console.log(e);
-    return;
-  }
+  await sparkplug.setup().catch((reason) => (error.value = reason));
 
   sparkplug.onGetMode((inputArguments) => {
     inputArguments.forEach((argument) => {
@@ -91,6 +88,7 @@ provide("blink-fast", blinkFast);
     <AppHeader
       :show-back-button="currentRoute != '' && currentRoute != '/'"
       :subtitle="config.name"
+      :show-buttons="!error && !loading"
       @on-back="navigateHome"
       @on-logo="scollToTop"
     >
@@ -102,11 +100,14 @@ provide("blink-fast", blinkFast);
       </template>
     </AppHeader>
     <Transition mode="out-in">
-      <div v-if="loading" class="absolute inset-0 grid place-items-center">
-        <LoadingIndicator />
-      </div>
-      <div v-else-if="error" class="absolute inset-0 grid place-items-center">
+      <div
+        v-if="error"
+        class="absolute inset-0 grid place-items-center p-6 pb-2 lg:container md:px-8 md:pb-6 lg:px-12 lg:pb-12 xl:px-20 xl:pb-10"
+      >
         <ErrorMessage :error="error" />
+      </div>
+      <div v-else-if="loading" class="absolute inset-0 grid place-items-center">
+        <LoadingIndicator />
       </div>
       <AppRouter v-else @route-changed="currentRoute = $event" />
     </Transition>

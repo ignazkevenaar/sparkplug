@@ -1,5 +1,6 @@
 <script setup>
 import { computed, onMounted, ref, watch } from "vue";
+import ErrorMessage from "../ErrorMessage.vue";
 import InlineSvg from "vue-inline-svg";
 import colors from "../../styles/displayColors";
 
@@ -16,7 +17,7 @@ const props = defineProps({
   },
 });
 
-const errorLoading = ref(false);
+const errorLoading = ref(null);
 const displayElement = ref(null);
 const originalElementClassLists = ref([]);
 
@@ -113,23 +114,13 @@ watch(cascadedProps, (newSegmentsProps) => {
 
 <template>
   <div class="flex flex-1 flex-col">
-    <div
-      v-if="errorLoading"
-      class="grid h-full place-items-center rounded-lg bg-control-background-red-dim text-control-foreground-red-highlight"
-    >
-      <div
-        class="mx-auto flex flex-col items-center text-center text-sm font-semibold"
-      >
-        <mdicon name="sparkplug-sad" size="36" />
-        Error loading SVG
-      </div>
-    </div>
+    <ErrorMessage v-if="errorLoading" :error="errorLoading" title="" />
     <inline-svg
       v-else
       :src="`/configs/${config}/${control.path}`"
       class="display pointer-events-none relative grid flex-1 place-items-center fill-transparent stroke-2"
       @loaded="SVGLoaded($event)"
-      @error="errorLoading = true"
+      @error="errorLoading = $event"
     />
   </div>
 </template>
