@@ -10,27 +10,6 @@ let controlsConfig = inject("controlsConfig");
 let controlModels = inject("controlModels");
 
 const emit = defineEmits(["input"]);
-
-const groupAndSetModeChanges = (event) => {
-  console.log("Control input", event);
-
-  const setModeStrings = [];
-  const unsetModeStrings = [];
-
-  Object.keys(event).forEach((modeID) => {
-    const newValue = Number(event[modeID]);
-    controlModels.value[modeID] = newValue;
-
-    const modeIndex = lightingModes.value.indexOf(modeID);
-    if (modeIndex > -1) {
-      if (newValue === 1) setModeStrings.push(modeIndex);
-      else if (newValue === 0) unsetModeStrings.push(modeIndex);
-    }
-  });
-
-  if (setModeStrings.length) api.setMode(setModeStrings);
-  if (unsetModeStrings.length) api.unsetMode(unsetModeStrings);
-};
 </script>
 
 <template>
@@ -39,13 +18,13 @@ const groupAndSetModeChanges = (event) => {
       class="mx-auto flex flex-1 flex-col justify-between p-6 pb-2 lg:container md:flex md:flex-1 md:flex-row md:items-center md:justify-center md:px-8 md:pb-6 lg:px-12 lg:pb-12 xl:px-20 xl:pb-10"
       :value="controlModels"
       :control-config="controlsConfig.status"
-      @input="groupAndSetModeChanges"
+      @input="$emit('input', $event)"
     />
     <ControlPanel
       class="bg-controls-background mx-auto flex flex-1 flex-col justify-between p-6 lg:container md:flex md:flex-1 md:flex-row md:items-center md:justify-center md:px-8 md:pb-8 lg:px-12 lg:pb-12 xl:px-20 xl:pb-20"
       :value="controlModels"
       :control-config="controlsConfig.controls"
-      @input="groupAndSetModeChanges"
+      @input="$emit('input', $event)"
     />
   </div>
 </template>

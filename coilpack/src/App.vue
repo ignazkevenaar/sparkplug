@@ -31,6 +31,39 @@ const scollToTop = () => {
   window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
 };
 
+const groupAndSetModeChanges = (event) => {
+  const setModeStrings = [];
+  const unsetModeStrings = [];
+
+  Object.keys(event).forEach((modeID) => {
+    const newValue = Number(event[modeID]);
+
+    if (import.meta.env.DEV) {
+      // Don't wait for websocket confirmation when debugging.
+      controlModels.value[modeID] = newValue;
+    }
+
+    const modeIndex = lightingModes.value.indexOf(modeID);
+    if (modeIndex > -1) {
+      if (newValue === 1) setModeStrings.push(modeIndex);
+      else if (newValue === 0) unsetModeStrings.push(modeIndex);
+    }
+  });
+
+  if (setModeStrings.length) api.setMode(setModeStrings);
+  if (unsetModeStrings.length) api.unsetMode(unsetModeStrings);
+};
+
+const unsetAllModes = () => {
+  api.unsetAllModes();
+
+  if (import.meta.env.DEV) {
+    lightingModes.value.forEach((mode) => {
+      controlModels.value[mode] = 0;
+    });
+  }
+};
+
 onMounted(async () => {
   const loadedConfig = await loadConfiguration().catch((reason) => {
     error.value = reason;
@@ -96,7 +129,7 @@ provide("blink-fast", blinkFast);
         <HeaderButton icon="weather-night" @click="lightsOut = !lightsOut" />
       </template>
       <template #right>
-        <HeaderButton icon="power-standby" />
+        <HeaderButton icon="power-standby" @click="unsetAllModes" />
       </template>
     </AppHeader>
     <Transition mode="out-in">
@@ -109,7 +142,11 @@ provide("blink-fast", blinkFast);
       <div v-else-if="loading" class="absolute inset-0 grid place-items-center">
         <LoadingIndicator />
       </div>
-      <AppRouter v-else @route-changed="currentRoute = $event" />
+      <AppRouter
+        v-else
+        @route-changed="currentRoute = $event"
+        @input="groupAndSetModeChanges"
+      />
     </Transition>
   </div>
 </template>

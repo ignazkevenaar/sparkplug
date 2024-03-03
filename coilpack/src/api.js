@@ -34,6 +34,10 @@ export const unsetMode = (inputArguments) => {
   trySend(`U ${inputArguments.join(",")}`);
 };
 
+export const unsetAllModes = () => {
+  trySend(`U`);
+};
+
 export const onGetMode = (callback) => {
   bind("M", callback);
 };
@@ -61,7 +65,9 @@ export const setup = async () => {
     };
 
     connection.onmessage = (event) => {
-      console.log("websocket says:", event.data);
+      if (import.meta.env.DEV) {
+        console.log("Websocket says:", event.data);
+      }
 
       const splitData = event.data.split(" ");
       if (splitData.length != 2) return;

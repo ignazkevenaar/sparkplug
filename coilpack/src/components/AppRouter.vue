@@ -37,6 +37,6 @@ export default {
 
 <template>
   <Transition mode="out-in">
-    <component :is="currentView" />
+    <component :is="currentView" v-bind="$attrs" />
   </Transition>
 </template>
