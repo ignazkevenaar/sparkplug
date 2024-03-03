@@ -115,35 +115,62 @@ const colorClasses = computed(() => {
 });
 
 let buttonDown = ref(false);
+let initialYCoordinate = ref(0);
 let holding = ref(false);
 let holdingPosition = ref(false);
+const holdDelay = 150;
+const holdCancelOffset = 20;
+const scrollDirty = ref(false);
 
-const mouseDown = () => {
+const mouseDown = (event) => {
   if (props.control.readOnly) return;
-  holdTimeout = setTimeout(onHold, 150);
+
+  if (event.touches?.length) {
+    initialYCoordinate.value = event.touches[0].clientY;
+  }
+
+  holdTimeout = setTimeout(onHold, holdDelay);
   buttonDown.value = true;
 };
 
-const mouseUp = (event) => {
+const cancelHold = () => {
+  if (holdingPosition.value)
+    emit("input", swapSetUnset(holdingPosition.value.modes));
+
+  holding.value = false;
+  holdingPosition.value = false;
+
+  window.removeEventListener("mouseup", mouseUp);
+};
+
+const mouseUp = () => {
   if (props.control.readOnly) return;
   if (buttonDown.value) buttonDown.value = false;
   else return;
 
   clearTimeout(holdTimeout);
+  initialYCoordinate.value = 0;
 
   if (holding.value) {
-    if (holdingPosition.value)
-      emit("input", swapSetUnset(holdingPosition.value.modes));
-
-    holding.value = false;
-    holdingPosition.value = false;
-
-    window.removeEventListener("mouseup", mouseUp);
+    cancelHold();
     return;
   }
 
   // Send modes of next (or first) non-drag-mode.
-  emit("input", nonHoldPosition.value.modes);
+  if (!scrollDirty.value) emit("input", nonHoldPosition.value.modes);
+  scrollDirty.value = false;
+};
+
+const touchMove = (event) => {
+  if (
+    holdTimeout &&
+    Math.abs(event.touches[0]?.clientY - initialYCoordinate.value) >
+      holdCancelOffset
+  ) {
+    scrollDirty.value = true;
+    clearTimeout(holdTimeout);
+    cancelHold();
+  }
 };
 
 let holdTimeout;
@@ -166,10 +193,11 @@ const onHold = (event) => {
     class="relative z-0 flex select-none flex-col items-center justify-center bg-gradient-to-br p-2 text-center text-xs ring-inset enabled:cursor-pointer md:text-sm md:font-semibold"
     :class="[roundClass, colorClasses, type]"
     :disabled="control.readOnly"
-    @mousedown.prevent="mouseDown"
-    @mouseup.prevent="mouseUp"
-    @touchstart.prevent="mouseDown"
+    @mousedown="mouseDown"
+    @mouseup="mouseUp"
+    @touchstart="mouseDown"
     @touchend.prevent="mouseUp"
+    @touchmove="touchMove"
   >
     <mdicon v-if="cascadedProps.icon" :name="cascadedProps.icon" size="36" />
     <slot />
