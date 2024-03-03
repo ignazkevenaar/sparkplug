@@ -3,6 +3,7 @@ import * as api from "./api.js";
 import { onMounted, provide, ref } from "vue";
 import AppHeader from "./components/AppHeader.vue";
 import AppRouter from "./components/AppRouter.vue";
+import ConnectionIndicator from "./components/ConnectionIndicator.vue";
 import ErrorMessage from "./components/ErrorMessage.vue";
 import HeaderButton from "./components/HeaderButton.vue";
 import LoadingIndicator from "./components/LoadingIndicator.vue";
@@ -12,6 +13,7 @@ const loading = ref(true);
 const error = ref(null);
 const lightsOut = ref(false);
 const currentRoute = ref("/");
+const websocketConnected = ref(false);
 
 const config = ref({});
 const lightingModes = ref([]);
@@ -23,6 +25,7 @@ provide("lightsOut", lightsOut);
 provide("lightingModes", lightingModes);
 provide("controlsConfig", controlsConfig);
 provide("controlModels", controlModels);
+provide("websocketConnected", websocketConnected);
 
 const navigateHome = () => {
   window.location.href = "#/";
@@ -66,6 +69,35 @@ const unsetAllModes = () => {
   }
 };
 
+const onGetMode = (inputArguments) => {
+  inputArguments.forEach((argument) => {
+    const [modeIndex, modeState] = argument.split(":");
+    const modeID = lightingModes.value[parseInt(modeIndex)];
+    controlModels.value[modeID] = parseInt(modeState);
+  });
+};
+
+const setupWebsocket = async () => {
+  await api
+    .setup()
+    .then(() => {
+      api.onGetMode(onGetMode);
+
+      api.connection.onopen = (event) => {
+        websocketConnected.value = true;
+      };
+
+      api.connection.onclose = (event) => {
+        websocketConnected.value = false;
+        setupWebsocket();
+      };
+
+      // Get initial mode state.
+      api.getModes();
+    })
+    .catch((reason) => (error.value = reason));
+};
+
 onMounted(async () => {
   const loadedConfig = await loadConfiguration().catch((reason) => {
     error.value = reason;
@@ -85,18 +117,7 @@ onMounted(async () => {
     document.title = `Sparkplug — ${config.value.name}`;
   }
 
-  await api.setup().catch((reason) => (error.value = reason));
-
-  api.onGetMode((inputArguments) => {
-    inputArguments.forEach((argument) => {
-      const [modeIndex, modeState] = argument.split(":");
-      const modeID = lightingModes.value[parseInt(modeIndex)];
-      controlModels.value[modeID] = parseInt(modeState);
-    });
-  });
-
-  // Get initial mode state.
-  api.getModes();
+  await setupWebsocket();
 
   loading.value = false;
 });
@@ -131,8 +152,13 @@ provide("blink-fast", blinkFast);
         <HeaderButton icon="weather-night" @click="lightsOut = !lightsOut" />
       </template>
       <template #right>
-        <HeaderButton icon="power-standby" @click="unsetAllModes" />
+        <HeaderButton
+          icon="power-standby"
+          :disabled="!websocketConnected"
+          @click="unsetAllModes"
+        />
       </template>
+      <ConnectionIndicator :status="websocketConnected" />
     </AppHeader>
     <Transition mode="out-in">
       <div

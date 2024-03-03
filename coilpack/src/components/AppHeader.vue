@@ -57,6 +57,7 @@ defineEmits(["on-back", "on-logo"]);
             {{ subtitle }}
           </span>
         </Transition>
+        <slot />
       </div>
       <Transition mode="out-in">
         <template v-if="showButtons">

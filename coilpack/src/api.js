@@ -55,15 +55,6 @@ export const setup = async () => {
       connection = new WebSocket("ws://" + window.location.hostname + ":81/");
     }
 
-    connection.onopen = () => {
-      console.log(connection);
-      resolve(connection);
-    };
-
-    connection.onerror = (error) => {
-      reject(error);
-    };
-
     connection.onmessage = (event) => {
       if (import.meta.env.DEV) {
         console.log("Websocket says:", event.data);
@@ -77,5 +68,7 @@ export const setup = async () => {
 
       dispatch(command, inputArguments);
     };
+
+    resolve(connection);
   });
 };

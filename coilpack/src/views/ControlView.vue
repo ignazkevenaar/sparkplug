@@ -1,13 +1,9 @@
 <script setup>
 import ControlPanel from "../components/ControlPanel.vue";
-import StatusDisplay from "../components/controls/DisplayControl.vue";
 import { inject } from "vue";
 
-let api = inject("api");
-let lightsOut = inject("lightsOut");
-let lightingModes = inject("lightingModes");
-let controlsConfig = inject("controlsConfig");
-let controlModels = inject("controlModels");
+const controlsConfig = inject("controlsConfig");
+const controlModels = inject("controlModels");
 
 const emit = defineEmits(["input"]);
 </script>

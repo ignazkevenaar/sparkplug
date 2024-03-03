@@ -193,7 +193,7 @@ const onHold = (event) => {
 <template>
   <component
     :is="type === 'button' ? 'button' : 'div'"
-    class="relative z-0 flex select-none flex-col items-center justify-center bg-gradient-to-br p-2 text-center text-xs ring-inset enabled:cursor-pointer md:text-sm md:font-semibold"
+    class="relative z-0 flex select-none flex-col items-center justify-center bg-gradient-to-br p-2 text-center text-xs ring-inset enabled:cursor-pointer disabled:opacity-50 md:text-sm md:font-semibold"
     :class="[roundClass, colorClasses, type]"
     :disabled="control.readOnly"
     @mousedown="mouseDown"

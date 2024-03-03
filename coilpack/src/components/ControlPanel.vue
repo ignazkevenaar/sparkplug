@@ -3,6 +3,7 @@ import ControlContainer from "./ControlContainer.vue";
 import DisplayControl from "./controls/DisplayControl.vue";
 import IconControl from "./controls/IconControl.vue";
 import Placeholder from "./controls/PlaceholderControl.vue";
+import { inject } from "vue";
 
 defineProps({
   value: {
@@ -23,6 +24,8 @@ const controlToComponent = {
   indicator: IconControl,
   display: DisplayControl,
 };
+
+const websocketConnected = inject("websocketConnected");
 
 // Automatic control panel grid sizing.
 const autoCols = [
@@ -64,6 +67,7 @@ const autoRows = [
           }"
           :control="control"
           :type="control.type"
+          :disabled="!websocketConnected"
           @input="$emit('input', $event)"
         >
           {{ control.text }}
