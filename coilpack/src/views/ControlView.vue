@@ -6,6 +6,7 @@ import { inject } from "vue";
 let sparkplug = inject("sparkplug");
 let lightsOut = inject("lightsOut");
 let lightingModes = inject("lightingModes");
+let controlsConfig = inject("controlsConfig");
 let controlModels = inject("controlModels");
 
 const emit = defineEmits(["input"]);
@@ -37,13 +38,13 @@ const groupAndSetModeChanges = (event) => {
     <ControlPanel
       class="mx-auto flex flex-1 flex-col justify-between p-6 pb-2 lg:container md:flex md:flex-1 md:flex-row md:items-center md:justify-center md:px-8 md:pb-6 lg:px-12 lg:pb-12 xl:px-20 xl:pb-10"
       :value="controlModels"
-      :control-config="sparkplug.controlsData.status"
+      :control-config="controlsConfig.status"
       @input="groupAndSetModeChanges"
     />
     <ControlPanel
       class="bg-controls-background mx-auto flex flex-1 flex-col justify-between p-6 lg:container md:flex md:flex-1 md:flex-row md:items-center md:justify-center md:px-8 md:pb-8 lg:px-12 lg:pb-12 xl:px-20 xl:pb-20"
       :value="controlModels"
-      :control-config="sparkplug.controlsData.controls"
+      :control-config="controlsConfig.controls"
       @input="groupAndSetModeChanges"
     />
   </div>

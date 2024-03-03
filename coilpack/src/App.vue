@@ -6,21 +6,23 @@ import AppRouter from "./components/AppRouter.vue";
 import ErrorMessage from "./components/ErrorMessage.vue";
 import HeaderButton from "./components/HeaderButton.vue";
 import LoadingIndicator from "./components/LoadingIndicator.vue";
+import loadConfiguration from "./config.js";
 
 const loading = ref(true);
 const error = ref(null);
 const lightsOut = ref(false);
 const currentRoute = ref("/");
+
 const config = ref({});
 const lightingModes = ref([]);
+const controlsConfig = ref([]);
 const controlModels = ref({});
-const indicatorConfiguration = ref([]);
 
 provide("sparkplug", sparkplug);
 provide("lightsOut", lightsOut);
 provide("lightingModes", lightingModes);
+provide("controlsConfig", controlsConfig);
 provide("controlModels", controlModels);
-provide("indicatorConfiguration", indicatorConfiguration);
 
 const navigateHome = () => {
   window.location.href = "#/";
@@ -30,6 +32,21 @@ const scollToTop = () => {
 };
 
 onMounted(async () => {
+  const loadedConfig = await loadConfiguration();
+
+  config.value = loadedConfig.config;
+  lightingModes.value = loadedConfig.lightingModes;
+  controlsConfig.value = loadedConfig.controlsConfig;
+
+  controlModels.value = {};
+  loadedConfig.lightingModes.forEach((mode) => {
+    controlModels.value[mode] = 0;
+  });
+
+  if (config.value?.name) {
+    document.title = `Sparkplug — ${config.value.name}`;
+  }
+
   try {
     await sparkplug.setup();
   } catch (e) {
@@ -37,20 +54,6 @@ onMounted(async () => {
     console.log(e);
     return;
   }
-
-  config.value = sparkplug.config;
-  lightingModes.value = sparkplug.lightingModes;
-  controlModels.value = {};
-  sparkplug.lightingModes.forEach((mode) => {
-    controlModels.value[mode] = 0;
-  });
-
-  if (config.value?.name)
-  {
-    document.title = `Sparkplug — ${config.value.name}`;
-  }
-
-  indicatorConfiguration.value = sparkplug.indicatorConfiguration;
 
   sparkplug.onGetMode((inputArguments) => {
     inputArguments.forEach((argument) => {

@@ -1,18 +1,6 @@
-export let config;
-export let lightingModes;
-export let controlsData;
 export let connection;
 
 let callbacks = {};
-
-const fetchJSON = async (filename) => fetch(filename).then((r) => r.json());
-
-export const fetchConfigurationFiles = async () => {
-  const configName = import.meta.env.VITE_CONFIG || "default";
-  config = await fetchJSON(`/configs/${configName}/config.json`);
-  lightingModes = await fetchJSON(`/configs/${configName}/modes.json`);
-  controlsData = await fetchJSON(`/configs/${configName}/controls.json`);
-};
 
 const dispatch = (event_name, data) => {
   let chain = callbacks[event_name];
@@ -51,8 +39,6 @@ export const onGetMode = (callback) => {
 };
 
 export const setup = async () => {
-  await fetchConfigurationFiles();
-
   return new Promise((resolve, reject) => {
     if (import.meta.env.DEV) {
       const debugServer = import.meta.env.VITE_DEBUG_WEBSOCKET;
