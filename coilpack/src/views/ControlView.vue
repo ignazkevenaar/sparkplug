@@ -3,7 +3,7 @@ import ControlPanel from "../components/ControlPanel.vue";
 import StatusDisplay from "../components/controls/DisplayControl.vue";
 import { inject } from "vue";
 
-let sparkplug = inject("sparkplug");
+let api = inject("api");
 let lightsOut = inject("lightsOut");
 let lightingModes = inject("lightingModes");
 let controlsConfig = inject("controlsConfig");
@@ -28,8 +28,8 @@ const groupAndSetModeChanges = (event) => {
     }
   });
 
-  if (setModeStrings.length) sparkplug.setMode(setModeStrings);
-  if (unsetModeStrings.length) sparkplug.unsetMode(unsetModeStrings);
+  if (setModeStrings.length) api.setMode(setModeStrings);
+  if (unsetModeStrings.length) api.unsetMode(unsetModeStrings);
 };
 </script>
 

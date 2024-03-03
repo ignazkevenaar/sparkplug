@@ -1,5 +1,5 @@
 <script setup>
-import * as sparkplug from "./api.js";
+import * as api from "./api.js";
 import { onMounted, provide, ref } from "vue";
 import AppHeader from "./components/AppHeader.vue";
 import AppRouter from "./components/AppRouter.vue";
@@ -18,7 +18,7 @@ const lightingModes = ref([]);
 const controlsConfig = ref([]);
 const controlModels = ref({});
 
-provide("sparkplug", sparkplug);
+provide("api", api);
 provide("lightsOut", lightsOut);
 provide("lightingModes", lightingModes);
 provide("controlsConfig", controlsConfig);
@@ -50,18 +50,18 @@ onMounted(async () => {
     document.title = `Sparkplug — ${config.value.name}`;
   }
 
-  await sparkplug.setup().catch((reason) => (error.value = reason));
+  await api.setup().catch((reason) => (error.value = reason));
 
-  sparkplug.onGetMode((inputArguments) => {
+  api.onGetMode((inputArguments) => {
     inputArguments.forEach((argument) => {
       const [modeIndex, modeState] = argument.split(":");
-      const modeID = sparkplug.lightingModes[parseInt(modeIndex)];
+      const modeID = lightingModes.value[parseInt(modeIndex)];
       controlModels.value[modeID] = parseInt(modeState);
     });
   });
 
   // Get initial mode state.
-  sparkplug.getModes();
+  api.getModes();
 
   loading.value = false;
 });
