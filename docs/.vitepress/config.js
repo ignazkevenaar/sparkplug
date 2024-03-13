@@ -20,6 +20,9 @@ module.exports = {
       { text: "Coilpack", link: "/coilpack" },
       { text: "GitHub", link: "https://github.com/ignazkevenaar/sparkplug" },
     ],
+    footer: {
+      copyright: `Copyright © ${new Date().getFullYear()} Ignaz Kevenaar`,
+    },
   },
   home: true,
 };
