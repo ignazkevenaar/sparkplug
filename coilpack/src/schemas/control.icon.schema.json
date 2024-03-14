@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "$id": "control.icon.schema.json",
+  "type": "object",
+  "anyOf": [{ "$ref": "#/$defs/cascadableProperties" }],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": ["button", "indicator"]
+    },
+    "positions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "anyOf": [{ "$ref": "#/$defs/cascadableProperties" }],
+        "properties": {
+          "modes": {
+            "$ref": "./mode.schema.json"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["default", "hold"]
+          }
+        },
+        "required": ["modes"],
+        "unevaluatedProperties": false
+      }
+    },
+    "round": {
+      "type": "boolean"
+    }
+  },
+  "if": {
+    "properties": {
+      "type": { "const": "indicator" }
+    }
+  },
+  "then": {
+    "properties": {
+      "readOnly": { "type": "boolean", "const": true }
+    },
+    "required": ["readOnly"]
+  },
+  "required": ["type", "positions"],
+  "$defs": {
+    "cascadableProperties": {
+      "type": "object",
+      "properties": {
+        "backgroundColor": {
+          "$ref": "./colors.schema.json"
+        },
+        "foregroundColor": {
+          "$ref": "./colors.schema.json"
+        },
+        "backgroundStyle": {
+          "type": "string",
+          "enum": ["transparent", "default", "outline", "fill"],
+          "default": "default"
+        },
+        "foregroundStyle": {
+          "type": "string",
+          "enum": ["default", "highlight", "dim"],
+          "default": "default"
+        },
+        "animation": {
+          "type": "string",
+          "enum": ["blinking"]
+        },
+        "icon": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

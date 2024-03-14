@@ -9,7 +9,7 @@
   "eslint.workingDirectories": ["coilpack"],
   "json.schemas": [
     {
-      "fileMatch": ["/coilpack/public/config/controls.json"],
+      "fileMatch": ["/coilpack/configs/*/controls.json"],
       "url": "/coilpack/src/schemas/controls.schema.json"
     }
   ],
@@ -32,5 +32,9 @@
   "[vue]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true
-  }
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
 }

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "$id": "mode.schema.json",
+  "type": "object",
+  "patternProperties": {
+    ".*": {
+      "oneOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 255
+        }
+      ]
+    }
+  }
+}

@@ -1,87 +1,89 @@
 {
   "$schema": "https://json-schema.org/draft-07/schema",
-  "$id": "indicators.schema.json",
-  "type": "array",
-  "items": {
-    "type": "object",
-    "properties": {
-      "name": {
-        "type": "string"
-      },
-      "height": {
-        "type": "number",
-        "minimum": 1,
-        "maximum": 6,
-        "default": 4
-      },
-      "controls": {
-        "type": "array",
-        "items": {
-          "type": "object",
-          "properties": {
-            "type": {
-              "const": "Button"
-            },
-            "icon": {
-              "type": "string"
-            },
-            "width": {
-              "type": "number",
-              "minimum": 1,
-              "maximum": 12
-            },
-            "height": {
-              "type": "number",
-              "minimum": 1,
-              "maximum": 12
-            },
-            "top": {
-              "type": "number",
-              "minimum": 1,
-              "maximum": 12
-            },
-            "left": {
-              "type": "number",
-              "minimum": 1,
-              "maximum": 12
-            },
-            "round": {
-              "type": "boolean"
-            },
-            "positions": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "modes": {
-                    "type": "object",
-                    "patternProperties": {
-                      ".*": {
-                        "type": "boolean"
-                      }
-                    }
-                  },
-                  "color": {
-                    "$ref": "#/$defs/buttonColor"
-                  },
-                  "type": {
-                    "type": "string",
-                    "enum": ["hold"]
-                  }
-                },
-                "required": ["modes"]
-              }
-            }
-          },
-          "required": ["type", "grid", "positions"]
-        }
+  "$id": "controls.schema.json",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/controlContainer"
+      }
+    },
+    "controls": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/controlContainer"
       }
     }
   },
+  "additionalProperties": false,
   "$defs": {
-    "buttonColor": {
-      "type": "string",
-      "enum": ["red", "yellow", "green", "blue", "invert"]
+    "controlContainer": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "width": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 2,
+          "default": 1
+        },
+        "height": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 2,
+          "default": 2
+        },
+        "color": {
+          "$ref": "./colors.schema.json"
+        },
+        "controls": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/control"
+          }
+        }
+      },
+      "required": ["name", "controls"],
+      "additionalProperties": false
+    },
+    "control": {
+      "type": "object",
+      "properties": {
+        "width": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 12,
+          "default": 6
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 12,
+          "default": 6
+        },
+        "top": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 12
+        },
+        "left": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 12
+        }
+      },
+      "oneOf": [
+        {
+          "$ref": "./control.icon.schema.json"
+        },
+        {
+          "$ref": "./control.display.schema.json"
+        }
+      ],
+      "unevaluatedProperties": false
     }
   }
 }

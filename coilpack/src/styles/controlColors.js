@@ -33,6 +33,16 @@ export default {
       dim: ["text-control-foreground-base-dim"],
     },
   },
+  transparent: {
+    background: {
+      default: ["bg-transparent"],
+      outline: ["bg-transparent"],
+      fill: ["bg-transparent"],
+    },
+    foreground: {
+      default: ["text-transparent"],
+    },
+  },
   black: {
     background: {
       default: [],
