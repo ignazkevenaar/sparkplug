@@ -1,0 +1,11 @@
+{
+  "name": "websocket-echo",
+  "version": "0.1.0",
+  "main": "index.js",
+  "dependencies": {
+    "ws": "^8.16.0"
+  },
+  "scripts": {
+    "serve": "node index.js --port 3030"
+  }
+}
