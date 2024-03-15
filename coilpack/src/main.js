@@ -1,6 +1,7 @@
 import "./styles/index.css";
 import "./styles/transitions.css";
 import "./styles/theme.scss";
+import "./styles/fonts.css";
 import * as mdijs from "./config/icons";
 import App from "./App.vue";
 import { createApp } from "vue";
