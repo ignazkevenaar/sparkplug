@@ -1,38 +1,36 @@
-<script>
-import ControlView from "../views/ControlView.vue";
-import InfoView from "../views/InfoView.vue";
+<script setup lang="ts">
+import { type Component, computed, onMounted, ref, watch } from 'vue'
+import ControlView from '../views/ControlView.vue'
+import InfoView from '../views/InfoView.vue'
 
-const routes = {
-  "/": ControlView,
-  "/info": InfoView,
-};
+const routes: { [path: string]: Component } = {
+  '/': ControlView,
+  '/info': InfoView
+}
 
-export default {
-  emits: ["route-changed"],
-  data() {
-    return {
-      currentPath: window.location.hash,
-    };
+const currentPath = ref(window.location.hash)
+
+const emit = defineEmits<{
+  routeChanged: [path: string]
+}>()
+
+const currentView = computed(() => {
+  return routes[currentPath.value.slice(1) || '/'] || ControlView
+})
+
+watch(
+  currentView,
+  async () => {
+    emit('routeChanged', currentPath.value.slice(1))
   },
-  computed: {
-    currentView() {
-      return routes[this.currentPath.slice(1) || "/"] || ControlView;
-    },
-  },
-  watch: {
-    currentView: {
-      handler() {
-        this.$emit("route-changed", this.currentPath.slice(1));
-      },
-      immediate: true,
-    },
-  },
-  mounted() {
-    window.addEventListener("hashchange", () => {
-      this.currentPath = window.location.hash;
-    });
-  },
-};
+  { immediate: true }
+)
+
+onMounted(() => {
+  window.addEventListener('hashchange', () => {
+    currentPath.value = window.location.hash
+  })
+})
 </script>
 
 <template>

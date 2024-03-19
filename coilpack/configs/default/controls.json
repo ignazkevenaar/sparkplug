@@ -12,7 +12,7 @@
           "width": 4,
           "height": 4,
           "foregroundStyle": "dim",
-          "backgroundStyle": "transparent",
+          "backgroundColor": "transparent",
           "positions": [
             {
               "modes": {
@@ -39,7 +39,7 @@
           "width": 4,
           "height": 4,
           "foregroundStyle": "dim",
-          "backgroundStyle": "transparent",
+          "backgroundColor": "transparent",
           "positions": [
             {
               "modes": {
@@ -93,7 +93,7 @@
           "width": 4,
           "height": 4,
           "foregroundStyle": "dim",
-          "backgroundStyle": "transparent",
+          "backgroundColor": "transparent",
           "positions": [
             {
               "modes": {
@@ -112,7 +112,7 @@
           "width": 4,
           "height": 4,
           "foregroundStyle": "dim",
-          "backgroundStyle": "transparent",
+          "backgroundColor": "transparent",
           "positions": [
             {
               "modes": {
@@ -139,7 +139,7 @@
           "width": 4,
           "height": 4,
           "foregroundStyle": "dim",
-          "backgroundStyle": "transparent",
+          "backgroundColor": "transparent",
           "positions": [
             {
               "modes": {
@@ -157,7 +157,7 @@
           "width": 4,
           "height": 4,
           "foregroundStyle": "dim",
-          "backgroundStyle": "transparent",
+          "backgroundColor": "transparent",
           "positions": [
             {
               "modes": {
@@ -175,7 +175,7 @@
           "width": 4,
           "height": 4,
           "foregroundStyle": "dim",
-          "backgroundStyle": "transparent",
+          "backgroundColor": "transparent",
           "positions": [
             {
               "modes": {
@@ -193,7 +193,7 @@
           "width": 4,
           "height": 4,
           "foregroundStyle": "dim",
-          "backgroundStyle": "transparent",
+          "backgroundColor": "transparent",
           "positions": [
             {
               "modes": {

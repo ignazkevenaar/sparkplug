@@ -1,20 +1,17 @@
-<script setup>
-defineProps({
-  startAngle: {
-    type: Number,
-    default: 0,
-  },
-  percent: {
-    type: Number,
-    default: 50,
-  },
-  strokeWidth: {
-    type: Number,
-    default: 5,
-  },
-});
+<script setup lang="ts">
+interface IProps {
+  startAngle?: number
+  percent?: number
+  strokeWidth?: number
+}
 
-const circumference = 50 * 2 * Math.PI;
+withDefaults(defineProps<IProps>(), {
+  startAngle: 0,
+  percent: 50,
+  strokeWidth: 5
+})
+
+const circumference = 50 * 2 * Math.PI
 </script>
 
 <template>

@@ -1,118 +1,107 @@
-<script setup>
-import { computed, onMounted, ref, watch } from "vue";
-import ErrorMessage from "../ErrorMessage.vue";
-import InlineSvg from "vue-inline-svg";
-import colors from "../../styles/displayColors";
+<script setup lang="ts">
+import type { CascadableProperties, DisplayControl, Segment, State } from '@/types/control.display'
+import { computed, mergeProps, ref, watch } from 'vue'
+import { Color } from '@/types/control'
+import type { ControlModel } from '@/types/types'
+import ErrorMessage from '../ErrorMessage.vue'
+import InlineSvg from 'vue-inline-svg'
+import type { Ref } from 'vue'
+import { Style } from '@/types/control.display'
+import colors from '../../styles/displayColors'
 
-const config = import.meta.env.VITE_CONFIG || "default";
+const config = import.meta.env.VITE_CONFIG || 'default'
 
-const props = defineProps({
-  value: {
-    type: Object,
-    required: true,
-  },
-  control: {
-    type: Object,
-    required: true,
-  },
-});
+const props = defineProps<{
+  value: ControlModel
+  control: DisplayControl
+}>()
 
-const errorLoading = ref(null);
-const displayElement = ref(null);
-const originalElementClassLists = ref([]);
+const errorLoading = ref(null)
+const displayElement: Ref<Element | undefined> = ref()
+const originalElementClassLists: Ref<string[][]> = ref([])
 
-const SVGLoaded = (event) => {
-  displayElement.value = event;
+const SVGLoaded = (svgElement: Element) => {
+  displayElement.value = svgElement
 
   props.control?.segments.forEach((segment) => {
-    const segmentElements = event.querySelectorAll(segment.selector);
+    const segmentElements = svgElement.querySelectorAll(segment.selector)
 
-    const originalClasses = [];
+    const originalClasses: string[] = []
     for (let i = 0; i < segmentElements?.length; i++) {
-      originalClasses.push(segmentElements[i]?.getAttribute("class"));
+      originalClasses.push(segmentElements[i]?.getAttribute('class') || '')
     }
 
-    originalElementClassLists.value.push(originalClasses);
-  });
+    originalElementClassLists.value.push(originalClasses)
+  })
 
-  appyIndicatorClasses(cascadedProps.value);
-};
+  appyIndicatorClasses(cascadedProps.value)
+}
 
 const currentStatesPerSegment = computed(() =>
   props.control.segments.map((segment) => {
-    if (!segment.states) return [];
-    return segment.states.flatMap((position, positionIndex) => {
-      const allModesApply = Object.keys(position.modes).every((mode) => {
-        let positionValue = position.modes[mode];
-        if (typeof positionValue === "boolean")
-          positionValue = Number(position.modes[mode]) * 255;
-        return props.value[mode] === positionValue;
-      });
-      return allModesApply ? [{ ...position, index: positionIndex }] : [];
-    });
-  }),
-);
+    if (!segment.states) return []
+    return segment.states.flatMap((state, index) => {
+      const allModesApply = Object.keys(state.modes).every((mode) => {
+        let positionValue = state.modes[mode]
+        if (typeof positionValue === 'boolean') positionValue = Number(state.modes[mode]) * 255
+        return props.value[mode] === positionValue
+      })
+      return allModesApply ? [{ ...state, index }] : []
+    })
+  })
+)
 
 const anyModeApplies = computed(() =>
-  currentStatesPerSegment.value.map((segment) => !!segment.length),
-);
+  currentStatesPerSegment.value.map((segment) => !!segment.length)
+)
 
-// Cascade magic proppers.
-const cascadableProperties = ["color", "style", "onState"];
+const defaultProperties: CascadableProperties = {
+  color: Color.default,
+  style: Style.stroke
+}
 
-const cascadeProps = (segment, activeSegmentStates) =>
-  Object.fromEntries(
-    cascadableProperties
-      .flatMap((key) =>
-        activeSegmentStates.length
-          ? activeSegmentStates.map((position) => [
-              key,
-              position[key] || segment[key],
-            ])
-          : [[key, segment[key] || ""]],
-      )
-      .filter(([key, value]) => !!value),
-  );
+const cascadeProps = (segment: Segment, activeSegmentStates: State[]): CascadableProperties => {
+  let mergedProps: CascadableProperties = { ...defaultProperties, ...segment }
+
+  activeSegmentStates.forEach((activeSegmentState) => {
+    mergedProps = { ...mergedProps, ...activeSegmentState }
+  })
+
+  return mergedProps
+}
 
 const cascadedProps = computed(() =>
   currentStatesPerSegment.value.map((states, segmentIndex) =>
-    cascadeProps(props.control.segments[segmentIndex], states),
-  ),
-);
+    cascadeProps(props.control.segments[segmentIndex], states)
+  )
+)
 
-const colorClassPerSegment = (props, anyMode) => {
-  const color = props.color || "default";
-  const style = props.style || "stroke";
-  const onState = props.onState || anyMode ? "on" : "off"; //Replace 'off' with sensible state.
+const colorClassPerSegment = (props: CascadableProperties, anyMode: boolean) => {
+  const onState = anyMode ? 'on' : 'off' //Replace 'off' with sensible state.
 
-  return [...colors.common[style], ...(colors[color][onState] || [])];
-};
+  return [...colors.common[props.style], ...(colors[props.color][onState] || [])]
+}
 
-const appyIndicatorClasses = (newSegmentsProps) => {
-  if (errorLoading.value) return;
+const appyIndicatorClasses = (newSegmentsProps: CascadableProperties[]) => {
+  if (errorLoading.value) return
 
-  newSegmentsProps.forEach((segmentProps, index) => {
-    const segment = props.control.segments[index];
-    const activeSegmentElements = displayElement.value.querySelectorAll(
-      segment.selector,
-    );
+  newSegmentsProps.forEach((segmentProps: CascadableProperties, index) => {
+    const segment = props.control.segments[index]
+    const activeSegmentElements = displayElement.value?.querySelectorAll(segment.selector) || []
 
     for (let i = 0; i < activeSegmentElements.length; i++) {
-      const classes = colorClassPerSegment(
-        segmentProps,
-        anyModeApplies.value[index],
-      );
+      const classes = colorClassPerSegment(segmentProps, anyModeApplies.value[index])
       activeSegmentElements[i].setAttribute(
-        "class",
-        originalElementClassLists.value[index][i] + " " + classes.join(" "),
-      );
+        'class',
+        originalElementClassLists.value[index][i] + ' ' + classes.join(' ')
+      )
     }
-  });
-};
+  })
+}
 
 watch(cascadedProps, (newSegmentsProps) => {
-  appyIndicatorClasses(newSegmentsProps);
-});
+  appyIndicatorClasses(newSegmentsProps)
+})
 </script>
 
 <template>

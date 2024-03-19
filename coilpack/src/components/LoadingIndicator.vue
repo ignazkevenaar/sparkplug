@@ -1,5 +1,5 @@
-<script setup>
-import Ring from "./Ring.vue";
+<script setup lang="ts">
+import Ring from './Ring.vue'
 </script>
 
 <template>

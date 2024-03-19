@@ -1,56 +1,55 @@
-<script setup>
-import { computed, inject, ref } from "vue";
-import colors from "../../styles/controlColors";
+<script setup lang="ts">
+import { BackgroundStyle, ForegroundStyle } from '@/types/control.icon'
+import type { CascadableProperties, IconControl, Position } from '@/types/control.icon'
+import { type Ref, computed, inject, ref } from 'vue'
+import { blinkFastKey, blinkNormalKey } from '@/provide-keys'
+import { Color } from '@/types/control'
+import type { ControlModel } from '@/types/types'
+import colors from '../../styles/controlColors'
 
-const props = defineProps({
-  value: {
-    type: Object,
-    required: true,
-  },
-  control: {
-    type: Object,
-    required: true,
-  },
-  type: {
-    type: String,
-    default: "control",
-  },
-});
+interface IProps {
+  value: ControlModel
+  control: IconControl
+  type: string
+}
 
-const emit = defineEmits(["input"]);
+const props = withDefaults(defineProps<IProps>(), {
+  type: 'button'
+})
+
+const emit = defineEmits<{
+  input: [modeChange: ControlModel]
+}>()
 
 // Animation timers.
-const blinkNormal = inject("blink-normal");
-const blinkFast = inject("blink-fast");
+const blinkNormal = inject(blinkNormalKey)
 
 const roundClass = computed(() =>
   props.control.round
-    ? "rounded-full"
-    : "rounded-lg md:rounded-2xl @squircle:squircle-xl @squircle:!rounded-none",
-);
+    ? 'rounded-full'
+    : 'rounded-lg md:rounded-2xl @squircle:squircle-xl @squircle:!rounded-none'
+)
 
 const currentPositions = computed(() =>
-  props.control.positions.flatMap((position, positionIndex) => {
+  props.control.positions.flatMap((position, index) => {
     const allModesApply = Object.keys(position.modes).every((mode) => {
-      let positionValue = position.modes[mode];
-      if (typeof positionValue === "boolean")
-        positionValue = Number(position.modes[mode]) * 255;
-      return props.value[mode] === positionValue;
-    });
-
-    return allModesApply ? [{ ...position, index: positionIndex }] : [];
-  }),
-);
+      let positionValue = position.modes[mode]
+      if (typeof positionValue === 'boolean') positionValue = Number(position.modes[mode]) * 255
+      return props.value[mode] === positionValue
+    })
+    return allModesApply ? [{ ...position, index }] : []
+  })
+)
 const nextPositionIndex = computed(
-  () => currentPositions.value[currentPositions.value.length - 1]?.index + 1,
-);
+  () => currentPositions.value[currentPositions.value.length - 1]?.index + 1
+)
 
 // Finds 'hold' position that comes later than the highest current position, if any.
 const holdPosition = computed(() =>
   props.control.positions
     .slice(nextPositionIndex.value)
-    .find((position) => position.type === "hold"),
-);
+    .find((position) => position.type === 'hold')
+)
 
 // The pair of slices wraps around the array.
 // [3,4,0,1,2]
@@ -58,136 +57,158 @@ const holdPosition = computed(() =>
 const nonHoldPosition = computed(() =>
   [
     ...props.control.positions.slice(nextPositionIndex.value),
-    ...props.control.positions.slice(0, nextPositionIndex.value),
-  ].find((position) => position.type !== "hold"),
-);
+    ...props.control.positions.slice(0, nextPositionIndex.value)
+  ].find((position) => position.type !== 'hold')
+)
 
-const cascadableProperties = [
-  "backgroundColor",
-  "backgroundStyle",
-  "foregroundColor",
-  "foregroundStyle",
-  "animation",
-  "icon",
-  "label",
-];
+const defaultProperties: CascadableProperties = {
+  backgroundStyle: BackgroundStyle.default,
+  backgroundColor: Color.default,
+  foregroundColor: Color.default,
+  foregroundStyle: ForegroundStyle.default,
+  animation: '',
+  label: '',
+  icon: ''
+}
 
 // Cascade properties from props, active positions.
 // Conditionally filters hold positions when not holding.
 // Filters cascaded null properties.
-const cascadedProps = computed(() =>
-  Object.fromEntries(
-    cascadableProperties
-      .flatMap((key) => {
-        const v = currentPositions.value
-          .filter((position) =>
-            !holdingPosition.value ? position.type !== "hold" : true,
-          )
-          .filter(
-            (position) =>
-              !(blinkNormal.value && position.animation === "blinking"),
-          )
-          .map((position) => [key, position[key] || props.control[key]]);
+const cascadedProps = computed<CascadableProperties>(() => {
+  const activeModes = currentPositions.value
+    .filter((position) => (!holdingPosition.value ? position.type !== 'hold' : true))
+    .filter((position) => !(blinkNormal?.value && position.animation === 'blinking'))
 
-        return v.length ? v : [[key, props.control[key] || ""]];
-      })
-      .filter(([key, value]) => !!value),
-  ),
-);
+  let mergedProps: CascadableProperties = { ...defaultProperties, ...props.control }
 
-const swapSetUnset = (original) => {
-  var modified = { ...original };
+  activeModes.forEach((activeMode) => {
+    mergedProps = { ...mergedProps, ...activeMode }
+  })
+
+  // Defaults
+  // Base control
+  // Every active mode
+  return mergedProps
+})
+
+// const cascadableProperties = [
+//   'backgroundStyle',
+//   'backgroundColor',
+//   'foregroundColor',
+//   'foregroundStyle',
+//   'animation',
+//   'label',
+//   'icon'
+// ]
+
+// const cascadedProps = computed<CascadableProperties>(() =>
+//   Object.fromEntries(
+//     cascadableProperties
+//       .flatMap((key) => {
+//         const v = currentPositions.value
+//           .filter((position) => (!holdingPosition.value ? position.type !== 'hold' : true))
+//           .filter((position) => !(blinkNormal?.value && position.animation === 'blinking'))
+//           .map((position) => [key, position[key] || props.control[key]])
+
+//         return v.length ? v : [[key, props.control[key] || '']]
+//       })
+//       .filter(([, value]) => !!value)
+//   )
+// )
+
+// TODO: Do variable modes even work!?
+const swapSetUnset = (original: ControlModel): ControlModel => {
+  var modified = { ...original }
   Object.keys(modified).forEach((key) => {
-    modified[key] = !modified[key];
-  });
-  return modified;
-};
+    modified[key] = !modified[key]
+  })
+  return modified
+}
 
 const colorClasses = computed(() => {
-  const backgroundColor = cascadedProps.value.backgroundColor || "default";
-  const foregroundColor = cascadedProps.value.foregroundColor || "default";
-  const backgroundStyle = cascadedProps.value.backgroundStyle || "default";
-  const foregroundStyle = cascadedProps.value.foregroundStyle || "default";
+  const backgroundColor = cascadedProps.value.backgroundColor
+  const foregroundColor = cascadedProps.value.foregroundColor
+  const backgroundStyle = cascadedProps.value.backgroundStyle
+  const foregroundStyle = cascadedProps.value.foregroundStyle
 
   return [
     ...colors.common.background[backgroundStyle],
     ...colors.common.foreground[foregroundStyle],
-    ...(colors[backgroundColor].background[backgroundStyle] || []),
-    ...(colors[foregroundColor].foreground[foregroundStyle] || []),
-  ];
-});
+    ...colors[backgroundColor].background[backgroundStyle],
+    ...colors[foregroundColor].foreground[foregroundStyle]
+  ]
+})
 
-let buttonDown = ref(false);
-let initialYCoordinate = ref(0);
-let holding = ref(false);
-let holdingPosition = ref(false);
-const holdDelay = 150;
-const holdCancelOffset = 20;
-const scrollDirty = ref(false);
+let buttonDown = ref(false)
+let initialYCoordinate = ref(0)
+let holding = ref(false)
+let holdingPosition: Ref<Position | undefined> = ref()
+const holdDelay = 150
+const holdCancelOffset = 20
+const scrollDirty = ref(false)
 
-const mouseDown = (event) => {
-  if (props.control.readOnly) return;
+const mouseDown = (event: MouseEvent | TouchEvent) => {
+  if (props.control.readOnly) return
 
-  if (event.touches?.length) {
-    initialYCoordinate.value = event.touches[0].clientY;
+  if (event instanceof TouchEvent) {
+    initialYCoordinate.value = event.touches[0].clientY
   }
 
-  holdTimeout = setTimeout(onHold, holdDelay);
-  buttonDown.value = true;
-};
+  holdTimeout = setTimeout(onHold, holdDelay)
+  buttonDown.value = true
+}
 
 const cancelHold = () => {
-  if (holdingPosition.value)
-    emit("input", swapSetUnset(holdingPosition.value.modes));
+  if (holdingPosition.value) emit('input', swapSetUnset(holdingPosition.value.modes))
 
-  holding.value = false;
-  holdingPosition.value = false;
+  holding.value = false
+  holdingPosition.value = undefined
 
-  window.removeEventListener("mouseup", mouseUp);
-};
+  window.removeEventListener('mouseup', mouseUp)
+}
 
 const mouseUp = () => {
-  if (props.control.readOnly) return;
-  if (buttonDown.value) buttonDown.value = false;
-  else return;
+  if (props.control.readOnly) return
 
-  clearTimeout(holdTimeout);
-  initialYCoordinate.value = 0;
+  if (buttonDown.value) buttonDown.value = false
+  else return
+
+  clearTimeout(holdTimeout)
+  initialYCoordinate.value = 0
 
   if (holding.value) {
-    cancelHold();
-    return;
+    cancelHold()
+    return
   }
 
   // Send modes of next (or first) non-drag-mode.
-  if (!scrollDirty.value) emit("input", nonHoldPosition.value.modes);
-  scrollDirty.value = false;
-};
+  if (!scrollDirty.value && nonHoldPosition.value) emit('input', nonHoldPosition.value.modes)
+  scrollDirty.value = false
+}
 
-const touchMove = (event) => {
+const touchMove = (event: TouchEvent) => {
   if (
     holdTimeout &&
-    Math.abs(event.touches[0]?.clientY - initialYCoordinate.value) >
-      holdCancelOffset
+    Math.abs(event.touches[0]?.clientY - initialYCoordinate.value) > holdCancelOffset
   ) {
-    scrollDirty.value = true;
-    clearTimeout(holdTimeout);
-    cancelHold();
+    scrollDirty.value = true
+    clearTimeout(holdTimeout)
+    cancelHold()
   }
-};
+}
 
-let holdTimeout;
+let holdTimeout: number
 
-const onHold = (event) => {
+const onHold = () => {
   // So mouse up events temporarily work outside of button bounds.
-  window.addEventListener("mouseup", mouseUp);
-  holding.value = true;
+  window.addEventListener('mouseup', mouseUp)
+  holding.value = true
 
   if (holdPosition.value) {
-    holdingPosition.value = holdPosition.value;
-    emit("input", holdPosition.value.modes);
+    holdingPosition.value = holdPosition.value
+    emit('input', holdPosition.value.modes)
   }
-};
+}
 </script>
 
 <template>

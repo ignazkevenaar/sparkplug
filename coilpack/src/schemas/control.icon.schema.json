@@ -54,7 +54,7 @@
         },
         "backgroundStyle": {
           "type": "string",
-          "enum": ["transparent", "default", "outline", "fill"],
+          "enum": ["default", "outline", "fill"],
           "default": "default"
         },
         "foregroundStyle": {

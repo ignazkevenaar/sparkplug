@@ -1,17 +1,14 @@
-<script setup>
-defineProps({
-  icon: {
-    type: String,
-    default: null,
-  },
-});
+<script setup lang="ts">
+defineProps<{
+  icon?: string
+}>()
 </script>
 
 <template>
   <button
-    class="border-header-controls/50 enabled:active:bg-header-controls/15 rounded-full border-2 p-3 disabled:opacity-50"
+    class="rounded-full border-2 border-header-controls/50 p-3 enabled:active:bg-header-controls/15 disabled:opacity-50"
   >
-    <mdicon v-if="icon" :name="icon" class="text-header-foreground w-[24px]" />
+    <mdicon v-if="icon" :name="icon" class="w-[24px] text-header-foreground" />
     <slot />
   </button>
 </template>

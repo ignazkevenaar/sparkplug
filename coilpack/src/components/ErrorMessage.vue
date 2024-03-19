@@ -1,16 +1,14 @@
-<script setup>
-const props = defineProps({
-  error: {
-    type: Object,
-    required: true,
-  },
-  title: {
-    type: String,
-    default: "Error",
-  },
-});
+<script setup lang="ts">
+interface IProps {
+  error: Error
+  title?: string
+}
 
-console.log(props.error);
+const props = withDefaults(defineProps<IProps>(), {
+  title: 'Error'
+})
+
+console.log(props.error)
 </script>
 
 <template>
