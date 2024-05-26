@@ -13,7 +13,7 @@
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:serve": "vitepress serve docs",
-    "makefs": "mklittlefs --create ./dist ./littlefs/coilpack.bin --size 512000 -b 8192 -p 256",
+    "makefs": "mklittlefs --create ./dist ./littlefs/coilpack.bin --size 1024000 -b 8192 -p 256",
     "websocket": "cd ../utils/websocket-echo/ && npm run serve"
   },
   "dependencies": {
