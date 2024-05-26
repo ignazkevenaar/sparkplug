@@ -4,7 +4,7 @@
   font-family: "Krona One";
   font-style: normal;
   font-weight: 400;
-  src: url("/fonts/krona-one-v14-latin_latin-ext-regular.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url("/fonts/krona-one-v14-regular.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
 /* radio-canada-regular - latin_latin-ext */
@@ -13,7 +13,7 @@
   font-family: "Radio Canada";
   font-style: normal;
   font-weight: 400;
-  src: url("/fonts/radio-canada-v21-latin_latin-ext-regular.woff2")
+  src: url("/fonts/radio-canada-v21-regular.woff2")
     format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 /* radio-canada-italic - latin_latin-ext */
@@ -22,7 +22,7 @@
   font-family: "Radio Canada";
   font-style: italic;
   font-weight: 400;
-  src: url("/fonts/radio-canada-v21-latin_latin-ext-italic.woff2")
+  src: url("/fonts/radio-canada-v21-italic.woff2")
     format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 /* radio-canada-500 - latin_latin-ext */
@@ -31,7 +31,7 @@
   font-family: "Radio Canada";
   font-style: normal;
   font-weight: 500;
-  src: url("/fonts/radio-canada-v21-latin_latin-ext-500.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url("/fonts/radio-canada-v21-500.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 /* radio-canada-600 - latin_latin-ext */
 @font-face {
@@ -39,7 +39,7 @@
   font-family: "Radio Canada";
   font-style: normal;
   font-weight: 600;
-  src: url("/fonts/radio-canada-v21-latin_latin-ext-600.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url("/fonts/radio-canada-v21-600.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 /* radio-canada-700 - latin_latin-ext */
 @font-face {
@@ -47,5 +47,5 @@
   font-family: "Radio Canada";
   font-style: normal;
   font-weight: 700;
-  src: url("/fonts/radio-canada-v21-latin_latin-ext-700.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url("/fonts/radio-canada-v21-700.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
