@@ -25,8 +25,8 @@ LightingMode modes[modesCount];
 
 const PROGMEM Preset presetsHeadlights[] =
     {
-        {.modeID = Parking, .intensity = 63},
-        {.modeID = LowBeams, .intensity = 127},
+        {.modeID = Parking, .intensity = 2},
+        {.modeID = LowBeams, .intensity = 32},
         {.modeID = HighBeams, .intensity = 255},
         {.modeID = FlashToPass, .intensity = 255},
 };
@@ -45,8 +45,8 @@ const PROGMEM Preset presetsBlinkersFrontRight[] =
 
 const PROGMEM Preset presetsPositionFront[] =
     {
-        {.modeID = DRL, .intensity = 128},
-        {.modeID = Parking, .intensity = 63},
+        {.modeID = DRL, .intensity = 64},
+        {.modeID = Parking, .intensity = 32},
 };
 
 const PROGMEM Preset presetsTaillights[] =
@@ -106,7 +106,6 @@ const PROGMEM Preset presetsInstruments[] =
 const PROGMEM Preset presetsStereo[] =
     {
         {.modeID = Stereo},
-        {.modeID = Hazards, .mode = PresetModes::Blink}, // Temporary.
 };
 
 const PROGMEM Preset dud[] = {};
@@ -114,43 +113,35 @@ const PROGMEM Preset dud[] = {};
 Channel channels[] =
     {
         // Rear exterior.
-        {COUNT_OF(presetsTaillights), presetsTaillights},
+        {COUNT_OF(presetsFogRear), presetsFogRear},
         {COUNT_OF(presetsBrakelights), presetsBrakelights},
         {COUNT_OF(presetsBlinkersFrontLeft), presetsBlinkersFrontLeft},
-        {COUNT_OF(presetsFogRear), presetsFogRear},
+        {COUNT_OF(presetsTaillights), presetsTaillights},
 
-        {COUNT_OF(presetsBrakelights), presetsBrakelights}, // Center high mounted stop light.
         {COUNT_OF(presetsInteriorDome), presetsInteriorDome},
-        {COUNT_OF(dud), dud},
-        {COUNT_OF(dud), dud},
-
-        {COUNT_OF(dud), dud},
-        {COUNT_OF(dud), dud},
-        {COUNT_OF(dud), dud},
-        {COUNT_OF(dud), dud},
-
         {COUNT_OF(presetsReverse), presetsReverse},
         {COUNT_OF(presetsBlinkersFrontRight), presetsBlinkersFrontRight},
         {COUNT_OF(presetsBrakelights), presetsBrakelights},
+
         {COUNT_OF(presetsTaillights), presetsTaillights},
 
         // Front exerior.
         {COUNT_OF(presetsHeadlights), presetsHeadlights},
         {COUNT_OF(presetsPositionFront), presetsPositionFront},
         {COUNT_OF(presetsBlinkersFrontLeft), presetsBlinkersFrontLeft},
+        {COUNT_OF(dud), dud},
+
+        {COUNT_OF(dud), dud},
+        {COUNT_OF(dud), dud},
+        {COUNT_OF(dud), dud},
+        {COUNT_OF(presetsBrakelights), presetsBrakelights},
+
         {COUNT_OF(presetsFogFront), presetsFogFront},
-
-        {COUNT_OF(presetsBlinkersFrontLeft), presetsBlinkersFrontLeft},
-        {COUNT_OF(dud), dud},
-        {COUNT_OF(dud), dud},
-        {COUNT_OF(dud), dud},
-
-        {COUNT_OF(dud), dud},
-        {COUNT_OF(dud), dud},
-        {COUNT_OF(dud), dud},
         {COUNT_OF(presetsBlinkersFrontRight), presetsBlinkersFrontRight},
-
         {COUNT_OF(presetsFogFront), presetsFogFront},
+        {COUNT_OF(presetsBlinkersFrontLeft), presetsBlinkersFrontLeft},
+
+        {COUNT_OF(dud), dud},
         {COUNT_OF(presetsBlinkersFrontRight), presetsBlinkersFrontRight},
         {COUNT_OF(presetsPositionFront), presetsPositionFront},
         {COUNT_OF(presetsHeadlights), presetsHeadlights},

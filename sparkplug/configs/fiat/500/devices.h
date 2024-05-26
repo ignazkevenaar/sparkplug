@@ -1,8 +1,8 @@
 #pragma once
 
-PCA9685 exteriorDriverRear(0x40, 0, 16);
-PCA9685 exteriorDriverFront(0x42, 16, 16);
-PCA9685 interiorDriver(0x43, 32, 16);
+LP55231Driver exteriorDriverRear(0x32, 0, 9);
+PCA9685 exteriorDriverFront(0x42, 9, 16);
+PCA9685 interiorDriver(0x43, 25, 16);
 
 WireDevice *wireDevices[] = {
     &exteriorDriverRear,

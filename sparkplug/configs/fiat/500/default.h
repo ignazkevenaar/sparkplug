@@ -9,7 +9,6 @@ bool onInitialize()
 {
   Serial.println("Hello from Fiat 500!");
 
-  setLightMode(Hazards, 255);
   return true;
 }
 
