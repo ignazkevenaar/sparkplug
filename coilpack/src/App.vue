@@ -91,15 +91,15 @@ const setupWebsocket = async () => {
 
       api.connection.onopen = () => {
         websocketConnected.value = true
+
+        // Get initial mode state.
+        api.getModes()
       }
 
       api.connection.onclose = () => {
         websocketConnected.value = false
         setupWebsocket()
       }
-
-      // Get initial mode state.
-      api.getModes()
     })
     .catch((reason: Error) => (error.value = reason))
 }

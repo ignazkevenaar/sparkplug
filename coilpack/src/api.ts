@@ -20,10 +20,11 @@ const bind = (event_name: string, callback: Callback) => {
   return this
 }
 
-const trySend = (data: string) => {
+const trySend = (data: string): boolean => {
   const OPEN = 1
-  if (connection?.readyState !== OPEN) return
+  if (connection?.readyState !== OPEN) return false
   connection.send(data)
+  return true
 }
 
 export const getModes = () => {
