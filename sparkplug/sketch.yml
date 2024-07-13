@@ -12,5 +12,18 @@ profiles:
       - Adafruit PWM Servo Driver Library (3.0.1)
       - Adafruit AW9523 (1.0.5)
       - SparkFun LP55231 Breakout (1.1.0)
+  d1_mini:
+    notes: Profile is suitable for Lolin/Wemos D1 mini modules.
+    fqbn: esp8266:esp8266:d1_mini:xtal=160,eesz=4M2M,baud=921600
+    platforms:
+      - platform: esp8266:esp8266 (3.1.2)
+        platform_index_url: https://arduino.esp8266.com/stable/package_esp8266com_index.json
+    libraries:
+      - PrintCharArray (0.3.4)
+      - WebSockets (2.4.0)
+      - Adafruit BusIO (1.15.0)
+      - Adafruit PWM Servo Driver Library (3.0.1)
+      - Adafruit AW9523 (1.0.5)
+      - SparkFun LP55231 Breakout (1.1.0)
 
 default_profile: esp_generic
