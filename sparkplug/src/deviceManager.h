@@ -21,6 +21,6 @@ extern OutputDevice *outputDevices[];
 
 void updateDeviceConnection();
 void outputToDevices();
-bool deviceResponding(WireDevice &device);
+uint8_t deviceResponding(WireDevice &device);
 bool deviceConnectionChanged(WireDevice &device);
 bool onDeviceConnectionChanged(WireDevice &device);

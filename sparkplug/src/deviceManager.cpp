@@ -44,12 +44,12 @@ void outputToDevices()
         outputDevices[i]->output();
 }
 
-bool deviceResponding(WireDevice &device)
+uint8_t deviceResponding(WireDevice &device)
 {
     Wire.beginTransmission(device.address);
     uint8_t error = Wire.endTransmission();
 
-    if (error && error < 5)
+    if (error && device.errorState != error)
     {
         Serial.print("I²C error at 0x");
         Serial.print(device.address, HEX);
@@ -58,14 +58,16 @@ bool deviceResponding(WireDevice &device)
         Serial.println(".");
     }
 
-    return !error;
+    return error;
 }
 
 bool deviceConnectionChanged(WireDevice &device)
 {
-    bool connected = deviceResponding(device);
+    uint8_t error = deviceResponding(device);
+    bool connected = error == 0;
     bool connectionChanged = device.connected != connected;
     device.connected = connected;
+    device.errorState = error;
     return connectionChanged;
 }
 
