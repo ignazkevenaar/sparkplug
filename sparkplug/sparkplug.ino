@@ -1,4 +1,4 @@
-#include "configs/default/default.h"
+#include "configs/default/config.h"
 #include "src/spark.h"
 
 void setup()

@@ -5,12 +5,12 @@
 #include "devices.h"
 #include "presets.h"
 
+// WiFI settings
+const char *ssid = "Sparkplug - Default";
+const char *password = "thereisnospoon";
+
 bool onInitialize()
 {
-  Serial.println("Hello from car");
-
-  //setLightMode(BlinkR, true);
-
   return true;
 }
 
