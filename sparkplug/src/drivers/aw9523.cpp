@@ -15,6 +15,18 @@ AW9523Driver::AW9523Driver(uint8_t address_, uint16_t channelFrom_, uint16_t cha
   }
 };
 
+// Blocked by https://github.com/adafruit/Adafruit_AW9523/pull/5/
+bool AW9523Driver::configureLEDCurrent(uint8_t quarters_to_reduce)
+{
+  Adafruit_I2CRegister gcrreg =
+      Adafruit_I2CRegister(i2c_dev, AW9523_REG_GCR, 1);
+
+  Adafruit_I2CRegisterBits ISEL =
+      Adafruit_I2CRegisterBits(&gcrreg, 2, 0); // # bits, bit_shift
+
+  return ISEL.write(quarters_to_reduce);
+}
+
 void AW9523Driver::setup()
 {
     begin(address);
@@ -28,6 +40,8 @@ void AW9523Driver::setup()
 
       pinMode(pinTable[i], AW9523_LED_MODE);
     }
+
+    configureLEDCurrent(AW9523_IMAX_9MA);
 };
 
 void AW9523Driver::output()

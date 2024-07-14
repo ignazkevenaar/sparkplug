@@ -14,6 +14,7 @@ class AW9523Driver : public Adafruit_AW9523, public WireDevice, public OutputDev
 {
 public:
   AW9523Driver(uint8_t address_ = 0x59, uint16_t channelFrom_ = 0, uint16_t channelCount_ = 0);
+  bool configureLEDCurrent(uint8_t quarters_to_reduce);
   void setup();
   void output();
 
@@ -41,4 +42,11 @@ private:
   };
 
   const static int outputCount = 16;
+
+  enum AW9523_CURRENT {
+    AW9523_IMAX_36MA,
+    AW9523_IMAX_28MA,
+    AW9523_IMAX_18MA,
+    AW9523_IMAX_9MA,
+  };
 };
