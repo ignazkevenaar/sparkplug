@@ -138,8 +138,9 @@ void startFade(Channel &channel, uint16_t value)
     // Instantly set channel to prevent fade and divide by zero.
     if (channel.targetDelay == 0)
     {
+        uint16_t oldValue = channel.value;
         channel.value = channel.transitionTo;
-        channel.wasUpdated = true;
+        channel.wasUpdated = oldValue != channel.value;
     }
 }
 
@@ -169,8 +170,9 @@ void updateFade(Channel &channel)
     else
         val -= change;
 
-    channel.value = uconstrain<uint32_t>(val, channel.transitionFrom, channel.transitionTo);
-    channel.wasUpdated = true;
+    uint16_t oldValue = channel.value;
+    channel.value = uconstrain(val, channel.transitionFrom, channel.transitionTo);
+    channel.wasUpdated = oldValue != channel.value;
 }
 
 void updateBlink(Channel &channel)
