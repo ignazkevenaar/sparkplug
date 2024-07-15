@@ -1,7 +1,7 @@
 #pragma once
 
 builtinLED builtin(0);
-PCA9685 dashboard(0x40, 0, 16);
+PCA9685Driver dashboard(0x40, 0, 16);
 
 WireDevice *wireDevices[] = {
     &dashboard};

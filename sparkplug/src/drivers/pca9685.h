@@ -10,10 +10,10 @@
 
 extern Channel channels[];
 
-class PCA9685 : public Adafruit_PWMServoDriver, public WireDevice, public OutputDevice
+class PCA9685Driver : public Adafruit_PWMServoDriver, public WireDevice, public OutputDevice
 {
 public:
-  PCA9685(uint8_t address_ = 0x00, uint16_t channelFrom_ = 0, uint16_t channelCount_ = 0, bool totemPoleOutput_ = false);
+  PCA9685Driver(uint8_t address_ = 0x00, uint16_t channelFrom_ = 0, uint16_t channelCount_ = 0, bool totemPoleOutput_ = false);
   void setup();
   void output();
 

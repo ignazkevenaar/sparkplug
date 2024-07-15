@@ -1,7 +1,7 @@
 #include "pca9685.h"
 #include "../helpers/wirehelper.h"
 
-PCA9685::PCA9685(uint8_t address_, uint16_t channelFrom_, uint16_t channelCount_, bool totemPoleOutput_) : Adafruit_PWMServoDriver(address_)
+PCA9685Driver::PCA9685Driver(uint8_t address_, uint16_t channelFrom_, uint16_t channelCount_, bool totemPoleOutput_) : Adafruit_PWMServoDriver(address_)
 {
   address = address_;
   channelFrom = channelFrom_;
@@ -16,7 +16,7 @@ PCA9685::PCA9685(uint8_t address_, uint16_t channelFrom_, uint16_t channelCount_
   }
 };
 
-void PCA9685::setup()
+void PCA9685Driver::setup()
 {
   begin();
   setPWMFreq(1600);
@@ -26,7 +26,7 @@ void PCA9685::setup()
     setPin(i, 0, true);
 };
 
-void PCA9685::output()
+void PCA9685Driver::output()
 {
   if (channelCount == 1)
   {
@@ -63,7 +63,7 @@ void PCA9685::output()
   }
 };
 
-void PCA9685::writeSequentially(uint16_t values[], bool invert, int rangeFrom, int rangeTo)
+void PCA9685Driver::writeSequentially(uint16_t values[], bool invert, int rangeFrom, int rangeTo)
 {
   Wire.beginTransmission(address);
   Wire.write(PCA9685_LED0_ON_L + 4 * rangeFrom);
@@ -84,7 +84,7 @@ void PCA9685::writeSequentially(uint16_t values[], bool invert, int rangeFrom, i
   Wire.endTransmission();
 }
 
-void PCA9685::getOnOff(uint16_t value, uint16_t &valueOn, uint16_t &valueOff, bool invert)
+void PCA9685Driver::getOnOff(uint16_t value, uint16_t &valueOn, uint16_t &valueOff, bool invert)
 {
   // Clamp value between 0 and 4095 inclusive.
   uint16_t value_ = min(value, (uint16_t)4095);
