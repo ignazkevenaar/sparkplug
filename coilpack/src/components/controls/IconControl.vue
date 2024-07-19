@@ -91,31 +91,6 @@ const cascadedProps = computed<CascadableProperties>(() => {
   return mergedProps
 })
 
-// const cascadableProperties = [
-//   'backgroundStyle',
-//   'backgroundColor',
-//   'foregroundColor',
-//   'foregroundStyle',
-//   'animation',
-//   'label',
-//   'icon'
-// ]
-
-// const cascadedProps = computed<CascadableProperties>(() =>
-//   Object.fromEntries(
-//     cascadableProperties
-//       .flatMap((key) => {
-//         const v = currentPositions.value
-//           .filter((position) => (!holdingPosition.value ? position.type !== 'hold' : true))
-//           .filter((position) => !(blinkNormal?.value && position.animation === 'blinking'))
-//           .map((position) => [key, position[key] || props.control[key]])
-
-//         return v.length ? v : [[key, props.control[key] || '']]
-//       })
-//       .filter(([, value]) => !!value)
-//   )
-// )
-
 // TODO: Do variable modes even work!?
 const swapSetUnset = (original: ControlModel): ControlModel => {
   var modified = { ...original }
