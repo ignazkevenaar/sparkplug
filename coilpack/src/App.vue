@@ -9,6 +9,7 @@ import {
   controlsConfigKey,
   websocketConnectedKey
 } from './provide-keys'
+import AppFooter from './components/AppFooter.vue'
 import AppHeader from './components/AppHeader.vue'
 import AppRouter from './components/AppRouter.vue'
 import ConnectionIndicator from './components/ConnectionIndicator.vue'
@@ -171,5 +172,6 @@ provide(blinkFastKey, blinkFast)
       </div>
       <AppRouter v-else @route-changed="currentRoute = $event" @input="groupAndSetModeChanges" />
     </Transition>
+    <AppFooter />
   </div>
 </template>

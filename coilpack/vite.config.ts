@@ -29,5 +29,8 @@ export default defineConfig({
   server: {
     port: 3000,
     strictPort: true
+  },
+  define: {
+    'import.meta.env.VITE_BUILD_DATE': JSON.stringify(new Date().valueOf())
   }
 })
