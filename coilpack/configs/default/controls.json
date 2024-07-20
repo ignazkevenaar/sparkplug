@@ -317,6 +317,32 @@
       ]
     },
     {
+      "name": "Variable Controls",
+      "controls": [
+        {
+          "type": "variable",
+          "icon": "car-light-fog-rear",
+          "width": 6,
+          "height": 6,
+          "mode": "FogFront",
+          "label": "Magic",
+          "backgroundStyle": "default",
+          "backgroundColor": "pink"
+        },
+        {
+          "type": "variable",
+          "icon": "car-light-fog-rear",
+          "width": 6,
+          "height": 12,
+          "mode": "FogFront",
+          "label": "Magicc",
+          "round": true,
+          "backgroundStyle": "default",
+          "backgroundColor": "blue"
+        }
+      ]
+    },
+    {
       "name": "Fog lights",
       "controls": [
         {
