@@ -3,7 +3,8 @@
 
 #include "lighting.h"
 
-constexpr auto uconstrain(auto value, auto b1, auto b2)
+template <typename T>
+constexpr auto uconstrain(T value, T b1, T b2)
 {
     return constrain(value, min(b1, b2), max(b1, b2));
 }
@@ -168,7 +169,7 @@ void updateFade(Channel &channel)
     else
         val -= change;
 
-    channel.value = uconstrain(val, channel.transitionFrom, channel.transitionTo);
+    channel.value = uconstrain<uint32_t>(val, channel.transitionFrom, channel.transitionTo);
     channel.wasUpdated = true;
 }
 
