@@ -1,5 +1,10 @@
 #pragma once
 
+#include "../../src/helpers/macros.h"
+#include "../../src/types/channel.h"
+#include "../../src/types/lightingmode.h"
+#include "../../src/types/preset.h"
+
 enum ModeIDs
 {
     DaytimeRunning,
