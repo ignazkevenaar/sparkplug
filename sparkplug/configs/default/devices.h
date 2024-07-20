@@ -1,14 +1,16 @@
 #pragma once
 
-builtinLED builtin(0);
-PCA9685Driver dashboard(0x40, 0, 16);
+#include "../../src/drivers/pca9685.h"
+#include "../../src/helpers/macros.h"
+
+PCA9685Driver mainOutputDevice(0x40, 0, 16);
 
 WireDevice *wireDevices[] = {
-    &dashboard};
+    &mainOutputDevice,
+};
 size_t wireDevicesCount = COUNT_OF(wireDevices);
 
 OutputDevice *outputDevices[] = {
-    &dashboard,
-    // &builtin,
+    &mainOutputDevice
 };
 size_t outputDevicesCount = COUNT_OF(outputDevices);
