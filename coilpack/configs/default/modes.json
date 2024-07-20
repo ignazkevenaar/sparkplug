@@ -1,18 +1,14 @@
 [
-  "DRL",
+  "DaytimeRunning",
   "Parking",
   "LowBeams",
   "HighBeams",
   "FlashToPass",
-  "FogRear",
-  "FogFront",
   "Brake",
-  "ESS",
-  "Interior",
   "Reverse",
   "BlinkL",
   "BlinkR",
   "Hazards",
-  "Exhaust",
-  "ExhaustGlow"
+  "FogRear",
+  "FogFront"
 ]
