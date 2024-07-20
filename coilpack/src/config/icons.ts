@@ -121,5 +121,10 @@ export {
   mdiTruckSnowflake,
   mdiTruckTrailer,
   mdiWeatherNight,
-  mdiGestureTapHold
+  mdiGestureTapHold,
+  mdiAlphaR,
+  mdiAlphaRCircle,
+  mdiAlphaRCircleOutline,
+  mdiAlphaRBox,
+  mdiAlphaRBoxOutline
 } from '@mdi/js'
