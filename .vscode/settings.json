@@ -1,6 +1,19 @@
 {
   "files.associations": {
-    "ino": "cpp"
+    ".clang-format": "yaml",
+    "ino": "cpp",
+    "array": "cpp",
+    "unordered_map": "cpp",
+    "vector": "cpp",
+    "exception": "cpp",
+    "iterator": "cpp",
+    "functional": "cpp",
+    "initializer_list": "cpp",
+    "iosfwd": "cpp",
+    "new": "cpp",
+    "tuple": "cpp",
+    "type_traits": "cpp",
+    "utility": "cpp"
   },
   "emmet.syntaxProfiles": {
     "vue-html": "html",
