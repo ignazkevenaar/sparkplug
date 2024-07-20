@@ -21,8 +21,10 @@
   },
   "dependencies": {
     "@mdi/js": "^6.5.95",
+    "@types/lodash": "^4.17.4",
     "css-houdini-squircle": "^0.2.1",
     "eslint-plugin-sort-exports": "^0.6.0",
+    "lodash": "^4.17.21",
     "mdi-vue": "^3.0.12",
     "vite-plugin-static-copy": "^1.0.1",
     "vue": "^3.4.21",

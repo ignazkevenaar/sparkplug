@@ -8,13 +8,19 @@ if (process.argv.length >= 4 && process.argv[2] === "--port") {
 
 const wss = new WebSocket.Server({ port });
 
+const websocketConnections = [];
+
 wss.on("connection", (ws) => {
   ws.on("error", console.error);
+
+  websocketConnections.push(ws);
 
   ws.on("message", function message(data) {
     console.log("received: %s", data);
 
-    ws.send(data.toString());
+    websocketConnections.forEach((connection) =>
+      connection.send(data.toString())
+    );
   });
 });
 

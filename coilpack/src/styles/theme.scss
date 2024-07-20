@@ -53,6 +53,15 @@
     --color-header-foreground: var(--color-foreground-100);
     --color-header-controls: var(--color-foreground-300);
 
+    // Button
+    --color-button-background: var(--color-background-500);
+    --color-button-background-hover: var(--color-background-400);
+
+    // Dialog
+    --color-dialog-background: var(--color-background-700);
+    --color-dialog-backdrop: var(--color-background-800);
+    --color-dialog-foreground: var(--color-foreground-100);
+
     // Control container
     --color-container-background-base: var(--color-background-700);
     --color-container-red: var(--color-red-dim);

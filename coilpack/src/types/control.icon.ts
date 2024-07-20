@@ -33,3 +33,8 @@ export interface IconControl extends Control, CascadableProperties {
   positions: Position[]
   readOnly: boolean
 }
+
+export interface VariableControl extends Control, CascadableProperties {
+  mode: string
+  readOnly: boolean
+}

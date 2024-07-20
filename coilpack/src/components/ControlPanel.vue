@@ -5,6 +5,7 @@ import type { ControlModel } from '@/types/types'
 import DisplayControl from './controls/DisplayControl.vue'
 import IconControl from './controls/IconControl.vue'
 import Placeholder from './controls/PlaceholderControl.vue'
+import VariableControl from './controls/VariableControl.vue'
 import { inject } from 'vue'
 import { websocketConnectedKey } from '../provide-keys'
 
@@ -21,7 +22,8 @@ const controlToComponent = {
   placeholder: Placeholder,
   button: IconControl,
   indicator: IconControl,
-  display: DisplayControl
+  display: DisplayControl,
+  variable: VariableControl
 }
 
 const websocketConnected = inject(websocketConnectedKey)
