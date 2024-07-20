@@ -12,50 +12,50 @@ Timer timerWire(1000);
 
 void sparkInitialize()
 {
-  welcomeMessage();
+    welcomeMessage();
 
-  setupWiFi();
-  setupUpdateServer();
-  setupWebServer();
-  setupWebSockets();
+    setupWiFi();
+    setupUpdateServer();
+    setupWebServer();
+    setupWebSockets();
 
-  if (!onInitialize())
-  {
-    Serial.println("There was an error during initializing");
-    for (;;)
+    if (!onInitialize())
     {
-    } // Stop execution.
-  }
+        Serial.println("There was an error during initializing");
+        for (;;)
+        {
+        } // Stop execution.
+    }
 
-  Serial.println("Ready.");
+    Serial.println("Ready.");
 }
 
 __attribute__((weak)) bool onInitialize()
 {
-  return true;
+    return true;
 }
 
 void sparkUpdate()
 {
-  currentMillis = millis();
+    currentMillis = millis();
 
-  readSerialInput();
-  applyLightModeChanges();
+    readSerialInput();
+    applyLightModeChanges();
 
-  if (timerWire.elapsed(currentMillis)) updateDeviceConnection();
+    if (timerWire.elapsed(currentMillis)) updateDeviceConnection();
 
-  if (timerLights.elapsed(currentMillis))
-  {
-    updateFadeChannels();
+    if (timerLights.elapsed(currentMillis))
+    {
+        updateFadeChannels();
 
-    outputToDevices();
-    clearAllChannelsChanged();
-  }
+        outputToDevices();
+        clearAllChannelsChanged();
+    }
 
-  updateWebServer();
-  updateWebSockets();
+    updateWebServer();
+    updateWebSockets();
 
-  onUpdate();
+    onUpdate();
 }
 
 __attribute__((weak)) void onUpdate() {}

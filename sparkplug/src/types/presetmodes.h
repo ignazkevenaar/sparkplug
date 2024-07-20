@@ -2,6 +2,6 @@
 
 enum class PresetModes
 {
-  Normal,
-  Blink
+    Normal,
+    Blink
 };

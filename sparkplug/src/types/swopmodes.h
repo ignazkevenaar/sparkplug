@@ -2,7 +2,7 @@
 
 enum class SwopModes
 {
-  LTP,
-  HTP,
-  LoTP,
+    LTP,
+    HTP,
+    LoTP,
 };

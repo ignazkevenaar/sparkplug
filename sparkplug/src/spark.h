@@ -4,14 +4,14 @@
 
 #include "types/version.h"
 
-#include "fileSystem.h"
 #include "commands.h"
 #include "deviceManager.h"
+#include "fileSystem.h"
 #include "input.h"
 #include "lighting.h"
 #include "timer.h"
-#include "webServer.h"
 #include "updateServer.h"
+#include "webServer.h"
 #include "webSockets.h"
 #include "wiFi.h"
 

@@ -12,14 +12,14 @@ extern Channel channels[];
 
 class LP55231Driver : public Lp55231, public WireDevice, public OutputDevice
 {
-public:
-  LP55231Driver(uint8_t address_ = 0x00, uint16_t channelFrom_ = 0, uint16_t channelCount_ = 0);
-  void setup();
-  void output();
+  public:
+    LP55231Driver(uint8_t address_ = 0x00, uint16_t channelFrom_ = 0, uint16_t channelCount_ = 0);
+    void setup();
+    void output();
 
-private:
-  static const uint8_t REG_D1_PWM  = 0x16;
-  static const uint8_t REG_MISC     = 0x36;
+  private:
+    static const uint8_t REG_D1_PWM = 0x16;
+    static const uint8_t REG_MISC = 0x36;
 
-  const static int outputCount = 9;
+    const static int outputCount = 9;
 };

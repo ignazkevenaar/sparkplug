@@ -7,7 +7,7 @@ extern const char *password;
 
 void setupWiFi()
 {
-  WiFi.mode(WIFI_AP);
-  WiFi.softAPConfig(accessPointAddress, accessPointAddress, subnetMask);
-  WiFi.softAP(ssid, password);
+    WiFi.mode(WIFI_AP);
+    WiFi.softAPConfig(accessPointAddress, accessPointAddress, subnetMask);
+    WiFi.softAP(ssid, password);
 }

@@ -3,12 +3,14 @@
 
 void setup()
 {
-  Serial.begin(9600);
-  delay(250);
-  Serial.flush();
+    Serial.begin(9600);
+    delay(250);
+    Serial.flush();
 
-  sparkInitialize();
+    sparkInitialize();
 }
 
-void loop() {
-  sparkUpdate(); }
+void loop()
+{
+    sparkUpdate();
+}

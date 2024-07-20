@@ -2,23 +2,24 @@
 
 uint16_t timingLinear(uint16_t input)
 {
-  return input;
+    return input;
 }
 
 uint16_t timingExponential(uint16_t input)
 {
-  int exp = 4;
-  uint16_t v = pow(input, exp) / pow(2, 16 * (exp - 1));
-  return v;
+    int exp = 4;
+    uint16_t v = pow(input, exp) / pow(2, 16 * (exp - 1));
+    return v;
 }
 
 typedef uint16_t (*FunctionPointer)(uint16_t);
 
 FunctionPointer functionPointers[] = {
     &timingLinear,
-    &timingExponential};
+    &timingExponential
+};
 
 uint16_t useTimingFunction(int kind, uint16_t input)
 {
-  return (*functionPointers[kind])(input);
+    return (*functionPointers[kind])(input);
 }

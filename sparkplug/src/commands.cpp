@@ -2,35 +2,35 @@
 
 #include <Wire.h>
 
+#include "fileSystem.h"
 #include "helpers/macros.h"
 #include "input.h"
 #include "lighting.h"
-#include "fileSystem.h"
 
 enum commandIDs
 {
-  idSetCommand,
-  idUnsetCommand,
-  idGetCommand,
-  idFileCommand,
-  idScanCommand,
-  idTestCommand,
-  idHelpCommand,
-  idVersionCommand,
+    idSetCommand,
+    idUnsetCommand,
+    idGetCommand,
+    idFileCommand,
+    idScanCommand,
+    idTestCommand,
+    idHelpCommand,
+    idVersionCommand,
 };
 
 void welcomeMessage()
 {
-  Serial.println();
-  Serial.print("Sparkplug - version ");
-  Serial.println(version.getString());
-  Serial.println("Type `?` to see a list of all available commands.");
-  Serial.println();
+    Serial.println();
+    Serial.print("Sparkplug - version ");
+    Serial.println(version.getString());
+    Serial.println("Type `?` to see a list of all available commands.");
+    Serial.println();
 }
 
 void versionExecute(const Command &command, char **arguments, uint8_t length)
 {
-  outputBuffer.print(version.getString());
+    outputBuffer.print(version.getString());
 }
 
 const Command versionCommand =
@@ -44,28 +44,28 @@ const Command versionCommand =
 
 void helpExecute(const Command &command, char **arguments, uint8_t length)
 {
-  Serial.println();
-  Serial.print("Sparkplug - version ");
-  Serial.println(version.getString());
+    Serial.println();
+    Serial.print("Sparkplug - version ");
+    Serial.println(version.getString());
 
-  Serial.println("Usage:");
-  Serial.println(" command argument, argument...");
-  Serial.println();
-  Serial.println("Available commands:");
-  Serial.println();
+    Serial.println("Usage:");
+    Serial.println(" command argument, argument...");
+    Serial.println();
+    Serial.println("Available commands:");
+    Serial.println();
 
-  for (int i = 0; i < commandCount; i++)
-  {
-    const Command &command = *commands[i];
-    Serial.print(" ");
-    Serial.print(command.shortIndentifier);
-    Serial.print(" ");
-    Serial.print(command.identifier);
-    Serial.print("\t");
-    Serial.println(command.helpText);
-  }
+    for (int i = 0; i < commandCount; i++)
+    {
+        const Command &command = *commands[i];
+        Serial.print(" ");
+        Serial.print(command.shortIndentifier);
+        Serial.print(" ");
+        Serial.print(command.identifier);
+        Serial.print("\t");
+        Serial.println(command.helpText);
+    }
 
-  Serial.println();
+    Serial.println();
 }
 
 const Command helpCommand =
@@ -79,7 +79,7 @@ const Command helpCommand =
 
 void fileExecute(const Command &command, char **arguments, uint8_t length)
 {
-  listHomeDirectory("/");
+    listHomeDirectory("/");
 }
 
 const Command fileCommand =
@@ -93,43 +93,43 @@ const Command fileCommand =
 
 void scanExecute(const Command &command, char **arguments, uint8_t length)
 {
-  // From: https://playground.arduino.cc/Main/I2cScanner/
+    // From: https://playground.arduino.cc/Main/I2cScanner/
 
-  byte error, address;
-  int nDevices;
+    byte error, address;
+    int nDevices;
 
-  Serial.println("Scanning...");
+    Serial.println("Scanning...");
 
-  nDevices = 0;
-  for(address = 1; address < 127; address++)
-  {
-    // The i2c_scanner uses the return value of
-    // the Write.endTransmisstion to see if
-    // a device did acknowledge to the address.
-    Wire.beginTransmission(address);
-    error = Wire.endTransmission();
-
-    if (error == 0)
+    nDevices = 0;
+    for (address = 1; address < 127; address++)
     {
-      Serial.print("I2C device found at address 0x");
-      if (address < 16)
-        Serial.print("0");
-      Serial.println(address, HEX);
+        // The i2c_scanner uses the return value of
+        // the Write.endTransmisstion to see if
+        // a device did acknowledge to the address.
+        Wire.beginTransmission(address);
+        error = Wire.endTransmission();
 
-      nDevices++;
+        if (error == 0)
+        {
+            Serial.print("I2C device found at address 0x");
+            if (address < 16)
+                Serial.print("0");
+            Serial.println(address, HEX);
+
+            nDevices++;
+        }
+        else if (error == 4)
+        {
+            Serial.print("Unknown error at address 0x");
+            if (address < 16)
+                Serial.print("0");
+            Serial.println(address, HEX);
+        }
     }
-    else if (error == 4)
-    {
-      Serial.print("Unknown error at address 0x");
-      if (address < 16)
-        Serial.print("0");
-      Serial.println(address,HEX);
-    }
-  }
-  if (nDevices == 0)
-    Serial.println("No I2C devices found\n");
-  else
-    Serial.println("done\n");
+    if (nDevices == 0)
+        Serial.println("No I2C devices found\n");
+    else
+        Serial.println("done\n");
 }
 
 const Command scanCommand =
@@ -143,12 +143,12 @@ const Command scanCommand =
 
 void testExecute(const Command &command, char **arguments, uint8_t length)
 {
-  Serial.println("Sleeping...");
-  delay(1500);
+    Serial.println("Sleeping...");
+    delay(1500);
 
-  // Your arguments in c-string format.
-  for (int i = 0; i < length; i++)
-    Serial.println(arguments[i]);
+    // Your arguments in c-string format.
+    for (int i = 0; i < length; i++)
+        Serial.println(arguments[i]);
 }
 
 const Command testCommand =
@@ -162,139 +162,140 @@ const Command testCommand =
 
 void outputMode(int modeIndex)
 {
-  if (outputBuffer.size() == 0)
-    outputBuffer.print("M ");
-  else
-    outputBuffer.print(outputGroupSeparator);
-  outputBuffer.print(modeIndex);
-  outputBuffer.print(outputKeyValueSeparator);
-  outputBuffer.print(modes[modeIndex].nextState > -1 ? modes[modeIndex].nextState : modes[modeIndex].currentState);
+    if (outputBuffer.size() == 0)
+        outputBuffer.print("M ");
+    else
+        outputBuffer.print(outputGroupSeparator);
+    outputBuffer.print(modeIndex);
+    outputBuffer.print(outputKeyValueSeparator);
+    outputBuffer.print(modes[modeIndex].nextState > -1 ? modes[modeIndex].nextState : modes[modeIndex].currentState);
 }
 
 uint32_t strToLong(char *string, bool &error)
 {
-  char *endptr = nullptr;
-  uint32_t number = strtoul(string, &endptr, 0);
-  if (endptr == string)
-  {
-    error |= true;
-    return 0;
-  }
+    char *endptr = nullptr;
+    uint32_t number = strtoul(string, &endptr, 0);
+    if (endptr == string)
+    {
+        error |= true;
+        return 0;
+    }
 
-  return number;
+    return number;
 }
 
 void argumentToRangeTokens(char *string, char **firstToken, char **lastToken)
 {
-  const char delimiter[] = "-";
-  char *token = strtok(string, delimiter);
-  *firstToken = token;
+    const char delimiter[] = "-";
+    char *token = strtok(string, delimiter);
+    *firstToken = token;
 
-  while (token != NULL)
-  {
-    *lastToken = token;
-    token = strtok(NULL, delimiter);
-  }
+    while (token != NULL)
+    {
+        *lastToken = token;
+        token = strtok(NULL, delimiter);
+    }
 }
 
 void argumentToRange(char *string, uint16_t *rangeFrom, uint16_t *rangeTo, bool &error)
 {
-  char *firstToken = nullptr;
-  char *lastToken = nullptr;
-  argumentToRangeTokens(string, &firstToken, &lastToken);
+    char *firstToken = nullptr;
+    char *lastToken = nullptr;
+    argumentToRangeTokens(string, &firstToken, &lastToken);
 
-  char *endptr;
-  bool errorFirst = false;
-  bool errorLast = false;
-  unsigned int firstNumber = strToLong(firstToken, errorFirst);
-  unsigned int lastNumber = strToLong(lastToken, errorLast);
+    char *endptr;
+    bool errorFirst = false;
+    bool errorLast = false;
+    unsigned int firstNumber = strToLong(firstToken, errorFirst);
+    unsigned int lastNumber = strToLong(lastToken, errorLast);
 
-  if (errorFirst || errorLast)
-  {
-    Serial.print("Error in ");
-    Serial.print(errorFirst ? "first" : "last");
-    Serial.println(" range index.");
+    if (errorFirst || errorLast)
+    {
+        Serial.print("Error in ");
+        Serial.print(errorFirst ? "first" : "last");
+        Serial.println(" range index.");
 
-    error |= true;
-    return;
-  }
+        error |= true;
+        return;
+    }
 
-  *rangeFrom = min(firstNumber, lastNumber);
-  *rangeTo = max(firstNumber, lastNumber);
+    *rangeFrom = min(firstNumber, lastNumber);
+    *rangeTo = max(firstNumber, lastNumber);
 }
 
 void argumentToIDValue(char *string, char **modeID, char **value)
 {
-  int counter = 0;
-  const char delimiter[] = ":";
-  char *token = strtok(string, delimiter);
+    int counter = 0;
+    const char delimiter[] = ":";
+    char *token = strtok(string, delimiter);
 
-  while (token != NULL)
-  {
-    if (counter == 0) *modeID = token;
-    else *value = token;
+    while (token != NULL)
+    {
+        if (counter == 0) *modeID = token;
+        else
+            *value = token;
 
-    token = strtok(NULL, delimiter);
-    counter++;
-  }
+        token = strtok(NULL, delimiter);
+        counter++;
+    }
 }
 
 void setUnsetGetExecute(const Command &command, char **arguments, uint8_t length)
 {
-  const bool setUnset = command.ID == idSetCommand || command.ID == idUnsetCommand;
+    const bool setUnset = command.ID == idSetCommand || command.ID == idUnsetCommand;
 
-  if (!length)
-  {
-    // If no arguments are provided for the unset command, all modes are turned off.
-    // If no arguments are provided for the get command, the state of all modes is returned.
-    for (int modeIndex = 0; modeIndex < modesCount; modeIndex++)
+    if (!length)
     {
-      if (command.ID == idUnsetCommand) setLightMode(modeIndex, 0);
-      if (modes[modeIndex].currentState > 0) outputMode(modeIndex);
-    }
-    return;
-  }
-
-  for (int i = 0; i < length; i++)
-  {
-    // Split argument into mode ID or range and new mode value.
-    char *modeIDOrRange = nullptr;
-    char *valueArgument = nullptr;
-    argumentToIDValue(arguments[i], &modeIDOrRange, &valueArgument);
-
-    bool errorValue = false;
-    unsigned int newModeValue = 255;
-    if (valueArgument != NULL)
-    {
-      newModeValue = strToLong(valueArgument, errorValue);
-      if (errorValue)
-      {
-        Serial.println("Error: Given value cannot be converted to unsigned long.");
-        continue;
-      }
+        // If no arguments are provided for the unset command, all modes are turned off.
+        // If no arguments are provided for the get command, the state of all modes is returned.
+        for (int modeIndex = 0; modeIndex < modesCount; modeIndex++)
+        {
+            if (command.ID == idUnsetCommand) setLightMode(modeIndex, 0);
+            if (modes[modeIndex].currentState > 0) outputMode(modeIndex);
+        }
+        return;
     }
 
-    // Try converting first half of command into a valid range.
-    bool errorRange = false;
-    uint16_t rangeFrom = 0;
-    uint16_t rangeTo = 0;
-    argumentToRange(modeIDOrRange, &rangeFrom, &rangeTo, errorRange);
-    if (errorRange)
+    for (int i = 0; i < length; i++)
     {
-      Serial.println("Error converting argument to valid range.");
-      continue;
-    }
+        // Split argument into mode ID or range and new mode value.
+        char *modeIDOrRange = nullptr;
+        char *valueArgument = nullptr;
+        argumentToIDValue(arguments[i], &modeIDOrRange, &valueArgument);
 
-    for (int modeIndex = rangeFrom; modeIndex <= rangeTo; modeIndex++)
-    {
-      if (setUnset && !setLightMode(modeIndex, command.ID == idSetCommand ? newModeValue : 0))
-      {
-        Serial.println("Mode index out of range or already set.");
-        continue;
-      }
-      outputMode(modeIndex);
+        bool errorValue = false;
+        unsigned int newModeValue = 255;
+        if (valueArgument != NULL)
+        {
+            newModeValue = strToLong(valueArgument, errorValue);
+            if (errorValue)
+            {
+                Serial.println("Error: Given value cannot be converted to unsigned long.");
+                continue;
+            }
+        }
+
+        // Try converting first half of command into a valid range.
+        bool errorRange = false;
+        uint16_t rangeFrom = 0;
+        uint16_t rangeTo = 0;
+        argumentToRange(modeIDOrRange, &rangeFrom, &rangeTo, errorRange);
+        if (errorRange)
+        {
+            Serial.println("Error converting argument to valid range.");
+            continue;
+        }
+
+        for (int modeIndex = rangeFrom; modeIndex <= rangeTo; modeIndex++)
+        {
+            if (setUnset && !setLightMode(modeIndex, command.ID == idSetCommand ? newModeValue : 0))
+            {
+                Serial.println("Mode index out of range or already set.");
+                continue;
+            }
+            outputMode(modeIndex);
+        }
     }
-  }
 }
 
 const Command setCommand =

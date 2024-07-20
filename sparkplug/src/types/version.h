@@ -4,32 +4,32 @@
 
 struct Version
 {
-  uint8_t major, minor, patch;
-  const char *label;
-  const char *build;
-  char buffer[64];
+    uint8_t major, minor, patch;
+    const char *label;
+    const char *build;
+    char buffer[64];
 
-  Version(uint8_t major_ = 0, uint8_t minor_ = 0, uint8_t patch_ = 0, const char *label_ = nullptr, const char *build_ = nullptr) : major{major_}, minor{minor_}, patch{patch_}, label{label_}, build{build_}
-  {
-    snprintf(buffer, 16, "%d.%d.%d", major, minor, patch);
-
-    if (label)
+    Version(uint8_t major_ = 0, uint8_t minor_ = 0, uint8_t patch_ = 0, const char *label_ = nullptr, const char *build_ = nullptr) : major{major_}, minor{minor_}, patch{patch_}, label{label_}, build{build_}
     {
-      char versionLabel[32];
-      snprintf(versionLabel, 32, "-%s", label);
-      strncat(buffer, versionLabel, 32);
+        snprintf(buffer, 16, "%d.%d.%d", major, minor, patch);
+
+        if (label)
+        {
+            char versionLabel[32];
+            snprintf(versionLabel, 32, "-%s", label);
+            strncat(buffer, versionLabel, 32);
+        }
+
+        if (build)
+        {
+            char versionBuild[16];
+            snprintf(versionBuild, 32, "+%s", build);
+            strncat(buffer, versionBuild, 32);
+        }
     }
 
-    if (build)
+    char *getString()
     {
-      char versionBuild[16];
-      snprintf(versionBuild, 32, "+%s", build);
-      strncat(buffer, versionBuild, 32);
+        return buffer;
     }
-  }
-
-  char *getString()
-  {
-    return buffer;
-  }
 };
