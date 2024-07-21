@@ -1,5 +1,6 @@
 module.exports = {
   title: "Sparkplug",
+  base: "/sparkplug/",
   head: [
     ["link", { rel: "icon", type: "image/svg+xml", href: "/logo.svg" }],
     [
