@@ -7,7 +7,7 @@ uint16_t timingLinear(uint16_t input)
 
 uint16_t timingExponential(uint16_t input)
 {
-    int exp = 4;
+    int exp = 2;
     uint16_t v = pow(input, exp) / pow(2, 16 * (exp - 1));
     return v;
 }
