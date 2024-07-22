@@ -9,12 +9,12 @@ Modes are defined in your config. Sparkplug does not come with a default set of 
 ```c++
 enum ModeIDs
 {
-  DaytimeRunningLights,
-  Parking,
-  LowBeams,
-  HighBeams,
-  BlinkL,
-  BlinkR,
+    DaytimeRunning,
+    Parking,
+    LowBeams,
+    HighBeams,
+    BlinkL,
+    BlinkR,
 };
 
 const size_t modesCount = BlinkR + 1;

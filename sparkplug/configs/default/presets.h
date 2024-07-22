@@ -60,15 +60,7 @@ const PROGMEM Preset presetsBrake[] = {
     {.modeID = Brake},
 };
 
-const PROGMEM Preset presetsBlinkerRearLeft[] = {
-    {.modeID = BlinkL, .mode = PresetModes::Blink},
-    {.modeID = Hazards, .mode = PresetModes::Blink}
-};
-
-const PROGMEM Preset presetsBlinkerRearRight[] = {
-    {.modeID = BlinkR, .mode = PresetModes::Blink},
-    {.modeID = Hazards, .mode = PresetModes::Blink}
-};
+const PROGMEM Preset pUnused[] = {};
 
 const PROGMEM Preset presetsFogRear[] = {
     {.modeID = FogRear}
@@ -76,6 +68,98 @@ const PROGMEM Preset presetsFogRear[] = {
 
 const PROGMEM Preset presetsReverse[] = {
     {.modeID = Reverse}
+};
+
+/// SEQ BLINKERS
+
+const PROGMEM Preset presetBlinkerFirstLeft[] = {
+    {.modeID = Brake},
+    {.modeID = BlinkL, .intensity = 0},
+    {.modeID = Hazards, .intensity = 0},
+    {.modeID = Parking, .priorityMode = SwopModes::HTP, .intensity = 32},
+    {.modeID = BlinkL,
+     .mode = PresetModes::Blink,
+     .blinkPattern = 0b11111111111111111100000000000000
+    },
+    {.modeID = Hazards,
+     .mode = PresetModes::Blink,
+     .blinkPattern = 0b11111111111111111100000000000000
+    }
+};
+
+const PROGMEM Preset presetBlinkerSecondLeft[] = {
+    {.modeID = Brake},
+    {.modeID = BlinkL, .intensity = 0},
+    {.modeID = Hazards, .intensity = 0},
+    {.modeID = Parking, .priorityMode = SwopModes::HTP, .intensity = 32},
+    {.modeID = BlinkL,
+     .mode = PresetModes::Blink,
+     .blinkPattern = 0b00000011111111111100000000000000
+    },
+    {.modeID = Hazards,
+     .mode = PresetModes::Blink,
+     .blinkPattern = 0b00000011111111111100000000000000
+    }
+};
+
+const PROGMEM Preset presetBlinkerThirdLeft[] = {
+    {.modeID = Brake},
+    {.modeID = BlinkL, .intensity = 0},
+    {.modeID = Hazards, .intensity = 0},
+    {.modeID = Parking, .priorityMode = SwopModes::HTP, .intensity = 32},
+    {.modeID = BlinkL,
+     .mode = PresetModes::Blink,
+     .blinkPattern = 0b00000000000011111100000000000000
+    },
+    {.modeID = Hazards,
+     .mode = PresetModes::Blink,
+     .blinkPattern = 0b00000000000011111100000000000000
+    }
+};
+
+const PROGMEM Preset presetBlinkerFirstRight[] = {
+    {.modeID = Brake},
+    {.modeID = BlinkR, .intensity = 0},
+    {.modeID = Hazards, .intensity = 0},
+    {.modeID = Parking, .priorityMode = SwopModes::HTP, .intensity = 32},
+    {.modeID = BlinkR,
+     .mode = PresetModes::Blink,
+     .blinkPattern = 0b11111111111111111100000000000000
+    },
+    {.modeID = Hazards,
+     .mode = PresetModes::Blink,
+     .blinkPattern = 0b11111111111111111100000000000000
+    }
+};
+
+const PROGMEM Preset presetBlinkerSecondRight[] = {
+    {.modeID = Brake},
+    {.modeID = BlinkR, .intensity = 0},
+    {.modeID = Hazards, .intensity = 0},
+    {.modeID = Parking, .priorityMode = SwopModes::HTP, .intensity = 32},
+    {.modeID = BlinkR,
+     .mode = PresetModes::Blink,
+     .blinkPattern = 0b00000011111111111100000000000000
+    },
+    {.modeID = Hazards,
+     .mode = PresetModes::Blink,
+     .blinkPattern = 0b00000011111111111100000000000000
+    }
+};
+
+const PROGMEM Preset presetBlinkerThirdRight[] = {
+    {.modeID = Brake},
+    {.modeID = BlinkR, .intensity = 0},
+    {.modeID = Hazards, .intensity = 0},
+    {.modeID = Parking, .priorityMode = SwopModes::HTP, .intensity = 32},
+    {.modeID = BlinkR,
+     .mode = PresetModes::Blink,
+     .blinkPattern = 0b00000000000011111100000000000000
+    },
+    {.modeID = Hazards,
+     .mode = PresetModes::Blink,
+     .blinkPattern = 0b00000000000011111100000000000000
+    }
 };
 
 Channel channels[] = {
@@ -89,14 +173,14 @@ Channel channels[] = {
     {COUNT_OF(presetsHighBeams), presetsHighBeams},
     {COUNT_OF(presetsFogsFront), presetsFogsFront},
 
-    {COUNT_OF(presetsTaillights), presetsTaillights},
-    {COUNT_OF(presetsBrake), presetsBrake},
-    {COUNT_OF(presetsBlinkerRearLeft), presetsBlinkerRearLeft},
-    {COUNT_OF(presetsFogRear), presetsFogRear},
+    {COUNT_OF(presetBlinkerSecondLeft), presetBlinkerSecondLeft},
+    {COUNT_OF(presetBlinkerThirdLeft), presetBlinkerThirdLeft},
+    {COUNT_OF(pUnused), pUnused},
+    {COUNT_OF(presetBlinkerFirstLeft), presetBlinkerFirstLeft},
 
-    {COUNT_OF(presetsTaillights), presetsTaillights},
-    {COUNT_OF(presetsBrake), presetsBrake},
-    {COUNT_OF(presetsBlinkerRearRight), presetsBlinkerRearRight},
-    {COUNT_OF(presetsReverse), presetsReverse}
+    {COUNT_OF(presetBlinkerSecondRight), presetBlinkerSecondRight},
+    {COUNT_OF(presetBlinkerThirdRight), presetBlinkerThirdRight},
+    {COUNT_OF(pUnused), pUnused},
+    {COUNT_OF(presetBlinkerFirstRight), presetBlinkerFirstRight}
 };
 const size_t channelsCount = COUNT_OF(channels);

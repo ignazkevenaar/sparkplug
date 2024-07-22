@@ -9,13 +9,13 @@ The following example defines a single channel with two basic presets:
 ```c++{9}
 const PROGMEM Preset presetsHeadlightLeft[] =
 {
-  { .modeID = LowBeams, .intensity = 32 },
-  { .modeID = HighBeams, .intensity = 128 },
+    { .modeID = LowBeams, .intensity = 32 },
+    { .modeID = HighBeams, .intensity = 128 },
 };
 
 Channel channels[] =
 {
-  { COUNT_OF(presetsHeadlightLeft), presetsHeadlightLeft }
+    { COUNT_OF(presetsHeadlightLeft), presetsHeadlightLeft }
 };
 const size_t channelsCount = COUNT_OF(channels);
 ```

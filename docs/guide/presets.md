@@ -7,29 +7,27 @@ The most basic presets contain a valid [`modeID`](#modes) and an `intensity` as 
 ```c++
 const PROGMEM Preset examplePreset =
 {
-  .modeID = HighBeams,
-  .intensity = 255
+    .modeID = HighBeams,
+    .intensity = 255
 };
 ```
-_If you omit the `intensity` property, it will be treated as full intensity._
+_Omitting the `intensity` property will default to full intensity._
 
-By default, presets make channels 'act' like incandescent bulbs; when a preset is applied, the channel fades in to the desired `intensity`, and fades out slower when the preset is no longer applied.
+By default, presets simulate incandescent bulbs; channels fade in to the desired `intensity`, and fade out slower when the preset is no longer applied.
 
 If you want to emulate LED-based modern vehicle lighting you can set those fade times to different values:
 
 ```c++{4,5}
 const PROGMEM Preset exampleLEDPreset =
 {
-  .modeID = DaytimeRunningLights,
-  .fadeSpeedRising = 0,
-  .fadeSpeedFalling = 0,
+    .modeID = DaytimeRunningLights,
+    .fadeSpeedRising = 0,
+    .fadeSpeedFalling = 0,
 };
 ```
 
 In most real-world applications, a single vehicle light fixture can serve more than one purpose, so it is likely that a channel has multiple presets defined for each desired state of the bulb. Presets are cascading; they can take or give precedence over other presets.
 
-This allows you to define intricate lighting that takes priority over other modes when needed, but not interfere with other modes when that is not desirable. (e.g. [US tail lights](#us-tail-lights) where the blinker takes priority over the parking lights and brake light)
+This allows you to define intricate lighting that takes priority over other modes when needed, but not interfere with other modes when that is not desirable. (e.g. US tail lights, where the blinkers take priority over the parking and brake lights)
 
-Presets also support basic blinking.
-
-[Cascading in-depth](#cascading-in-depth)
+Presets also support [Blinking](/guide/blinkers) and [Cascading](/guide/cascading) to allow presets to overtake presets with lower priority in different ways.

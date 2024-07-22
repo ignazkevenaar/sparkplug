@@ -39,7 +39,10 @@ module.exports = {
             text: "Assigning Presets to Channels",
             link: "/guide/presets-channels",
           },
-          { text: "Building and Uploading", link: "/guide/building-uploading" },
+          {
+            text: "Compiling and Uploading",
+            link: "/guide/compiling-uploading",
+          },
         ],
       },
       {
@@ -47,6 +50,8 @@ module.exports = {
         items: [
           { text: "Cascading presets", link: "/guide/cascading" },
           { text: "Blinkers", link: "/guide/blinkers" },
+          { text: "Sequential Blinkers", link: "/guide/sequential-blinkers" },
+          { text: "US tail lights", link: "/guide/us-tail-lights" },
         ],
       },
       {

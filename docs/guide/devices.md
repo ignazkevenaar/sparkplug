@@ -8,6 +8,7 @@ It comes built-in with support for the following LED diver ICs:
 
 * [NXP PCA9685](https://www.nxp.com/docs/en/data-sheet/PCA9685.pdf)
 * [TI LP55231](https://www.ti.com/lit/ds/symlink/lp55231.pdf)
+* [Awinic AW9523](https://doc.awinic.com/doc/202403/deffbf3b-7e7b-4ff6-8e91-fd85e2d845d5.pdf)
 
 Example definition of devices in a config:
 ```cpp
