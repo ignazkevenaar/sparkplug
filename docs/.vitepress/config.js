@@ -17,7 +17,6 @@ module.exports = {
     nav: [
       { text: "Guide", link: "/guide/introduction" },
       { text: "Reference", link: "/reference/" },
-      { text: "Coilpack", link: "/coilpack" },
       { text: "GitHub", link: "https://github.com/ignazkevenaar/sparkplug" },
     ],
     sidebar: [
@@ -52,14 +51,6 @@ module.exports = {
           { text: "Blinkers", link: "/guide/blinkers" },
           { text: "Sequential Blinkers", link: "/guide/sequential-blinkers" },
           { text: "US tail lights", link: "/guide/us-tail-lights" },
-        ],
-      },
-      {
-        text: "Coilpack",
-        items: [
-          { text: "Creating a Config", link: "/" },
-          { text: "Setting up Controls", link: "/" },
-          { text: "Building and Uploading", link: "/" },
         ],
       },
       {
