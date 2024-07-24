@@ -46,7 +46,7 @@ void sparkUpdate()
 
     if (timerLights.elapsed(currentMillis))
     {
-        updateFadeChannels();
+        updateChannels();
 
         outputToDevices();
         clearAllChannelsChanged();
