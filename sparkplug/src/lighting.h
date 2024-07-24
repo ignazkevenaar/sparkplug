@@ -29,7 +29,7 @@ uint16_t getChannelValue(Channel &channel);
 void clearAllChannelsChanged();
 
 void startFade(Channel &channel, uint16_t value);
-void updateFadeChannels();
+void updateChannels();
 void updateFade(Channel &channel);
 void updateBlink(Channel &channel);
 

@@ -144,7 +144,7 @@ void startFade(Channel &channel, uint16_t value)
     }
 }
 
-void updateFadeChannels()
+void updateChannels()
 {
     for (int i = 0; i < channelsCount; i++)
     {
