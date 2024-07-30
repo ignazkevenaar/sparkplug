@@ -9,12 +9,12 @@ import { inject } from 'vue'
 import { websocketConnectedKey } from '../provide-keys'
 
 defineProps<{
-  value: ControlModel | undefined
+  modelValue: ControlModel | undefined
   controlConfig: ControlContainer[] | undefined
 }>()
 
 defineEmits<{
-  input: [modeChange: ControlModel | unknown]
+  'update:modelValue': [modeChange: ControlModel | unknown]
 }>()
 
 const controlToComponent = {
@@ -60,14 +60,14 @@ const autoRows = [
           :is="controlToComponent[control.type]"
           v-for="(control, controlIndex) in item.controls"
           :key="controlIndex"
-          :value="value"
+          :modelValue="modelValue"
           :style="{
             'grid-area': `${control.top ?? 'auto'} / ${control.left ?? 'auto'} / span ${control.height ?? 1} / span ${control.width ?? 1}`
           }"
           :control="control"
           :type="control.type"
           :disabled="!websocketConnected"
-          @input="$emit('input', $event)"
+          @update:modelValue="$emit('update:modelValue', $event)"
         />
         <template #header>
           {{ item.name }}

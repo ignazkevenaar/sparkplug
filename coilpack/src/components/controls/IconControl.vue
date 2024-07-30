@@ -8,7 +8,7 @@ import type { ControlModel } from '@/types/types'
 import colors from '../../styles/controlColors'
 
 interface IProps {
-  value: ControlModel
+  modelValue: ControlModel
   control: IconControl
   type: string
 }
@@ -18,7 +18,7 @@ const props = withDefaults(defineProps<IProps>(), {
 })
 
 const emit = defineEmits<{
-  input: [modeChange: ControlModel]
+  'update:modelValue': [modeChange: ControlModel]
 }>()
 
 // Animation timers.
@@ -35,7 +35,7 @@ const currentPositions = computed(() =>
     const allModesApply = Object.keys(position.modes).every((mode) => {
       let positionValue = position.modes[mode]
       if (typeof positionValue === 'boolean') positionValue = Number(position.modes[mode]) * 255
-      return props.value[mode] === positionValue
+      return props.modelValue[mode] === positionValue
     })
     return allModesApply ? [{ ...position, index }] : []
   })
@@ -134,7 +134,7 @@ const mouseDown = (event: MouseEvent | TouchEvent) => {
 }
 
 const cancelHold = () => {
-  if (holdingPosition.value) emit('input', swapSetUnset(holdingPosition.value.modes))
+  if (holdingPosition.value) emit('update:modelValue', swapSetUnset(holdingPosition.value.modes))
 
   holding.value = false
   holdingPosition.value = undefined
@@ -157,7 +157,8 @@ const mouseUp = () => {
   }
 
   // Send modes of next (or first) non-drag-mode.
-  if (!scrollDirty.value && nonHoldPosition.value) emit('input', nonHoldPosition.value.modes)
+  if (!scrollDirty.value && nonHoldPosition.value)
+    emit('update:modelValue', nonHoldPosition.value.modes)
   scrollDirty.value = false
 }
 
@@ -181,7 +182,7 @@ const onHold = () => {
 
   if (holdPosition.value) {
     holdingPosition.value = holdPosition.value
-    emit('input', holdPosition.value.modes)
+    emit('update:modelValue', holdPosition.value.modes)
   }
 }
 </script>
