@@ -122,7 +122,7 @@ const holdDelay = 150
 const holdCancelOffset = 20
 const scrollDirty = ref(false)
 
-const mouseDown = (event: MouseEvent | TouchEvent) => {
+const pointerDown = (event: PointerEvent) => {
   if (props.control.readOnly) return
 
   if (event instanceof TouchEvent) {
@@ -139,10 +139,10 @@ const cancelHold = () => {
   holding.value = false
   holdingPosition.value = undefined
 
-  window.removeEventListener('mouseup', mouseUp)
+  window.removeEventListener('pointerup', pointerUp)
 }
 
-const mouseUp = () => {
+const pointerUp = () => {
   if (props.control.readOnly) return
 
   if (buttonDown.value) buttonDown.value = false
@@ -162,11 +162,8 @@ const mouseUp = () => {
   scrollDirty.value = false
 }
 
-const touchMove = (event: TouchEvent) => {
-  if (
-    holdTimeout &&
-    Math.abs(event.touches[0]?.clientY - initialYCoordinate.value) > holdCancelOffset
-  ) {
+const pointerMove = (event: PointerEvent) => {
+  if (holdTimeout && Math.abs(event.clientY - initialYCoordinate.value) > holdCancelOffset) {
     scrollDirty.value = true
     clearTimeout(holdTimeout)
     cancelHold()
@@ -177,7 +174,7 @@ let holdTimeout: number
 
 const onHold = () => {
   // So mouse up events temporarily work outside of button bounds.
-  window.addEventListener('mouseup', mouseUp)
+  window.addEventListener('pointerup', pointerUp)
   holding.value = true
 
   if (holdPosition.value) {
@@ -193,11 +190,9 @@ const onHold = () => {
     class="relative z-0 flex select-none flex-col items-center justify-center bg-gradient-to-br p-2 text-center text-xs ring-inset enabled:cursor-pointer disabled:opacity-50 md:text-sm md:font-semibold"
     :class="[roundClass, colorClasses, type]"
     :disabled="control.readOnly"
-    @mousedown="mouseDown"
-    @mouseup="mouseUp"
-    @touchstart="mouseDown"
-    @touchend.prevent="mouseUp"
-    @touchmove="touchMove"
+    @pointerdown="pointerDown"
+    @pointerup.prevent="pointerUp"
+    @pointermove="pointerMove"
   >
     <mdicon v-if="cascadedProps.icon" :name="cascadedProps.icon" size="36" />
     <slot />
