@@ -14,7 +14,6 @@ enum commandIDs
     idGetCommand,
     idFileCommand,
     idScanCommand,
-    idTestCommand,
     idHelpCommand,
     idVersionCommand,
 };
@@ -139,25 +138,6 @@ const Command scanCommand =
         "scan",
         "Scan the I2C bus for connected devices.",
         &scanExecute,
-};
-
-void testExecute(const Command &command, char **arguments, uint8_t length)
-{
-    Serial.println("Sleeping...");
-    delay(1500);
-
-    // Your arguments in c-string format.
-    for (int i = 0; i < length; i++)
-        Serial.println(arguments[i]);
-}
-
-const Command testCommand =
-    {
-        idTestCommand,
-        "T",
-        "test",
-        "Test command used for echoing presented command arguments.",
-        &testExecute,
 };
 
 void outputMode(int modeIndex)
@@ -332,7 +312,6 @@ const Command *commands[] =
         &getCommand,
         &fileCommand,
         &scanCommand,
-        &testCommand,
         &helpCommand,
         &versionCommand,
 };
