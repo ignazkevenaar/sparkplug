@@ -12,7 +12,7 @@ import colors from '../../styles/displayColors'
 const config = import.meta.env.VITE_CONFIG || 'default'
 
 const props = defineProps<{
-  value: ControlModel
+  modelValue: ControlModel
   control: DisplayControl
 }>()
 
@@ -44,7 +44,7 @@ const currentStatesPerSegment = computed(() =>
       const allModesApply = Object.keys(state.modes).every((mode) => {
         let positionValue = state.modes[mode]
         if (typeof positionValue === 'boolean') positionValue = Number(state.modes[mode]) * 255
-        return props.value[mode] === positionValue
+        return props.modelValue[mode] === positionValue
       })
       return allModesApply ? [{ ...state, index }] : []
     })

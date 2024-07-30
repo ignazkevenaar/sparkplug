@@ -170,7 +170,11 @@ provide(blinkFastKey, blinkFast)
       <div v-else-if="loading" class="absolute inset-0 grid place-items-center">
         <LoadingIndicator />
       </div>
-      <AppRouter v-else @route-changed="currentRoute = $event" @input="groupAndSetModeChanges" />
+      <AppRouter
+        v-else
+        @route-changed="currentRoute = $event"
+        @update:modelValue="groupAndSetModeChanges"
+      />
     </Transition>
     <AppFooter />
   </div>
