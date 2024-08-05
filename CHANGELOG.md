@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Add LPD8806 driver
 - Add SN3218 driver
 
 ## [0.2.0] - 2025-07-25

@@ -11,6 +11,7 @@
 #include "drivers/aw9523.h"
 #include "drivers/builtinLED.h"
 #include "drivers/lp55231.h"
+#include "drivers/lpd8806driver.h"
 #include "drivers/pca9685.h"
 #include "drivers/sn3218driver.h"
 

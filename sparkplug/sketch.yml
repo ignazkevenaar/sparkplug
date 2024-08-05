@@ -12,6 +12,7 @@ profiles:
       - Adafruit PWM Servo Driver Library (3.0.1)
       - Adafruit AW9523 (1.0.5)
       - SparkFun LP55231 Breakout (1.1.0)
+      - LPD8806 (1.0.7)
   d1_mini:
     notes: Profile is suitable for Lolin/Wemos D1 mini modules.
     fqbn: esp8266:esp8266:d1_mini:xtal=160,eesz=4M2M,baud=921600
@@ -25,6 +26,7 @@ profiles:
       - Adafruit PWM Servo Driver Library (3.0.1)
       - Adafruit AW9523 (1.0.5)
       - SparkFun LP55231 Breakout (1.1.0)
+      - LPD8806 (1.0.7)
   s2_pico:
     notes: Profile is suitable for Lolin/Wemos S2 Pico modules.
     fqbn: esp32:esp32:lolin_s2_pico:CDCOnBoot=default,MSCOnBoot=default,DFUOnBoot=default,PartitionScheme=default,DebugLevel=none,EraseFlash=none
@@ -38,5 +40,6 @@ profiles:
       - Adafruit PWM Servo Driver Library (3.0.1)
       - Adafruit AW9523 (1.0.5)
       - SparkFun LP55231 Breakout (1.1.0)
+      - LPD8806 (1.0.7)
 
 default_profile: esp_generic
