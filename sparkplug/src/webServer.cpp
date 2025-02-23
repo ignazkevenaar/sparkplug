@@ -2,7 +2,7 @@
 
 uint16_t portHTTP = 80;
 
-ESP8266WebServer server = ESP8266WebServer(portHTTP);
+WebServer server = WebServer(portHTTP);
 
 void setupWebServer()
 {

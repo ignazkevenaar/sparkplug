@@ -3,7 +3,7 @@
 #include "deviceManager.h"
 #include "lighting.h"
 
-__attribute__((weak)) int wirePins[] = {4, 5}; // { SDA, SCL }.
+__attribute__((weak)) int wirePins[] = {SDA, SCL}; // { SDA, SCL }.
 __attribute__((weak)) WireDevice *wireDevices[] = {};
 __attribute__((weak)) extern size_t wireDevicesCount;
 __attribute__((weak)) OutputDevice *outputDevices[] = {};

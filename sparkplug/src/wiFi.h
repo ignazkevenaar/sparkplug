@@ -2,7 +2,7 @@
 
 #include <Arduino.h>
 
-#include <ESP8266WiFi.h>
+#include <WiFi.h>
 
 extern IPAddress accessPointAddress;
 extern IPAddress subnetMask;
