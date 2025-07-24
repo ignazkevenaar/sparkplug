@@ -9,6 +9,24 @@ constexpr auto uconstrain(T value, T b1, T b2)
     return constrain(value, min(b1, b2), max(b1, b2));
 }
 
+void setupChannel(Channel &channel)
+{
+    channel.presetsActive = new bool[channel.presetCount]();
+    for (int i = 0; i < channel.presetCount; i++)
+    {
+        channel.presetsActive[i] = false;
+    }
+}
+
+void setupChannels()
+{
+    for (int i = 0; i < channelsCount; i++)
+    {
+        Channel &channel = channels[i];
+        setupChannel(channel);
+    }
+}
+
 bool setLightMode(int modeID, int newState)
 {
     if (modeID >= modesCount) return false;
@@ -19,8 +37,6 @@ bool setLightMode(int modeID, int newState)
 
 void applyLightModeChanges()
 {
-    bool anyModeChanged = false;
-
     for (int i = 0; i < modesCount; i++)
     {
         LightingMode &mode = modes[i];
@@ -28,13 +44,10 @@ void applyLightModeChanges()
         if (onLightingModeChanged(i))
         {
             mode.currentState = mode.nextState;
-            anyModeChanged = true;
+            updatechannelValues(i);
         }
         mode.nextState = -1; // Maybe move this up to keep checking condition.
     }
-
-    // Update mode changes to channels.
-    if (anyModeChanged) updateChannelValues();
 }
 
 __attribute__((weak)) bool onLightingModeChanged(int modeID)
@@ -42,89 +55,23 @@ __attribute__((weak)) bool onLightingModeChanged(int modeID)
     return true; // Parse mode change by default.
 }
 
-void updateChannelValues()
+bool channelHasPresetWithModeID(Channel &channel, int modeID)
 {
-    for (int i = 0; i < channelsCount; i++)
+    for (int j = 0; j < channel.presetCount; j++)
     {
-        Channel &channel = channels[i];
-        uint16_t newValue = getChannelValue(channel);
-        startFade(channel, newValue);
+        const Preset preset = PROGMEM_getAnything(&channel.presets[j]);
+        if (preset.modeID == modeID) return true;
     }
+
+    return false;
 }
 
-uint16_t getChannelValue(Channel &channel)
-{
-    int16_t chosenPresetIndex = -1;
-    uint32_t baseValue = 0;
-    int16_t highestEnabledBlinkIndex = -1;
-
-    for (int i = 0; i < channel.presetCount; i++)
-    {
-        const Preset preset = PROGMEM_getAnything(&channel.presets[i]);
-
-        if (modes[preset.modeID].currentState <= 0) continue;
-
-        if (preset.mode == PresetModes::Blink)
-        {
-            highestEnabledBlinkIndex = i;
-            // Determines wheter or not the blink preset influences the channel value.
-            // Should only happen on positive blink phase.
-            if (!channel.blinkPhase) continue;
-        }
-
-        const uint16_t presetIntensity = preset.intensity << 8 | preset.intensity; // Shift 8-bit to 16-bit intensity.
-        const int modeIntensity = modes[preset.modeID].currentState;
-        const uint16_t intensity = presetIntensity * modeIntensity / 255;
-
-        switch (preset.priorityMode)
-        {
-        case SwopModes::LTP:
-            chosenPresetIndex = i;
-            baseValue = intensity;
-            break;
-        case SwopModes::HTP:
-            if (intensity > baseValue)
-            {
-                chosenPresetIndex = i;
-                baseValue = intensity;
-            }
-            break;
-        case SwopModes::LoTP:
-            if (intensity < baseValue)
-            {
-                chosenPresetIndex = i;
-                baseValue = intensity;
-            }
-            break;
-        }
-    }
-
-    if (highestEnabledBlinkIndex > -1 && channel.blinkPresetIndex != highestEnabledBlinkIndex)
-    {
-        // Starting blink.
-        channel.blinkStartTime = currentMillis;
-        channel.blinkPhase = 0;
-    }
-
-    channel.previousPresetIndex = channel.activePresetIndex;
-    channel.activePresetIndex = chosenPresetIndex;
-    channel.blinkPresetIndex = highestEnabledBlinkIndex;
-
-    return baseValue;
-}
-
-void startFade(Channel &channel, uint16_t value)
+void startFade(Channel &channel, uint16_t value, uint16_t fadeSpeed)
 {
     channel.transitionFrom = channel.value;
     channel.transitionTo = value;
 
     if (channel.transitionFrom == value) return;
-
-    uint16_t presetIndex = 0;
-    if (channel.previousPresetIndex != -1 || channel.activePresetIndex != -1) presetIndex = max(channel.previousPresetIndex, channel.activePresetIndex);
-
-    const Preset preset = PROGMEM_getAnything(&channel.presets[presetIndex]);
-    int32_t fadeSpeed = channel.previousPresetIndex < channel.activePresetIndex ? preset.fadeSpeedRising : preset.fadeSpeedFalling;
 
     uint16_t totalChange = abs(channel.transitionTo - channel.transitionFrom);
     channel.startTime = currentMillis;
@@ -141,6 +88,118 @@ void startFade(Channel &channel, uint16_t value)
         uint16_t oldValue = channel.value;
         channel.value = channel.transitionTo;
         channel.wasUpdated = oldValue != channel.value;
+    }
+}
+
+bool isPresetActive(SwopModes mode, uint16_t bufferIntensity, uint16_t presetIntensity)
+{
+    // TODO: we can really turn this into a shader with an `out` parameter.
+    switch (mode)
+    {
+    case SwopModes::LTP:
+        return true;
+        break;
+    case SwopModes::HTP:
+        return (presetIntensity > bufferIntensity);
+        break;
+    case SwopModes::LoTP:
+        return (presetIntensity < bufferIntensity);
+        break;
+    }
+
+    return false;
+}
+
+void calculateChannelValue(Channel &channel)
+{
+    int16_t highestActivatedPresetIndex = -1;
+    int16_t highestDeactivatedPresetIndex = -1;
+
+    uint16_t targetValue = 0;
+    int16_t highestEnabledBlinkIndex = -1;
+
+    for (int i = 0; i < channel.presetCount; i++)
+    {
+        uint16_t presetIntensity = 0;
+        bool presetActive = false;
+        const Preset preset = PROGMEM_getAnything(&channel.presets[i]);
+
+        if (modes[preset.modeID].currentState > 0)
+        {
+            // Scale preset intensity by mode state.
+            presetIntensity = preset.intensity * modes[preset.modeID].currentState / 255;
+            // Convert 8-bit to 16-bit.
+            presetIntensity = presetIntensity << 8 | presetIntensity;
+
+            if (preset.mode == PresetModes::Blink)
+            {
+                highestEnabledBlinkIndex = i;
+                // Determines wheter or not the blink preset influences the channel value.
+                // Should only happen on positive blink phase.
+                if (channel.blinkPhase)
+                {
+                    presetActive = isPresetActive(preset.priorityMode, targetValue, presetIntensity);
+                }
+                else
+                {
+                    presetActive = false;
+                }
+            }
+            else
+            {
+                presetActive = isPresetActive(preset.priorityMode, targetValue, presetIntensity);
+            }
+        }
+
+        if (presetActive != channel.presetsActive[i])
+        {
+            channel.presetsActive[i] = presetActive;
+
+            if (presetActive)
+            {
+                highestActivatedPresetIndex = i;
+            }
+            else
+            {
+                highestDeactivatedPresetIndex = i;
+            }
+        }
+
+        if (presetActive)
+        {
+            targetValue = presetIntensity;
+        }
+    }
+
+    if (highestEnabledBlinkIndex > -1 && channel.blinkPresetIndex != highestEnabledBlinkIndex)
+    {
+        // Starting blink.
+        channel.blinkStartTime = currentMillis;
+        channel.blinkPhase = 0;
+    }
+
+    channel.blinkPresetIndex = highestEnabledBlinkIndex;
+    int16_t presetIndex = max(highestActivatedPresetIndex, highestDeactivatedPresetIndex);
+    const Preset preset = PROGMEM_getAnything(&channel.presets[presetIndex]);
+    int32_t fadeSpeed = channel.presetsActive[presetIndex] ? preset.fadeSpeedRising : preset.fadeSpeedFalling;
+    startFade(channel, targetValue, fadeSpeed);
+}
+
+void updatechannelValues(int modeID)
+{
+    for (int i = 0; i < channelsCount; i++)
+    {
+        Channel &channel = channels[i];
+        if (channelHasPresetWithModeID(channel, modeID)) calculateChannelValue(channel);
+    }
+}
+
+void updateChannelValues()
+{
+    for (int i = 0; i < channelsCount; i++)
+    {
+        Channel &channel = channels[i];
+        calculateChannelValue(channel);
     }
 }
 
@@ -171,7 +230,8 @@ void updateFade(Channel &channel)
         val -= change;
 
     uint16_t oldValue = channel.value;
-    channel.value = uconstrain(val, channel.transitionFrom, channel.transitionTo);
+    // TODO: Seems bad...
+    channel.value = uconstrain<uint16_t>(val, channel.transitionFrom, channel.transitionTo);
     channel.wasUpdated = oldValue != channel.value;
 }
 
@@ -182,13 +242,21 @@ void updateBlink(Channel &channel)
     const Preset preset = PROGMEM_getAnything(&channel.presets[channel.blinkPresetIndex]);
     const uint8_t patternSize = sizeof(preset.blinkPattern) * 8;
     int16_t interval = preset.blinkInterval / patternSize;
-    uint32_t maxBlinkTime = interval * patternSize * preset.blinkCount;
+
+    // TODO: Does the blinkCount actually work!?
+    uint32_t maxBlinkTime = preset.blinkInterval * preset.blinkCount;
     uint32_t elapsed = currentMillis - channel.blinkStartTime;
 
+    // TODO: Is this required? Is this only required for blinkcount?
+    // Maybe add check if blinkphase is non-zero first?
+    // Feels like this should be rewritten.
     if (elapsed > maxBlinkTime)
     {
         channel.blinkPhase = 0;
-        if (onBlinkPhaseChanged(channel)) startFade(channel, getChannelValue(channel));
+        if (onBlinkPhaseChanged(channel))
+        {
+            calculateChannelValue(channel);
+        }
         return;
     }
 
@@ -197,7 +265,10 @@ void updateBlink(Channel &channel)
 
     if (channel.blinkPhase == patternIsHigh) return;
     channel.blinkPhase = patternIsHigh;
-    if (onBlinkPhaseChanged(channel)) startFade(channel, getChannelValue(channel));
+    if (onBlinkPhaseChanged(channel))
+    {
+        calculateChannelValue(channel);
+    }
 }
 
 __attribute__((weak)) bool onBlinkPhaseChanged(Channel &channel)

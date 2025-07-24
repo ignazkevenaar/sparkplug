@@ -15,20 +15,18 @@ extern Channel channels[];
 extern const size_t channelsCount;
 extern const uint16_t deltaTime;
 
-/**
-A brief description on a single line, ended by a period or blank line.
-@param myParam1 Description of 1st parameter.
-@param myParam2 Description of 2nd parameter.
-@returns Description of returned value.
-*/
+void setupChannel(Channel &channel);
+void setupChannels();
+
 bool setLightMode(int modeID, int newState);
 
 void applyLightModeChanges();
+void updatechannelValues(int modeID);
 void updateChannelValues();
-uint16_t getChannelValue(Channel &channel);
+void calculateChannelValue(Channel &channel);
 void clearAllChannelsChanged();
 
-void startFade(Channel &channel, uint16_t value);
+void startFade(Channel &channel, uint16_t value, uint16_t fadeSpeed);
 void updateChannels();
 void updateFade(Channel &channel);
 void updateBlink(Channel &channel);
