@@ -1,4 +1,4 @@
-#include "configs/default/config.h"
+#include "configs/s13-silvia/config.h"
 #include "src/spark.h"
 
 void setup()
