@@ -1,4 +1,6 @@
 #include "sn3218driver.h"
+#include "../helpers/gamma8.h"
+#include "../helpers/progmem_readanything.h"
 #include "../helpers/wirehelper.h"
 
 SN3218Driver::SN3218Driver(uint16_t channelFrom_, uint16_t channelCount_) : _sn3218()
@@ -32,7 +34,9 @@ void SN3218Driver::output()
         if (!channels[channelFrom + i].wasUpdated) continue;
 
         uint8_t value = channels[channelFrom + i].value >> 8;
-        set(i, value);
+        uint8_t logValue = PROGMEM_getAnything(&gamma8[value]);
+
+        set(i, logValue);
     }
 
     sn3218.update();

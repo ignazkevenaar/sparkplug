@@ -1,4 +1,6 @@
 #include "lpd8806driver.h"
+#include "../helpers/gamma7.h"
+#include "../helpers/progmem_readanything.h"
 
 LPD8806Driver::LPD8806Driver(uint8_t dataPin, uint8_t clockPin, uint16_t channelFrom_, uint16_t channelCount_) : LPD8806(2, dataPin, clockPin)
 {
@@ -27,7 +29,8 @@ void LPD8806Driver::output()
 
     for (int i = 0; i < channelCount; i++)
     {
-        values[i] = (channels[channelFrom + i].value >> 9) & 0xff; // useTimingFunction(Exponential, channels[channelFrom + i].value) >> 9;
+        uint8_t value = (channels[channelFrom + i].value >> 9) & 0xff;
+        values[i] = PROGMEM_getAnything(&gamma7[value]);
     }
 
     setPixelColor(0, values[0], values[1], values[2]);

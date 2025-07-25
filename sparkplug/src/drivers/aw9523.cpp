@@ -1,4 +1,6 @@
 #include "aw9523.h"
+#include "../helpers/gamma8.h"
+#include "../helpers/progmem_readanything.h"
 #include "../helpers/wirehelper.h"
 
 AW9523Driver::AW9523Driver(uint8_t address_, uint16_t channelFrom_, uint16_t channelCount_) : Adafruit_AW9523()
@@ -50,7 +52,8 @@ void AW9523Driver::output()
     {
         if (!channels[channelFrom + i].wasUpdated) continue;
 
-        uint8_t value = useTimingFunction(Exponential, channels[channelFrom + i].value) >> 8;
-        analogWrite(pinTable[i], value);
+        uint8_t value = channels[channelFrom + i].value >> 8;
+        uint8_t logValue = PROGMEM_getAnything(&gamma8[value]);
+        analogWrite(pinTable[i], logValue);
     }
 }
