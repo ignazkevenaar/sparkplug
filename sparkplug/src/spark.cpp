@@ -2,7 +2,7 @@
 
 #include "spark.h"
 
-Version version(0, 1, 0);
+Version version(0, 2, 0);
 
 uint32_t currentMillis = 0;
 
