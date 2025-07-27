@@ -2,7 +2,6 @@
 
 struct Command
 {
-    int ID;
     const char *shortIndentifier;
     const char *identifier;
     const char *helpText;

@@ -8,18 +8,6 @@
 #include "lighting.h"
 #include "spark.h"
 
-enum commandIDs
-{
-    idSetCommand,
-    idUnsetCommand,
-    idGetCommand,
-    idFileCommand,
-    idScanCommand,
-    idHelpCommand,
-    idVersionCommand,
-    idInfoCommand,
-};
-
 void printNameVersionAndConfig()
 {
     Serial.println();
@@ -44,7 +32,6 @@ void versionExecute(const Command &command, char **arguments, uint8_t length)
 
 const Command versionCommand =
     {
-        idVersionCommand,
         "V",
         "version",
         "Get Sparkplug semantic version number.",
@@ -69,7 +56,6 @@ void infoExecute(const Command &command, char **arguments, uint8_t length)
 
 const Command infoCommand =
     {
-        idInfoCommand,
         "I",
         "info",
         "Get configuration info.",
@@ -101,7 +87,6 @@ void helpExecute(const Command &command, char **arguments, uint8_t length)
 
 const Command helpCommand =
     {
-        idHelpCommand,
         "?",
         "help",
         "Get information on available commands and their usage. (This command.)",
@@ -115,7 +100,6 @@ void fileExecute(const Command &command, char **arguments, uint8_t length)
 
 const Command fileCommand =
     {
-        idFileCommand,
         "F",
         "file",
         "List files in the littleFS root directory.",
@@ -165,7 +149,6 @@ void scanExecute(const Command &command, char **arguments, uint8_t length)
 
 const Command scanCommand =
     {
-        idScanCommand,
         "B",
         "scan",
         "Scan the I2C bus for connected devices.",
@@ -254,7 +237,7 @@ void argumentToIDValue(char *string, char **modeID, char **value)
 
 void setUnsetGetExecute(const Command &command, char **arguments, uint8_t length)
 {
-    const bool setUnset = command.ID == idSetCommand || command.ID == idUnsetCommand;
+    const bool setUnset = command.shortIndentifier == "S" || command.shortIndentifier == "U";
 
     if (!length)
     {
@@ -262,7 +245,7 @@ void setUnsetGetExecute(const Command &command, char **arguments, uint8_t length
         // If no arguments are provided for the get command, the state of all modes is returned.
         for (int modeIndex = 0; modeIndex < modesCount; modeIndex++)
         {
-            if (command.ID == idUnsetCommand) setLightMode(modeIndex, 0);
+            if (command.shortIndentifier == "U") setLightMode(modeIndex, 0);
             if (modes[modeIndex].currentState > 0) outputMode(modeIndex);
         }
         return;
@@ -300,7 +283,7 @@ void setUnsetGetExecute(const Command &command, char **arguments, uint8_t length
 
         for (int modeIndex = rangeFrom; modeIndex <= rangeTo; modeIndex++)
         {
-            if (setUnset && !setLightMode(modeIndex, command.ID == idSetCommand ? newModeValue : 0))
+            if (setUnset && !setLightMode(modeIndex, command.shortIndentifier == "S" ? newModeValue : 0))
             {
                 Serial.println("Mode index out of range or already set.");
                 continue;
@@ -312,7 +295,6 @@ void setUnsetGetExecute(const Command &command, char **arguments, uint8_t length
 
 const Command setCommand =
     {
-        idSetCommand,
         "S",
         "set",
         "Set light mode. [mode, range, ...]",
@@ -321,7 +303,6 @@ const Command setCommand =
 
 const Command unsetCommand =
     {
-        idUnsetCommand,
         "U",
         "unset",
         "Unset light mode. [mode, range, ...]",
@@ -330,7 +311,6 @@ const Command unsetCommand =
 
 const Command getCommand =
     {
-        idGetCommand,
         "G",
         "get",
         "Get light mode state. [mode, range, ...]",
