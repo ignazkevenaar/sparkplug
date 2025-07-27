@@ -23,6 +23,21 @@ enum ModeIDs
 const size_t modesCount = FogFront + 1;
 LightingMode modes[modesCount];
 
+const char *modeNames[modesCount] = {
+    "DaytimeRunning",
+    "Parking",
+    "LowBeams",
+    "HighBeams",
+    "FlashToPass",
+    "Brake",
+    "Reverse",
+    "BlinkL",
+    "BlinkR",
+    "Hazards",
+    "FogRear",
+    "FogFront",
+};
+
 const PROGMEM Preset presetsHeadlights[] = {
     {.modeID = LowBeams, .intensity = 128}
 };
@@ -79,12 +94,10 @@ const PROGMEM Preset presetBlinkerFirstLeft[] = {
     {.modeID = Parking, .priorityMode = SwopModes::HTP, .intensity = 32},
     {.modeID = BlinkL,
      .mode = PresetModes::Blink,
-     .blinkPattern = 0b11111111111111111100000000000000
-    },
+     .blinkPattern = 0b11111111111111111100000000000000},
     {.modeID = Hazards,
      .mode = PresetModes::Blink,
-     .blinkPattern = 0b11111111111111111100000000000000
-    }
+     .blinkPattern = 0b11111111111111111100000000000000}
 };
 
 const PROGMEM Preset presetBlinkerSecondLeft[] = {
@@ -94,12 +107,10 @@ const PROGMEM Preset presetBlinkerSecondLeft[] = {
     {.modeID = Parking, .priorityMode = SwopModes::HTP, .intensity = 32},
     {.modeID = BlinkL,
      .mode = PresetModes::Blink,
-     .blinkPattern = 0b00000011111111111100000000000000
-    },
+     .blinkPattern = 0b00000011111111111100000000000000},
     {.modeID = Hazards,
      .mode = PresetModes::Blink,
-     .blinkPattern = 0b00000011111111111100000000000000
-    }
+     .blinkPattern = 0b00000011111111111100000000000000}
 };
 
 const PROGMEM Preset presetBlinkerThirdLeft[] = {
@@ -109,12 +120,10 @@ const PROGMEM Preset presetBlinkerThirdLeft[] = {
     {.modeID = Parking, .priorityMode = SwopModes::HTP, .intensity = 32},
     {.modeID = BlinkL,
      .mode = PresetModes::Blink,
-     .blinkPattern = 0b00000000000011111100000000000000
-    },
+     .blinkPattern = 0b00000000000011111100000000000000},
     {.modeID = Hazards,
      .mode = PresetModes::Blink,
-     .blinkPattern = 0b00000000000011111100000000000000
-    }
+     .blinkPattern = 0b00000000000011111100000000000000}
 };
 
 const PROGMEM Preset presetBlinkerFirstRight[] = {
@@ -124,12 +133,10 @@ const PROGMEM Preset presetBlinkerFirstRight[] = {
     {.modeID = Parking, .priorityMode = SwopModes::HTP, .intensity = 32},
     {.modeID = BlinkR,
      .mode = PresetModes::Blink,
-     .blinkPattern = 0b11111111111111111100000000000000
-    },
+     .blinkPattern = 0b11111111111111111100000000000000},
     {.modeID = Hazards,
      .mode = PresetModes::Blink,
-     .blinkPattern = 0b11111111111111111100000000000000
-    }
+     .blinkPattern = 0b11111111111111111100000000000000}
 };
 
 const PROGMEM Preset presetBlinkerSecondRight[] = {
@@ -139,12 +146,10 @@ const PROGMEM Preset presetBlinkerSecondRight[] = {
     {.modeID = Parking, .priorityMode = SwopModes::HTP, .intensity = 32},
     {.modeID = BlinkR,
      .mode = PresetModes::Blink,
-     .blinkPattern = 0b00000011111111111100000000000000
-    },
+     .blinkPattern = 0b00000011111111111100000000000000},
     {.modeID = Hazards,
      .mode = PresetModes::Blink,
-     .blinkPattern = 0b00000011111111111100000000000000
-    }
+     .blinkPattern = 0b00000011111111111100000000000000}
 };
 
 const PROGMEM Preset presetBlinkerThirdRight[] = {
@@ -154,12 +159,10 @@ const PROGMEM Preset presetBlinkerThirdRight[] = {
     {.modeID = Parking, .priorityMode = SwopModes::HTP, .intensity = 32},
     {.modeID = BlinkR,
      .mode = PresetModes::Blink,
-     .blinkPattern = 0b00000000000011111100000000000000
-    },
+     .blinkPattern = 0b00000000000011111100000000000000},
     {.modeID = Hazards,
      .mode = PresetModes::Blink,
-     .blinkPattern = 0b00000000000011111100000000000000
-    }
+     .blinkPattern = 0b00000000000011111100000000000000}
 };
 
 Channel channels[] = {

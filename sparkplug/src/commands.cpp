@@ -17,6 +17,7 @@ enum commandIDs
     idScanCommand,
     idHelpCommand,
     idVersionCommand,
+    idInfoCommand,
 };
 
 void printNameVersionAndConfig()
@@ -48,6 +49,31 @@ const Command versionCommand =
         "version",
         "Get Sparkplug semantic version number.",
         &versionExecute,
+};
+
+void infoExecute(const Command &command, char **arguments, uint8_t length)
+{
+    Serial.println();
+    Serial.print(modesCount);
+    Serial.println(" modes:");
+
+    for (int i = 0; i < modesCount; i++)
+    {
+        Serial.print(i);
+        Serial.print('\t');
+        Serial.println(modeNames[i]);
+    }
+
+    Serial.println();
+}
+
+const Command infoCommand =
+    {
+        idInfoCommand,
+        "I",
+        "info",
+        "Get configuration info.",
+        &infoExecute,
 };
 
 void helpExecute(const Command &command, char **arguments, uint8_t length)
@@ -313,12 +339,13 @@ const Command getCommand =
 
 const Command *commands[] =
     {
+        &helpCommand,
+        &versionCommand,
         &setCommand,
         &unsetCommand,
         &getCommand,
-        &fileCommand,
         &scanCommand,
-        &helpCommand,
-        &versionCommand,
+        &infoCommand,
+        &fileCommand,
 };
 size_t commandCount = COUNT_OF(commands);
