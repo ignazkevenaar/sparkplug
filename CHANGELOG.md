@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Rename driver files.
 - Simplify sequential write in PCA9685 driver.
 - Change exponential timing function gamma to match LUT.
+- Improve formatting of help command
 
 ### Removed
 

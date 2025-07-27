@@ -76,7 +76,7 @@ void helpExecute(const Command &command, char **arguments, uint8_t length)
         const Command &command = *commands[i];
         Serial.print(" ");
         Serial.print(command.shortIndentifier);
-        Serial.print(" ");
+        Serial.print("\t");
         Serial.print(command.identifier);
         Serial.print("\t");
         Serial.println(command.helpText);
