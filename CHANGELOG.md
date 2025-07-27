@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - LPD8806 driver.
 - Gamma correction to linear dimming output devices.
 
+### Changed
+
+- Rename driver files.
+
 ## [0.2.0] - 2025-07-25
 
 ### Changed

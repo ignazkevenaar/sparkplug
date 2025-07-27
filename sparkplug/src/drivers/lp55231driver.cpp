@@ -1,4 +1,4 @@
-#include "lp55231.h"
+#include "lp55231driver.h"
 #include "../helpers/wirehelper.h"
 
 LP55231Driver::LP55231Driver(uint8_t address_, uint16_t channelFrom_, uint16_t channelCount_) : Lp55231(address_)

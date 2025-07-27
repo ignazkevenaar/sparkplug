@@ -8,11 +8,11 @@
 #include "types/WireDevice.h"
 
 // Device drivers.
-#include "drivers/aw9523.h"
+#include "drivers/aw9523driver.h"
 #include "drivers/builtinLED.h"
-#include "drivers/lp55231.h"
+#include "drivers/lp55231driver.h"
 #include "drivers/lpd8806driver.h"
-#include "drivers/pca9685.h"
+#include "drivers/pca9685driver.h"
 #include "drivers/sn3218driver.h"
 
 extern int wirePins[];

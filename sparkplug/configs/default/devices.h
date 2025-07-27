@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../src/drivers/pca9685.h"
+#include "../../src/drivers/pca9685driver.h"
 #include "../../src/helpers/macros.h"
 
 PCA9685Driver mainOutputDevice(0x40, 0, 16);

@@ -1,5 +1,5 @@
-#include "pca9685.h"
 #include "../helpers/wirehelper.h"
+#include "pca9685driver.h"
 
 PCA9685Driver::PCA9685Driver(uint8_t address_, uint16_t channelFrom_, uint16_t channelCount_, bool totemPoleOutput_) : Adafruit_PWMServoDriver(address_)
 {
