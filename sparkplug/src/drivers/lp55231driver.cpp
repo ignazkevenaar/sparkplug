@@ -42,11 +42,27 @@ void LP55231Driver::setup()
 
 void LP55231Driver::output()
 {
-    for (int i = 0; i < channelCount; i++)
-    {
-        if (!channels[channelFrom + i].wasUpdated) continue;
+    bool lastChannelUpdated = false;
 
-        uint8_t value = channels[channelFrom + i].value >> 8;
-        SetChannelPWM(i, value);
+    for (int i = 0; i <= channelCount; i++)
+    {
+        if (channels[channelFrom + i].wasUpdated)
+        {
+            if (!lastChannelUpdated)
+            {
+                Wire.beginTransmission(address);
+                Wire.write(REG_D1_PWM + i);
+            }
+
+            uint8_t value = channels[channelFrom + i].value >> 8;
+            Wire.write(value);
+            lastChannelUpdated = true;
+        }
+        else
+        {
+            if (lastChannelUpdated) Wire.endTransmission();
+            lastChannelUpdated = false;
+        }
     }
+    if (lastChannelUpdated) Wire.endTransmission();
 }

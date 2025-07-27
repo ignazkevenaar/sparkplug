@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - LPD8806 driver.
 - Gamma correction to linear dimming output devices.
 - Sequential write to SN3218 driver.
+- Sequential write to LP55231 driver.
 
 ### Changed
 
