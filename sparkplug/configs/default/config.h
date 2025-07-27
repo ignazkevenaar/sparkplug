@@ -5,6 +5,8 @@
 #include "devices.h"
 #include "presets.h"
 
+const char *configName = "Default";
+
 // WiFI settings
 const char *ssid = "Sparkplug - Default";
 const char *password = "thereisnospoon";

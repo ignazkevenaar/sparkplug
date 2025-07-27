@@ -22,3 +22,4 @@ void onUpdate();
 
 extern Version version;
 extern uint32_t currentMillis;
+extern const char *configName;

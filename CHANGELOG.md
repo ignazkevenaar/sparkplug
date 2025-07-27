@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Gamma correction to linear dimming output devices.
 - Sequential write to SN3218 driver.
 - Sequential write to LP55231 driver.
+- Name to config for reporting on startup.
 
 ### Changed
 

@@ -6,6 +6,7 @@
 #include "helpers/macros.h"
 #include "input.h"
 #include "lighting.h"
+#include "spark.h"
 
 enum commandIDs
 {
@@ -18,11 +19,19 @@ enum commandIDs
     idVersionCommand,
 };
 
-void welcomeMessage()
+void printNameVersionAndConfig()
 {
     Serial.println();
     Serial.print("Sparkplug - version ");
     Serial.println(version.getString());
+    Serial.print("Config: ");
+    Serial.println(configName);
+    Serial.println();
+}
+
+void welcomeMessage()
+{
+    printNameVersionAndConfig();
     Serial.println("Type `?` to see a list of all available commands.");
     Serial.println();
 }
@@ -43,10 +52,7 @@ const Command versionCommand =
 
 void helpExecute(const Command &command, char **arguments, uint8_t length)
 {
-    Serial.println();
-    Serial.print("Sparkplug - version ");
-    Serial.println(version.getString());
-
+    printNameVersionAndConfig();
     Serial.println("Usage:");
     Serial.println(" command argument, argument...");
     Serial.println();
