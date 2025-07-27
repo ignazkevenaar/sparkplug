@@ -28,61 +28,29 @@ void PCA9685Driver::setup()
 
 void PCA9685Driver::output()
 {
-    if (channelCount == 1)
+    bool lastChannelUpdated = false;
+
+    for (int i = 0; i <= channelCount; i++)
     {
-        uint16_t value = useTimingFunction(Exponential, channels[channelFrom].value) >> 4;
-        setPin(channelFrom, value, true);
-        return;
-    }
-
-    uint16_t values[outputCount] = {}; // Buffer for values of changed channels.
-
-    // Split updated channels into ranges.
-    int length = 1;
-
-    for (int i = 1; i <= channelCount; i++)
-    {
-        if (channels[channelFrom + i - 1].wasUpdated)
-            values[i - 1] = useTimingFunction(Exponential, channels[channelFrom + i - 1].value) >> 4;
-
-        if (i == channelCount || channels[channelFrom + i].wasUpdated != channels[channelFrom + i - 1].wasUpdated)
+        if (channels[channelFrom + i].wasUpdated)
         {
-            if (channels[channelFrom + i - 1].wasUpdated)
+            if (!lastChannelUpdated)
             {
-                if (i - length == i - 1)
-                    setPin(i - length, values[i - length], true);
-                else
-                    writeSequentially(values, true, i - length, i - 1);
+                Wire.beginTransmission(address);
+                Wire.write(PCA9685_LED0_ON_L + 4 * i);
             }
 
-            length = 1;
-            continue;
+            writeChannel(useTimingFunction(Exponential, channels[channelFrom + i].value) >> 4);
+            lastChannelUpdated = true;
         }
-
-        length++;
+        else
+        {
+            if (lastChannelUpdated) Wire.endTransmission();
+            lastChannelUpdated = false;
+        }
     }
+    if (lastChannelUpdated) Wire.endTransmission();
 };
-
-void PCA9685Driver::writeSequentially(uint16_t values[], bool invert, int rangeFrom, int rangeTo)
-{
-    Wire.beginTransmission(address);
-    Wire.write(PCA9685_LED0_ON_L + 4 * rangeFrom);
-
-    // LED Addresses are auto incrementing.
-    for (int i = rangeFrom; i <= rangeTo; i++)
-    {
-        uint16_t valueOn = 0;
-        uint16_t valueOff = 0;
-        getOnOff(values[i], valueOn, valueOff, true);
-
-        Wire.write(valueOn);
-        Wire.write(valueOn >> 8);
-        Wire.write(valueOff);
-        Wire.write(valueOff >> 8);
-    }
-
-    Wire.endTransmission();
-}
 
 void PCA9685Driver::getOnOff(uint16_t value, uint16_t &valueOn, uint16_t &valueOff, bool invert)
 {
@@ -104,4 +72,16 @@ void PCA9685Driver::getOnOff(uint16_t value, uint16_t &valueOn, uint16_t &valueO
     {
         valueOff = value_;
     }
+}
+
+void PCA9685Driver::writeChannel(uint16_t value)
+{
+    uint16_t valueOn = 0;
+    uint16_t valueOff = 0;
+    getOnOff(value, valueOn, valueOff, true);
+
+    Wire.write(valueOn);
+    Wire.write(valueOn >> 8);
+    Wire.write(valueOff);
+    Wire.write(valueOff >> 8);
 }

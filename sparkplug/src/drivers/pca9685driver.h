@@ -18,7 +18,7 @@ class PCA9685Driver : public Adafruit_PWMServoDriver, public WireDevice, public 
     void output();
 
   private:
-    void writeSequentially(uint16_t values[], bool invert, int rangeFrom, int rangeTo);
+    void writeChannel(uint16_t value);
     void getOnOff(uint16_t value, uint16_t &valueOn, uint16_t &valueOff, bool invert = false);
 
     bool totemPoleOutput;
