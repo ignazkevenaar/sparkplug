@@ -11,6 +11,7 @@
 extern uint32_t currentMillis;
 extern const size_t modesCount;
 extern LightingMode modes[];
+extern const char *modeNames[];
 extern Channel channels[];
 extern const size_t channelsCount;
 extern const uint16_t deltaTime;
