@@ -17,6 +17,7 @@ class AW9523Driver : public Adafruit_AW9523, public WireDevice, public OutputDev
     bool configureLEDCurrent(uint8_t quarters_to_reduce);
     void setup();
     void output();
+    const char *getName();
 
   private:
     // Adafruit uses logical port pin order for their

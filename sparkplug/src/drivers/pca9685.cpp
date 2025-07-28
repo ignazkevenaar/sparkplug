@@ -85,3 +85,8 @@ void PCA9685Driver::writeChannel(uint16_t value)
     Wire.write(valueOff);
     Wire.write(valueOff >> 8);
 }
+
+const char *PCA9685Driver::getName()
+{
+    return "PCA9685";
+}

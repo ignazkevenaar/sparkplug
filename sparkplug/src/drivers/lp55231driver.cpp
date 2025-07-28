@@ -66,3 +66,8 @@ void LP55231Driver::output()
     }
     if (lastChannelUpdated) Wire.endTransmission();
 }
+
+const char *LP55231Driver::getName()
+{
+    return "LP55231";
+}

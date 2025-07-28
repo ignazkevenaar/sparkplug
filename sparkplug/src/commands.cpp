@@ -40,15 +40,35 @@ const Command versionCommand =
 
 void infoExecute(const Command &command, char **arguments, uint8_t length)
 {
-    Serial.println();
     Serial.print(modesCount);
-    Serial.println(" modes:");
+    Serial.println(" mode(s):");
 
     for (int i = 0; i < modesCount; i++)
     {
         Serial.print(i);
         Serial.print('\t');
         Serial.println(modeNames[i]);
+    }
+
+    Serial.println();
+
+    // Devices
+
+    Serial.print(wireDevicesCount);
+    Serial.print(" wire device(s):");
+    Serial.println();
+
+    Serial.println("Address\tDevice\t\tConnected");
+    Serial.println("---");
+
+    for (int i = 0; i < wireDevicesCount; i++)
+    {
+        Serial.print("0x");
+        Serial.print(wireDevices[i]->address, HEX);
+        Serial.print('\t');
+        Serial.print(wireDevices[i]->getName());
+        Serial.print("\t\t");
+        Serial.println(wireDevices[i]->connected ? "true" : "false");
     }
 
     Serial.println();
@@ -76,9 +96,9 @@ void helpExecute(const Command &command, char **arguments, uint8_t length)
         const Command &command = *commands[i];
         Serial.print(" ");
         Serial.print(command.shortIndentifier);
-        Serial.print("\t");
+        Serial.print('\t');
         Serial.print(command.identifier);
-        Serial.print("\t");
+        Serial.print('\t');
         Serial.println(command.helpText);
     }
 

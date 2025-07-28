@@ -58,3 +58,8 @@ void SN3218Driver::output()
 
     sn3218.update();
 };
+
+const char *SN3218Driver::getName()
+{
+    return "SN3218";
+}
