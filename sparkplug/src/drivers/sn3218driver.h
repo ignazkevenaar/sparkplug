@@ -16,6 +16,7 @@ class SN3218Driver : public _sn3218, public WireDevice, public OutputDevice
     SN3218Driver(uint16_t channelFrom_ = 0, uint16_t channelCount_ = 0);
     void setup();
     void output();
+    const char *getName();
 
   private:
     const static int outputCount = 18;

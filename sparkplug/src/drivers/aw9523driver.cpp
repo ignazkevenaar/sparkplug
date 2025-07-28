@@ -57,3 +57,8 @@ void AW9523Driver::output()
         analogWrite(pinTable[i], logValue);
     }
 }
+
+const char *AW9523Driver::getName()
+{
+    return "AW9523";
+}

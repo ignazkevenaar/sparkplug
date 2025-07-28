@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Sequential write to LP55231 driver.
 - Name to config for reporting on startup.
 - Name to lighting modes to list in serial terminal.
+- List of wire devices to info command.
 
 ### Changed
 
