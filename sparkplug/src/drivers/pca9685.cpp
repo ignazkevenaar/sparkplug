@@ -30,7 +30,7 @@ void PCA9685Driver::output()
 {
     bool lastChannelUpdated = false;
 
-    for (int i = 0; i <= channelCount; i++)
+    for (int i = 0; i < channelCount; i++)
     {
         if (channels[channelFrom + i].wasUpdated)
         {
