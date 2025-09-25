@@ -2,7 +2,7 @@
 
 #include "spark.h"
 
-Version version(0, 2, 0);
+Version version(0, 2, 0, "RP2040");
 
 uint32_t currentMillis = 0;
 
@@ -15,10 +15,10 @@ void sparkInitialize()
     welcomeMessage();
 
     setupChannels();
-    setupWiFi();
-    setupUpdateServer();
-    setupWebServer();
-    setupWebSockets();
+    // setupWiFi();
+    // setupUpdateServer();
+    // setupWebServer();
+    // setupWebSockets();
 
     if (!onInitialize())
     {
@@ -53,8 +53,8 @@ void sparkUpdate()
         clearAllChannelsChanged();
     }
 
-    updateWebServer();
-    updateWebSockets();
+    // updateWebServer();
+    // updateWebSockets();
 
     onUpdate();
 }

@@ -20,7 +20,12 @@ const char *wireErrorMessagesByReturnCode[] = {
 
 void updateDeviceConnection()
 {
-    Wire.begin(wirePins[0], wirePins[1]);
+    // RP2040
+    Wire.setSDA(wirePins[0]);
+    Wire.setSCL(wirePins[1]);
+    Wire.begin();
+    // ESP32
+    // Wire.begin(wirePins[0], wirePins[1]);
     Wire.setClock(400000);
 
     bool shouldUpdateChannels = false;
