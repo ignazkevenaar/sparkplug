@@ -6,6 +6,7 @@ struct Channel
 {
     int presetCount = 0;
     const Preset *presets = NULL;
+    int id = -1;
     bool *presetsActive;
 
     // Fade.

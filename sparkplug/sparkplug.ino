@@ -1,4 +1,4 @@
-#include "configs/default/config.h"
+#include "configs/bmw-75-5/config.h"
 #include "src/spark.h"
 
 void setup()

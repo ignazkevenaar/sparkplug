@@ -14,6 +14,7 @@
 // #include "webServer.h"
 // #include "webSockets.h"
 // #include "wiFi.h"
+#include "infrared.h"
 
 void sparkInitialize();
 bool onInitialize();

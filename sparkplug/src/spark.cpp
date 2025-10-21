@@ -19,6 +19,7 @@ void sparkInitialize()
     // setupUpdateServer();
     // setupWebServer();
     // setupWebSockets();
+    setupInfrared();
 
     if (!onInitialize())
     {
@@ -41,6 +42,7 @@ void sparkUpdate()
     currentMillis = millis();
 
     readSerialInput();
+    updateInfrared();
     applyLightModeChanges();
 
     if (timerWire.elapsed(currentMillis)) updateDeviceConnection();

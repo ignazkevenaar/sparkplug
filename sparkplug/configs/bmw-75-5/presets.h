@@ -15,10 +15,23 @@ enum ModeIDs
     BlinkL,
     BlinkR,
     Hazards,
-    Neutral
+    Neutral,
+    Battery
 };
-const size_t modesCount = Hazards + 1;
+const size_t modesCount = Battery + 1;
 LightingMode modes[modesCount];
+
+const char *modeNames[modesCount] = {
+    "Parking",
+    "LowBeams",
+    "HighBeams",
+    "FlashToPass",
+    "Brake",
+    "BlinkL",
+    "BlinkR",
+    "Hazards",
+    "Neutral"
+};
 
 const PROGMEM Preset presetParking[] = {
     {.modeID = Parking, .intensity = 16},
@@ -51,31 +64,32 @@ const PROGMEM Preset presetsTaillights[] = {
 };
 
 const PROGMEM Preset instruments[] = {
-    {.modeID = Parking, .intensity = 64},
+    {.modeID = Parking, .intensity = 128},
 };
 
 const PROGMEM Preset indicatorBlue[] = {
-    {.modeID = HighBeams, .intensity = 64}
+    {.modeID = HighBeams, .intensity = 64, .fadeSpeedRising = 10, .fadeSpeedFalling = 20}
 };
 
 const PROGMEM Preset indicatorRed[] = {
-    {.modeID = Parking, .intensity = 64},
-    {.modeID = LowBeams, .intensity = 0},
+    {.modeID = Parking, .intensity = 64, .fadeSpeedRising = 10, .fadeSpeedFalling = 20},
+    {.modeID = LowBeams, .intensity = 0, .fadeSpeedRising = 10, .fadeSpeedFalling = 20},
 };
 
 const PROGMEM Preset indicatorGreen[] = {
-    {.modeID = Neutral, .intensity = 64},
+    {.modeID = Neutral, .intensity = 64, .fadeSpeedRising = 10, .fadeSpeedFalling = 20},
 };
 
 const PROGMEM Preset indicatorOrange[] = {
-    {.modeID = Parking, .intensity = 64},
-    {.modeID = LowBeams, .intensity = 0},
+    {.modeID = Parking, .intensity = 64, .fadeSpeedRising = 10, .fadeSpeedFalling = 20},
+    {.modeID = LowBeams, .intensity = 0, .fadeSpeedRising = 10, .fadeSpeedFalling = 20},
+    {.modeID = Battery, .fadeSpeedRising = 10, .fadeSpeedFalling = 20},
 };
 
 const PROGMEM Preset presetsTattleTale[] = {
-    {.modeID = BlinkL, .mode = PresetModes::Blink},
-    {.modeID = BlinkR, .mode = PresetModes::Blink},
-    {.modeID = Hazards, .mode = PresetModes::Blink}
+    {.modeID = BlinkL, .mode = PresetModes::Blink, .intensity = 32},
+    {.modeID = BlinkR, .mode = PresetModes::Blink, .intensity = 32},
+    {.modeID = Hazards, .mode = PresetModes::Blink, .intensity = 32}
 };
 
 const PROGMEM Preset DUMMY[] = {};
@@ -91,7 +105,7 @@ Channel channels[] = {
     {COUNT_OF(indicatorGreen), indicatorGreen},
     {COUNT_OF(indicatorOrange), indicatorOrange},
 
-    {COUNT_OF(presetsTattleTale), presetsTattleTale},
+    {COUNT_OF(presetsTattleTale), presetsTattleTale, 1},
     {COUNT_OF(presetsBlinkersLeft), presetsBlinkersLeft},
     {COUNT_OF(presetsBlinkersRight), presetsBlinkersRight},
     {COUNT_OF(presetsBlinkersLeft), presetsBlinkersLeft},

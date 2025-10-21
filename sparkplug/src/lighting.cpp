@@ -35,6 +35,14 @@ bool setLightMode(int modeID, int newState)
     return true;
 }
 
+bool toggleLightMode(int modeID)
+{
+    return setLightMode(
+        modeID,
+        modes[modeID].currentState == 255 ? 0 : 255
+    );
+}
+
 void applyLightModeChanges()
 {
     for (int i = 0; i < modesCount; i++)
@@ -182,6 +190,23 @@ void calculateChannelValue(Channel &channel)
     int16_t presetIndex = max(highestActivatedPresetIndex, highestDeactivatedPresetIndex);
     const Preset preset = PROGMEM_getAnything(&channel.presets[presetIndex]);
     int32_t fadeSpeed = channel.presetsActive[presetIndex] ? preset.fadeSpeedRising : preset.fadeSpeedFalling;
+
+    if (presetIndex == -1)
+    {
+        fadeSpeed = 0;
+    }
+
+    // if (channel.id == 1)
+    // {
+    //     Serial.print("presetIndex: ");
+    //     Serial.print(presetIndex);
+    //     Serial.print("\t preset.fadeSpeedRising: ");
+    //     Serial.print(preset.fadeSpeedRising);
+    //     Serial.print("\t preset.fadeSpeedFalling: ");
+    //     Serial.print(preset.fadeSpeedFalling);
+    //     Serial.println();
+    // }
+
     startFade(channel, targetValue, fadeSpeed);
 }
 
@@ -221,7 +246,7 @@ void updateFade(Channel &channel)
     uint32_t elapsed = (currentMillis - channel.startTime);
     elapsed = min(elapsed, (uint32_t)channel.targetDelay);
 
-    uint32_t change = abs(totalChange) * elapsed / channel.targetDelay;
+    uint16_t change = abs(totalChange) * elapsed / channel.targetDelay;
     uint32_t val = channel.transitionFrom;
 
     if (totalChange > 0)
@@ -233,6 +258,21 @@ void updateFade(Channel &channel)
     // TODO: Seems bad...
     channel.value = uconstrain<uint16_t>(val, channel.transitionFrom, channel.transitionTo);
     channel.wasUpdated = oldValue != channel.value;
+
+    // if (channel.id == 1)
+    // {
+    //     Serial.print("totalChange: ");
+    //     Serial.print(totalChange);
+    //     Serial.print("\t elapsed: ");
+    //     Serial.print(elapsed);
+    //     Serial.print("\t channel.targetDelay: ");
+    //     Serial.print(channel.targetDelay);
+    //     Serial.print("\t change: ");
+    //     Serial.print(change);
+    //     Serial.print("\t val: ");
+    //     Serial.print(val);
+    //     Serial.println();
+    // }
 }
 
 void updateBlink(Channel &channel)

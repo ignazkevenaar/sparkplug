@@ -20,6 +20,7 @@ void setupChannel(Channel &channel);
 void setupChannels();
 
 bool setLightMode(int modeID, int newState);
+bool toggleLightMode(int modeID);
 
 void applyLightModeChanges();
 void updatechannelValues(int modeID);

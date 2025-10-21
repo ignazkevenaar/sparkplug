@@ -2,7 +2,7 @@
 
 #include <Wire.h>
 
-#include "fileSystem.h"
+// #include "fileSystem.h"
 #include "helpers/macros.h"
 #include "input.h"
 #include "lighting.h"
@@ -113,18 +113,18 @@ const Command helpCommand =
         &helpExecute,
 };
 
-void fileExecute(const Command &command, char **arguments, uint8_t length)
-{
-    listHomeDirectory("/");
-}
+// void fileExecute(const Command &command, char **arguments, uint8_t length)
+// {
+//     listHomeDirectory("/");
+// }
 
-const Command fileCommand =
-    {
-        "F",
-        "file",
-        "List files in the littleFS root directory.",
-        &fileExecute,
-};
+// const Command fileCommand =
+//     {
+//         "F",
+//         "file",
+//         "List files in the littleFS root directory.",
+//         &fileExecute,
+// };
 
 void scanExecute(const Command &command, char **arguments, uint8_t length)
 {
@@ -346,6 +346,6 @@ const Command *commands[] =
         &getCommand,
         &scanCommand,
         &infoCommand,
-        &fileCommand,
+        // &fileCommand,
 };
 size_t commandCount = COUNT_OF(commands);
