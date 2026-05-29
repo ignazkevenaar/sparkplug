@@ -19,11 +19,13 @@ defineEmits<{
 
 <template>
   <header
-    class="pointer-events-none sticky top-0 z-10 mx-auto w-full p-6 lg:container md:px-8 md:pb-8 lg:h-32 lg:px-12 lg:pb-12 xl:px-20 xl:pb-20"
+    class="pointer-events-none sticky top-0 z-10 mx-auto w-full p-6 md:px-8 md:pb-8 lg:container lg:h-32 lg:px-12 lg:pb-12 xl:px-20 xl:pb-20"
   >
-    <div class="mask-image absolute inset-0 bg-header-background/50 backdrop-blur-lg" />
     <div
-      class="pointer-events-auto relative z-10 flex h-20 w-full items-center justify-between rounded-2xl p-3 text-header-foreground"
+      class="bg-header-background/50 absolute inset-0 mask-linear-180 mask-linear-from-75% backdrop-blur-lg"
+    />
+    <div
+      class="text-header-foreground pointer-events-auto relative z-10 flex h-20 w-full items-center justify-between rounded-2xl p-3"
     >
       <Transition mode="out-in">
         <template v-if="showButtons">
@@ -31,7 +33,7 @@ defineEmits<{
           <slot v-else name="left" />
         </template>
       </Transition>
-      <div class="flex flex-1 select-none flex-col items-center">
+      <div class="flex flex-1 flex-col items-center select-none">
         <span
           class="mx-auto flex cursor-pointer items-center transition-opacity"
           @click="$emit('on-logo')"

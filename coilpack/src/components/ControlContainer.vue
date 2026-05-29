@@ -4,8 +4,8 @@ import controlContainerColors from '../styles/controlContainerColors'
 
 interface IProps {
   color: Color
-  width: number
-  height: number
+  width: 1 | 2
+  height: 1 | 2
   circleLayout?: boolean
 }
 
@@ -15,7 +15,13 @@ const props = withDefaults(defineProps<IProps>(), {
   height: 2
 })
 
-const gridClasses: { width: any; height: any } = {
+interface gridClass {
+  1: string
+  2: string
+  circle: string
+}
+
+const gridClasses: { width: gridClass; height: gridClass } = {
   width: {
     1: 'grid-cols-12',
     2: 'grid-cols-[repeat(24,1fr)]',
@@ -42,13 +48,14 @@ const rowClass =
 <template>
   <div>
     <div
-      class="controlContainer grid h-full gap-2 rounded-2xl p-3 squircle-2xl @squircle:rounded-none md:rounded-3xl"
+      class="controlContainer squircle-2xl @squircle:rounded-none grid h-full gap-2 rounded-2xl p-3 md:rounded-3xl"
       :class="[controlContainerColors[color], colClass, rowClass]"
     >
       <slot />
     </div>
     <div
-      class="absolute top-full w-full translate-y-2 select-none overflow-hidden text-ellipsis whitespace-nowrap text-center text-xs font-semibold tracking-wide text-container-foreground"
+      class="absolute top-full w-full translate-y-2 overflow-hidden text-center text-xs font-semibold tracking-wide text-ellipsis whitespace-nowrap select-none"
+      :class="controlContainerColors.foreground"
     >
       <slot name="header" />
     </div>

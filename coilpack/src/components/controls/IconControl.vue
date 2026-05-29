@@ -2,9 +2,9 @@
 import { BackgroundStyle, ForegroundStyle } from '@/types/control.icon'
 import type { CascadableProperties, IconControl, Position } from '@/types/control.icon'
 import { type Ref, computed, inject, ref } from 'vue'
-import { blinkFastKey, blinkNormalKey } from '@/provide-keys'
 import { Color } from '@/types/control'
 import type { ControlModel } from '@/types/types'
+import { blinkNormalKey } from '@/provide-keys'
 import colors from '../../styles/controlColors'
 
 interface IProps {
@@ -93,7 +93,7 @@ const cascadedProps = computed<CascadableProperties>(() => {
 
 // TODO: Do variable modes even work!?
 const swapSetUnset = (original: ControlModel): ControlModel => {
-  var modified = { ...original }
+  const modified = { ...original }
   Object.keys(modified).forEach((key) => {
     modified[key] = !modified[key]
   })
@@ -114,10 +114,10 @@ const colorClasses = computed(() => {
   ]
 })
 
-let buttonDown = ref(false)
-let initialYCoordinate = ref(0)
-let holding = ref(false)
-let holdingPosition: Ref<Position | undefined> = ref()
+const buttonDown = ref(false)
+const initialYCoordinate = ref(0)
+const holding = ref(false)
+const holdingPosition: Ref<Position | undefined> = ref()
 const holdDelay = 150
 const holdCancelOffset = 20
 const scrollDirty = ref(false)
@@ -187,7 +187,7 @@ const onHold = () => {
 <template>
   <component
     :is="type === 'button' ? 'button' : 'div'"
-    class="relative z-0 flex select-none flex-col items-center justify-center bg-gradient-to-br p-2 text-center text-xs ring-inset enabled:cursor-pointer disabled:opacity-50 md:text-sm md:font-semibold"
+    class="relative z-0 flex flex-col items-center justify-center bg-linear-to-br p-2 text-center text-xs select-none ring-inset enabled:cursor-pointer disabled:opacity-50 md:text-sm md:font-semibold"
     :class="[roundClass, colorClasses, type]"
     :disabled="control.readOnly"
     @pointerdown="pointerDown"
@@ -199,7 +199,7 @@ const onHold = () => {
     {{ cascadedProps.label }}
     <div
       v-if="holdPosition || holdingPosition"
-      class="absolute bottom-1 h-[3px] w-5 rounded-full bg-current opacity-25"
+      class="absolute bottom-1 h-0.75 w-5 rounded-full bg-current opacity-25"
     />
   </component>
 </template>

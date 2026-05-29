@@ -6,9 +6,9 @@ defineProps<{
 
 <template>
   <button
-    class="rounded-full border-2 border-header-controls/50 p-3 enabled:active:bg-header-controls/15 disabled:opacity-50"
+    class="border-header-controls/50 enabled:active:bg-header-controls/15 rounded-full border-2 p-3 disabled:opacity-50"
   >
-    <mdicon v-if="icon" :name="icon" class="w-[24px] text-header-foreground" />
+    <mdicon v-if="icon" :name="icon" class="text-header-foreground w-[24px]" />
     <slot />
   </button>
 </template>

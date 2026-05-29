@@ -1,10 +1,11 @@
 export default {
-  default: ['bg-container-background'],
+  default: ['bg-background-700'],
   transparent: ['bg-transparent'],
   black: ['bg-black'],
-  red: ['bg-container-red'],
-  yellow: ['bg-container-yellow'],
-  green: ['bg-container-green'],
-  blue: ['bg-container-blue'],
-  pink: ['bg-container-pink']
+  red: ['bg-red'],
+  yellow: ['bg-yellow'],
+  green: ['bg-green'],
+  blue: ['bg-blue'],
+  pink: ['bg-pink'],
+  foreground: ['text-foreground-200']
 }

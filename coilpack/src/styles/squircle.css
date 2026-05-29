@@ -1,0 +1,86 @@
+@theme {
+  --squircle-none: 0px;
+  --squircle-sm: 2px;
+  --squircle: 4px;
+  --squircle-md: 6px;
+  --squircle-lg: 8px;
+  --squircle-xl: 12px;
+  --squircle-2xl: 16px;
+  --squircle-3xl: 24px;
+
+  --squircle-ring-0: 0;
+  --squircle-ring-1: 1px;
+  --squircle-ring-2: 2px;
+  --squircle-ring: 3px;
+  --squircle-ring-4: 4px;
+  --squircle-ring-8: 8px;
+}
+
+@utility squircle-* {
+  mask-image: paint(squircle);
+  --squircle-smooth: 0.8;
+  --squircle-radius: --value(--squircle-*);
+}
+
+@utility squircle-ring-* {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    display: block;
+
+    mask: paint(squircle);
+
+    --squircle-outline: --value(--squircle-ring-*);
+
+    background: var(--tw-squircle-ring-color);
+    opacity: var(--tw-squircle-ring-opacity, 1);
+
+    pointer-events: none;
+    --squircle-radius: inherit;
+  }
+}
+
+/* Optional defaults */
+@utility squircle {
+  mask-image: paint(squircle);
+  --squircle-smooth: 0.8;
+  --squircle-radius: var(--squircle);
+}
+
+@utility squircle-ring {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    display: block;
+
+    mask: paint(squircle);
+
+    --squircle-outline: var(--squircle-ring);
+
+    background: var(--tw-squircle-ring-color);
+    opacity: var(--tw-squircle-ring-opacity, 1);
+
+    pointer-events: none;
+    --squircle-radius: inherit;
+  }
+}
+
+@utility squircle-ring-current {
+  --tw-squircle-ring-color: currentColor;
+}
+
+@utility squircle-ring-transparent {
+  --tw-squircle-ring-color: transparent;
+}
+
+@custom-variant squircle-supports {
+  @supports (mask-image: paint(squircle)) {
+    @slot;
+  }
+}

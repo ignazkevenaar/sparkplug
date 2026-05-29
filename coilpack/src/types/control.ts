@@ -12,8 +12,8 @@ export enum Color {
 export interface ControlContainer {
   controls: Control[]
   name: string
-  width: number
-  height: number
+  width: 1 | 2
+  height: 1 | 2
   color: Color
   circleLayout: boolean
 }

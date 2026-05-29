@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { CascadableProperties, DisplayControl, Segment, State } from '@/types/control.display'
-import { computed, mergeProps, ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { Color } from '@/types/control'
 import type { ControlModel } from '@/types/types'
 import ErrorMessage from '../ErrorMessage.vue'

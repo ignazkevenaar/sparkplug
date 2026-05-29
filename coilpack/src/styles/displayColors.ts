@@ -4,8 +4,8 @@ export default {
     fill: ['fill-current']
   },
   default: {
-    off: ['text-control-foreground-base-dim'],
-    on: ['text-control-foreground-base-highlight']
+    off: ['text-foreground-600'],
+    on: ['text-foreground-100']
   },
   transparent: {
     off: ['text-transparent'],
@@ -16,23 +16,23 @@ export default {
     on: ['text-black']
   },
   red: {
-    off: ['text-control-foreground-red-dim'],
-    on: ['text-control-foreground-red-highlight']
+    off: ['text-red-dim'],
+    on: ['text-red-highlight']
   },
   yellow: {
-    off: ['text-control-foreground-yellow-dim'],
-    on: ['text-control-foreground-yellow-highlight']
+    off: ['text-yellow-dim'],
+    on: ['text-yellow-highlight']
   },
   green: {
-    off: ['text-control-foreground-green-dim'],
-    on: ['text-control-foreground-green-highlight']
+    off: ['text-green-dim'],
+    on: ['text-green-highlight']
   },
   blue: {
-    off: ['text-control-foreground-blue-dim'],
-    on: ['text-control-foreground-blue-highlight']
+    off: ['text-blue-dim'],
+    on: ['text-blue-highlight']
   },
   pink: {
-    off: ['text-control-foreground-pink-dim'],
-    on: ['text-control-foreground-pink-highlight']
+    off: ['text-pink-dim'],
+    on: ['text-pink-highlight']
   }
 }

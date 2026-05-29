@@ -1,6 +1,5 @@
 import './styles/index.css'
 import './styles/transitions.css'
-import './styles/theme.scss'
 import './styles/fonts.css'
 import * as mdijs from './config/icons'
 import App from './App.vue'
@@ -20,13 +19,7 @@ app
   })
   .mount('#app')
 
-// TODO
-declare namespace CSS {
-  namespace paintWorklet {
-    export function addModule(url: URL | string): void
-  }
-}
-
 if ('paintWorklet' in CSS) {
+  // @ts-expect-error TS2339 It really does exist
   CSS.paintWorklet.addModule(squircle)
 }

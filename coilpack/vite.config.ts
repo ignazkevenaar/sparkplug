@@ -1,6 +1,7 @@
 import { URL, fileURLToPath } from 'node:url'
 import { defineConfig, loadEnv } from 'vite'
 import basicSsl from '@vitejs/plugin-basic-ssl'
+import tailwindcss from '@tailwindcss/vite'
 import { viteStaticCopy } from 'vite-plugin-static-copy'
 import vue from '@vitejs/plugin-vue'
 
@@ -11,6 +12,7 @@ const configName = env['VITE_CONFIG']
 export default defineConfig({
   plugins: [
     vue(),
+    tailwindcss(),
     viteStaticCopy({
       targets: [
         {

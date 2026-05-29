@@ -17,9 +17,9 @@ console.log(props.error)
   >
     <mdicon name="sparkplug-sad" size="48" class="ml-2" />
     <div v-if="title?.length" class="bg-current px-1">
-      <span class="uppercase text-black">{{ title }}</span>
+      <span class="text-black uppercase">{{ title }}</span>
     </div>
-    <div class="text-center [overflow-wrap:anywhere]">
+    <div class="text-center wrap-anywhere">
       {{ error.message }}
     </div>
   </div>

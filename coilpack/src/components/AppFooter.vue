@@ -7,7 +7,7 @@ const formattedBuildDate = formatObj.format(new Date(buildDate))
 
 <template>
   <footer
-    class="pointer-events-none mx-auto flex w-full select-none p-6 text-xs text-header-foreground opacity-35 lg:container md:px-8 md:pb-8 lg:h-32 lg:px-12 lg:pb-12 xl:px-20 xl:pb-20"
+    class="text-header-foreground pointer-events-none mx-auto flex w-full p-6 text-xs opacity-35 select-none md:px-8 md:pb-8 lg:container lg:h-32 lg:px-12 lg:pb-12 xl:px-20 xl:pb-20"
   >
     <div class="mx-auto flex-col justify-center">
       <p class="flex items-center justify-center gap-0.5">

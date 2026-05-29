@@ -144,7 +144,7 @@ provide(blinkFastKey, blinkFast)
 </script>
 
 <template>
-  <div :class="[lightsOut ? 'lightsOut' : '']" class="relative min-h-screen bg-app-background">
+  <div :class="{ lightsOut }" class="bg-app-background relative min-h-screen">
     <AppHeader
       :show-back-button="currentRoute != '' && currentRoute != '/'"
       :subtitle="config?.name"
@@ -163,7 +163,7 @@ provide(blinkFastKey, blinkFast)
     <Transition mode="out-in">
       <div
         v-if="error"
-        class="absolute inset-0 grid place-items-center p-6 pb-2 lg:container md:px-8 md:pb-6 lg:px-12 lg:pb-12 xl:px-20 xl:pb-10"
+        class="absolute inset-0 grid place-items-center p-6 pb-2 md:px-8 md:pb-6 lg:container lg:px-12 lg:pb-12 xl:px-20 xl:pb-10"
       >
         <ErrorMessage :error="error" />
       </div>
