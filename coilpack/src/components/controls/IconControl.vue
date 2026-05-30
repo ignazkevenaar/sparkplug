@@ -125,8 +125,10 @@ const scrollDirty = ref(false)
 const pointerDown = (event: PointerEvent) => {
   if (props.control.readOnly) return
 
-  if (event instanceof TouchEvent) {
+  if (typeof TouchEvent !== 'undefined' && event instanceof TouchEvent) {
     initialYCoordinate.value = event.touches[0].clientY
+  } else {
+    initialYCoordinate.value = event.clientY
   }
 
   holdTimeout = setTimeout(onHold, holdDelay)
@@ -138,11 +140,11 @@ const cancelHold = () => {
 
   holding.value = false
   holdingPosition.value = undefined
-
-  window.removeEventListener('pointerup', pointerUp)
 }
 
 const pointerUp = () => {
+  window.removeEventListener('pointerup', pointerUp)
+
   if (props.control.readOnly) return
 
   if (buttonDown.value) buttonDown.value = false
@@ -191,8 +193,8 @@ const onHold = () => {
     :class="[roundClass, colorClasses, type]"
     :disabled="control.readOnly"
     @pointerdown="pointerDown"
-    @pointerup.prevent="pointerUp"
-    @pointermove="pointerMove"
+    @pointerup="pointerUp"
+    v-on="buttonDown ? { pointermove: pointerMove } : {}"
   >
     <mdicon v-if="cascadedProps.icon" :name="cascadedProps.icon" size="36" />
     <slot />
