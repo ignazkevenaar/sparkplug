@@ -1,3 +1,7 @@
+<script setup>
+import BlinkerSequencer from '../components/BlinkerSequencer.vue';
+</script>
+
 # Blinkers
 
 Channels support basic blinking functionality that can be used for blinkers, alarm lights etc.
@@ -48,3 +52,5 @@ The most significant bit marks the start of the timeline and the pattern moves f
 ::: info KEEP IN MIND
 The `blinkInterval` marks the period of the pattern. For the default pattern this means the example preset above is applied for 300ms and then not applied for another 300ms.
 :::
+
+<BlinkerSequencer />
