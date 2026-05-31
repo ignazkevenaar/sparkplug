@@ -1,7 +1,7 @@
 /* ./src/index.css */
 @import 'tailwindcss';
 
-@import './squircle.css';
+@import './cornerShape.css';
 
 @theme {
   /* Fonts */

@@ -6,7 +6,6 @@ import App from './App.vue'
 import { createApp } from 'vue'
 import customIcons from './config/customIcons'
 import mdiVue from 'mdi-vue/v3'
-import squircle from '../../node_modules/css-houdini-squircle/squircle.min.js?url'
 
 const app = createApp(App)
 
@@ -18,8 +17,3 @@ app
     }
   })
   .mount('#app')
-
-if ('paintWorklet' in CSS) {
-  // @ts-expect-error TS2339 It really does exist
-  CSS.paintWorklet.addModule(squircle)
-}

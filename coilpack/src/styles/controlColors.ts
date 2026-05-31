@@ -2,7 +2,7 @@ export default {
   common: {
     background: {
       default: [],
-      outline: ['ring-2', '@squircle:squircle-ring'],
+      outline: ['ring-2'],
       fill: []
     },
     foreground: {

@@ -25,9 +25,7 @@ const emit = defineEmits<{
 const blinkNormal = inject(blinkNormalKey)
 
 const roundClass = computed(() =>
-  props.control.round
-    ? 'rounded-full'
-    : 'rounded-lg md:rounded-2xl @squircle:squircle-xl @squircle:!rounded-none'
+  props.control.round ? 'rounded-full' : 'rounded-xl md:rounded-3xl corner-super-1.5'
 )
 
 const currentPositions = computed(() =>

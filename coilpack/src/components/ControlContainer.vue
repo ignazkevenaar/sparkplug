@@ -48,7 +48,7 @@ const rowClass =
 <template>
   <div>
     <div
-      class="controlContainer squircle-2xl @squircle:rounded-none grid h-full gap-2 rounded-2xl p-3 md:rounded-3xl"
+      class="controlContainer corner-super-1.5 grid h-full gap-2 rounded-3xl p-3 md:rounded-4xl"
       :class="[controlContainerColors[color], colClass, rowClass]"
     >
       <slot />

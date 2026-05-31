@@ -1,0 +1,11 @@
+@utility corner-* {
+  corner-shape: --value("round", "scoop", "bevel", "notch", "square", "squircle");
+}
+
+@utility corner-super-* {
+  corner-shape: superellipse(--value([number], number, --default(0)));
+}
+
+@utility -corner-super-* {
+  corner-shape: superellipse(calc(--value([number], number) * -1));
+}

@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Upgrade docs dependencies.
 - Upgrade websocket-echo dependencies.
 - Update TSConfig.
+- Replace CSS houdini squircle with corner-shape property.
 
 ### Fixed
 
