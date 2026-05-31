@@ -198,14 +198,16 @@ const events = computed(() => {
 <template>
   <component
     :is="type === 'button' ? 'button' : 'div'"
-    class="relative z-0 flex flex-col items-center justify-center bg-linear-to-br p-2 text-center text-xs select-none ring-inset enabled:cursor-pointer disabled:opacity-50 md:text-sm md:font-semibold"
+    class="relative z-0 flex flex-col items-center justify-center ring-inset enabled:cursor-pointer disabled:opacity-50"
     :class="[roundClass, colorClasses, type]"
     :disabled="disabled || control.readOnly"
     v-on="events"
   >
     <mdicon v-if="cascadedProps.icon" :name="cascadedProps.icon" size="36" />
     <slot />
-    {{ cascadedProps.label }}
+    <span v-if="cascadedProps.label" class="-mb-2 text-center text-xs select-none md:font-medium">
+      {{ cascadedProps.label }}
+    </span>
     <div
       v-if="holdPosition || holdingPosition"
       class="absolute bottom-1 h-0.75 w-5 rounded-full bg-current opacity-25"
