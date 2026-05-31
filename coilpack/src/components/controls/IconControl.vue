@@ -11,6 +11,7 @@ interface IProps {
   modelValue: ControlModel
   control: IconControl
   type: string
+  disabled: boolean
 }
 
 const props = withDefaults(defineProps<IProps>(), {
@@ -182,6 +183,16 @@ const onHold = () => {
     emit('update:modelValue', holdPosition.value.modes)
   }
 }
+
+const events = computed(() => {
+  if (props.disabled || props.control.readOnly) return {}
+
+  return {
+    pointerdown: pointerDown,
+    pointerup: pointerUp,
+    pointermove: buttonDown.value ? pointerMove : null
+  }
+})
 </script>
 
 <template>
@@ -189,10 +200,8 @@ const onHold = () => {
     :is="type === 'button' ? 'button' : 'div'"
     class="relative z-0 flex flex-col items-center justify-center bg-linear-to-br p-2 text-center text-xs select-none ring-inset enabled:cursor-pointer disabled:opacity-50 md:text-sm md:font-semibold"
     :class="[roundClass, colorClasses, type]"
-    :disabled="control.readOnly"
-    @pointerdown="pointerDown"
-    @pointerup="pointerUp"
-    v-on="buttonDown ? { pointermove: pointerMove } : {}"
+    :disabled="disabled || control.readOnly"
+    v-on="events"
   >
     <mdicon v-if="cascadedProps.icon" :name="cascadedProps.icon" size="36" />
     <slot />
