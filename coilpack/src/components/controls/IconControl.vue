@@ -210,7 +210,7 @@ const events = computed(() => {
     </span>
     <div
       v-if="holdPosition || holdingPosition"
-      class="absolute bottom-1 h-0.75 w-5 rounded-full bg-current opacity-25"
+      class="absolute bottom-1 h-0.75 w-5 rounded-full bg-current opacity-35"
     />
   </component>
 </template>

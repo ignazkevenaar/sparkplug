@@ -13,14 +13,14 @@ export default {
   },
   default: {
     background: {
-      default: ['bg-background-600', 'enabled:active:bg-background-600/50'],
+      default: ['bg-background-700', 'enabled:active:bg-background-600/50'],
       outline: ['bg-background-800', 'enabled:active:bg-background-800/50', 'ring-base'],
       fill: ['bg-background-100', 'enabled:active:bg-background-100/75']
     },
     foreground: {
-      default: ['text-foreground-100'],
+      default: ['text-foreground-200'],
       highlight: ['text-foreground-50'],
-      dim: ['text-foreground-600']
+      dim: ['text-foreground-800']
     }
   },
   transparent: {

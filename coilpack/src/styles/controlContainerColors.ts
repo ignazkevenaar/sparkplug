@@ -1,5 +1,5 @@
 export default {
-  default: ['bg-background-700'],
+  default: ['bg-background-800'],
   transparent: ['bg-transparent'],
   black: ['bg-black'],
   red: ['bg-red'],

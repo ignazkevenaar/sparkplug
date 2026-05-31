@@ -4,8 +4,8 @@ export default {
     fill: ['fill-current']
   },
   default: {
-    off: ['text-foreground-600'],
-    on: ['text-foreground-100']
+    off: ['text-foreground-800'],
+    on: ['text-foreground-200']
   },
   transparent: {
     off: ['text-transparent'],
