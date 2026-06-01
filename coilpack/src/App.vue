@@ -145,37 +145,40 @@ provide(blinkFastKey, blinkFast)
 
 <template>
   <div :class="{ lightsOut }" class="bg-app-background relative min-h-screen">
-    <AppHeader
-      :show-back-button="currentRoute != '' && currentRoute != '/'"
-      :subtitle="config?.name"
-      :show-buttons="!error && !loading"
-      @on-back="navigateHome"
-      @on-logo="scollToTop"
-    >
-      <template #left>
-        <HeaderButton icon="weather-night" @click="lightsOut = !lightsOut" />
-      </template>
-      <template #right>
-        <HeaderButton icon="power-standby" :disabled="!websocketConnected" @click="unsetAllModes" />
-      </template>
-      <ConnectionIndicator :status="websocketConnected" />
-    </AppHeader>
-    <Transition mode="out-in">
-      <div
-        v-if="error"
-        class="absolute inset-0 grid place-items-center p-6 pb-2 md:px-8 md:pb-6 lg:container lg:px-12 lg:pb-12 xl:px-20 xl:pb-10"
+    <div class="@container mx-auto flex min-h-screen max-w-md flex-col">
+      <AppHeader
+        :show-back-button="currentRoute != '' && currentRoute != '/'"
+        :subtitle="config?.name"
+        :show-buttons="!error && !loading"
+        @on-back="navigateHome"
+        @on-logo="scollToTop"
       >
-        <ErrorMessage :error="error" />
-      </div>
-      <div v-else-if="loading" class="absolute inset-0 grid place-items-center">
-        <LoadingIndicator />
-      </div>
-      <AppRouter
-        v-else
-        @route-changed="currentRoute = $event"
-        @update:modelValue="groupAndSetModeChanges"
-      />
-    </Transition>
-    <AppFooter />
+        <template #left>
+          <HeaderButton icon="weather-night" @click="lightsOut = !lightsOut" />
+        </template>
+        <template #right>
+          <HeaderButton
+            icon="power-standby"
+            :disabled="!websocketConnected"
+            @click="unsetAllModes"
+          />
+        </template>
+        <ConnectionIndicator :status="websocketConnected" />
+      </AppHeader>
+      <Transition mode="out-in">
+        <div v-if="error" class="grid flex-1 place-items-center p-6">
+          <ErrorMessage :error="error" />
+        </div>
+        <div v-else-if="loading" class="absolute inset-0 grid place-items-center">
+          <LoadingIndicator />
+        </div>
+        <AppRouter
+          v-else
+          @route-changed="currentRoute = $event"
+          @update:modelValue="groupAndSetModeChanges"
+        />
+      </Transition>
+      <AppFooter />
+    </div>
   </div>
 </template>

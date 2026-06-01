@@ -18,14 +18,12 @@ defineEmits<{
 </script>
 
 <template>
-  <header
-    class="pointer-events-none sticky top-0 z-10 mx-auto w-full p-6 md:px-8 md:pb-8 lg:container lg:h-32 lg:px-12 lg:pb-12 xl:px-20 xl:pb-20"
-  >
+  <header class="pointer-events-none sticky top-0 z-10 mx-auto w-full p-6 pb-0">
     <div
       class="bg-header-background/50 absolute inset-0 mask-linear-180 mask-linear-from-75% backdrop-blur-lg"
     />
     <div
-      class="text-header-foreground pointer-events-auto relative z-10 flex h-20 w-full items-center justify-between rounded-2xl p-3"
+      class="text-header-foreground pointer-events-auto relative z-10 flex w-full items-center justify-between rounded-2xl"
     >
       <Transition mode="out-in">
         <template v-if="showButtons">

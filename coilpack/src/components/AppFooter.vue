@@ -6,9 +6,7 @@ const formattedBuildDate = formatObj.format(new Date(buildDate))
 </script>
 
 <template>
-  <footer
-    class="text-header-foreground pointer-events-none mx-auto flex w-full p-6 text-xs opacity-35 select-none md:px-8 md:pb-8 lg:container lg:h-32 lg:px-12 lg:pb-12 xl:px-20 xl:pb-20"
-  >
+  <footer class="text-header-foreground flex w-full p-6 text-xs opacity-35 select-none xl:pb-20">
     <div class="mx-auto flex-col justify-center">
       <p class="flex items-center justify-center gap-0.5">
         <mdicon name="sparkplug" size="18" />
