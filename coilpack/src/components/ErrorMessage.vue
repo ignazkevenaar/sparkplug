@@ -13,7 +13,7 @@ console.log(props.error)
 
 <template>
   <div
-    class="flex flex-col items-center gap-3 font-mono font-bold text-red-500 drop-shadow-[0_0_25px_rgba(255,0,0,0.5)]"
+    class="text-red-highlight drop-shadow-red-highlight/50 flex flex-col items-center gap-3 font-mono font-bold drop-shadow-[0_0_15px]"
   >
     <mdicon name="sparkplug-sad" size="48" class="ml-2" />
     <div v-if="title?.length" class="bg-current px-1">
