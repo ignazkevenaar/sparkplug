@@ -27,23 +27,15 @@ const controlToComponent = {
 const websocketConnected = inject(websocketConnectedKey)
 
 // Automatic control panel grid sizing.
-const autoCols = [
-  'grid-cols-[repeat(2,calc((100vw-2*var(--spacing)*6-var(--spacing)*4)/2))]',
-  'sm:grid-cols-[repeat(2,200px)]'
-]
-
+const autoCols = ['grid-cols-[repeat(2,calc((100cqw-2*var(--spacing)*6-var(--spacing)*4)/2))]']
 const autoRows = [
-  'auto-rows-[calc(((100vw-2*var(--spacing)*6-var(--spacing)*4)/2-var(--spacing)*12)/2)]',
-  'sm:auto-rows-[calc((200px-var(--spacing)*12)/2)]'
+  'auto-rows-[calc(((100cqw-2*var(--spacing)*6-var(--spacing)*4)/2-var(--spacing)*12)/2)]'
 ]
 </script>
 
 <template>
-  <div>
-    <div
-      class="controlGrid grid w-full gap-x-4 gap-y-12 pb-10 xl:gap-10"
-      :class="[autoCols, autoRows]"
-    >
+  <div class="corners-super-[1.2] rounded-4xl p-3">
+    <div class="controlGrid grid w-full gap-x-4 gap-y-12 pb-10" :class="[autoCols, autoRows]">
       <ControlContainerComponent
         v-for="(item, itemIndex) in controlConfig"
         :key="itemIndex"
