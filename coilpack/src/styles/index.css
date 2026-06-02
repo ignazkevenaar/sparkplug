@@ -4,7 +4,8 @@
 @import './cornerShape.css';
 
 @theme {
-  /* Fonts */
+  --breakpoint-xs: 24rem;
+
   --font-sans: 'Radio Canada', ui-sans-serif, system-ui, sans-serif;
   --font-header: 'Krona One', ui-sans-serif, system-ui, sans-serif;
 
