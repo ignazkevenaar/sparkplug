@@ -3,7 +3,7 @@ export default {
     background: {
       default: [],
       outline: ['ring-2'],
-      fill: []
+      fill: ['shadow-glow']
     },
     foreground: {
       default: [],
@@ -13,7 +13,12 @@ export default {
   },
   default: {
     background: {
-      default: ['bg-background-700', 'enabled:active:bg-background-600/50'],
+      default: [
+        'shadow-xl',
+        'bg-linear-to-b from-background-700 via-background-800/75 to-background-700/75 via-70%',
+        'enabled:active:from-background-700/75 enabled:active:via-background-800/50 enabled:active:to-background-700/50',
+        'inset-shadow-rim inset-shadow-background-400 enabled:active:inset-shadow-background-500'
+      ],
       outline: ['bg-background-800', 'enabled:active:bg-background-800/50', 'ring-base'],
       fill: ['bg-background-100', 'enabled:active:bg-background-100/75']
     },
@@ -52,7 +57,7 @@ export default {
     background: {
       default: ['bg-red', 'enabled:active:bg-red/50'],
       outline: ['bg-red-dim', 'enabled:active:bg-red-dim/50', 'ring-red'],
-      fill: ['bg-red-highlight', 'enabled:active:bg-red-highlight/75']
+      fill: ['bg-red-highlight', 'enabled:active:bg-red-highlight/75', 'shadow-red/50']
     },
     foreground: {
       default: ['text-red'],
@@ -64,7 +69,7 @@ export default {
     background: {
       default: ['bg-yellow', 'enabled:active:bg-yellow/50'],
       outline: ['bg-yellow-dim', 'enabled:active:bg-yellow-dim/50', 'ring-yellow'],
-      fill: ['bg-yellow-highlight', 'enabled:active:bg-yellow-highlight/75']
+      fill: ['bg-yellow-highlight', 'enabled:active:bg-yellow-highlight/75', 'shadow-yellow/50']
     },
     foreground: {
       default: ['text-yellow'],
@@ -76,7 +81,11 @@ export default {
     background: {
       default: ['bg-green', 'enabled:active:bg-green/50'],
       outline: ['bg-green-dim', 'enabled:active:bg-green-dim/50', 'ring-green'],
-      fill: ['bg-green-highlight', 'enabled:active:bg-green-highlight/75']
+      fill: [
+        'linear-to-br from-green to-green-highlight',
+        'enabled:active:bg-green-highlight/75',
+        'shadow-green/50'
+      ]
     },
     foreground: {
       default: ['text-green'],
@@ -88,7 +97,7 @@ export default {
     background: {
       default: ['bg-blue', 'enabled:active:bg-blue/50'],
       outline: ['bg-blue-dim', 'enabled:active:bg-blue-dim/50', 'ring-blue'],
-      fill: ['bg-blue-highlight', 'enabled:active:bg-blue-highlight/75']
+      fill: ['bg-blue-highlight', 'enabled:active:bg-blue-highlight/75', 'shadow-blue/50']
     },
     foreground: {
       default: ['text-blue'],
@@ -100,7 +109,7 @@ export default {
     background: {
       default: ['bg-pink', 'enabled:active:bg-pink/50'],
       outline: ['bg-pink-dim', 'enabled:active:bg-pink-dim/50', 'ring-pink'],
-      fill: ['bg-pink-highlight', 'enabled:active:bg-pink-highlight/75']
+      fill: ['bg-pink-highlight', 'enabled:active:bg-pink-highlight/75', 'shadow-pink/50']
     },
     foreground: {
       default: ['text-pink'],

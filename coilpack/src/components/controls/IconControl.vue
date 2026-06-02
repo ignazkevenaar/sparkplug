@@ -26,7 +26,7 @@ const emit = defineEmits<{
 const blinkNormal = inject(blinkNormalKey)
 
 const roundClass = computed(() =>
-  props.control.round ? 'rounded-full' : 'rounded-xl md:rounded-3xl corner-super-1.5'
+  props.control.round ? 'rounded-full' : 'rounded-2xl xs:rounded-3xl corner-super-[1.2]'
 )
 
 const currentPositions = computed(() =>
@@ -198,14 +198,17 @@ const events = computed(() => {
 <template>
   <component
     :is="type === 'button' ? 'button' : 'div'"
-    class="relative z-0 flex flex-col items-center justify-center ring-inset enabled:cursor-pointer disabled:opacity-50"
+    class="relative flex flex-col items-center justify-center bg-linear-to-br ring-inset enabled:cursor-pointer enabled:active:translate-y-px disabled:opacity-50"
     :class="[roundClass, colorClasses, type]"
     :disabled="disabled || control.readOnly"
     v-on="events"
   >
-    <mdicon v-if="cascadedProps.icon" :name="cascadedProps.icon" size="36" />
+    <mdicon v-if="cascadedProps.icon" :name="cascadedProps.icon" size="36" class="drop-shadow" />
     <slot />
-    <span v-if="cascadedProps.label" class="-mb-2 text-center text-xs select-none md:font-medium">
+    <span
+      v-if="cascadedProps.label"
+      class="xs:text-xs xs:mt-0 xs:-mb-2 -mt-1 text-center text-[0.6em] font-medium select-none"
+    >
       {{ cascadedProps.label }}
     </span>
     <div
