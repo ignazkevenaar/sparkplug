@@ -25,17 +25,11 @@ const controlToComponent = {
 }
 
 const websocketConnected = inject(websocketConnectedKey)
-
-// Automatic control panel grid sizing.
-const autoCols = ['grid-cols-[repeat(2,calc((100cqw-2*var(--spacing)*6-var(--spacing)*4)/2))]']
-const autoRows = [
-  'auto-rows-[calc(((100cqw-2*var(--spacing)*6-var(--spacing)*4)/2-var(--spacing)*12)/2)]'
-]
 </script>
 
 <template>
-  <div class="corners-super-[1.2] rounded-4xl p-3">
-    <div class="controlGrid grid w-full gap-x-4 gap-y-12 pb-10" :class="[autoCols, autoRows]">
+  <div class="corners-super-[1.2] rounded-4xl">
+    <div class="controlGrid grid w-full gap-y-12 pb-10">
       <ControlContainerComponent
         v-for="(item, itemIndex) in controlConfig"
         :key="itemIndex"
@@ -68,3 +62,20 @@ const autoRows = [
     </div>
   </div>
 </template>
+
+<style lang="css" scoped>
+.controlGrid {
+  --gap-x: calc(var(--spacing) * 2);
+  --padding: calc(var(--spacing) * 2);
+  --grid-column: calc((100cqw - var(--padding) * 4 - var(--gap-x) * 2) / 2);
+  --grid-row: calc(
+    ((100cqw - var(--padding) * 4 - var(--gap-x) * 2) / 2 - var(--spacing) * 12) / 2
+  );
+
+  grid-template-columns: repeat(2, var(--grid-column));
+  grid-auto-rows: var(--grid-row);
+  padding: var(--padding);
+  padding-block-end: calc(var(--spacing) * 8);
+  column-gap: var(--gap-x);
+}
+</style>
