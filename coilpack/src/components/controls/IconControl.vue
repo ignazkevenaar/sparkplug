@@ -99,16 +99,22 @@ const swapSetUnset = (original: ControlModel): ControlModel => {
   return modified
 }
 
-const colorClasses = computed(() => {
+const backgroundClasses = computed(() => {
   const backgroundColor = cascadedProps.value.backgroundColor
-  const foregroundColor = cascadedProps.value.foregroundColor
   const backgroundStyle = cascadedProps.value.backgroundStyle
-  const foregroundStyle = cascadedProps.value.foregroundStyle
 
   return [
     ...colors.common.background[backgroundStyle],
+    ...colors[backgroundColor].background[backgroundStyle]
+  ]
+})
+
+const foregroundClasses = computed(() => {
+  const foregroundColor = cascadedProps.value.foregroundColor
+  const foregroundStyle = cascadedProps.value.foregroundStyle
+
+  return [
     ...colors.common.foreground[foregroundStyle],
-    ...colors[backgroundColor].background[backgroundStyle],
     ...colors[foregroundColor].foreground[foregroundStyle]
   ]
 })
@@ -198,22 +204,25 @@ const events = computed(() => {
 <template>
   <component
     :is="type === 'button' ? 'button' : 'div'"
-    class="relative flex flex-col items-center justify-center bg-linear-to-br ring-inset enabled:cursor-pointer enabled:active:translate-y-px disabled:opacity-50"
-    :class="[roundClass, colorClasses, type]"
+    class="relative bg-linear-to-br ring-inset enabled:cursor-pointer enabled:active:translate-y-px disabled:opacity-50"
+    :class="[roundClass, backgroundClasses, type]"
     :disabled="disabled || control.readOnly"
     v-on="events"
   >
-    <mdicon v-if="cascadedProps.icon" :name="cascadedProps.icon" size="36" class="drop-shadow" />
-    <slot />
-    <span
-      v-if="cascadedProps.label"
-      class="xs:text-xs xs:mt-0 xs:-mb-2 -mt-1 text-center text-[0.6em] font-medium select-none"
-    >
-      {{ cascadedProps.label }}
-    </span>
+    <div :class="foregroundClasses" class="flex flex-col items-center justify-center">
+      <mdicon v-if="cascadedProps.icon" :name="cascadedProps.icon" size="36" />
+      <slot />
+      <span
+        v-if="cascadedProps.label"
+        class="xs:text-xs xs:mt-0 xs:-mb-2 -mt-1 text-center text-[0.6em] font-medium select-none"
+      >
+        {{ cascadedProps.label }}
+      </span>
+    </div>
     <div
       v-if="holdPosition || holdingPosition"
-      class="absolute bottom-1 h-0.75 w-5 rounded-full bg-current opacity-35"
+      class="absolute inset-s-1/2 bottom-1 h-0.5 w-4 -translate-1/2 rounded-full bg-current opacity-50"
+      :class="foregroundClasses"
     />
   </component>
 </template>

@@ -3,10 +3,10 @@ export default {
     background: {
       default: [],
       outline: ['ring-2'],
-      fill: ['shadow-glow']
+      fill: ['bg-radial-[at_50%_75%] shadow-glow from-25%']
     },
     foreground: {
-      default: [],
+      default: ['drop-shadow-xs drop-shadow-black/25'],
       highlight: [],
       dim: []
     }
@@ -48,73 +48,89 @@ export default {
       fill: []
     },
     foreground: {
-      default: ['text-black'],
-      highlight: ['text-black'],
-      dim: ['text-black']
+      default: ['text-black', 'drop-shadow-none!'],
+      highlight: ['text-black', 'drop-shadow-none!'],
+      dim: ['text-black', 'drop-shadow-none!']
     }
   },
   red: {
     background: {
-      default: ['bg-red', 'enabled:active:bg-red/50'],
-      outline: ['bg-red-dim', 'enabled:active:bg-red-dim/50', 'ring-red'],
-      fill: ['bg-red-highlight', 'enabled:active:bg-red-highlight/75', 'shadow-red/50']
+      default: ['bg-red-600', 'enabled:active:bg-red-600/50'],
+      outline: ['bg-red-950', 'enabled:active:bg-red-950/50', 'ring-red-600'],
+      fill: [
+        'from-red-500 to-red-600',
+        'enabled:active:from-red-500/95 enabled:active:to-red-600/95',
+        'shadow-red-600/50'
+      ]
     },
     foreground: {
-      default: ['text-red'],
-      highlight: ['text-red-highlight'],
-      dim: ['text-red-dim']
+      default: ['text-red-500'],
+      highlight: ['text-red-400'],
+      dim: ['text-red-950']
     }
   },
   yellow: {
     background: {
-      default: ['bg-yellow', 'enabled:active:bg-yellow/50'],
-      outline: ['bg-yellow-dim', 'enabled:active:bg-yellow-dim/50', 'ring-yellow'],
-      fill: ['bg-yellow-highlight', 'enabled:active:bg-yellow-highlight/75', 'shadow-yellow/50']
+      default: ['bg-amber-500', 'enabled:active:bg-amber-500/50'],
+      outline: ['bg-amber-950', 'enabled:active:bg-amber-950/50', 'ring-amber-500'],
+      fill: [
+        'from-amber-400 to-amber-500',
+        'enabled:active:from-amber-400/95 enabled:active:to-amber-500/95',
+        'shadow-amber-500/50'
+      ]
     },
     foreground: {
-      default: ['text-yellow'],
-      highlight: ['text-yellow-highlight'],
-      dim: ['text-yellow-dim']
+      default: ['text-amber-500'],
+      highlight: ['text-amber-400'],
+      dim: ['text-amber-950']
     }
   },
   green: {
     background: {
-      default: ['bg-green', 'enabled:active:bg-green/50'],
-      outline: ['bg-green-dim', 'enabled:active:bg-green-dim/50', 'ring-green'],
+      default: ['bg-lime-500', 'enabled:active:bg-lime-500/50'],
+      outline: ['bg-lime-950', 'enabled:active:bg-lime-950/50', 'ring-lime-500'],
       fill: [
-        'linear-to-br from-green to-green-highlight',
-        'enabled:active:bg-green-highlight/75',
-        'shadow-green/50'
+        'from-lime-400 to-lime-500',
+        'enabled:active:from-lime-400/95 enabled:active:to-lime-500/95',
+        'shadow-lime-500/50'
       ]
     },
     foreground: {
-      default: ['text-green'],
-      highlight: ['text-green-highlight'],
-      dim: ['text-green-dim']
+      default: ['text-lime-500'],
+      highlight: ['text-lime-400'],
+      dim: ['text-lime-950']
     }
   },
   blue: {
     background: {
-      default: ['bg-blue', 'enabled:active:bg-blue/50'],
-      outline: ['bg-blue-dim', 'enabled:active:bg-blue-dim/50', 'ring-blue'],
-      fill: ['bg-blue-highlight', 'enabled:active:bg-blue-highlight/75', 'shadow-blue/50']
+      default: ['bg-blue-400', 'enabled:active:bg-blue-400/50'],
+      outline: ['bg-blue-950', 'enabled:active:bg-blue-950/50', 'ring-blue-400'],
+      fill: [
+        'from-blue-300 to-blue-400',
+        'enabled:active:from-blue-300/95 enabled:active:to-blue-400/95',
+        'shadow-blue-400/50'
+      ]
     },
     foreground: {
-      default: ['text-blue'],
-      highlight: ['text-blue-highlight'],
-      dim: ['text-blue-dim']
+      default: ['text-blue-500'],
+      highlight: ['text-blue-400'],
+      dim: ['text-blue-950']
     }
   },
   pink: {
     background: {
-      default: ['bg-pink', 'enabled:active:bg-pink/50'],
-      outline: ['bg-pink-dim', 'enabled:active:bg-pink-dim/50', 'ring-pink'],
-      fill: ['bg-pink-highlight', 'enabled:active:bg-pink-highlight/75', 'shadow-pink/50']
+      default: ['bg-pink-500', 'enabled:active:bg-pink/50'],
+      outline: ['bg-pink-950', 'enabled:active:bg-pink-950/50', 'ring-pink'],
+      fill: [
+        'from-pink-400 to-pink-500',
+        'enabled:active:from-pink-400/95 enabled:active:to-pink-500/95',
+        'shadow-pink-500/50'
+      ]
     },
     foreground: {
-      default: ['text-pink'],
-      highlight: ['text-pink-highlight'],
-      dim: ['text-pink-dim']
+      default: ['text-pink-500'],
+      highlight: ['text-pink-400'],
+      dim: ['text-pink-950']
     }
   }
 }

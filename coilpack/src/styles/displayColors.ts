@@ -16,23 +16,23 @@ export default {
     on: ['text-black']
   },
   red: {
-    off: ['text-red-dim'],
-    on: ['text-red-highlight']
+    off: ['text-red-950'],
+    on: ['text-red-400']
   },
   yellow: {
-    off: ['text-yellow-dim'],
-    on: ['text-yellow-highlight']
+    off: ['text-amber-950'],
+    on: ['text-amber-400']
   },
   green: {
-    off: ['text-green-dim'],
-    on: ['text-green-highlight']
+    off: ['text-lime-950'],
+    on: ['text-lime-400']
   },
   blue: {
-    off: ['text-blue-dim'],
-    on: ['text-blue-highlight']
+    off: ['text-blue-950'],
+    on: ['text-blue-400']
   },
   pink: {
-    off: ['text-pink-dim'],
-    on: ['text-pink-highlight']
+    off: ['text-pink-950'],
+    on: ['text-pink-400']
   }
 }
