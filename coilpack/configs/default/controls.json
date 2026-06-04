@@ -6,35 +6,13 @@
       "color": "transparent",
       "controls": [
         {
-          "type": "indicator",
-          "icon": "arrow-left-bold-outline",
-          "readOnly": true,
+          "type": "placeholder",
           "width": 4,
-          "height": 4,
-          "foregroundStyle": "dim",
-          "backgroundColor": "transparent",
-          "positions": [
-            {
-              "modes": {
-                "BlinkL": true
-              },
-              "foregroundColor": "green",
-              "foregroundStyle": "default",
-              "animation": "blinking"
-            },
-            {
-              "modes": {
-                "Hazards": true
-              },
-              "foregroundColor": "green",
-              "foregroundStyle": "default",
-              "animation": "blinking"
-            }
-          ]
+          "height": 4
         },
         {
           "type": "indicator",
-          "icon": "car-light-high",
+          "icon": "car-parking-lights",
           "readOnly": true,
           "width": 4,
           "height": 4,
@@ -43,9 +21,9 @@
           "positions": [
             {
               "modes": {
-                "HighBeams": true
+                "Parking": true
               },
-              "foregroundColor": "blue",
+              "foregroundColor": "green",
               "foregroundStyle": "default"
             }
           ]
@@ -86,6 +64,7 @@
             }
           ]
         },
+
         {
           "type": "indicator",
           "icon": "hazard-lights",
@@ -106,8 +85,14 @@
           ]
         },
         {
+          "type": "placeholder",
+          "width": 4,
+          "height": 4
+        },
+
+        {
           "type": "indicator",
-          "icon": "arrow-right-bold-outline",
+          "icon": "arrow-left-bold-outline",
           "readOnly": true,
           "width": 4,
           "height": 4,
@@ -116,7 +101,7 @@
           "positions": [
             {
               "modes": {
-                "BlinkR": true
+                "BlinkL": true
               },
               "foregroundColor": "green",
               "foregroundStyle": "default",
@@ -129,24 +114,6 @@
               "foregroundColor": "green",
               "foregroundStyle": "default",
               "animation": "blinking"
-            }
-          ]
-        },
-        {
-          "type": "indicator",
-          "icon": "car-parking-lights",
-          "readOnly": true,
-          "width": 4,
-          "height": 4,
-          "foregroundStyle": "dim",
-          "backgroundColor": "transparent",
-          "positions": [
-            {
-              "modes": {
-                "Parking": true
-              },
-              "foregroundColor": "green",
-              "foregroundStyle": "default"
             }
           ]
         },
@@ -182,6 +149,56 @@
                 "FogFront": true
               },
               "foregroundColor": "green",
+              "foregroundStyle": "default"
+            }
+          ]
+        },
+        {
+          "type": "indicator",
+          "icon": "arrow-right-bold-outline",
+          "readOnly": true,
+          "width": 4,
+          "height": 4,
+          "foregroundStyle": "dim",
+          "backgroundColor": "transparent",
+          "positions": [
+            {
+              "modes": {
+                "BlinkR": true
+              },
+              "foregroundColor": "green",
+              "foregroundStyle": "default",
+              "animation": "blinking"
+            },
+            {
+              "modes": {
+                "Hazards": true
+              },
+              "foregroundColor": "green",
+              "foregroundStyle": "default",
+              "animation": "blinking"
+            }
+          ]
+        },
+        {
+          "type": "placeholder",
+          "width": 4,
+          "height": 4
+        },
+        {
+          "type": "indicator",
+          "icon": "car-light-high",
+          "readOnly": true,
+          "width": 4,
+          "height": 4,
+          "foregroundStyle": "dim",
+          "backgroundColor": "transparent",
+          "positions": [
+            {
+              "modes": {
+                "HighBeams": true
+              },
+              "foregroundColor": "blue",
               "foregroundStyle": "default"
             }
           ]
@@ -214,8 +231,6 @@
         {
           "type": "button",
           "icon": "numeric-0",
-          "width": 6,
-          "height": 6,
           "positions": [
             {
               "modes": {
@@ -232,8 +247,6 @@
         {
           "type": "button",
           "icon": "car-light-daytime-running",
-          "width": 6,
-          "height": 6,
           "positions": [
             {
               "modes": {
@@ -251,8 +264,6 @@
         {
           "type": "button",
           "icon": "car-parking-lights",
-          "width": 6,
-          "height": 6,
           "positions": [
             {
               "modes": {
@@ -270,8 +281,6 @@
         {
           "type": "button",
           "icon": "car-light-dimmed",
-          "width": 6,
-          "height": 6,
           "positions": [
             {
               "modes": {
@@ -295,7 +304,6 @@
           "type": "button",
           "icon": "car-light-high",
           "width": 12,
-          "height": 6,
           "positions": [
             {
               "modes": {
@@ -327,8 +335,6 @@
           "type": "button",
           "icon": "car-light-fog-front",
           "round": true,
-          "width": 6,
-          "height": 6,
           "positions": [
             {
               "modes": {
@@ -350,8 +356,6 @@
           "type": "button",
           "icon": "car-light-fog-rear",
           "round": true,
-          "width": 6,
-          "height": 6,
           "positions": [
             {
               "modes": {
@@ -378,8 +382,6 @@
           "type": "button",
           "icon": "arrow-left-bold-outline",
           "round": true,
-          "width": 6,
-          "height": 6,
           "positions": [
             {
               "modes": {
@@ -401,8 +403,6 @@
           "type": "button",
           "icon": "arrow-right-bold-outline",
           "round": true,
-          "width": 6,
-          "height": 6,
           "positions": [
             {
               "modes": {
@@ -427,7 +427,7 @@
           "backgroundStyle": "outline",
           "foregroundColor": "red",
           "width": 12,
-          "height": 6,
+          "round": true,
           "positions": [
             {
               "modes": {
@@ -452,7 +452,6 @@
         {
           "type": "button",
           "icon": "car-brake",
-          "width": 6,
           "height": 12,
           "positions": [
             {
@@ -474,8 +473,6 @@
         {
           "type": "button",
           "icon": "car-brake-abs",
-          "width": 6,
-          "height": 6,
           "positions": [
             {
               "modes": {
@@ -496,8 +493,6 @@
         {
           "type": "button",
           "icon": "alpha-r",
-          "width": 6,
-          "height": 6,
           "positions": [
             {
               "modes": {
