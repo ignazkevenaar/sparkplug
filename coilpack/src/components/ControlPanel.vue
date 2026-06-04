@@ -48,7 +48,7 @@ const websocketConnected = inject(websocketConnectedKey)
           :key="controlIndex"
           :modelValue="modelValue"
           :style="{
-            'grid-area': `${control.top ?? 'auto'} / ${control.left ?? 'auto'} / span ${control.height ?? 1} / span ${control.width ?? 1}`
+            'grid-area': `${control.top ?? 'auto'} / ${control.left ?? 'auto'} / span ${control.height ?? 6} / span ${control.width ?? 6}`
           }"
           :control="control"
           :type="control.type"
